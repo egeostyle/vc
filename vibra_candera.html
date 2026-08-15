@@ -111,7 +111,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 
 
 
-.about-img{flex:0 0 380px;width:380px;min-height:400px;align-self:stretch;border-radius:12px;box-shadow:10px 10px 0 var(--ca);background:#c5b8aa center/cover no-repeat;}
+.about-img{flex:0 0 380px;width:380px;min-height:420px;align-self:stretch;border-radius:12px;box-shadow:10px 10px 0 var(--ca);background-color:#c5b8aa;background-size:cover;background-position:center;background-repeat:no-repeat;}
 
 /* CONTACT */
 .contact-page{padding:4rem 8%;}
@@ -146,7 +146,9 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 .modal-close{position:absolute;top:0.9rem;right:1.3rem;font-size:1.7rem;cursor:pointer;color:#999;}
 .modal-close:hover{color:var(--cd);}
 .modal-flex{display:flex;gap:1.8rem;margin-top:1rem;flex-wrap:wrap;}
-.modal-img{flex:1;min-width:180px;height:210px;background-size:cover;background-position:center;border-radius:6px;background-color:#e8e0d8;}
+.modal-img-wrap{flex:1;min-width:180px;height:210px;border-radius:6px;background-color:#e8e0d8;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.modal-img{width:100%;height:100%;object-fit:cover;display:block;border-radius:6px;}
+.modal-img[src=""]{display:none;}
 .modal-info{flex:1.2;min-width:220px;display:flex;flex-direction:column;justify-content:space-between;}
 .modal-info h3{font-size:1.5rem;color:var(--cp);margin-bottom:0.4rem;}
 .modal-info .mprice{font-weight:bold;font-size:1.1rem;color:var(--cd);margin-bottom:0.9rem;}
@@ -270,7 +272,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 .form-status.sending{background:#e0f2fe;color:#0369a1;display:block;}
 
 /* FAQ */
-.faq-img{height:380px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.09);background:#c5b8aa center/cover no-repeat;}
+.faq-img{height:380px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.09);background-color:#c5b8aa;background-size:cover;background-position:center;background-repeat:no-repeat;}
 
 /* TOAST */
 
@@ -311,8 +313,8 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         
     </div>
     <nav class="nav">
-        <a onclick="navigateTo('inicio')" id="nav-inicio" class="">Inicio</a>
-        <a onclick="navigateTo('productos')" id="nav-productos" class="active">Productos</a>
+        <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
         <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
         <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
     </nav>
@@ -321,7 +323,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: INICIO
      ========================================================= -->
-<main id="page-inicio" class="page" style="margin-top: 70px;">
+<main id="page-inicio" class="page active" style="margin-top: 70px;">
 
     <!-- HERO -->
     <section class="hero" id="hero-bg" style="background-color: rgb(160, 176, 166);">
@@ -474,7 +476,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: PRODUCTOS
      ========================================================= -->
-<div id="page-productos" class="page active" style="margin-top: 70px;">
+<div id="page-productos" class="page" style="margin-top: 70px;">
     <div class="catalog-container">
         <h2 style="text-align:center;">Nuestro Catálogo</h2>
         <div class="catalog-grid" id="catalogGrid" style="grid-template-columns: repeat(3, 1fr);"><div class="seller-card" onclick="openProductModal_s('Vela Lavanda Francesa','100% Soya','S/. 45.00','Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.','https://i.blogs.es/f96f9c/ios-26/1200_900.jpeg')" style="cursor: pointer;"><div class="seller-img" style="background-image:url('https://i.blogs.es/f96f9c/ios-26/1200_900.jpeg');background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Vela Lavanda Francesa</h3><p>Calma el estrés cotidiano con notas florales suaves.</p><div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" onclick="openProductModal_s('Difusor Vainilla Dulce','Ambiental','S/. 55.00','Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_KQS6mIxs_7HhJl--CRGzBYQkY4__GyqJQhPv2ZOzDQ&amp;s')" style="cursor: pointer;"><div class="seller-img" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_KQS6mIxs_7HhJl--CRGzBYQkY4__GyqJQhPv2ZOzDQ&amp;s');background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Difusor Vainilla Dulce</h3><p>Fragancia reconfortante de larga duración.</p><div class="seller-meta"><span class="price">S/. 55.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" onclick="openProductModal_s('Vela Bosque de Pino','100% Soya','S/. 45.00','Evoca la frescura de un bosque matutino. Pabilo de algodón puro y esencias maderosas que purifican el ambiente.','')" style="cursor: pointer;"><div class="seller-img" style="background-image:none;background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Vela Bosque de Pino</h3><p>Notas frescas y maderosas que te transportan a la naturaleza.</p><div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div></div>
@@ -488,7 +490,9 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="closeProductModal(null)">×</span>
         <div class="modal-flex">
-            <div id="modal-product-img" class="modal-img"></div>
+            <div class="modal-img-wrap">
+                <img id="modal-product-img" class="modal-img" src="" alt="" crossorigin="anonymous" style="display: none;">
+            </div>
             <div class="modal-info">
                 <div>
                     <h3 id="modal-product-title">Difusor Vainilla Dulce</h3>
@@ -607,7 +611,8 @@ function openProductModal_s(title,cat,price,desc,img){
     document.getElementById('modal-product-title').innerText=title;
     document.getElementById('modal-product-meta').innerText=cat+' | '+price;
     document.getElementById('modal-product-desc').innerText=desc;
-    document.getElementById('modal-product-img').style.backgroundImage=img?"url('"+img+"')":'';
+    var imgEl=document.getElementById('modal-product-img');
+    imgEl.src=img||''; imgEl.style.display=img?'block':'none';
     document.getElementById('modal-whatsapp-link').dataset.productInfo=JSON.stringify({name:title,cat:cat,price:price,img:img});
     document.getElementById('product-modal').classList.add('open');
 }
@@ -615,16 +620,25 @@ function closeProductModal(e){if(!e||e.target===document.getElementById('product
 async function sendWhatsApp(e){
     e.preventDefault();
     var info=JSON.parse(document.getElementById('modal-whatsapp-link').dataset.productInfo||'{}');
-    var textMsg='¡Hola! Me interesa:\n\n\uD83D\uDED2 *Producto:* '+info.name+'\n\u2728 *Categoría:* '+info.cat+'\n\uD83D\uDCB0 *Precio:* '+info.price+(info.img?'\n\uD83D\uDDBC\uFE0F *Imagen:* '+info.img:'')+'\n\n¿Tienen stock disponible?';
+    var textMsg='¡Hola! Me interesa el siguiente producto:
+
+🛒 *'+info.name+'*
+✨ Categoría: '+info.cat+'
+💰 Precio: '+info.price+'
+
+¿Tienen stock disponible?';
     var waUrl='https://wa.me/'+WA+'?text='+encodeURIComponent(textMsg);
     if(info.img&&navigator.share&&navigator.canShare){
         try{
-            var resp=await fetch(info.img);
-            var blob=await resp.blob();
-            var ext=blob.type.split('/')[1]||'jpg';
-            var file=new File([blob],(info.name||'producto').replace(/\s+/g,'_')+'.'+ext,{type:blob.type});
-            var shareData={title:info.name,text:textMsg,files:[file]};
-            if(navigator.canShare(shareData)){await navigator.share(shareData);return;}
+            var imgEl=document.getElementById('modal-product-img');
+            await new Promise(function(res,rej){if(imgEl.complete&&imgEl.naturalWidth>0){res();}else{imgEl.onload=res;imgEl.onerror=rej;}});
+            var canvas=document.createElement('canvas');
+            canvas.width=imgEl.naturalWidth||600; canvas.height=imgEl.naturalHeight||600;
+            canvas.getContext('2d').drawImage(imgEl,0,0);
+            var blob=await new Promise(function(res){canvas.toBlob(res,'image/jpeg',0.9);});
+            var file=new File([blob],(info.name||'producto').replace(/s+/g,'_')+'.jpg',{type:'image/jpeg'});
+            var sd={title:info.name,text:textMsg,files:[file]};
+            if(navigator.canShare(sd)){await navigator.share(sd);return;}
         }catch(err){}
     }
     window.open(waUrl,'_blank');
