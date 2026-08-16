@@ -3,6 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibra Candela | Editor</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root{--cp:#6e8174;--cs:#f4eee6;--ca:#d9c3b0;--cd:#333333;--cl:#faf8f5;--f:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -13,51 +14,51 @@ body{font-family:var(--f);color:var(--cd);background:var(--cl);line-height:1.6;d
 .logo-area{display:flex;align-items:center;gap:0.6rem;cursor:pointer;}
 .logo-img{height:44px;width:auto;max-width:150px;object-fit:contain;display:none;}
 .logo-text{font-size:1.4rem;font-weight:bold;color:var(--cp);}
-
-
+.logo-edit-btn{background:transparent;border:1px dashed var(--ca);color:#aaa;border-radius:4px;padding:0.12rem 0.45rem;font-size:0.68rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.logo-edit-btn:hover{border-color:var(--cp);color:var(--cp);}
 .nav{display:flex;flex-wrap:wrap;gap:0.2rem;}
 .nav a{text-decoration:none;color:var(--cd);margin-left:1.2rem;font-weight:500;transition:color 0.3s;cursor:pointer;font-size:0.95rem;}
 .nav a:hover,.nav a.active{color:var(--cp);}
 
 /* EDITOR TOOLBAR */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.editor-toolbar{position:fixed;top:70px;width:100%;background:#2d2d2d;color:#fff;padding:0.5rem 8%;display:flex;align-items:center;gap:0.65rem;z-index:999;font-size:0.82rem;box-shadow:0 2px 8px rgba(0,0,0,0.25);flex-wrap:wrap;}
+.tlabel{color:#aaa;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;}
+.tbtn{background:#444;border:1px solid #555;color:#fff;padding:0.3rem 0.8rem;border-radius:4px;cursor:pointer;font-size:0.78rem;transition:background 0.2s;display:flex;align-items:center;gap:0.3rem;white-space:nowrap;}
+.tbtn:hover{background:#555;}
+.tbtn.save-e{background:#4a6fa5;border-color:#3d5e8c;font-weight:600;}
+.tbtn.save-e:hover{background:#3d5e8c;}
+.tbtn.save-c{background:var(--cp);border-color:var(--cp);font-weight:600;}
+.tbtn.save-c:hover{background:#58685d;}
+.tsep{width:1px;height:20px;background:#555;}
+.save-grp{display:flex;align-items:center;gap:0.45rem;margin-left:auto;}
+.eml-cfg{display:flex;align-items:center;gap:0.45rem;}
+.eml-cfg input{background:#3a3a3a;border:1px solid #555;color:#fff;padding:0.26rem 0.55rem;border-radius:4px;font-size:0.78rem;width:190px;}
+.eml-cfg input::placeholder{color:#888;}
+.eml-note{font-size:0.68rem;color:#f59e0b;}
 
 /* PAGES */
-.page{display:none;margin-top: 70px;flex:1;}
+.page{display:none;margin-top:116px;flex:1;}
 .page.active{display:block;}
-section{padding:5rem 8%;text-align:center;}
+section{padding:3.5rem 8%;text-align:center;}
 h2{font-size:2.3rem;color:var(--cp);margin-bottom:3rem;position:relative;}
 h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);margin:0.4rem auto 0;}
 
 /* EDITABLE TEXT */
-
-
-
+[contenteditable="true"]{outline:none;border-radius:3px;transition:background 0.2s,box-shadow 0.2s;}
+[contenteditable="true"]:hover{background:rgba(110,129,116,0.08);box-shadow:0 0 0 2px rgba(110,129,116,0.3);cursor:text;}
+[contenteditable="true"]:focus{background:rgba(110,129,116,0.13);box-shadow:0 0 0 2px var(--cp);}
 
 /* IMAGE BOXES */
-
-
-
+.img-editable{position:relative;cursor:pointer;overflow:hidden;background:#e8e0d8;}
+.img-editable::after{content:'📷 Clic para cambiar imagen';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:#fff;font-size:0.83rem;font-weight:600;opacity:0;transition:opacity 0.22s;pointer-events:none;}
+.img-editable:hover::after{opacity:1;}
 
 /* ICON BOXES (beneficios/tips) */
 .icon-box{position:relative;display:flex;justify-content:center;margin-bottom:1rem;}
 .icon-img{width:72px;height:72px;object-fit:contain;display:none;}
 .icon-emoji{font-size:2.5rem;line-height:1;}
-
-.icon-box:hover 
+.icon-swap-btn{position:absolute;bottom:-6px;right:calc(50% - 42px);background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:3px;padding:0.12rem 0.4rem;font-size:0.65rem;cursor:pointer;opacity:0;transition:opacity 0.18s;white-space:nowrap;}
+.icon-box:hover .icon-swap-btn{opacity:1;}
 
 /* TIPS icon is smaller */
 .tips-section .icon-emoji{font-size:2rem;}
@@ -88,45 +89,48 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 /* BESTSELLERS */
 .bestsellers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.5rem;}
 .seller-card{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.06);text-align:left;}
-.seller-img{height:240px;background-size:cover;background-position:center;background-color:#e8e0d8;}
+.seller-img{height:420px;background-size:cover;background-position:center;background-color:#e8e0d8;}
 .seller-info{padding:1.4rem;}
 .seller-info h3{margin-bottom:0.4rem;}
 .seller-info p{font-size:0.88rem;color:#666;margin-bottom:1rem;}
 .seller-meta{display:flex;justify-content:space-between;align-items:center;}
 .price{font-weight:bold;color:var(--cp);font-size:1.05rem;}
 
-/* CATALOG — fijo 3 columnas */
-.catalog-container{padding:4rem 8%;}
-.catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem;}
+/* CATALOG — 3 col desktop, 2 col tablet, 1 col móvil */
+.catalog-container{padding:3.5rem 8%;}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem;max-width:980px;margin:0 auto;}
+@media(max-width:900px){.catalog-grid{grid-template-columns:repeat(2,1fr)!important;}}
+@media(max-width:560px){.catalog-grid{grid-template-columns:1fr!important;}}
 
 /* ABOUT */
-.about-wrapper{display:flex;align-items:flex-start;gap:3.5rem;max-width:1100px;margin:0 auto;text-align:left;padding:3rem 0;}
+.about-wrapper{display:flex;align-items:flex-start;gap:3.5rem;max-width:980px;margin:0 auto;text-align:left;padding:0rem 0;}
 .about-bio{flex:1;}
 .about-bio h3{font-size:1.7rem;margin-bottom:1rem;color:var(--cp);}
 .about-bio .bio-p{margin-bottom:1.2rem;color:#555;position:relative;padding-right:2.2rem;}
-
-.about-bio .bio-p:hover 
-
-
-
-.about-img{flex:1;min-width:280px;height:420px;border-radius:12px;box-shadow:10px 10px 0 var(--ca);background:#c5b8aa center/cover no-repeat;flex-shrink:0;}
+.para-controls{position:absolute;right:0;top:0;display:flex;gap:4px;opacity:0;transition:opacity 0.18s;}
+.about-bio .bio-p:hover .para-controls{opacity:1;}
+.para-btn{background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:3px;padding:0.1rem 0.4rem;font-size:0.65rem;cursor:pointer;white-space:nowrap;}
+.add-para-btn{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;padding:0.4rem 0.9rem;background:transparent;border:1.5px dashed var(--ca);color:#888;border-radius:4px;cursor:pointer;font-size:0.8rem;transition:all 0.2s;}
+.add-para-btn:hover{border-color:var(--cp);color:var(--cp);}
+.about-img{flex:0 0 380px;width:380px;min-height:400px;align-self:stretch;border-radius:12px;box-shadow:10px 10px 0 var(--ca);background:#c5b8aa center/cover no-repeat;}
 
 /* CONTACT */
-.contact-page{padding:4rem 8%;}
+.contact-page{padding:3.5rem 8%;}
 .contact-page h2{text-align:center;}
-.contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:980px;margin:0 auto;text-align:left;padding:2rem 0 0;}
+.contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:980px;margin:0 auto;text-align:left;padding:0rem 0 0;}
 .contact-info-panel{background:var(--cs);padding:2.5rem;border-radius:8px;}
 .contact-info-panel h3{margin-bottom:1rem;color:var(--cp);}
 .contact-info-intro{margin-bottom:1.5rem;color:#555;font-size:0.93rem;}
 .info-link{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.2rem;position:relative;padding-right:2.2rem;}
-.info-link-icon{cursor:pointer;font-size:1.2rem;border-radius:4px;padding:0.1rem 0.2rem;transition:background 0.18s;}
-.info-link-icon:hover{background:rgba(110,129,116,0.15);}
+.info-link-icon{font-size:1.2rem;border-radius:4px;padding:0.1rem 0.2rem;}
+.editor-active .info-link-icon{cursor:pointer;transition:background 0.18s;}
+.editor-active .info-link-icon:hover{background:rgba(110,129,116,0.15);}
 .info-link-text{flex:1;}
-
-.info-link:hover 
-
-
-
+.info-link-actions{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;gap:3px;opacity:0;transition:opacity 0.18s;}
+.info-link:hover .info-link-actions{opacity:1;}
+.il-btn{background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:3px;padding:0.1rem 0.38rem;font-size:0.65rem;cursor:pointer;}
+.add-link-btn{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.3rem;padding:0.35rem 0.8rem;background:transparent;border:1.5px dashed var(--ca);color:#888;border-radius:4px;cursor:pointer;font-size:0.78rem;transition:all 0.2s;}
+.add-link-btn:hover{border-color:var(--cp);color:var(--cp);}
 .contact-form-panel{background:#fff;padding:2.5rem;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
 .form-group{margin-bottom:1.3rem;}
 .form-group label{display:block;margin-bottom:0.4rem;font-weight:500;font-size:0.88rem;}
@@ -153,59 +157,59 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 .btn-wa:hover{background:#1ebd58;}
 
 /* PRODUCT EDITOR */
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
+.pe-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:3000;opacity:0;pointer-events:none;transition:opacity 0.22s;}
+.pe-overlay.open{opacity:1;pointer-events:auto;}
+.pe-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:520px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-18px);transition:transform 0.22s;max-height:90vh;overflow-y:auto;}
+.pe-overlay.open .pe-modal{transform:translateY(0);}
+.pe-modal h3{color:var(--cp);margin-bottom:1.1rem;font-size:1.1rem;}
+.fg{margin-bottom:0.8rem;}
+.fg label{display:block;font-size:0.78rem;font-weight:600;margin-bottom:0.25rem;color:#555;}
+.fg input,.fg textarea{width:100%;padding:0.5rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-family:var(--f);font-size:0.87rem;}
+.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--cp);}
+.pe-actions{display:flex;gap:0.6rem;margin-top:1.1rem;justify-content:flex-end;}
+.pe-actions button{padding:0.45rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.85rem;}
+.pe-cancel{background:#eee;color:#333;} .pe-cancel:hover{background:#ddd;}
+.pe-del{background:#fee2e2;color:#b91c1c;} .pe-del:hover{background:#fecaca;}
+.pe-ok{background:var(--cp);color:#fff;} .pe-ok:hover{background:#58685d;}
 
 /* CARD WRAPPER */
-
-
-
-
-
-
+.seller-card-wrapper{position:relative;}
+.card-edt{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.65);color:#fff;border:none;border-radius:4px;padding:0.25rem 0.55rem;font-size:0.7rem;cursor:pointer;z-index:10;opacity:0;transition:opacity 0.18s;}
+.seller-card-wrapper:hover .card-edt{opacity:1;}
+.add-product-card{border:2px dashed var(--ca);border-radius:8px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;color:#999;font-size:0.88rem;}
+.add-product-card:hover{border-color:var(--cp);background:rgba(110,129,116,0.05);color:var(--cp);}
+.add-product-card .ic{font-size:1.9rem;}
 
 /* IMAGE URL MODAL */
-
-
-
-
-
-
-
-
-
-
+.iu-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4000;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.iu-overlay.open{opacity:1;pointer-events:auto;}
+.iu-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:460px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.iu-overlay.open .iu-modal{transform:translateY(0);}
+.iu-modal h4{margin-bottom:0.9rem;color:var(--cp);}
+.iu-modal input[type="text"]{width:100%;padding:0.6rem 0.75rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.35rem;}
+.iu-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
+.iu-hint{font-size:0.74rem;color:#888;margin-bottom:0.9rem;}
+.iu-actions{display:flex;gap:0.6rem;justify-content:flex-end;margin-top:0.5rem;}
+.iu-actions button{padding:0.45rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
 
 /* HERO IMAGE MODAL (extended) */
-
-
-
-
-
-
-
-
-
-
-
+.hero-img-section{border-top:1px solid #eee;padding-top:1rem;margin-top:1rem;}
+.hero-img-section h5{font-size:0.8rem;font-weight:700;color:#555;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.04em;}
+.filter-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.65rem;flex-wrap:wrap;}
+.filter-row label{font-size:0.78rem;color:#666;white-space:nowrap;}
+.filter-row input[type="color"]{width:34px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
+.filter-row input[type="range"]{flex:1;min-width:80px;accent-color:var(--cp);}
+.filter-row span{font-size:0.75rem;color:#888;min-width:30px;}
+.filter-row select{padding:0.28rem 0.5rem;border:1px solid #ddd;border-radius:4px;font-size:0.78rem;color:#555;background:#fff;cursor:pointer;flex:1;}
+.filter-presets{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem;}
+.fpreset{border:none;border-radius:4px;padding:0.25rem 0.65rem;font-size:0.74rem;cursor:pointer;font-weight:600;transition:transform 0.15s;color:#fff;}
+.fpreset:hover{transform:scale(1.06);}
 .blend-chips{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.8rem;}
 .bchip{border:1px solid #ddd;border-radius:20px;padding:0.18rem 0.65rem;font-size:0.72rem;cursor:pointer;background:#f5f5f5;color:#555;transition:all 0.15s;white-space:nowrap;}
 .bchip:hover{border-color:var(--cp);color:var(--cp);}
 .bchip.active{background:var(--cp);color:#fff;border-color:var(--cp);}
-
-
+.hero-preview-bar{height:70px;border-radius:6px;margin-top:0.5rem;border:1px solid #eee;background:#ccc center/cover no-repeat;position:relative;overflow:hidden;}
+.hero-preview-tint{position:absolute;inset:0;}
 /* HERO BUTTON SECTION */
 .hero-btn-section{border-top:1px solid #eee;padding-top:1rem;margin-top:1rem;}
 .hero-btn-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.65rem;flex-wrap:wrap;}
@@ -216,50 +220,64 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 .hero-btn-preview{display:inline-block;padding:0.55rem 1.4rem;border-radius:4px;font-size:0.88rem;font-weight:600;color:#fff;margin-top:0.4rem;transition:all 0.2s;cursor:default;}
 
 /* ICON SWAP MODAL */
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
+.is-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4500;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.is-overlay.open{opacity:1;pointer-events:auto;}
+.is-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:420px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.is-overlay.open .is-modal{transform:translateY(0);}
+.is-modal h4{color:var(--cp);margin-bottom:0.4rem;}
+.is-modal p{font-size:0.78rem;color:#888;margin-bottom:1rem;}
+.is-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1rem;}
+.is-tab{flex:1;padding:0.42rem;text-align:center;cursor:pointer;font-size:0.8rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
+.is-tab.active{background:var(--cp);color:#fff;font-weight:600;}
+.is-panel{display:none;} .is-panel.active{display:block;}
+.is-modal input[type="text"]{width:100%;padding:0.55rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.4rem;}
+.is-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
+.is-emoji-input{font-size:1.8rem;width:100%;text-align:center;padding:0.4rem;border:1px solid #ddd;border-radius:4px;}
+.is-preview{margin:0.7rem 0;min-height:60px;display:flex;align-items:center;justify-content:center;border:1px solid #eee;border-radius:6px;background:var(--cl);}
+.is-actions{display:flex;gap:0.55rem;justify-content:flex-end;margin-top:1rem;}
+.is-actions button{padding:0.42rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
 
 /* LOGO MODAL */
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
+.lo-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4000;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.lo-overlay.open{opacity:1;pointer-events:auto;}
+.lo-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:460px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.lo-overlay.open .lo-modal{transform:translateY(0);}
+.lo-modal h4{color:var(--cp);margin-bottom:0.35rem;}
+.lo-modal .sub{font-size:0.78rem;color:#888;margin-bottom:1.1rem;}
+.lo-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1.1rem;}
+.lo-tab{flex:1;padding:0.42rem;text-align:center;cursor:pointer;font-size:0.8rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
+.lo-tab.active{background:var(--cp);color:#fff;font-weight:600;}
+.lo-panel{display:none;} .lo-panel.active{display:block;}
+.lo-modal input[type="text"]{width:100%;padding:0.58rem 0.75rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.35rem;}
+.lo-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
+.lo-hint{font-size:0.74rem;color:#888;margin-bottom:0.9rem;}
+.lo-preview{margin:0.65rem 0;padding:0.85rem;background:rgba(250,248,245,0.98);border:1px solid #eee;border-radius:6px;display:flex;align-items:center;gap:0.65rem;min-height:64px;}
+.lo-actions{display:flex;gap:0.6rem;justify-content:flex-end;margin-top:1.1rem;}
+.lo-actions button{padding:0.42rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
 
 /* CONTACT LINK ICON MODAL */
-
-
-
-
-
-
-
-
+.ci-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4500;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.ci-overlay.open{opacity:1;pointer-events:auto;}
+.ci-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:420px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.ci-overlay.open .ci-modal{transform:translateY(0);}
+.ci-modal h4{color:var(--cp);margin-bottom:0.35rem;}
+.ci-modal .ci-sub{font-size:0.76rem;color:#aaa;margin-bottom:1rem;}
+.ci-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1rem;}
+.ci-tab{flex:1;padding:0.4rem;text-align:center;cursor:pointer;font-size:0.78rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
+.ci-tab.active{background:var(--cp);color:#fff;font-weight:600;}
+.ci-panel{display:none;} .ci-panel.active{display:block;}
+.ci-emoji-input{font-size:1.8rem;width:100%;text-align:center;padding:0.4rem;border:1px solid #ddd;border-radius:4px;margin-bottom:0.3rem;}
+.ci-fa-input{width:100%;padding:0.55rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;font-family:monospace;margin-bottom:0.3rem;}
+.ci-fa-input:focus,.ci-emoji-input:focus{outline:none;border-color:var(--cp);}
+.ci-fa-hint{font-size:0.72rem;color:#aaa;margin-bottom:0.7rem;}
+.ci-fa-hint a{color:var(--cp);text-decoration:none;}
+.ci-color-row{display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #eee;}
+.ci-color-row label{font-size:0.78rem;color:#555;flex:1;}
+.ci-color-row input[type="color"]{width:36px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
+.ci-color-row button{font-size:0.72rem;padding:0.22rem 0.6rem;border:1px solid #ddd;border-radius:4px;background:#f5f5f5;color:#666;cursor:pointer;}
+.ci-preview{margin:0.7rem 0;min-height:52px;display:flex;align-items:center;justify-content:center;border:1px solid #eee;border-radius:6px;background:var(--cl);gap:0.5rem;font-size:0.82rem;color:#888;}
+.ci-actions{display:flex;gap:0.55rem;justify-content:flex-end;margin-top:1rem;}
+.ci-actions button{padding:0.42rem 0.9rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
 
 /* FORM STATUS */
 .form-status{padding:0.65rem 0.9rem;border-radius:4px;font-size:0.84rem;margin-top:0.45rem;display:none;}
@@ -271,12 +289,13 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 .faq-img{height:380px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.09);background:#c5b8aa center/cover no-repeat;}
 
 /* TOAST */
-
-
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(18px);background:#1e293b;color:#fff;padding:0.68rem 1.4rem;border-radius:6px;font-size:0.84rem;z-index:9999;opacity:0;transition:opacity 0.28s,transform 0.28s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 /* RESPONSIVE */
+.about-img{flex:0 0 380px;width:380px;min-height:400px;align-self:stretch;border-radius:12px;box-shadow:10px 10px 0 var(--ca);background:#c5b8aa center/cover no-repeat;}
+
 @media(max-width:900px){
-    .catalog-grid{grid-template-columns:1fr 1fr;}
     .benefits-grid{grid-template-columns:1fr;}
     .about-wrapper{flex-direction:column;gap:1.8rem;}
     .about-img{height:280px;min-width:unset;width:100%;order:-1;}
@@ -284,56 +303,241 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
     .header{flex-direction:column;gap:0.6rem;padding:0.9rem 5%;}
     .nav a{margin:0 0.45rem;}
     .page{margin-top:160px;}
-    
+    .editor-toolbar{top:105px;}
     section{padding:3.5rem 5%;}
-    .catalog-container{padding:3rem 5%;}
-    .contact-page{padding:3rem 5%;}
+    .catalog-container{padding:3.5rem 5%;}
+    .contact-page{padding:3.5rem 5%;}
 }
 @media(max-width:560px){
-    .catalog-grid{grid-template-columns:1fr;}
     .contact-wrapper{gap:1.4rem;}
     .contact-info-panel,.contact-form-panel{padding:1.6rem;}
     h2{font-size:1.8rem;}
     .hero-content h1{font-size:2rem;}
 }
+
+
+    /* Estilo iconos de redes sociales */
+    .nav-icon {
+        color: #6e8174;
+        font-size: 1.2rem; /* Puedes ajustar el tamaño aquí */
+        margin-left: 15px; /* Espaciado entre los íconos */
+        text-decoration: none;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* Opcional: un efecto visual cuando pasas el mouse por encima */
+    .nav-icon:hover {
+        opacity: 0.8;
+    }
+
+
+/* =========================================
+   COMPORTAMIENTO BASE (Desktop >= 561px)
+   ========================================= */
+.header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap; /* Permite que los elementos fluyan a otra línea si falta espacio */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.nav a {
+    margin: 0 !important; /* Anula el margin-left: 1.2rem original */
+}
+
+.social-nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-icon {
+    margin: 0 !important; /* Anula el margin-left: 15px original */
+}
+
+
+/* =========================================
+   1. ESCRITORIO (Mayores a 900px)
+   - Logo izquierda | Menú centro | Redes derecha
+   ========================================= */
+.header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap; /* Permite el salto de línea en resoluciones menores */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.nav a {
+    margin: 0 !important; /* Anula el margin original del HTML */
+}
+
+.social-nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-icon {
+    margin: 0 !important; /* Anula el margin original del HTML */
+}
+
+
+/* =========================================
+   2. TABLET (Desde 561px hasta 900px)
+   - Fila 1: Logo centrado
+   - Fila 2: Menú izquierda | Redes derecha
+   ========================================= */
+@media (min-width: 561px) and (max-width: 900px) {
+    .header {
+        padding: 0.7rem 5% !important;
+        justify-content: space-between; /* Separa los elementos de la fila 2 a los extremos */
+    }
+
+    .logo-area {
+        width: 100%; /* Obliga al logo a ocupar toda la primera fila */
+        justify-content: center; /* Centra el logo horizontalmente */
+        order: 1;
+    }
+
+    .nav {
+        order: 2;
+        justify-content: flex-start; /* Alinea los 4 ítems a la izquierda */
+        flex: 1;
+    }
+
+    .social-nav {
+        order: 3;
+        justify-content: flex-end; /* Mantiene las redes a la derecha */
+    }
+}
+
+
+/* =========================================
+   3. MÓVIL (Menores o igual a 560px)
+   - Fila 1: Logo izquierda | Redes derecha
+   - Fila 2: Menú distribuido en todo el ancho
+   ========================================= */
+@media (max-width: 560px) {
+    .header {
+        padding: 0.9rem 5% !important;
+        gap: 0.6rem;
+    }
+
+    .logo-area {
+        order: 1;
+    }
+
+    .social-nav {
+        order: 2;
+        margin-left: auto; /* Empuja los íconos arriba a la derecha */
+    }
+
+    .nav {
+        order: 3;
+        width: 100%; /* Obliga al menú a bajar a la segunda fila */
+        justify-content: space-between; /* Distribuye uniformemente */
+        gap: 0;
+    }
+
+    .nav a {
+        font-size: 0.85rem; /* Reduce un poco la letra para que entren los 4 ítems */
+    }
+}
+/* Para resoluciones menores o iguales a 900px */
+@media (max-width: 900px) {
+    .page {
+        margin-top: 104px !important;
+    }
+}
+
+/* Para resoluciones mayores o iguales a 901px */
+@media (min-width: 901px) {
+    .page {
+        margin-top: 80px !important;
+    }
+}
 </style>
-</head>
-<body>
+<style>
+        #editorToolbar,
+        .logo-edit-btn,.icon-swap-btn,.para-controls,.add-para-btn,
+        .info-link-actions,.add-link-btn,.card-edt,.add-product-card,.toast,
+        .pe-overlay,.iu-overlay,.is-overlay,.lo-overlay,.ci-overlay
+        {display:none!important;}
+        [contenteditable]{outline:none!important;box-shadow:none!important;}
+        [contenteditable]:hover{background:none!important;box-shadow:none!important;cursor:inherit!important;}
+        .img-editable::after{display:none!important;}
+        .img-editable{cursor:default!important;pointer-events:none!important;}
+        .info-link-icon{cursor:default!important;pointer-events:none!important;}
+        .page{margin-top:80px!important;}
+        @media(max-width:900px){.page{margin-top:104px!important;}}
+    </style></head>
+<body class="">
 
 <!-- EDITOR TOOLBAR -->
 
 
 <!-- HEADER -->
+
 <header class="header">
     <div class="logo-area" onclick="navigateTo('inicio')" id="logoArea">
-        <img src="" alt="Logo" class="logo-img" id="logoImg" style="display: none;">
-        <span class="logo-text" id="logoText" onclick="event.stopPropagation()" style="display: block;">Vibra Candela</span>
+        <img src="https://vibracandela.com/vibraimgs/logo.gif" alt="Logo" class="logo-img" id="logoImg" style="display: block;">
+        <span class="logo-text" id="logoText" onclick="event.stopPropagation()" style="display: none;">Vibra Candela</span>
         
     </div>
+
+    <!-- Enlaces de texto -->
     <nav class="nav">
-        <a onclick="navigateTo('inicio')" id="nav-inicio" class="">Inicio</a>
-        <a onclick="navigateTo('productos')" id="nav-productos" class="active">Productos</a>
+        <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
         <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
         <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
     </nav>
+
+    <!-- Íconos sociales agrupados -->
+    <div class="social-nav">
+        <a href="https://www.instagram.com/vibra_candela" target="_blank" rel="noopener noreferrer" class="nav-icon">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@vibra_candela" target="_blank" rel="noopener noreferrer" class="nav-icon">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="https://wa.me/926997276" target="_blank" rel="noopener noreferrer" class="nav-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
 </header>
 
 <!-- =========================================================
      PÁGINA: INICIO
      ========================================================= -->
-<main id="page-inicio" class="page" style="margin-top: 70px;">
+<main id="page-inicio" class="page active" style="margin-top: 70px;">
 
     <!-- HERO -->
-    <section class="hero" id="hero-bg" style="background-color: rgb(160, 176, 166);">
+    <section class="hero" id="hero-bg">
         <!-- Capa imagen (z-index:0) -->
-        <div class="hero-bg-img" id="heroBgImg" style="background-image: none;"></div>
+        <div class="hero-bg-img" id="heroBgImg" style="background-image: url(&quot;https://instagram.flim18-1.fna.fbcdn.net/v/t51.82787-15/730320912_17940493944252683_8501733020269616275_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=MzkyNTU1NTA0NzYwNTYxMDQ0Ng%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTYzMi5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=mQr18TibVA4Q7kNvwEr_9B0&amp;_nc_oc=AdpM9klkQsAmEjmoGwiEF9q7h8fl2ePQQQ3aOOAogtJ4mJ2_kkz4jQXJqiipv6kMk2o&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim18-1.fna&amp;_nc_gid=c4DZMaBjmfaRxWtOMwH-8g&amp;_nc_ss=7a22e&amp;oh=00_AQHUB50SwjeWu7lePuRwIew2BCFvrc-80Ao89UFMq_29bQ&amp;oe=6A870A70&quot;);"></div>
         <!-- Capa tinte + blend (z-index:1) — NO toca el texto ni el botón -->
-        <div class="hero-filter-layer" id="heroFilterLayer" style="background-color: rgba(0, 0, 0, 0.3); mix-blend-mode: normal;"></div>
+        <div class="hero-filter-layer" id="heroFilterLayer" style="background-color: rgba(110, 129, 116, 0.59); mix-blend-mode: normal;"></div>
         <!-- Contenido (z-index:10) — completamente fuera del blend -->
         <div class="hero-content">
             <h1 onclick="event.stopPropagation()">Ilumina tu espacio de forma natural</h1>
             <p onclick="event.stopPropagation()">Velas artesanales de cera de soya y difusores ambientales para tu bienestar.</p>
-            <button id="heroCTABtn" onclick="navigateTo('productos');event.stopPropagation();" class="btn" style="background: rgb(110, 129, 116); color: rgb(255, 255, 255);">Explorar Catálogo</button>
+            <button id="heroCTABtn" onclick="navigateTo('productos');event.stopPropagation();" class="btn" style="background: rgb(38, 43, 40); color: rgb(255, 255, 255); border-color: rgb(38, 43, 40);">Explorar Catálogo</button>
         </div>
         <!-- Botón editor (z-index:10) -->
         
@@ -345,30 +549,30 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <div class="benefits-grid" id="benefitsGrid">
             <div class="benefit-item">
                 <div class="icon-box">
-                    <span class="icon-emoji" id="bi-icon-0">🌱</span>
-                    <img class="icon-img" id="bi-img-0" src="" alt="">
+                    <span class="icon-emoji" id="bi-icon-0" style="display: none;">🌱</span>
+                    <img class="icon-img" id="bi-img-0" src="https://vibracandela.com/vibraimgs/why1.png" alt="" style="display: block;">
                     
                 </div>
                 <h3>100% Ecológica</h3>
-                <p>Derivada de fuentes renovables, biodegradable y libre de derivados del petróleo.</p>
+                <p><div>Derivada de fuentes renovables, biodegradable y completamente libre de derivados del petróleo.</div></p>
             </div>
             <div class="benefit-item">
                 <div class="icon-box">
-                    <span class="icon-emoji" id="bi-icon-1">⏳</span>
-                    <img class="icon-img" id="bi-img-1" src="" alt="">
+                    <span class="icon-emoji" id="bi-icon-1" style="display: none;">⏳</span>
+                    <img class="icon-img" id="bi-img-1" src="https://vibracandela.com/vibraimgs/why2.png" alt="" style="display: block;">
                     
                 </div>
                 <h3>Mayor Duración</h3>
-                <p>Quema a menor temperatura, permitiendo que tu vela dure hasta el doble que una de parafina.</p>
+                <p><div>Quema a menor temperatura, lo que permite que tu vela dure hasta el doble que una de parafina común.</div></p>
             </div>
             <div class="benefit-item">
                 <div class="icon-box">
-                    <span class="icon-emoji" id="bi-icon-2">🍃</span>
-                    <img class="icon-img" id="bi-img-2" src="" alt="">
+                    <span class="icon-emoji" id="bi-icon-2" style="display: none;">🍃</span>
+                    <img class="icon-img" id="bi-img-2" src="https://vibracandela.com/vibraimgs/why3.png" alt="" style="display: block;">
                     
                 </div>
                 <h3>Quemado Limpio</h3>
-                <p>No produce hollín negro, protegiendo tus pulmones y las paredes de tu hogar.</p>
+                <p><div>No eleva los niveles de CO2 ni produce hollín negro, protegiendo tus pulmones y tus paredes.</div></p>
             </div>
         </div>
     </section>
@@ -378,19 +582,19 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <h2>Nuestros Favoritos de la Temporada</h2>
         <div class="bestsellers-grid">
             <div class="seller-card">
-                <div class="seller-img" id="bs1"></div>
+                <div class="seller-img" id="bs1" style="background-image: url(&quot;https://instagram.flim2-5.fna.fbcdn.net/v/t51.82787-15/590430584_17911527282252683_9156761691242129847_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=Mzc3NDU3MzY0ODQ0NDE5Nzc3Ng%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=VZWihGIfbMUQ7kNvwHooUOQ&amp;_nc_oc=AdrLmC4fG7fpCvZef2Qcjwhby39Fhov5ovn5EUD1p0HkyC3UD0DiO6LEMD-Qo-tz9vg&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-5.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQGmV_jE0AGtZQpH0BuZG-iU5GZhnCT3CdFRUBpJU-ET2A&amp;oe=6A83F06E&quot;); background-size: cover; background-position: center center;"></div>
                 <div class="seller-info">
                     <h3>Vela Lavanda Relajante</h3>
                     <p>Infusionada con aceite esencial puro, ideal para meditar o antes de dormir.</p>
-                    <div class="seller-meta"><span class="price">Edición Vidrio</span><button onclick="navigateTo('contacto')" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem">Pedir</button></div>
+                    <div class="seller-meta"><span class="price"><div><span style="font-size: 16.8px;">Edición Marmolina</span><br></div></span><button onclick="navigateTo('contacto')" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem">Pedir</button></div>
                 </div>
             </div>
             <div class="seller-card">
-                <div class="seller-img" id="bs2"></div>
+                <div class="seller-img" id="bs2" style="background-image: url(&quot;https://instagram.flim2-2.fna.fbcdn.net/v/t51.75761-15/504490291_17892164289252683_1218533360887458515_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=103&amp;ig_cache_key=MzY1MTQ1MjI0OTkxMDU4NDUzOA%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTAyNC5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=mvo-XVOHRHUQ7kNvwEnnZDt&amp;_nc_oc=Adqg3F5cul2PUQlLyBRUswdXOQqrxZIvTZUnXA3ItrboWDucapFAha5nuC5sNXvJH6Y&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-2.fna&amp;_nc_gid=zDIBLlx-FeSW8ASPo06m6g&amp;_nc_ss=7a22e&amp;oh=00_AQEvu8n0Ueo0eQ5rkgcxvymcLIOGHggFZXa3L2DT-42o9g&amp;oe=6A83EF85&quot;); background-size: cover; background-position: center center;"></div>
                 <div class="seller-info">
-                    <h3>Difusor Citrus Mood</h3>
-                    <p>Notas vibrantes de mandarina y bergamota para activar la energía de tu sala.</p>
-                    <div class="seller-meta"><span class="price">Varillas de Bambú</span><button onclick="navigateTo('contacto')" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem">Pedir</button></div>
+                    <h3>Difusor para autos - Citrus Mood</h3>
+                    <p><div><span style="font-size: 14.08px;">Notas vibrantes de mandarina y bergamota para activar la energía de tu vehículo.</span></div></p>
+                    <div class="seller-meta"><span class="price"><div><span style="font-size: 16.8px;">Frescura Constante</span><br></div></span><button onclick="navigateTo('contacto')" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem">Pedir</button></div>
                 </div>
             </div>
         </div>
@@ -403,8 +607,8 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <div class="benefits-grid">
             <div class="tips-item">
                 <div class="icon-box">
-                    <span class="icon-emoji" id="ti-icon-0">✂️</span>
-                    <img class="icon-img" id="ti-img-0" src="" alt="">
+                    <span class="icon-emoji" id="ti-icon-0" style="display: none;">✂️</span>
+                    <img class="icon-img" id="ti-img-0" src="https://vibracandela.com/vibraimgs/tips1.png" alt="" style="display: block;">
                     
                 </div>
                 <h4>Corta la mecha</h4>
@@ -412,8 +616,8 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             </div>
             <div class="tips-item">
                 <div class="icon-box">
-                    <span class="icon-emoji" id="ti-icon-1">⏱️</span>
-                    <img class="icon-img" id="ti-img-1" src="" alt="">
+                    <span class="icon-emoji" id="ti-icon-1" style="display: none;">⏱️</span>
+                    <img class="icon-img" id="ti-img-1" src="https://vibracandela.com/vibraimgs/tips2.png" alt="" style="display: block;">
                     
                 </div>
                 <h4>La primera quemada</h4>
@@ -421,8 +625,8 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             </div>
             <div class="tips-item">
                 <div class="icon-box">
-                    <span class="icon-emoji" id="ti-icon-2">🌬️</span>
-                    <img class="icon-img" id="ti-img-2" src="" alt="">
+                    <span class="icon-emoji" id="ti-icon-2" style="display: none;">🌬️</span>
+                    <img class="icon-img" id="ti-img-2" src="https://vibracandela.com/vibraimgs/tips3.png" alt="" style="display: block;">
                     
                 </div>
                 <h4>No la soples</h4>
@@ -438,18 +642,18 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             <div style="flex:1;min-width:280px;">
                 <div style="margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid #ddd;">
                     <strong style="color:var(--cp);display:block;margin-bottom:0.45rem;">¿Cuánto tiempo dura encendida una vela de soya?</strong>
-                    <p style="color:#555;font-size:0.92rem;">Nuestras velas medianas rinden entre 35 y 40 horas gracias al bajo punto de fusión de la cera orgánica.</p>
+                    <p style="color:#555;font-size:0.92rem;"><div><span style="font-size: 14.72px;">Nuestras velas medianas rinden entre 35 y 40 horas de luz y aroma continuo gracias al punto de fusión bajo de la cera orgánica.</span></div></p>
                 </div>
                 <div style="margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid #ddd;">
                     <strong style="color:var(--cp);display:block;margin-bottom:0.45rem;">¿Los difusores contienen alcohol?</strong>
-                    <p style="color:#555;font-size:0.92rem;">No. Usamos base difusora eco-amigable libre de alcohol para una evaporación lenta y uniforme.</p>
+                    <p style="color:#555;font-size:0.92rem;"><div><span style="font-size: 14.72px;">No. Utilizamos una base difusora eco-amigable libre de alcohol para que la fragancia se evapore de manera lenta, sutil y uniforme en tus habitaciones.</span></div></p>
                 </div>
                 <div style="margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid #ddd;">
                     <strong style="color:var(--cp);display:block;margin-bottom:0.45rem;">¿Hacen envíos a todo el país?</strong>
-                    <p style="color:#555;font-size:0.92rem;">Sí, enviamos a nivel nacional con embalaje reforzado para que los envases de vidrio lleguen intactos.</p>
+                    <p style="color:#555;font-size:0.92rem;"><div><span style="font-size: 14.72px;">Sí, gestionamos envíos a nivel nacional. Los productos viajan perfectamente protegidos para asegurar que los envases de vidrio lleguen intactos.</span></div></p>
                 </div>
             </div>
-            <div class="faq-img" id="faq-img" style="flex:1;min-width:260px;"></div>
+            <div class="faq-img" id="faq-img" style="flex: 1 1 0%; min-width: 260px; background-image: url(&quot;https://instagram.flim2-1.fna.fbcdn.net/v/t51.82787-15/561565034_17906535819252683_6922662755465891187_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=106&amp;ig_cache_key=MzczOTk0MDQyNDQwOTc2NjkyOA%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuOTkyLnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=UVsCHihOi7AQ7kNvwGGR5Z9&amp;_nc_oc=AdqYzJriO_d0MowP1aW_H7MsA1X-dmm1nP8hkzzWSIAqbP7E8OyorakJ_3eWax08YyM&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-1.fna&amp;_nc_gid=zDIBLlx-FeSW8ASPo06m6g&amp;_nc_ss=7a22e&amp;oh=00_AQHB2XlIHMYZ3RyPF7P3b4CCwhVEctMnnQU45V9g8OGGRQ&amp;oe=6A83E368&quot;); background-size: cover; background-position: center center;"></div>
         </div>
     </section>
 
@@ -458,19 +662,19 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <h2>Lo que dicen de Vibra Candela</h2>
         <div class="benefits-grid" style="margin-top:2rem;">
             <div class="benefit-item" style="text-align:left;border-left:4px solid var(--cp);">
-                <p style="font-style:italic;margin-bottom:1rem;">"La vela de lavanda cambió mis noches. Su aroma es muhjgy natural y no me da dolor de cabeza."</p>
-                <strong>- Camilaghj R.</strong>
-                <div style="color:#ffc107;margin-top:0.3rem;">★★★ghj★★</div>
+                <p style="font-style:italic;margin-bottom:1rem;">"La vela de lavanda cambió mis noches. Su aroma es muy natural y no me da dolor de cabeza."</p>
+                <strong>- Nahla F.</strong>
+                <div style="color:#ffc107;margin-top:0.3rem;">★★★★★</div>
             </div>
             <div class="benefit-item" style="text-align:left;border-left:4px solid var(--cp);">
-                <p style="font-style:italic;margin-bottom:1rem;">"El difusor Citrus Mood es increíble. Dura meses y el diseño minimalista combina con todo."ghj</p>
-                <strong>- Mateoghj S.</strong>
-                <div style="color:#ffc107;margin-top:0.3rem;">★★★★ghj★</div>
+                <p style="font-style:italic;margin-bottom:1rem;">"La vela Vainilla genera un aroma sutil en el ambiente, te relaja en cualquier momento."</p>
+                <strong>- Felix S.</strong>
+                <div style="color:#ffc107;margin-top:0.3rem;">★★★★★</div>
             </div>
             <div class="benefit-item" style="text-align:left;border-left:4px solid var(--cp);">
-                <p style="font-style:italic;margin-bottom:1rem;">"El difusor Citrus Mood es increíble. Dura meses y el dasdasdiseño minimalista combina con todo."</p>
-                <strong>- Mateasdao S.</strong>
-                <div style="color:#ffc107;margin-top:0.3rem;">★★★★asda★</div>
+                <p style="font-style:italic;margin-bottom:1rem;">"El difusor Citrus Mood para autos es increíble. Dura meses y el diseño minimalista combina con todo."</p>
+                <strong>- S. Pedrito</strong>
+                <div style="color:#ffc107;margin-top:0.3rem;">★★★★★</div>
             </div>
         </div>
     </section>
@@ -479,10 +683,10 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: PRODUCTOS
      ========================================================= -->
-<div id="page-productos" class="page active" style="margin-top: 70px;">
+<div id="page-productos" class="page" style="margin-top: 70px;">
     <div class="catalog-container">
         <h2 style="text-align:center;">Nuestro Catálogo</h2>
-        <div class="catalog-grid" id="catalogGrid" style="grid-template-columns: repeat(3, 1fr);"><div class="seller-card" onclick="openProductModal_s('Vela Lavanda Francesa','100% Soya','S/. 45.00','Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.','')" style="cursor: pointer;"><div class="seller-img" style="background-image:none;background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Vela Lavanda Francesa</h3><p>Calma el estrés cotidiano con notas florales suaves.</p><div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" onclick="openProductModal_s('Difusor Vainilla Dulce','Ambiental','S/. 55.00','Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.','')" style="cursor: pointer;"><div class="seller-img" style="background-image:none;background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Difusor Vainilla Dulce</h3><p>Fragancia reconfortante de larga duración.</p><div class="seller-meta"><span class="price">S/. 55.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" onclick="openProductModal_s('Vela Bosque de Pino','100% Soya','S/. 45.00','Evoca la frescura de un bosque matutino. Pabilo de algodón puro y esencias maderosas que purifican el ambiente.','')" style="cursor: pointer;"><div class="seller-img" style="background-image:none;background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Vela Bosque de Pino</h3><p>Notas frescas y maderosas que te transportan a la naturaleza.</p><div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div></div>
+        <div class="catalog-grid" id="catalogGrid" style="grid-template-columns: repeat(3, 1fr);"><div class="seller-card" onclick="openProductModal_s('Vela Lavanda Francesa','100% Soya','S/. 45.00','Relaja tu mente y cuerpo con el sutil aroma de la lavanda extraída de campos orgánicos. Ideal para tus sesiones de meditación, lectura o para encender antes de dormir.','https://instagram.flim2-2.fna.fbcdn.net/v/t51.82787-15/763992645_17947513695252683_1461326903004608070_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ig_cache_key=Mzk1NTk0MDUyMzMyMzQ3MDE3NA%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuOTYwLnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=Xm1JQnNlrn8Q7kNvwGZhmow&amp;_nc_oc=AdryWJw4TFPZcyR_WJedXHFX5Jo-O8Fiz_HBeYTmnrKclYP-HN3qAg3HQPNRLrB869c&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-2.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQGLNEl3dZ4YyH7c5Bqko6Xjlns7c_6cnlLgsdUQJn9g8g&amp;oe=6A8418D5')" style="cursor: pointer;"><div class="seller-img" style="background-image:url('https://instagram.flim2-2.fna.fbcdn.net/v/t51.82787-15/763992645_17947513695252683_1461326903004608070_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ig_cache_key=Mzk1NTk0MDUyMzMyMzQ3MDE3NA%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuOTYwLnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=Xm1JQnNlrn8Q7kNvwGZhmow&amp;_nc_oc=AdryWJw4TFPZcyR_WJedXHFX5Jo-O8Fiz_HBeYTmnrKclYP-HN3qAg3HQPNRLrB869c&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-2.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQGLNEl3dZ4YyH7c5Bqko6Xjlns7c_6cnlLgsdUQJn9g8g&amp;oe=6A8418D5');background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Vela Lavanda Francesa</h3><p>Calma el estrés cotidiano con notas florales suaves.</p><div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" onclick="openProductModal_s('Vela Vainilla Dulce','Ambiental','S/. 55.00','Un difusor formulado sobre una base ecológica libre de alcohol. Dispersa notas cálidas y reconfortantes de vainilla natural que envuelven tus espacios por más de 3 meses.','https://instagram.flim2-6.fna.fbcdn.net/v/t51.82787-15/753231597_17945338332252683_3373052511268797551_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ig_cache_key=Mzk0NjUwNDU3OTE3NjU3NjM2OQ%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuODU2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=FEM80WGycbkQ7kNvwEinMiP&amp;_nc_oc=Adqkkwk-Gf_9fbBXABO9PMCM97ewqU36ii0qsVrE8fpmnsHaExg83F7XxASoXFzZsxc&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-6.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQEIrG79cqrwJ6u9B8p-80Ps5g08IMChlBdRPihe-n3ouA&amp;oe=6A840397')" style="cursor: pointer;"><div class="seller-img" style="background-image:url('https://instagram.flim2-6.fna.fbcdn.net/v/t51.82787-15/753231597_17945338332252683_3373052511268797551_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ig_cache_key=Mzk0NjUwNDU3OTE3NjU3NjM2OQ%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuODU2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=FEM80WGycbkQ7kNvwEinMiP&amp;_nc_oc=Adqkkwk-Gf_9fbBXABO9PMCM97ewqU36ii0qsVrE8fpmnsHaExg83F7XxASoXFzZsxc&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-6.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQEIrG79cqrwJ6u9B8p-80Ps5g08IMChlBdRPihe-n3ouA&amp;oe=6A840397');background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Vela Vainilla Dulce</h3><p>Fragancia reconfortante y acogedora de larga duración.</p><div class="seller-meta"><span class="price">S/. 55.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" onclick="openProductModal_s('Vela Bosque de Pino','100% Soya','S/. 45.00','Evoca la frescura de un bosque navideño. Elaborada con pabilo de algodón puro y esencias que te harán recordar la navidad.','https://instagram.flim2-5.fna.fbcdn.net/v/t51.82787-15/600873573_17913585456252683_2010257839239122089_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=Mzc4ODE0Mjg0NDExNzI2NDEyOQ%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuNzQ2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=RSLIBSVvLUIQ7kNvwHxZu5T&amp;_nc_oc=Adru3Bo7vTzP2nd1vu74c7uqepWSgVTuLo7k-6dxa_ekUJq0NctdBUUQkLZzA2zpilE&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-5.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQG01Uy2MK-8w13xzS30MAxD8ivS-EXMQSO7oFH-FU15Uw&amp;oe=6A83E9DB')" style="cursor: pointer;"><div class="seller-img" style="background-image:url('https://instagram.flim2-5.fna.fbcdn.net/v/t51.82787-15/600873573_17913585456252683_2010257839239122089_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=Mzc4ODE0Mjg0NDExNzI2NDEyOQ%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuNzQ2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=RSLIBSVvLUIQ7kNvwHxZu5T&amp;_nc_oc=Adru3Bo7vTzP2nd1vu74c7uqepWSgVTuLo7k-6dxa_ekUJq0NctdBUUQkLZzA2zpilE&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-5.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQG01Uy2MK-8w13xzS30MAxD8ivS-EXMQSO7oFH-FU15Uw&amp;oe=6A83E9DB');background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>Vela Bosque de Pino</h3><p>Notas frescas y dulces que te transportan a la naturaleza.</p><div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div></div>
     </div>
 </div>
 
@@ -496,11 +700,11 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             <div id="modal-product-img" class="modal-img"></div>
             <div class="modal-info">
                 <div>
-                    <h3 id="modal-product-title"></h3>
-                    <div id="modal-product-meta" class="mprice"></div>
-                    <p id="modal-product-desc"></p>
+                    <h3 id="modal-product-title">Difusor Vainilla Dulce</h3>
+                    <div id="modal-product-meta" class="mprice">Ambiental | S/. 55.00</div>
+                    <p id="modal-product-desc">Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.</p>
                 </div>
-                <a id="modal-whatsapp-link" href="#" target="_blank" class="btn btn-wa"><span>💬</span> Solicitar por WhatsApp</a>
+                <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa" data-product-id="2"><span>💬</span> Solicitar por WhatsApp</a>
             </div>
         </div>
     </div>
@@ -532,18 +736,18 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <h2>Nuestra Historia</h2>
         <div class="about-wrapper">
             <div class="about-bio" id="aboutBio">
-                <h3>Hola, soy la creadora</h3>
+                <h3>Hola, soy Yenka</h3>
                 <div class="bio-p">
-                    <p>Este proyecto nació de una búsqueda personal por transformar mi hogar en un santuario de paz sin comprometer mi salud. Al descubrir que las velas de parafina liberaban toxinas al quemarse, decidí investigar alternativas conscientes.</p>
+                    <p><div>Este proyecto nació de una búsqueda personal por transformar mi hogar en un santuario de paz sin comprometer mi salud. Al descubrir que las velas convencionales de parafina liberaban toxinas al quemarse, decidí investigar alternativas conscientes.</div></p>
                     
                 </div>
                 <div class="bio-p">
-                    <p>Vibra Candela fusiona diseño minimalista, botánica y respeto al medio ambiente. Cada pieza se diseña, mezcla y vierte a mano, cuidando la procedencia de los insumos y asegurando un producto ético.</p>
+                    <p><div>Vibra Candela se fundó con el concepto de fusionar el diseño minimalista, la botánica y el respeto al medio ambiente. Cada pieza es diseñada, mezclada y vertida individualmente a mano, cuidando la procedencia de los insumos y asegurando un producto ético de inicio a fin.</div></p>
                     
                 </div>
                 
             </div>
-            <div class="about-img" id="about-img"></div>
+            <div class="about-img" id="about-img" style="background-image: url(&quot;https://instagram.flim1-2.fna.fbcdn.net/v/t51.82787-15/659217144_18576869383055784_2080647906464403244_n.jpg?stp=dst-jpg_e35_p720x720_tt6&amp;_nc_cat=110&amp;ig_cache_key=Mzg2ODcyMzk0MzI2MDI3NTgyNw%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=u5sxz0xM1X0Q7kNvwEhZl4S&amp;_nc_oc=AdohKkr1GUuz-eO7K1qDJo7GB-B6Hy424qhC8l8YM7uJOt-O6O21RmULmTX29VQZvyQ&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim1-2.fna&amp;_nc_gid=uwoseENEKO9MQT7CHoloaA&amp;_nc_ss=7a22e&amp;oh=00_AQEj0FLzdWyIhxtT4xXUKQuqCl1VVtju1eJEfEwQmwFIAg&amp;oe=6A841A0E&quot;); background-size: cover; background-position: center center;"></div>
         </div>
     </section>
 </div>
@@ -557,41 +761,46 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <div class="contact-wrapper">
             <div class="contact-info-panel">
                 <h3>Información de Contacto</h3>
-                <p class="contact-info-intro">¿Quieres ser distribuidor, necesitas recuerdos para un evento o tienes dudas? ¡Escríbenos!</p>
+                <p class="contact-info-intro"><div><span style="font-size: 14.88px;">¿Necesitas recuerdos para un evento social o tienes dudas de tu cuidado de la vela o te gustaría distribuir?&nbsp; ¡Escríbenos directamente!</span></div></p>
                 <div id="infoLinksContainer">
                     <div class="info-link">
-                        <span class="info-link-icon">📍</span>
-                        <span class="info-link-text">Callao, Perú</span>
+                        <span class="info-link-icon" data-ci-type="fa"><i class="fa-solid fa-location-dot" style="color:#6e8174;font-size:1.2rem;"></i></span>
+                        <span class="info-link-text">SJL, Perú</span>
                         
                     </div>
                     <div class="info-link">
-                        <span class="info-link-icon">💬</span>
-                        <span class="info-link-text">WhatsApp: +51 999 999 999</span>
+                        <span class="info-link-icon" data-ci-type="fa"><i class="fa-brands fa-whatsapp" style="color:#6e8174;font-size:1.2rem;"></i></span>
+                        <span class="info-link-text">WhatsApp: +51 926 997 276</span>
                         
                     </div>
                     <div class="info-link">
-                        <span class="info-link-icon">✉️</span>
-                        <span class="info-link-text">hola@aromanatural.com</span>
+                        <span class="info-link-icon" data-ci-type="fa"><i class="fa-solid fa-envelope" style="color:#6e8174;font-size:1.2rem;"></i></span>
+                        <span class="info-link-text"><div>contacto@vibracandela.com<br></div></span>
                         
                     </div>
                 </div>
                 
             </div>
             <div class="contact-form-panel">
-                <form id="contactForm" onsubmit="handleContactForm(event)">
-                    <div class="form-group"><label>Nombre Completo</label><input type="text" id="c-name" placeholder="Ej. Ana García" required=""></div>
-                    <div class="form-group"><label>Correo Electrónico</label><input type="email" id="c-email" placeholder="Ej. ana@correo.com" required=""></div>
+                <form action="https://api.web3forms.com/submit" method="POST" id="form">
+                    <input type="hidden" name="access_key" value="8224743d-95d4-4ea0-aa7b-8cc5eb1c8c6c">
+                    <input type="checkbox" name="botcheck" id="" style="display: none;">
+                    <div class="form-group"><label>Nombre</label><input type="text" id="c-name" placeholder="Ej. Ana García" name="Nombre" required=""></div>
+                    <div class="form-group"><label>Correo Electrónico</label><input type="email" id="c-email" placeholder="Ej. ana@correo.com" name="Correo" required=""></div>
+                    <div class="form-group"><label>Celular</label><input type="tel" placeholder="987654321" name="Celular" required=""></div>
                     <div class="form-group">
                         <label>¿En qué te podemos ayudar?</label>
-                        <select id="c-motivo">
-                            <option>Duda sobre un producto</option>
-                            <option>Pedido personalizado / Eventos</option>
-                            <option>Mayoristas y distribución</option>
+                        <select id="c-motivo" name="Asunto" required="">
+                            <option value="">Selecciona una opción</option>
+                            <option value="Duda sobre un producto">Duda sobre un producto</option>
+                            <option value="Pedido personalizado / Eventos">Pedido personalizado / Eventos</option>
+                            <option value="Mayoristas y distribución">Mayoristas y distribución</option>
+                            <option value="Problemas con producto adquirido">Problemas con producto adquirido</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Tu Mensaje</label><textarea id="c-message" rows="4" placeholder="Escribe aquí los detalles..." required=""></textarea></div>
+                    <div class="form-group"><label>Tu Mensaje</label><textarea id="c-message" rows="4" placeholder="Escribe aquí los detalles..." name="Mensaje" required=""></textarea></div>
                     <button type="submit" class="btn" style="width:100%;" id="formSubmitBtn">Enviar Mensaje</button>
-                    <div id="formStatus" class="form-status"></div>
+                    <div id="result"></div>
                 </form>
             </div>
         </div>
@@ -608,6 +817,26 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 
 <script>var WA="51930246770";
 function navigateTo(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));var pg=document.getElementById('page-'+p);if(pg)pg.classList.add('active');var lk=document.getElementById('nav-'+p);if(lk)lk.classList.add('active');window.scrollTo(0,0);}
-function openProductModal_s(title,cat,price,desc,img){document.getElementById('modal-product-title').innerText=title;document.getElementById('modal-product-meta').innerText=cat+' | '+price;document.getElementById('modal-product-desc').innerText=desc;document.getElementById('modal-product-img').style.backgroundImage=img?"url('"+img+"')":'';var msg=encodeURIComponent('¡Hola! Me interesa:\n\n🛍️ *Producto:* '+title+'\n✨ *Categoría:* '+cat+'\n💰 *Precio:* '+price+'\n\n¿Tienen stock disponible?');document.getElementById('modal-whatsapp-link').href='https://wa.me/'+WA+'?text='+msg;document.getElementById('product-modal').classList.add('open');}
+function openProductModal_s(title,cat,price,desc,img){
+    document.getElementById('modal-product-title').innerText=title;
+    document.getElementById('modal-product-meta').innerText=cat+' | '+price;
+    document.getElementById('modal-product-desc').innerText=desc;
+    document.getElementById('modal-product-img').style.backgroundImage=img?"url('"+img+"')":'';
+    document.getElementById('modal-whatsapp-link').dataset.productInfo=JSON.stringify({name:title,cat:cat,price:price,img:img});
+    document.getElementById('product-modal').classList.add('open');
+}
 function closeProductModal(e){if(!e||e.target===document.getElementById('product-modal'))document.getElementById('product-modal').classList.remove('open');}
+async function sendWhatsApp(e){
+    e.preventDefault();
+    var info=JSON.parse(document.getElementById('modal-whatsapp-link').dataset.productInfo||'{}');
+    var textMsg='¡Hola! Me interesa el siguiente producto:
+
+🛒 *'+info.name+'*
+✨ Categoría: '+info.cat+'
+💰 Precio: '+info.price+'
+
+¿Tienen stock disponible?';
+    var waUrl='https://wa.me/'+WA+'?text='+encodeURIComponent(textMsg);
+    window.open(waUrl,'_blank');
+}
 </script></body></html>
