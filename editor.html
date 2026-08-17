@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibra Candela | Editor</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--cp:#6e8174;--cs:#f4eee6;--ca:#d9c3b0;--cd:#333333;--cl:#faf8f5;--f:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--f);color:var(--cd);background:var(--cl);line-height:1.6;display:flex;flex-direction:column;min-height:100vh;}
+
+/* HEADER */
+.header{position:fixed;top:0;width:100%;background:rgba(250,248,245,0.98);padding:1.2rem 8%;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 5px rgba(0,0,0,0.06);z-index:1000;}
+.logo-area{display:flex;align-items:center;gap:0.6rem;cursor:pointer;}
+.logo-img{height:44px;width:auto;max-width:150px;object-fit:contain;display:none;}
+.logo-text{font-size:1.4rem;font-weight:bold;color:var(--cp);}
+.logo-edit-btn{background:transparent;border:1px dashed var(--ca);color:#aaa;border-radius:4px;padding:0.12rem 0.45rem;font-size:0.68rem;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.logo-edit-btn:hover{border-color:var(--cp);color:var(--cp);}
+.nav{display:flex;flex-wrap:wrap;gap:0.2rem;}
+.nav a{text-decoration:none;color:var(--cd);margin-left:1.2rem;font-weight:500;transition:color 0.3s;cursor:pointer;font-size:0.95rem;}
+.nav a:hover,.nav a.active{color:var(--cp);}
+
+/* EDITOR TOOLBAR */
+.editor-toolbar{position:fixed;top:70px;width:100%;background:#2d2d2d;color:#fff;padding:0.5rem 8%;display:flex;align-items:center;gap:0.65rem;z-index:999;font-size:0.82rem;box-shadow:0 2px 8px rgba(0,0,0,0.25);flex-wrap:wrap;}
+.tlabel{color:#aaa;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;}
+.tbtn{background:#444;border:1px solid #555;color:#fff;padding:0.3rem 0.8rem;border-radius:4px;cursor:pointer;font-size:0.78rem;transition:background 0.2s;display:flex;align-items:center;gap:0.3rem;white-space:nowrap;}
+.tbtn:hover{background:#555;}
+.tbtn.save-e{background:#4a6fa5;border-color:#3d5e8c;font-weight:600;}
+.tbtn.save-e:hover{background:#3d5e8c;}
+.tbtn.save-c{background:var(--cp);border-color:var(--cp);font-weight:600;}
+.tbtn.save-c:hover{background:#58685d;}
+.tsep{width:1px;height:20px;background:#555;}
+.save-grp{display:flex;align-items:center;gap:0.45rem;margin-left:auto;}
+.eml-cfg{display:flex;align-items:center;gap:0.45rem;}
+.eml-cfg input{background:#3a3a3a;border:1px solid #555;color:#fff;padding:0.26rem 0.55rem;border-radius:4px;font-size:0.78rem;width:190px;}
+.eml-cfg input::placeholder{color:#888;}
+.eml-note{font-size:0.68rem;color:#f59e0b;}
+
+/* PAGES */
+.page{display:none;margin-top:116px;flex:1;}
+.page.active{display:block;}
+section{padding:3.5rem 8%;text-align:center;}
+h2{font-size:2.3rem;color:var(--cp);margin-bottom:3rem;position:relative;}
+h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);margin:0.4rem auto 0;}
+
+/* EDITABLE TEXT */
+[contenteditable="true"]{outline:none;border-radius:3px;transition:background 0.2s,box-shadow 0.2s;}
+[contenteditable="true"]:hover{background:rgba(110,129,116,0.08);box-shadow:0 0 0 2px rgba(110,129,116,0.3);cursor:text;}
+[contenteditable="true"]:focus{background:rgba(110,129,116,0.13);box-shadow:0 0 0 2px var(--cp);}
+
+/* IMAGE BOXES */
+.img-editable{position:relative;cursor:pointer;overflow:hidden;background:#e8e0d8;}
+.img-editable::after{content:'📷 Clic para cambiar imagen';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:#fff;font-size:0.83rem;font-weight:600;opacity:0;transition:opacity 0.22s;pointer-events:none;}
+.img-editable:hover::after{opacity:1;}
+
+/* ICON BOXES (beneficios/tips) */
+.icon-box{position:relative;display:flex;justify-content:center;margin-bottom:1rem;}
+.icon-img{width:72px;height:72px;object-fit:contain;display:none;}
+.icon-emoji{font-size:2.5rem;line-height:1;}
+.icon-swap-btn{position:absolute;bottom:-6px;right:calc(50% - 42px);background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:3px;padding:0.12rem 0.4rem;font-size:0.65rem;cursor:pointer;opacity:0;transition:opacity 0.18s;white-space:nowrap;}
+.icon-box:hover .icon-swap-btn{opacity:1;}
+
+/* TIPS icon is smaller */
+.tips-section .icon-emoji{font-size:2rem;}
+.tips-section .icon-img{width:56px;height:56px;}
+
+/* BUTTONS */
+.btn{display:inline-block;padding:0.75rem 1.8rem;background:var(--cp);color:#fff;text-decoration:none;border-radius:4px;border:none;cursor:pointer;font-size:0.95rem;transition:background 0.3s;}
+.btn:hover{background:#58685d;}
+
+/* HERO — arquitectura de capas para blend mode correcto */
+.hero{height:70vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;padding:0 1rem;position:relative;overflow:hidden;background:#a0b0a6;}
+/* Capa 0: imagen de fondo — recibe el blend mode, aislada aquí */
+.hero-bg-img{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0;}
+/* Capa 1: tinte de color con blend mode — hermana de .hero-bg-img */
+.hero-filter-layer{position:absolute;inset:0;z-index:1;pointer-events:none;}
+/* Capa 2: contenido — z-index alto, fuera del contexto de blend */
+.hero-content{position:relative;z-index:10;}
+.hero-content h1{font-size:2.8rem;margin-bottom:1rem;text-shadow:1px 1px 4px rgba(0,0,0,0.5);}
+.hero-content p{font-size:1.15rem;margin-bottom:2rem;text-shadow:1px 1px 4px rgba(0,0,0,0.5);}
+
+/* BENEFITS / TIPS GRID — siempre 3 col en desktop */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;justify-items:center;}
+.benefit-item{background:#fff;padding:2rem;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.03);width:100%;text-align:center;}
+.benefit-item h3{margin-bottom:0.5rem;color:var(--cp);}
+.tips-item{background:#fff;padding:2rem;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.03);width:100%;text-align:center;}
+.tips-item h4{margin-bottom:0.5rem;color:var(--cp);}
+
+/* BESTSELLERS */
+.bestsellers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.5rem;}
+.seller-card{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.06);text-align:left;}
+.seller-img{height:420px;background-size:cover;background-position:center;background-color:#e8e0d8;}
+.seller-info{padding:1.4rem;}
+.seller-info h3{margin-bottom:0.4rem;}
+.seller-info p{font-size:0.88rem;color:#666;margin-bottom:1rem;}
+.seller-meta{display:flex;justify-content:space-between;align-items:center;}
+.price{font-weight:bold;color:var(--cp);font-size:1.05rem;}
+
+/* CATALOG — 3 col desktop, 2 col tablet, 1 col móvil */
+.catalog-container{padding:3.5rem 8%;}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem;max-width:980px;margin:0 auto;}
+@media(max-width:900px){.catalog-grid{grid-template-columns:repeat(2,1fr)!important;}}
+@media(max-width:560px){.catalog-grid{grid-template-columns:1fr!important;}}
+
+/* ABOUT */
+.about-wrapper{display:flex;align-items:flex-start;gap:3.5rem;max-width:980px;margin:0 auto;text-align:left;padding:0rem 0;}
+.about-bio{flex:1;}
+.about-bio h3{font-size:1.7rem;margin-bottom:1rem;color:var(--cp);}
+.about-bio .bio-p{margin-bottom:1.2rem;color:#555;position:relative;padding-right:2.2rem;}
+.para-controls{position:absolute;right:0;top:0;display:flex;gap:4px;opacity:0;transition:opacity 0.18s;}
+.about-bio .bio-p:hover .para-controls{opacity:1;}
+.para-btn{background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:3px;padding:0.1rem 0.4rem;font-size:0.65rem;cursor:pointer;white-space:nowrap;}
+.add-para-btn{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;padding:0.4rem 0.9rem;background:transparent;border:1.5px dashed var(--ca);color:#888;border-radius:4px;cursor:pointer;font-size:0.8rem;transition:all 0.2s;}
+.add-para-btn:hover{border-color:var(--cp);color:var(--cp);}
+.about-img{flex:0 0 380px;width:380px;min-height:400px;align-self:stretch;border-radius:12px;box-shadow:10px 10px 0 var(--ca);background:#c5b8aa center/cover no-repeat;}
+
+/* CONTACT */
+.contact-page{padding:3.5rem 8%;}
+.contact-page h2{text-align:center;}
+.contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:980px;margin:0 auto;text-align:left;padding:0rem 0 0;}
+.contact-info-panel{background:var(--cs);padding:2.5rem;border-radius:8px;}
+.contact-info-panel h3{margin-bottom:1rem;color:var(--cp);}
+.contact-info-intro{margin-bottom:1.5rem;color:#555;font-size:0.93rem;}
+.info-link{display:flex;align-items:center;gap:0.8rem;margin-bottom:1.2rem;position:relative;padding-right:2.2rem;}
+.info-link-icon{font-size:1.2rem;border-radius:4px;padding:0.1rem 0.2rem;}
+.editor-active .info-link-icon{cursor:pointer;transition:background 0.18s;}
+.editor-active .info-link-icon:hover{background:rgba(110,129,116,0.15);}
+.info-link-text{flex:1;}
+.info-link-actions{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;gap:3px;opacity:0;transition:opacity 0.18s;}
+.info-link:hover .info-link-actions{opacity:1;}
+.il-btn{background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:3px;padding:0.1rem 0.38rem;font-size:0.65rem;cursor:pointer;}
+.add-link-btn{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.3rem;padding:0.35rem 0.8rem;background:transparent;border:1.5px dashed var(--ca);color:#888;border-radius:4px;cursor:pointer;font-size:0.78rem;transition:all 0.2s;}
+.add-link-btn:hover{border-color:var(--cp);color:var(--cp);}
+.contact-form-panel{background:#fff;padding:2.5rem;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.06);}
+.form-group{margin-bottom:1.3rem;}
+.form-group label{display:block;margin-bottom:0.4rem;font-weight:500;font-size:0.88rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:0.75rem;border:1px solid #ddd;border-radius:4px;font-family:var(--f);font-size:0.9rem;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--cp);}
+
+/* FOOTER */
+.footer{background:var(--cd);color:#fff;text-align:center;padding:2rem;font-size:0.88rem;margin-top:auto;}
+
+/* PRODUCT VIEW MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:2000;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.modal-overlay.open{opacity:1;pointer-events:auto;}
+.modal-content{background:var(--cl);padding:2.2rem;border-radius:8px;max-width:580px;width:90%;position:relative;box-shadow:0 10px 25px rgba(0,0,0,0.16);text-align:left;transform:translateY(-18px);transition:transform 0.3s;}
+.modal-overlay.open .modal-content{transform:translateY(0);}
+.modal-close{position:absolute;top:0.9rem;right:1.3rem;font-size:1.7rem;cursor:pointer;color:#999;}
+.modal-close:hover{color:var(--cd);}
+.modal-flex{display:flex;gap:1.8rem;margin-top:1rem;flex-wrap:wrap;}
+.modal-img{flex:1;min-width:180px;height:210px;background-size:cover;background-position:center;border-radius:6px;background-color:#e8e0d8;}
+.modal-info{flex:1.2;min-width:220px;display:flex;flex-direction:column;justify-content:space-between;}
+.modal-info h3{font-size:1.5rem;color:var(--cp);margin-bottom:0.4rem;}
+.modal-info .mprice{font-weight:bold;font-size:1.1rem;color:var(--cd);margin-bottom:0.9rem;}
+.modal-info p{font-size:0.92rem;color:#555;margin-bottom:1.3rem;}
+.btn-wa{background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;gap:0.45rem;}
+.btn-wa:hover{background:#1ebd58;}
+
+/* PRODUCT EDITOR */
+.pe-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:3000;opacity:0;pointer-events:none;transition:opacity 0.22s;}
+.pe-overlay.open{opacity:1;pointer-events:auto;}
+.pe-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:520px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-18px);transition:transform 0.22s;max-height:90vh;overflow-y:auto;}
+.pe-overlay.open .pe-modal{transform:translateY(0);}
+.pe-modal h3{color:var(--cp);margin-bottom:1.1rem;font-size:1.1rem;}
+.fg{margin-bottom:0.8rem;}
+.fg label{display:block;font-size:0.78rem;font-weight:600;margin-bottom:0.25rem;color:#555;}
+.fg input,.fg textarea{width:100%;padding:0.5rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-family:var(--f);font-size:0.87rem;}
+.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--cp);}
+.pe-actions{display:flex;gap:0.6rem;margin-top:1.1rem;justify-content:flex-end;}
+.pe-actions button{padding:0.45rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.85rem;}
+.pe-cancel{background:#eee;color:#333;} .pe-cancel:hover{background:#ddd;}
+.pe-del{background:#fee2e2;color:#b91c1c;} .pe-del:hover{background:#fecaca;}
+.pe-ok{background:var(--cp);color:#fff;} .pe-ok:hover{background:#58685d;}
+
+/* CARD WRAPPER */
+.seller-card-wrapper{position:relative;}
+.card-edt{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.65);color:#fff;border:none;border-radius:4px;padding:0.25rem 0.55rem;font-size:0.7rem;cursor:pointer;z-index:10;opacity:0;transition:opacity 0.18s;}
+.seller-card-wrapper:hover .card-edt{opacity:1;}
+.add-product-card{border:2px dashed var(--ca);border-radius:8px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;color:#999;font-size:0.88rem;}
+.add-product-card:hover{border-color:var(--cp);background:rgba(110,129,116,0.05);color:var(--cp);}
+.add-product-card .ic{font-size:1.9rem;}
+
+/* IMAGE URL MODAL */
+.iu-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4000;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.iu-overlay.open{opacity:1;pointer-events:auto;}
+.iu-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:460px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.iu-overlay.open .iu-modal{transform:translateY(0);}
+.iu-modal h4{margin-bottom:0.9rem;color:var(--cp);}
+.iu-modal input[type="text"]{width:100%;padding:0.6rem 0.75rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.35rem;}
+.iu-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
+.iu-hint{font-size:0.74rem;color:#888;margin-bottom:0.9rem;}
+.iu-actions{display:flex;gap:0.6rem;justify-content:flex-end;margin-top:0.5rem;}
+.iu-actions button{padding:0.45rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
+
+/* HERO IMAGE MODAL (extended) */
+.hero-img-section{border-top:1px solid #eee;padding-top:1rem;margin-top:1rem;}
+.hero-img-section h5{font-size:0.8rem;font-weight:700;color:#555;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.04em;}
+.filter-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.65rem;flex-wrap:wrap;}
+.filter-row label{font-size:0.78rem;color:#666;white-space:nowrap;}
+.filter-row input[type="color"]{width:34px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
+.filter-row input[type="range"]{flex:1;min-width:80px;accent-color:var(--cp);}
+.filter-row span{font-size:0.75rem;color:#888;min-width:30px;}
+.filter-row select{padding:0.28rem 0.5rem;border:1px solid #ddd;border-radius:4px;font-size:0.78rem;color:#555;background:#fff;cursor:pointer;flex:1;}
+.filter-presets{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem;}
+.fpreset{border:none;border-radius:4px;padding:0.25rem 0.65rem;font-size:0.74rem;cursor:pointer;font-weight:600;transition:transform 0.15s;color:#fff;}
+.fpreset:hover{transform:scale(1.06);}
+.blend-chips{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.8rem;}
+.bchip{border:1px solid #ddd;border-radius:20px;padding:0.18rem 0.65rem;font-size:0.72rem;cursor:pointer;background:#f5f5f5;color:#555;transition:all 0.15s;white-space:nowrap;}
+.bchip:hover{border-color:var(--cp);color:var(--cp);}
+.bchip.active{background:var(--cp);color:#fff;border-color:var(--cp);}
+.hero-preview-bar{height:70px;border-radius:6px;margin-top:0.5rem;border:1px solid #eee;background:#ccc center/cover no-repeat;position:relative;overflow:hidden;}
+.hero-preview-tint{position:absolute;inset:0;}
+/* HERO BUTTON SECTION */
+.hero-btn-section{border-top:1px solid #eee;padding-top:1rem;margin-top:1rem;}
+.hero-btn-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.65rem;flex-wrap:wrap;}
+.hero-btn-row label{font-size:0.78rem;color:#666;white-space:nowrap;min-width:52px;}
+.hero-btn-row input[type="text"]{flex:1;padding:0.4rem 0.65rem;border:1px solid #ddd;border-radius:4px;font-size:0.84rem;}
+.hero-btn-row input[type="text"]:focus{outline:none;border-color:var(--cp);}
+.hero-btn-row input[type="color"]{width:34px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
+.hero-btn-preview{display:inline-block;padding:0.55rem 1.4rem;border-radius:4px;font-size:0.88rem;font-weight:600;color:#fff;margin-top:0.4rem;transition:all 0.2s;cursor:default;}
+
+/* ICON SWAP MODAL */
+.is-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4500;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.is-overlay.open{opacity:1;pointer-events:auto;}
+.is-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:420px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.is-overlay.open .is-modal{transform:translateY(0);}
+.is-modal h4{color:var(--cp);margin-bottom:0.4rem;}
+.is-modal p{font-size:0.78rem;color:#888;margin-bottom:1rem;}
+.is-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1rem;}
+.is-tab{flex:1;padding:0.42rem;text-align:center;cursor:pointer;font-size:0.8rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
+.is-tab.active{background:var(--cp);color:#fff;font-weight:600;}
+.is-panel{display:none;} .is-panel.active{display:block;}
+.is-modal input[type="text"]{width:100%;padding:0.55rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.4rem;}
+.is-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
+.is-emoji-input{font-size:1.8rem;width:100%;text-align:center;padding:0.4rem;border:1px solid #ddd;border-radius:4px;}
+.is-preview{margin:0.7rem 0;min-height:60px;display:flex;align-items:center;justify-content:center;border:1px solid #eee;border-radius:6px;background:var(--cl);}
+.is-actions{display:flex;gap:0.55rem;justify-content:flex-end;margin-top:1rem;}
+.is-actions button{padding:0.42rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
+
+/* LOGO MODAL */
+.lo-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4000;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.lo-overlay.open{opacity:1;pointer-events:auto;}
+.lo-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:460px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.lo-overlay.open .lo-modal{transform:translateY(0);}
+.lo-modal h4{color:var(--cp);margin-bottom:0.35rem;}
+.lo-modal .sub{font-size:0.78rem;color:#888;margin-bottom:1.1rem;}
+.lo-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1.1rem;}
+.lo-tab{flex:1;padding:0.42rem;text-align:center;cursor:pointer;font-size:0.8rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
+.lo-tab.active{background:var(--cp);color:#fff;font-weight:600;}
+.lo-panel{display:none;} .lo-panel.active{display:block;}
+.lo-modal input[type="text"]{width:100%;padding:0.58rem 0.75rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.35rem;}
+.lo-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
+.lo-hint{font-size:0.74rem;color:#888;margin-bottom:0.9rem;}
+.lo-preview{margin:0.65rem 0;padding:0.85rem;background:rgba(250,248,245,0.98);border:1px solid #eee;border-radius:6px;display:flex;align-items:center;gap:0.65rem;min-height:64px;}
+.lo-actions{display:flex;gap:0.6rem;justify-content:flex-end;margin-top:1.1rem;}
+.lo-actions button{padding:0.42rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
+
+/* CONTACT LINK ICON MODAL */
+.ci-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4500;opacity:0;pointer-events:none;transition:opacity 0.18s;}
+.ci-overlay.open{opacity:1;pointer-events:auto;}
+.ci-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:420px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
+.ci-overlay.open .ci-modal{transform:translateY(0);}
+.ci-modal h4{color:var(--cp);margin-bottom:0.3rem;}
+.ci-modal .ci-sub{font-size:0.76rem;color:#aaa;margin-bottom:0.9rem;}
+.ci-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1rem;}
+.ci-tab{flex:1;padding:0.4rem;text-align:center;cursor:pointer;font-size:0.78rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
+.ci-tab.active{background:var(--cp);color:#fff;font-weight:600;}
+.ci-panel{display:none;} .ci-panel.active{display:block;}
+.ci-emoji-input{font-size:1.8rem;width:100%;text-align:center;padding:0.4rem;border:1px solid #ddd;border-radius:4px;margin-bottom:0.3rem;}
+.ci-fa-input{width:100%;padding:0.55rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;font-family:monospace;margin-bottom:0.3rem;}
+.ci-fa-input:focus,.ci-emoji-input:focus{outline:none;border-color:var(--cp);}
+.ci-fa-hint{font-size:0.72rem;color:#aaa;margin-bottom:0.7rem;}
+.ci-fa-hint a{color:var(--cp);text-decoration:none;}
+.ci-color-row{display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #eee;}
+.ci-color-row label{font-size:0.78rem;color:#555;flex:1;}
+.ci-color-row input[type="color"]{width:36px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
+.ci-color-row button{font-size:0.72rem;padding:0.22rem 0.6rem;border:1px solid #ddd;border-radius:4px;background:#f5f5f5;color:#666;cursor:pointer;}
+.ci-preview{margin:0.65rem 0;min-height:50px;display:flex;align-items:center;justify-content:center;border:1px solid #eee;border-radius:6px;background:var(--cl);}
+.ci-actions{display:flex;gap:0.55rem;justify-content:flex-end;margin-top:1rem;}
+.ci-actions button{padding:0.42rem 0.9rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
+
+/* FORM STATUS */
+.form-status{padding:0.65rem 0.9rem;border-radius:4px;font-size:0.84rem;margin-top:0.45rem;display:none;}
+.form-status.success{background:#d1fae5;color:#065f46;display:block;}
+.form-status.error{background:#fee2e2;color:#991b1b;display:block;}
+.form-status.sending{background:#e0f2fe;color:#0369a1;display:block;}
+
+/* FAQ */
+.faq-img{height:380px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.09);background:#c5b8aa center/cover no-repeat;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(18px);background:#1e293b;color:#fff;padding:0.68rem 1.4rem;border-radius:6px;font-size:0.84rem;z-index:9999;opacity:0;transition:opacity 0.28s,transform 0.28s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* RESPONSIVE */
+.about-img{flex:0 0 380px;width:380px;min-height:400px;align-self:stretch;border-radius:12px;box-shadow:10px 10px 0 var(--ca);background:#c5b8aa center/cover no-repeat;}
+
+@media(max-width:900px){
+    .benefits-grid{grid-template-columns:1fr;}
+    .about-wrapper{flex-direction:column;gap:1.8rem;}
+    .about-img{height:280px;min-width:unset;width:100%;order:-1;}
+    .contact-wrapper{grid-template-columns:1fr;gap:1.8rem;}
+    .header{flex-direction:column;gap:0.6rem;padding:0.9rem 5%;}
+    .nav a{margin:0 0.45rem;}
+    .page{margin-top:160px;}
+    .editor-toolbar{top:105px;}
+    section{padding:3.5rem 5%;}
+    .catalog-container{padding:3.5rem 5%;}
+    .contact-page{padding:3.5rem 5%;}
+}
+@media(max-width:560px){
+    .contact-wrapper{gap:1.4rem;}
+    .contact-info-panel,.contact-form-panel{padding:1.6rem;}
+    h2{font-size:1.8rem;}
+    .hero-content h1{font-size:2rem;}
+}
+
+
+    /* Estilo iconos de redes sociales */
+    .nav-icon {
+        color: #6e8174;
+        font-size: 1.2rem; /* Puedes ajustar el tamaño aquí */
+        margin-left: 15px; /* Espaciado entre los íconos */
+        text-decoration: none;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* Opcional: un efecto visual cuando pasas el mouse por encima */
+    .nav-icon:hover {
+        opacity: 0.8;
+    }
+
+
+/* =========================================
+   COMPORTAMIENTO BASE (Desktop >= 561px)
+   ========================================= */
+.header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap; /* Permite que los elementos fluyan a otra línea si falta espacio */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.nav a {
+    margin: 0 !important; /* Anula el margin-left: 1.2rem original */
+}
+
+.social-nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-icon {
+    margin: 0 !important; /* Anula el margin-left: 15px original */
+}
+
+
+/* =========================================
+   1. ESCRITORIO (Mayores a 900px)
+   - Logo izquierda | Menú centro | Redes derecha
+   ========================================= */
+.header {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap; /* Permite el salto de línea en resoluciones menores */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.nav a {
+    margin: 0 !important; /* Anula el margin original del HTML */
+}
+
+.social-nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-icon {
+    margin: 0 !important; /* Anula el margin original del HTML */
+}
+
+
+/* =========================================
+   2. TABLET (Desde 561px hasta 900px)
+   - Fila 1: Logo centrado
+   - Fila 2: Menú izquierda | Redes derecha
+   ========================================= */
+@media (min-width: 561px) and (max-width: 900px) {
+    .header {
+        padding: 0.7rem 5% !important;
+        justify-content: space-between; /* Separa los elementos de la fila 2 a los extremos */
+    }
+
+    .logo-area {
+        width: 100%; /* Obliga al logo a ocupar toda la primera fila */
+        justify-content: center; /* Centra el logo horizontalmente */
+        order: 1;
+    }
+
+    .nav {
+        order: 2;
+        justify-content: flex-start; /* Alinea los 4 ítems a la izquierda */
+        flex: 1;
+    }
+
+    .social-nav {
+        order: 3;
+        justify-content: flex-end; /* Mantiene las redes a la derecha */
+    }
+}
+
+
+/* =========================================
+   3. MÓVIL (Menores o igual a 560px)
+   - Fila 1: Logo izquierda | Redes derecha
+   - Fila 2: Menú distribuido en todo el ancho
+   ========================================= */
+@media (max-width: 560px) {
+    .header {
+        padding: 0.9rem 5% !important;
+        gap: 0.6rem;
+    }
+
+    .logo-area {
+        order: 1;
+    }
+
+    .social-nav {
+        order: 2;
+        margin-left: auto; /* Empuja los íconos arriba a la derecha */
+    }
+
+    .nav {
+        order: 3;
+        width: 100%; /* Obliga al menú a bajar a la segunda fila */
+        justify-content: space-between; /* Distribuye uniformemente */
+        gap: 0;
+    }
+
+    .nav a {
+        font-size: 0.85rem; /* Reduce un poco la letra para que entren los 4 ítems */
+    }
+}
+/* Para resoluciones menores o iguales a 900px */
+@media (max-width: 900px) {
+    .page {
+        margin-top: 104px !important;
+    }
+}
+
+/* Para resoluciones mayores o iguales a 901px */
+@media (min-width: 901px) {
+    .page {
+        margin-top: 80px !important;
+    }
+}
+</style>
+</head>
+<body class="editor-active">
+
+<!-- EDITOR TOOLBAR -->
+<div class="editor-toolbar" id="editorToolbar">
+    <span class="tlabel">Modo Editor</span>
+    <div class="tsep"></div>
+    <!--
+    <div class="eml-cfg">
+        <span style="color:#bbb;font-size:0.75rem;">📧 Correo:</span>
+        <input type="email" id="destEmail" placeholder="tucorreo@ejemplo.com">
+        <span class="eml-note" title="Configura tu dominio permitido en web3forms.com">⚠️ web3forms</span>
+    </div>
+    <div class="tsep"></div>-->
+    <button class="tbtn" onclick="toggleHints()" id="hintBtn">👁 Ocultar pistas</button>
+    <div class="save-grp">
+        <button class="tbtn save-e" onclick="saveWithEditor()">💾 Guardar editor</button>
+        <button class="tbtn save-c" onclick="saveClean()">🚀 Publicar</button>
+    </div>
+</div>
+
+<!-- HEADER -->
+
+<header class="header">
+    <div class="logo-area" onclick="navigateTo('inicio')" id="logoArea">
+        <img src="https://vibracandela.com/vibraimgs/logo.gif" alt="Logo" class="logo-img" id="logoImg" style="display: block;">
+        <span class="logo-text" id="logoText" contenteditable="true" onclick="event.stopPropagation()" style="display: none;">Vibra Candela</span>
+        <button class="logo-edit-btn" onclick="event.stopPropagation();openLogoModal()" title="Cambiar logo">🖼 Logo</button>
+    </div>
+
+    <!-- Enlaces de texto -->
+    <nav class="nav">
+        <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
+        <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
+        <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
+    </nav>
+
+    <!-- Íconos sociales agrupados -->
+    <div class="social-nav">
+        <a href="https://www.instagram.com/vibra_candela" target="_blank" rel="noopener noreferrer" class="nav-icon">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@vibra_candela" target="_blank" rel="noopener noreferrer" class="nav-icon">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a href="https://wa.me/926997276" target="_blank" rel="noopener noreferrer" class="nav-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+</header>
+
+<!-- =========================================================
+     PÁGINA: INICIO
+     ========================================================= -->
+<main id="page-inicio" class="page active">
+
+    <!-- HERO -->
+    <section class="hero" id="hero-bg">
+        <!-- Capa imagen (z-index:0) -->
+        <div class="hero-bg-img" id="heroBgImg" style="background-image: url(&quot;https://instagram.flim18-1.fna.fbcdn.net/v/t51.82787-15/730320912_17940493944252683_8501733020269616275_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=MzkyNTU1NTA0NzYwNTYxMDQ0Ng%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTYzMi5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=mQr18TibVA4Q7kNvwEr_9B0&amp;_nc_oc=AdpM9klkQsAmEjmoGwiEF9q7h8fl2ePQQQ3aOOAogtJ4mJ2_kkz4jQXJqiipv6kMk2o&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim18-1.fna&amp;_nc_gid=c4DZMaBjmfaRxWtOMwH-8g&amp;_nc_ss=7a22e&amp;oh=00_AQHUB50SwjeWu7lePuRwIew2BCFvrc-80Ao89UFMq_29bQ&amp;oe=6A870A70&quot;);"></div>
+        <!-- Capa tinte + blend (z-index:1) — NO toca el texto ni el botón -->
+        <div class="hero-filter-layer" id="heroFilterLayer" style="background-color: rgba(110, 129, 116, 0.66); mix-blend-mode: normal;"></div>
+        <!-- Contenido (z-index:10) — completamente fuera del blend -->
+        <div class="hero-content">
+            <h1 contenteditable="true" onclick="event.stopPropagation()">Aromatiza tu espacio naturalmente</h1>
+            <p contenteditable="true" onclick="event.stopPropagation()">Velas artesanales de cera de soya y difusores ambientales para tu bienestar.</p>
+            <button id="heroCTABtn" onclick="navigateTo('productos');event.stopPropagation();" class="btn" style="background: rgb(32, 39, 34); color: rgb(255, 255, 255); border-color: rgb(32, 39, 34);">Explorar Catálogo</button>
+        </div>
+        <!-- Botón editor (z-index:10) -->
+        <button onclick="event.stopPropagation();openHeroImgModal()" style="position:absolute;bottom:14px;right:16px;background:rgba(0,0,0,0.55);color:#fff;border:none;border-radius:5px;padding:0.38rem 0.85rem;font-size:0.78rem;cursor:pointer;z-index:10;">📷 Cambiar imagen y filtro</button>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="benefits">
+        <h2 contenteditable="true">¿Por qué elegir Cera de Soya?</h2>
+        <div class="benefits-grid" id="benefitsGrid">
+            <div class="benefit-item">
+                <div class="icon-box">
+                    <span class="icon-emoji" id="bi-icon-0" style="display: none;">🌱</span>
+                    <img class="icon-img" id="bi-img-0" src="https://vibracandela.com/vibraimgs/why1.png" alt="" style="display: block;">
+                    <button class="icon-swap-btn" onclick="openIconSwap('bi',0)">📷 cambiar</button>
+                </div>
+                <h3 contenteditable="true">100% Ecológica</h3>
+                <p contenteditable="true">Derivada de fuentes renovables, biodegradable y libre de derivados del petróleo.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon-box">
+                    <span class="icon-emoji" id="bi-icon-1" style="display: none;">⏳</span>
+                    <img class="icon-img" id="bi-img-1" src="https://vibracandela.com/vibraimgs/why2.png" alt="" style="display: block;">
+                    <button class="icon-swap-btn" onclick="openIconSwap('bi',1)">📷 cambiar</button>
+                </div>
+                <h3 contenteditable="true">Mayor Duración</h3>
+                <p contenteditable="true">Quema a menor temperatura, permitiendo que tu vela dure hasta el doble que una de parafina.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon-box">
+                    <span class="icon-emoji" id="bi-icon-2" style="display: none;">🍃</span>
+                    <img class="icon-img" id="bi-img-2" src="https://vibracandela.com/vibraimgs/why3.png" alt="" style="display: block;">
+                    <button class="icon-swap-btn" onclick="openIconSwap('bi',2)">📷 cambiar</button>
+                </div>
+                <h3 contenteditable="true">Quemado Limpio</h3>
+                <p contenteditable="true">No produce hollín negro, protegiendo tus pulmones y las paredes de tu hogar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BESTSELLERS -->
+    <section class="bestsellers">
+        <h2 contenteditable="true">Nuestros Favoritos de la Temporada</h2>
+        <div class="bestsellers-grid">
+            <div class="seller-card">
+                <div class="seller-img img-editable" id="bs1" onclick="openImgModal('bs1')" style="background-image: url(&quot;https://instagram.flim2-5.fna.fbcdn.net/v/t51.82787-15/590430584_17911527282252683_9156761691242129847_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=Mzc3NDU3MzY0ODQ0NDE5Nzc3Ng%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTA4MC5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=VZWihGIfbMUQ7kNvwHooUOQ&amp;_nc_oc=AdrLmC4fG7fpCvZef2Qcjwhby39Fhov5ovn5EUD1p0HkyC3UD0DiO6LEMD-Qo-tz9vg&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-5.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQGmV_jE0AGtZQpH0BuZG-iU5GZhnCT3CdFRUBpJU-ET2A&amp;oe=6A83F06E&quot;); background-size: cover; background-position: center center;"></div>
+                <div class="seller-info">
+                    <h3 contenteditable="true">Vela Lavanda Relajante</h3>
+                    <p contenteditable="true">Infusionada con aceite esencial puro, ideal para meditar o antes de dormir.</p>
+                    <div class="seller-meta"><span class="price" contenteditable="true">Edición Marmolina</span><button onclick="navigateTo('contacto')" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem">Pedir</button></div>
+                </div>
+            </div>
+            <div class="seller-card">
+                <div class="seller-img img-editable" id="bs2" onclick="openImgModal('bs2')" style="background-image: url(&quot;https://instagram.flim2-2.fna.fbcdn.net/v/t51.75761-15/504490291_17892164289252683_1218533360887458515_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=103&amp;ig_cache_key=MzY1MTQ1MjI0OTkxMDU4NDUzOA%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTAyNC5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=mvo-XVOHRHUQ7kNvwEnnZDt&amp;_nc_oc=Adqg3F5cul2PUQlLyBRUswdXOQqrxZIvTZUnXA3ItrboWDucapFAha5nuC5sNXvJH6Y&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-2.fna&amp;_nc_gid=zDIBLlx-FeSW8ASPo06m6g&amp;_nc_ss=7a22e&amp;oh=00_AQEvu8n0Ueo0eQ5rkgcxvymcLIOGHggFZXa3L2DT-42o9g&amp;oe=6A83EF85&quot;); background-size: cover; background-position: center center;"></div>
+                <div class="seller-info">
+                    <h3 contenteditable="true">Difusor para autos - Citrus Mood</h3>
+                    <p contenteditable="true">Notas vibrantes de mandarina y bergamota para activar la energía de tu vehículo.</p>
+                    <div class="seller-meta"><span class="price" contenteditable="true">Varillas de Bambú</span><button onclick="navigateTo('contacto')" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem">Pedir</button></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIPS -->
+    <section class="tips-section" style="background:var(--cs);">
+        <h2 contenteditable="true">Tips para Cuidar tu Vela</h2>
+        <p contenteditable="true" style="max-width:580px;margin:-1.5rem auto 2.5rem;color:#555;">Sigue estas recomendaciones para que tus velas duren más y quemen de forma uniforme.</p>
+        <div class="benefits-grid">
+            <div class="tips-item">
+                <div class="icon-box">
+                    <span class="icon-emoji" id="ti-icon-0" style="display: none;">✂️</span>
+                    <img class="icon-img" id="ti-img-0" src="https://vibracandela.com/vibraimgs/tips1.png" alt="" style="display: block;">
+                    <button class="icon-swap-btn" onclick="openIconSwap('ti',0)">📷 cambiar</button>
+                </div>
+                <h4 contenteditable="true">Corta la mecha</h4>
+                <p contenteditable="true" style="font-size:0.88rem;color:#555;">Recorta a 5mm antes de cada encendido para evitar llamas altas y humo innecesario.</p>
+            </div>
+            <div class="tips-item">
+                <div class="icon-box">
+                    <span class="icon-emoji" id="ti-icon-1" style="display: none;">⏱️</span>
+                    <img class="icon-img" id="ti-img-1" src="https://vibracandela.com/vibraimgs/tips2.png" alt="" style="display: block;">
+                    <button class="icon-swap-btn" onclick="openIconSwap('ti',1)">📷 cambiar</button>
+                </div>
+                <h4 contenteditable="true">La primera quemada</h4>
+                <p contenteditable="true" style="font-size:0.88rem;color:#555;">Deja encendida hasta que toda la superficie sea líquida para evitar el efecto "túnel".</p>
+            </div>
+            <div class="tips-item">
+                <div class="icon-box">
+                    <span class="icon-emoji" id="ti-icon-2" style="display: none;">🌬️</span>
+                    <img class="icon-img" id="ti-img-2" src="https://vibracandela.com/vibraimgs/tips3.png" alt="" style="display: block;">
+                    <button class="icon-swap-btn" onclick="openIconSwap('ti',2)">📷 cambiar</button>
+                </div>
+                <h4 contenteditable="true">No la soples</h4>
+                <p contenteditable="true" style="font-size:0.88rem;color:#555;">Usa un apagavelas o pon la tapa. Soplar desplaza la mecha y altera el aroma.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <h2 contenteditable="true">Preguntas Frecuentes</h2>
+        <div style="display:flex;align-items:flex-start;gap:3rem;max-width:1100px;margin:0 auto;text-align:left;flex-wrap:wrap;padding:1rem 0;">
+            <div style="flex:1;min-width:280px;">
+                <div style="margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid #ddd;">
+                    <strong contenteditable="true" style="color:var(--cp);display:block;margin-bottom:0.45rem;">¿Cuánto tiempo dura encendida una vela de soya?</strong>
+                    <p contenteditable="true" style="color:#555;font-size:0.92rem;">Nuestras velas medianas rinden entre 35 y 40 horas de luz y aroma continuo gracias al punto de fusión bajo de la cera orgánica.</p>
+                </div>
+                <div style="margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid #ddd;">
+                    <strong contenteditable="true" style="color:var(--cp);display:block;margin-bottom:0.45rem;">¿Los difusores contienen alcohol?</strong>
+                    <p contenteditable="true" style="color:#555;font-size:0.92rem;">No. Utilizamos una base difusora eco-amigable libre de alcohol para que la fragancia se evapore de manera lenta, sutil y uniforme en tus habitaciones.</p>
+                </div>
+                <div style="margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid #ddd;">
+                    <strong contenteditable="true" style="color:var(--cp);display:block;margin-bottom:0.45rem;">¿Hacen envíos a todo el país?</strong>
+                    <p contenteditable="true" style="color:#555;font-size:0.92rem;">Sí, gestionamos envíos a nivel nacional. Los productos viajan perfectamente protegidos para asegurar que los envases de vidrio lleguen intactos.</p>
+                </div>
+            </div>
+            <div class="faq-img img-editable" id="faq-img" onclick="openImgModal('faq-img')" style="flex: 1 1 0%; min-width: 260px; background-image: url(&quot;https://instagram.flim2-1.fna.fbcdn.net/v/t51.82787-15/561565034_17906535819252683_6922662755465891187_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=106&amp;ig_cache_key=MzczOTk0MDQyNDQwOTc2NjkyOA%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuOTkyLnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=UVsCHihOi7AQ7kNvwGGR5Z9&amp;_nc_oc=AdqYzJriO_d0MowP1aW_H7MsA1X-dmm1nP8hkzzWSIAqbP7E8OyorakJ_3eWax08YyM&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-1.fna&amp;_nc_gid=zDIBLlx-FeSW8ASPo06m6g&amp;_nc_ss=7a22e&amp;oh=00_AQHB2XlIHMYZ3RyPF7P3b4CCwhVEctMnnQU45V9g8OGGRQ&amp;oe=6A83E368&quot;); background-size: cover; background-position: center center;"></div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section style="background:var(--cl);border-top:1px solid #eee;">
+        <h2 contenteditable="true">Lo que dicen de Vibra Candela</h2>
+        <div class="benefits-grid" style="margin-top:2rem;">
+            <div class="benefit-item" style="text-align:left;border-left:4px solid var(--cp);">
+                <p contenteditable="true" style="font-style:italic;margin-bottom:1rem;">"La vela de lavanda cambió mis noches. Su aroma es muy natural y no me da dolor de cabeza."</p>
+                <strong contenteditable="true">- Nahla F.</strong>
+                <div contenteditable="true" style="color:#ffc107;margin-top:0.3rem;">★★★★★</div>
+            </div>
+            <div class="benefit-item" style="text-align:left;border-left:4px solid var(--cp);">
+                <p contenteditable="true" style="font-style:italic;margin-bottom:1rem;">"La vela Vainilla genera un aroma sutil en el ambiente, te relaja en cualquier momento."</p>
+                <strong contenteditable="true">- Felix S.</strong>
+                <div contenteditable="true" style="color:#ffc107;margin-top:0.3rem;">★★★★★</div>
+            </div>
+            <div class="benefit-item" style="text-align:left;border-left:4px solid var(--cp);">
+                <p contenteditable="true" style="font-style:italic;margin-bottom:1rem;">"El difusor Citrus Mood para autos es increíble. Dura meses y el diseño minimalista combina con todo."</p>
+                <strong contenteditable="true">- S. Pedrito</strong>
+                <div contenteditable="true" style="color:#ffc107;margin-top:0.3rem;">★★★★★</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- =========================================================
+     PÁGINA: PRODUCTOS
+     ========================================================= -->
+<div id="page-productos" class="page">
+    <div class="catalog-container">
+        <h2 contenteditable="true" style="text-align:center;">Nuestro Catálogo</h2>
+        <div class="catalog-grid" id="catalogGrid"><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(1,event)">✏️ Editar</button>
+        <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(1)">
+            <div class="seller-img" style="background-image:url('https://instagram.flim2-2.fna.fbcdn.net/v/t51.82787-15/763992645_17947513695252683_1461326903004608070_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ig_cache_key=Mzk1NTk0MDUyMzMyMzQ3MDE3NA%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuOTYwLnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=Xm1JQnNlrn8Q7kNvwGZhmow&amp;_nc_oc=AdryWJw4TFPZcyR_WJedXHFX5Jo-O8Fiz_HBeYTmnrKclYP-HN3qAg3HQPNRLrB869c&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-2.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQGLNEl3dZ4YyH7c5Bqko6Xjlns7c_6cnlLgsdUQJn9g8g&amp;oe=6A8418D5');"></div>
+            <div class="seller-info"><h3>Vela Lavanda Francesa</h3><p>Calma el estrés cotidiano con notas florales suaves.</p>
+            <div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+        </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(2,event)">✏️ Editar</button>
+        <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(2)">
+            <div class="seller-img" style="background-image:url('https://instagram.flim2-6.fna.fbcdn.net/v/t51.82787-15/753231597_17945338332252683_3373052511268797551_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ig_cache_key=Mzk0NjUwNDU3OTE3NjU3NjM2OQ%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuODU2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=FEM80WGycbkQ7kNvwEinMiP&amp;_nc_oc=Adqkkwk-Gf_9fbBXABO9PMCM97ewqU36ii0qsVrE8fpmnsHaExg83F7XxASoXFzZsxc&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-6.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQEIrG79cqrwJ6u9B8p-80Ps5g08IMChlBdRPihe-n3ouA&amp;oe=6A840397');"></div>
+            <div class="seller-info"><h3>Vela Vainilla Dulce</h3><p>Fragancia reconfortante de larga duración.</p>
+            <div class="seller-meta"><span class="price">S/. 55.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+        </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(3,event)">✏️ Editar</button>
+        <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(3)">
+            <div class="seller-img" style="background-image:url('https://instagram.flim2-5.fna.fbcdn.net/v/t51.82787-15/600873573_17913585456252683_2010257839239122089_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=Mzc4ODE0Mjg0NDExNzI2NDEyOQ%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuNzQ2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&amp;_nc_ohc=RSLIBSVvLUIQ7kNvwHxZu5T&amp;_nc_oc=Adru3Bo7vTzP2nd1vu74c7uqepWSgVTuLo7k-6dxa_ekUJq0NctdBUUQkLZzA2zpilE&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim2-5.fna&amp;_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&amp;_nc_ss=7a22e&amp;oh=00_AQG01Uy2MK-8w13xzS30MAxD8ivS-EXMQSO7oFH-FU15Uw&amp;oe=6A83E9DB');"></div>
+            <div class="seller-info"><h3>Vela Bosque de Pino</h3><p>Notas frescas y dulces que te transportan a la naturaleza.</p>
+            <div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+        </div></div><div class="add-product-card"><span class="ic">＋</span><span>Agregar producto</span></div></div>
+    </div>
+</div>
+
+<!-- =========================================================
+     MODAL: VER PRODUCTO
+     ========================================================= -->
+<div id="product-modal" class="modal-overlay" onclick="closeProductModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="modal-close" onclick="closeProductModal(null)">×</span>
+        <div class="modal-flex">
+            <div id="modal-product-img" class="modal-img"></div>
+            <div class="modal-info">
+                <div>
+                    <h3 id="modal-product-title"></h3>
+                    <div id="modal-product-meta" class="mprice"></div>
+                    <p id="modal-product-desc"></p>
+                </div>
+                <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa"><span><i class="fa-brands fa-whatsapp" style="color:#fff;font-size:1.2rem;"></i></span> Solicitar por WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: EDITAR PRODUCTO -->
+<div id="prodEditOverlay" class="pe-overlay" onclick="closeProdEdit(event)">
+    <div class="pe-modal" onclick="event.stopPropagation()">
+        <h3 id="prodEditTitle">Editar producto</h3>
+        <div class="fg"><label>Nombre</label><input type="text" id="pe-name" placeholder="Vela Lavanda"></div>
+        <div class="fg"><label>Categoría</label><input type="text" id="pe-cat" placeholder="100% Soya"></div>
+        <div class="fg"><label>Precio</label><input type="text" id="pe-price" placeholder="S/. 45.00"></div>
+        <div class="fg"><label>Descripción corta (tarjeta)</label><input type="text" id="pe-short" placeholder="Breve descripción..."></div>
+        <div class="fg"><label>Descripción larga (modal)</label><textarea id="pe-long" rows="3" placeholder="Descripción detallada..."></textarea></div>
+        <div class="fg"><label>URL o ruta de imagen</label><input type="text" id="pe-img" placeholder="https://..."></div>
+        <div class="pe-actions">
+            <button class="pe-cancel" onclick="closeProdEditDirect()">Cancelar</button>
+            <button class="pe-del" id="peDeleteBtn" onclick="deleteProduct()" style="display: inline-block;">🗑 Eliminar</button>
+            <button class="pe-ok" onclick="applyProductEdit()">✓ Aplicar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: IMAGEN GENÉRICA -->
+<div id="imgUrlOverlay" class="iu-overlay" onclick="closeImgModal(event)">
+    <div class="iu-modal" onclick="event.stopPropagation()">
+        <h4>📷 Cambiar imagen</h4>
+        <input type="text" id="imgUrlInput" placeholder="https://ejemplo.com/imagen.jpg">
+        <p class="iu-hint">URL completa o ruta relativa. La imagen cubrirá el área exacta.</p>
+        <div class="iu-actions">
+            <button style="background:#eee;color:#333;" onclick="closeImgModalDirect()">Cancelar</button>
+            <button style="background:var(--cp);color:#fff;" onclick="applyImgUrl()">Aplicar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: HERO IMAGEN + FILTRO + BOTÓN -->
+<div id="heroImgOverlay" class="iu-overlay" onclick="closeHeroImgModal(event)">
+    <div class="iu-modal" style="max-width:560px;max-height:92vh;overflow-y:auto;" onclick="event.stopPropagation()">
+        <h4>🖼 Editor del banner</h4>
+
+        <!-- IMAGEN -->
+        <label style="font-size:0.78rem;font-weight:700;color:#555;display:block;margin-bottom:0.28rem;">URL de imagen de fondo</label>
+        <input type="text" id="heroUrlInput" placeholder="https://ejemplo.com/imagen.jpg" oninput="updateHeroPreview()" style="width:100%;padding:0.55rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.3rem;">
+        <p class="iu-hint">URL completa o ruta relativa a la imagen del banner.</p>
+
+        <!-- FILTRO DE COLOR -->
+        <div class="hero-img-section">
+            <h5>🎨 Filtro de color</h5>
+            <div class="filter-row">
+                <label>Color:</label>
+                <input type="color" id="heroFilterColor" value="#000000" oninput="updateHeroPreview()">
+                <label>Opacidad:</label>
+                <input type="range" id="heroFilterOpacity" min="0" max="100" value="30" oninput="updateHeroPreview()">
+                <span id="heroOpacityVal">66%</span>
+            </div>
+            <div class="filter-presets">
+                <span style="font-size:0.72rem;color:#aaa;align-self:center;margin-right:2px;">Presets:</span>
+                <button class="fpreset" style="background:#000;" onclick="setHeroPreset('#000000',30)">Oscuro</button>
+                <button class="fpreset" style="background:#6e8174;" onclick="setHeroPreset('#6e8174',45)">Verde</button>
+                <button class="fpreset" style="background:#8b5e3c;" onclick="setHeroPreset('#8b5e3c',40)">Tierra</button>
+                <button class="fpreset" style="background:#3b5998;" onclick="setHeroPreset('#3b5998',40)">Azul</button>
+                <button class="fpreset" style="background:#7e22ce;" onclick="setHeroPreset('#7e22ce',35)">Morado</button>
+                <button class="fpreset" style="background:#be185d;" onclick="setHeroPreset('#be185d',35)">Rosa</button>
+                <button class="fpreset" style="background:transparent;color:#555;border:1px solid #ccc;" onclick="setHeroPreset('#000000',0)">Sin filtro</button>
+            </div>
+
+            <!-- BLEND MODES -->
+            <h5 style="margin-top:0.8rem;">🔀 Modo de fusión (blend mode)</h5>
+            <p style="font-size:0.72rem;color:#aaa;margin-bottom:0.5rem;">Controla cómo el color de filtro interactúa con la imagen.</p>
+            <div class="blend-chips" id="blendChips">
+                <button class="bchip active" onclick="setBlendMode('normal',this)">Normal</button>
+                <button class="bchip" onclick="setBlendMode('multiply',this)">Multiply</button>
+                <button class="bchip" onclick="setBlendMode('screen',this)">Screen</button>
+                <button class="bchip" onclick="setBlendMode('overlay',this)">Overlay</button>
+                <button class="bchip" onclick="setBlendMode('darken',this)">Darken</button>
+                <button class="bchip" onclick="setBlendMode('lighten',this)">Lighten</button>
+                <button class="bchip" onclick="setBlendMode('color-dodge',this)">Color Dodge</button>
+                <button class="bchip" onclick="setBlendMode('color-burn',this)">Color Burn</button>
+                <button class="bchip" onclick="setBlendMode('hard-light',this)">Hard Light</button>
+                <button class="bchip" onclick="setBlendMode('soft-light',this)">Soft Light</button>
+                <button class="bchip" onclick="setBlendMode('difference',this)">Difference</button>
+                <button class="bchip" onclick="setBlendMode('exclusion',this)">Exclusion</button>
+                <button class="bchip" onclick="setBlendMode('hue',this)">Hue</button>
+                <button class="bchip" onclick="setBlendMode('saturation',this)">Saturation</button>
+                <button class="bchip" onclick="setBlendMode('color',this)">Color</button>
+                <button class="bchip" onclick="setBlendMode('luminosity',this)">Luminosity</button>
+            </div>
+
+            <!-- PREVIEW -->
+            <div class="hero-preview-bar" id="heroPreviewBar" style="background-image: url(&quot;https://instagram.flim18-1.fna.fbcdn.net/v/t51.82787-15/730320912_17940493944252683_8501733020269616275_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ig_cache_key=MzkyNTU1NTA0NzYwNTYxMDQ0Ng%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTYzMi5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=mQr18TibVA4Q7kNvwEr_9B0&amp;_nc_oc=AdpM9klkQsAmEjmoGwiEF9q7h8fl2ePQQQ3aOOAogtJ4mJ2_kkz4jQXJqiipv6kMk2o&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim18-1.fna&amp;_nc_gid=c4DZMaBjmfaRxWtOMwH-8g&amp;_nc_ss=7a22e&amp;oh=00_AQHUB50SwjeWu7lePuRwIew2BCFvrc-80Ao89UFMq_29bQ&amp;oe=6A870A70&quot;); background-color: rgb(136, 136, 136);">
+                <div class="hero-preview-tint" id="heroPreviewTint" style="background-color: rgba(110, 129, 116, 0.66); mix-blend-mode: normal;"></div>
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                    <span style="color:#fff;font-size:0.7rem;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,0.8);opacity:0.7;letter-spacing:0.05em;">VISTA PREVIA</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÓN CTA -->
+        <div class="hero-btn-section">
+            <h5>🔘 Botón del banner</h5>
+            <div class="hero-btn-row">
+                <label>Texto:</label>
+                <input type="text" id="heroBtnText" value="Explorar Catálogo" oninput="updateHeroBtnPreview()">
+            </div>
+            <div class="hero-btn-row">
+                <label>Color fondo:</label>
+                <input type="color" id="heroBtnColor" value="#6e8174" oninput="updateHeroBtnPreview()">
+                <label>Color texto:</label>
+                <input type="color" id="heroBtnTextColor" value="#ffffff" oninput="updateHeroBtnPreview()">
+            </div>
+            <div style="text-align:center;padding:0.6rem 0 0.2rem;">
+                <span class="hero-btn-preview" id="heroBtnPreview" style="background: rgb(32, 39, 34); color: rgb(255, 255, 255);">Explorar Catálogo</span>
+            </div>
+        </div>
+
+        <div class="iu-actions" style="margin-top:1.2rem;">
+            <button style="background:#eee;color:#333;" onclick="closeHeroImgModal(null)">Cancelar</button>
+            <button style="background:var(--cp);color:#fff;" onclick="applyHeroImg()">Aplicar todo</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: CAMBIAR ÍCONO (emoji o imagen) -->
+<div id="iconSwapOverlay" class="is-overlay" onclick="closeIconSwap(event)">
+    <div class="is-modal" onclick="event.stopPropagation()">
+        <h4>🔄 Cambiar ícono</h4>
+        <p>Usa un emoji o una imagen URL.</p>
+        <div class="is-tabs">
+            <button class="is-tab" id="isTabEmoji" onclick="switchIsTab('emoji')">Emoji</button>
+            <button class="is-tab active" id="isTabImg" onclick="switchIsTab('img')">Imagen URL</button>
+        </div>
+        <div class="is-panel" id="isPanelEmoji">
+            <input type="text" class="is-emoji-input" id="isEmojiInput" placeholder="✂️" maxlength="4">
+            <p style="font-size:0.72rem;color:#aaa;text-align:center;margin-top:0.3rem;">Pega o escribe un emoji</p>
+        </div>
+        <div class="is-panel active" id="isPanelImg">
+            <input type="text" id="isImgInput" placeholder="https://... o ruta/icono.png" oninput="updateIsPreview()">
+            <p style="font-size:0.72rem;color:#aaa;margin-top:0.3rem;">PNG, SVG, WebP — se mostrará cuadrado ~64px</p>
+        </div>
+        <div class="is-preview" id="isPreview"><img src="https://vibracandela.com/vibraimgs/tips3.png" style="max-height:56px;max-width:120px;object-fit:contain;"></div>
+        <div class="is-actions">
+            <button style="background:#eee;color:#333;" onclick="closeIconSwapDirect()">Cancelar</button>
+            <button style="background:var(--cp);color:#fff;" onclick="applyIconSwap()">Aplicar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: ÍCONO DE LINK DE CONTACTO -->
+<div id="ciOverlay" class="ci-overlay" onclick="closeCiModal(event)">
+    <div class="ci-modal" onclick="event.stopPropagation()">
+        <h4>🔄 Cambiar ícono del ítem</h4>
+        <p class="ci-sub">Elige emoji o ícono de Font Awesome.</p>
+        <div class="ci-tabs">
+            <button class="ci-tab" id="ciTabEmoji" onclick="switchCiTab('emoji')">Emoji</button>
+            <button class="ci-tab active" id="ciTabFa" onclick="switchCiTab('fa')">Font Awesome</button>
+        </div>
+        <div class="ci-panel" id="ciPanelEmoji">
+            <input type="text" class="ci-emoji-input" id="ciEmojiInput" placeholder="📍" oninput="updateCiPreview()">
+            <p style="font-size:0.72rem;color:#aaa;text-align:center;">Pega o escribe un emoji</p>
+        </div>
+        <div class="ci-panel active" id="ciPanelFa">
+            <input type="text" class="ci-fa-input" id="ciFaInput" placeholder="fa-solid fa-location-dot" oninput="updateCiPreview()">
+            <p class="ci-fa-hint">Ej: <code>fa-solid fa-phone</code> — busca en <a href="https://fontawesome.com/icons" target="_blank">fontawesome.com/icons</a></p>
+        </div>
+        <div class="ci-color-row">
+            <label>Color del ícono:</label>
+            <input type="color" id="ciColorInput" value="#6e8174" oninput="updateCiPreview()">
+            <button onclick="document.getElementById('ciColorInput').value='#6e8174';updateCiPreview()">Reset</button>
+        </div>
+        <div class="ci-preview" id="ciPreview"><i class="fa-solid fa-location-dot" style="font-size:1.6rem;color:#6e8174"></i></div>
+        <div class="ci-actions">
+            <button style="background:#eee;color:#333;" onclick="closeCiModal(null)">Cancelar</button>
+            <button style="background:var(--cp);color:#fff;" onclick="applyCiIcon()">Aplicar</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: LOGO -->
+<div id="logoOverlay" class="lo-overlay" onclick="closeLogoModal(event)">
+    <div class="lo-modal" onclick="event.stopPropagation()">
+        <h4>🖼 Editar logo</h4>
+        <p class="sub">Elige entre texto o imagen.</p>
+        <div class="lo-tabs">
+            <button class="lo-tab" id="loTabText" onclick="switchLoTab('text')">Texto</button>
+            <button class="lo-tab active" id="loTabImg" onclick="switchLoTab('img')">Imagen</button>
+        </div>
+        <div class="lo-panel" id="loPanelText">
+            <label style="font-size:0.78rem;font-weight:600;color:#555;display:block;margin-bottom:0.28rem;">Nombre de la marca</label>
+            <input type="text" id="loTextInput" placeholder="Vibra Candela">
+        </div>
+        <div class="lo-panel active" id="loPanelImg">
+            <label style="font-size:0.78rem;font-weight:600;color:#555;display:block;margin-bottom:0.28rem;">URL del logo</label>
+            <input type="text" id="loImgInput" placeholder="https://... o logo.png" oninput="previewLo()">
+            <p class="lo-hint">PNG transparente o SVG recomendado. Altura: 44px.</p>
+            <div class="lo-preview" id="loPreview">
+                <img id="loPreviewImg" src="https://vibracandela.com/vibraimgs/logo.gif" alt="" style="height: 36px; max-width: 140px; object-fit: contain; display: block;">
+                <span id="loPreviewEmpty" style="color: rgb(204, 204, 204); font-size: 0.8rem; display: none;">Vista previa…</span>
+            </div>
+        </div>
+        <div class="lo-actions">
+            <button style="background:#eee;color:#333;" onclick="closeLogoModalDirect()">Cancelar</button>
+            <button style="background:#fee2e2;color:#b91c1c;" onclick="resetLogo()">Restablecer</button>
+            <button style="background:var(--cp);color:#fff;" onclick="applyLogo()">Aplicar</button>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================================
+     PÁGINA: ACERCA DE
+     ========================================================= -->
+<div id="page-acerca" class="page">
+    <section>
+        <h2 contenteditable="true">Nuestra Historia</h2>
+        <div class="about-wrapper">
+            <div class="about-bio" id="aboutBio">
+                <h3 contenteditable="true">Hola, soy Yenka</h3>
+                <div class="bio-p">
+                    <p contenteditable="true">Este proyecto nació de una búsqueda personal por transformar mi hogar en un santuario de paz sin comprometer mi salud. Al descubrir que las velas convencionales de parafina liberaban toxinas al quemarse, decidí investigar alternativas conscientes.</p>
+                    <div class="para-controls">
+                        <button class="para-btn" onclick="removePara(this)" title="Eliminar párrafo">✕</button>
+                    </div>
+                </div>
+                <div class="bio-p">
+                    <p contenteditable="true">Vibra Candela se fundó con el concepto de fusionar el diseño minimalista, la botánica y el respeto al medio ambiente. Cada pieza es diseñada, mezclada y vertida individualmente a mano, cuidando la procedencia de los insumos y asegurando un producto ético de inicio a fin.</p>
+                    <div class="para-controls">
+                        <button class="para-btn" onclick="removePara(this)" title="Eliminar párrafo">✕</button>
+                    </div>
+                </div>
+                <button class="add-para-btn" onclick="addPara()">＋ Agregar párrafo</button>
+            </div>
+            <div class="about-img img-editable" id="about-img" onclick="openImgModal('about-img')" style="background-image: url(&quot;https://instagram.flim1-2.fna.fbcdn.net/v/t51.82787-15/659217144_18576869383055784_2080647906464403244_n.jpg?stp=dst-jpg_e35_p720x720_tt6&amp;_nc_cat=110&amp;ig_cache_key=Mzg2ODcyMzk0MzI2MDI3NTgyNw%3D%3D.3-ccb7-5&amp;ccb=7-5&amp;_nc_sid=58cdad&amp;efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&amp;_nc_ohc=u5sxz0xM1X0Q7kNvwEhZl4S&amp;_nc_oc=AdohKkr1GUuz-eO7K1qDJo7GB-B6Hy424qhC8l8YM7uJOt-O6O21RmULmTX29VQZvyQ&amp;_nc_ad=z-m&amp;_nc_cid=0&amp;_nc_zt=23&amp;_nc_ht=instagram.flim1-2.fna&amp;_nc_gid=uwoseENEKO9MQT7CHoloaA&amp;_nc_ss=7a22e&amp;oh=00_AQEj0FLzdWyIhxtT4xXUKQuqCl1VVtju1eJEfEwQmwFIAg&amp;oe=6A841A0E&quot;); background-size: cover; background-position: center center;"></div>
+        </div>
+    </section>
+</div>
+
+<!-- =========================================================
+     PÁGINA: CONTACTO
+     ========================================================= -->
+<div id="page-contacto" class="page">
+    <div class="contact-page">
+        <h2 contenteditable="true">Cuéntanos tus Ideas</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info-panel">
+                <h3 contenteditable="true">Información de Contacto</h3>
+                <p class="contact-info-intro" contenteditable="true">¿Necesitas recuerdos para un evento social o tienes dudas de tu cuidado de la vela o te gustaría distribuir?&nbsp; ¡Escríbenos directamente!</p>
+                <div id="infoLinksContainer">
+                    <div class="info-link">
+                        <span class="info-link-icon" onclick="openCiModal(this)" title="Clic para cambiar ícono"><i class="fa-solid fa-location-dot" style="color:#6e8174;font-size:1.2rem;"></i></span>
+                        <span class="info-link-text" contenteditable="true">SJL, Perú</span>
+                        <div class="info-link-actions">
+                            <button class="il-btn" onclick="removeInfoLink(this)" title="Eliminar">✕</button>
+                        </div>
+                    </div>
+                    <div class="info-link">
+                        <span class="info-link-icon" onclick="openCiModal(this)" title="Clic para cambiar ícono"><i class="fa-brands fa-whatsapp" style="color:#6e8174;font-size:1.2rem;"></i></span>
+                        <span class="info-link-text" contenteditable="true">WhatsApp: +51 926 997 276</span>
+                        <div class="info-link-actions">
+                            <button class="il-btn" onclick="removeInfoLink(this)" title="Eliminar">✕</button>
+                        </div>
+                    </div>
+                    <div class="info-link">
+                        <span class="info-link-icon" onclick="openCiModal(this)" title="Clic para cambiar ícono"><i class="fa-solid fa-envelope" style="color:#6e8174;font-size:1.2rem;"></i></span>
+                        <span class="info-link-text" contenteditable="true">contacto@vibracandela.com</span>
+                        <div class="info-link-actions">
+                            <button class="il-btn" onclick="removeInfoLink(this)" title="Eliminar">✕</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-link-btn" onclick="addInfoLink()">＋ Agregar ítem</button>
+            </div>
+            <div class="contact-form-panel">
+                <form action="https://api.web3forms.com/submit" method="POST" id="form">
+                    <input type="hidden" name="access_key" value="8224743d-95d4-4ea0-aa7b-8cc5eb1c8c6c">
+                    <input type="checkbox" name="botcheck" id="" style="display: none;">
+                    <div class="form-group"><label>Nombre</label><input type="text" id="c-name" placeholder="Ej. Ana García" name="Nombre" required=""></div>
+                    <div class="form-group"><label>Correo Electrónico</label><input type="email" id="c-email" placeholder="Ej. ana@correo.com" name="Correo" required=""></div>
+                    <div class="form-group"><label>Celular</label><input type="tel" placeholder="987654321" name="Celular" required=""></div>
+                    <div class="form-group">
+                        <label>¿En qué te podemos ayudar?</label>
+                        <select id="c-motivo" name="Asunto" required="">
+                            <option value="">Selecciona una opción</option>
+                            <option value="Duda sobre un producto">Duda sobre un producto</option>
+                            <option value="Pedido personalizado / Eventos">Pedido personalizado / Eventos</option>
+                            <option value="Mayoristas y distribución">Mayoristas y distribución</option>
+                            <option value="Problemas con producto adquirido">Problemas con producto adquirido</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Tu Mensaje</label><textarea id="c-message" rows="4" placeholder="Escribe aquí los detalles..." name="Mensaje" required=""></textarea></div>
+                    <button type="submit" class="btn" style="width:100%;" id="formSubmitBtn">Enviar Mensaje</button>
+                    <div id="result"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p contenteditable="true">© 2026 Vibra Candela. Todos los derechos reservados.</p>
+</footer>
+<div class="toast" id="toast">✅ Imagen actualizada.</div>
+
+<script>
+// ============================================================
+// ESTADO GLOBAL
+// ============================================================
+const WA_NUMBER="51926997276";
+let products=[{"id":1,"name":"Vela Lavanda Francesa","cat":"100% Soya","price":"S/. 45.00","shortDesc":"Calma el estrés cotidiano con notas florales suaves.","longDesc":"Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.","img":"https://instagram.flim2-2.fna.fbcdn.net/v/t51.82787-15/763992645_17947513695252683_1461326903004608070_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzk1NTk0MDUyMzMyMzQ3MDE3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuOTYwLnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&_nc_ohc=Xm1JQnNlrn8Q7kNvwGZhmow&_nc_oc=AdryWJw4TFPZcyR_WJedXHFX5Jo-O8Fiz_HBeYTmnrKclYP-HN3qAg3HQPNRLrB869c&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.flim2-2.fna&_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&_nc_ss=7a22e&oh=00_AQGLNEl3dZ4YyH7c5Bqko6Xjlns7c_6cnlLgsdUQJn9g8g&oe=6A8418D5"},{"id":2,"name":"Vela Vainilla Dulce","cat":"Ambiental","price":"S/. 55.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Un difusor formulado sobre una base ecológica libre de alcohol. Dispersa notas cálidas y reconfortantes de vainilla natural que envuelven tus espacios por más de 3 meses.","img":"https://instagram.flim2-6.fna.fbcdn.net/v/t51.82787-15/753231597_17945338332252683_3373052511268797551_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ig_cache_key=Mzk0NjUwNDU3OTE3NjU3NjM2OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuODU2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&_nc_ohc=FEM80WGycbkQ7kNvwEinMiP&_nc_oc=Adqkkwk-Gf_9fbBXABO9PMCM97ewqU36ii0qsVrE8fpmnsHaExg83F7XxASoXFzZsxc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.flim2-6.fna&_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&_nc_ss=7a22e&oh=00_AQEIrG79cqrwJ6u9B8p-80Ps5g08IMChlBdRPihe-n3ouA&oe=6A840397"},{"id":3,"name":"Vela Bosque de Pino","cat":"100% Soya","price":"S/. 45.00","shortDesc":"Notas frescas y dulces que te transportan a la naturaleza.","longDesc":"Evoca la frescura de un bosque navideño. Elaborada con pabilo de algodón puro y esencias que te harán recordar la navidad.","img":"https://instagram.flim2-5.fna.fbcdn.net/v/t51.82787-15/600873573_17913585456252683_2010257839239122089_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ig_cache_key=Mzc4ODE0Mjg0NDExNzI2NDEyOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuNzQ2LnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&_nc_ohc=RSLIBSVvLUIQ7kNvwHxZu5T&_nc_oc=Adru3Bo7vTzP2nd1vu74c7uqepWSgVTuLo7k-6dxa_ekUJq0NctdBUUQkLZzA2zpilE&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.flim2-5.fna&_nc_gid=dhx0rH1h_61x5fYW5VO2NQ&_nc_ss=7a22e&oh=00_AQG01Uy2MK-8w13xzS30MAxD8ivS-EXMQSO7oFH-FU15Uw&oe=6A83E9DB"}];
+let nextId=4;
+let editingProductId=null;
+let logoState={"mode":"img","text":"","imgUrl":"https://vibracandela.com/vibraimgs/logo.gif"};
+let heroState={"url":"https://instagram.flim18-1.fna.fbcdn.net/v/t51.82787-15/730320912_17940493944252683_8501733020269616275_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ig_cache_key=MzkyNTU1NTA0NzYwNTYxMDQ0Ng%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTYzMi5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=mQr18TibVA4Q7kNvwEr_9B0&_nc_oc=AdpM9klkQsAmEjmoGwiEF9q7h8fl2ePQQQ3aOOAogtJ4mJ2_kkz4jQXJqiipv6kMk2o&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.flim18-1.fna&_nc_gid=c4DZMaBjmfaRxWtOMwH-8g&_nc_ss=7a22e&oh=00_AQHUB50SwjeWu7lePuRwIew2BCFvrc-80Ao89UFMq_29bQ&oe=6A870A70","color":"#6e8174","opacity":66,"blend":"normal","btnText":"Explorar Catálogo","btnBg":"#202722","btnColor":"#ffffff"};
+
+// ============================================================
+// NAV
+// ============================================================
+function navigateTo(p){
+    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));
+    var pg=document.getElementById('page-'+p); if(pg)pg.classList.add('active');
+    var lk=document.getElementById('nav-'+p); if(lk)lk.classList.add('active');
+    window.scrollTo(0,0);
+}
+
+// ============================================================
+// PRODUCTOS
+// ============================================================
+function renderProducts(){
+    const g=document.getElementById('catalogGrid');
+    g.innerHTML='';
+    products.forEach(p=>{
+        const w=document.createElement('div');
+        w.className='seller-card-wrapper';
+        w.innerHTML=`<button class="card-edt" onclick="openProdEdit(${p.id},event)">✏️ Editar</button>
+        <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(${p.id})">
+            <div class="seller-img" style="background-image:${p.img?'url(\''+p.img+'\')':'none'};"></div>
+            <div class="seller-info"><h3>${esc(p.name)}</h3><p>${esc(p.shortDesc)}</p>
+            <div class="seller-meta"><span class="price">${esc(p.price)}</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+        </div>`;
+        g.appendChild(w);
+    });
+    const a=document.createElement('div');
+    a.className='add-product-card';
+    a.onclick=()=>openProdEdit(null,null);
+    a.innerHTML='<span class="ic">＋</span><span>Agregar producto</span>';
+    g.appendChild(a);
+}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function escA(s){return(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function openProductModal(id){
+    const p=products.find(x=>x.id===id); if(!p)return;
+    document.getElementById('modal-product-title').innerText=p.name;
+    document.getElementById('modal-product-meta').innerText=p.cat+' | '+p.price;
+    document.getElementById('modal-product-desc').innerText=p.longDesc;
+    document.getElementById('modal-product-img').style.backgroundImage=p.img?"url('"+p.img+"')":'';
+    // Guardar id activo para el botón de WA
+    document.getElementById('modal-whatsapp-link').dataset.productId=id;
+    document.getElementById('product-modal').classList.add('open');
+}
+function closeProductModal(e){if(!e||e.target===document.getElementById('product-modal'))document.getElementById('product-modal').classList.remove('open');}
+
+async function sendWhatsApp(e){
+    e.preventDefault();
+    const id=parseInt(document.getElementById('modal-whatsapp-link').dataset.productId);
+    const p=products.find(x=>x.id===id); if(!p)return;
+
+    const textMsg='¡Hola Vibra Candela! Me interesa:\n\n *Producto:* '+p.name+'\n *Categoría:* '+p.cat+'\n *Precio:* '+p.price+'\n\n¿Tienen stock disponible?';
+    const waUrl='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(textMsg);
+
+    // Intentar Web Share API con imagen (solo móvil/compatible)
+    if(p.img && navigator.share && navigator.canShare){
+        try{
+            // Descargar la imagen como File para compartir
+            const resp=await fetch(p.img);
+            const blob=await resp.blob();
+            const ext=blob.type.split('/')[1]||'jpg';
+            const file=new File([blob],p.name.replace(/\s+/g,'_')+'.'+ext,{type:blob.type});
+            const shareData={title:p.name,text:textMsg,files:[file]};
+            if(navigator.canShare(shareData)){
+                await navigator.share(shareData);
+                return; // compartido con imagen, no abrir wa.me
+            }
+        } catch(err){
+            // Si falla (CORS, cancelado, etc.) cae al fallback de wa.me
+        }
+    }
+    // Fallback: abrir wa.me con texto (incluye URL de imagen en el texto)
+    window.open(waUrl,'_blank');
+}
+function openProdEdit(id,e){
+    if(e)e.stopPropagation();
+    editingProductId=id;
+    document.getElementById('prodEditTitle').textContent=id===null?'Agregar producto':'Editar producto';
+    document.getElementById('peDeleteBtn').style.display=id===null?'none':'inline-block';
+    const p=id!==null?products.find(x=>x.id===id):{};
+    document.getElementById('pe-name').value=p.name||'';
+    document.getElementById('pe-cat').value=p.cat||'';
+    document.getElementById('pe-price').value=p.price||'';
+    document.getElementById('pe-short').value=p.shortDesc||'';
+    document.getElementById('pe-long').value=p.longDesc||'';
+    document.getElementById('pe-img').value=p.img||'';
+    document.getElementById('prodEditOverlay').classList.add('open');
+}
+function applyProductEdit(){
+    const name=document.getElementById('pe-name').value.trim();
+    if(!name){showToast('El nombre es obligatorio.');return;}
+    const data={name,cat:document.getElementById('pe-cat').value.trim(),price:document.getElementById('pe-price').value.trim(),shortDesc:document.getElementById('pe-short').value.trim(),longDesc:document.getElementById('pe-long').value.trim(),img:document.getElementById('pe-img').value.trim()};
+    if(editingProductId===null){products.push({id:nextId++,...data});showToast('✅ Producto agregado.');}
+    else{Object.assign(products.find(x=>x.id===editingProductId),data);showToast('✅ Producto actualizado.');}
+    closeProdEditDirect();renderProducts();
+}
+function deleteProduct(){if(!confirm('¿Eliminar este producto?'))return;products=products.filter(x=>x.id!==editingProductId);closeProdEditDirect();renderProducts();showToast('🗑 Producto eliminado.');}
+function closeProdEdit(e){if(e&&e.target!==document.getElementById('prodEditOverlay'))return;closeProdEditDirect();}
+function closeProdEditDirect(){document.getElementById('prodEditOverlay').classList.remove('open');}
+
+// ============================================================
+// IMAGEN GENÉRICA
+// ============================================================
+let currentImgEl=null;
+function openImgModal(id){
+    currentImgEl=document.getElementById(id);
+    const bg=currentImgEl.style.backgroundImage||'';
+    document.getElementById('imgUrlInput').value=bg.replace(/^url\(['"]?/,'').replace(/['"]?\)$/,'');
+    document.getElementById('imgUrlOverlay').classList.add('open');
+    setTimeout(()=>document.getElementById('imgUrlInput').focus(),160);
+}
+function applyImgUrl(){
+    const url=document.getElementById('imgUrlInput').value.trim();
+    if(currentImgEl){currentImgEl.style.backgroundImage=url?"url('"+url+"')":'';currentImgEl.style.backgroundSize='cover';currentImgEl.style.backgroundPosition='center';}
+    closeImgModalDirect();showToast('✅ Imagen actualizada.');
+}
+function closeImgModal(e){if(e&&e.target!==document.getElementById('imgUrlOverlay'))return;closeImgModalDirect();}
+function closeImgModalDirect(){document.getElementById('imgUrlOverlay').classList.remove('open');currentImgEl=null;}
+document.getElementById('imgUrlInput').addEventListener('keydown',e=>{if(e.key==='Enter')applyImgUrl();if(e.key==='Escape')closeImgModalDirect();});
+
+// ============================================================
+// HERO IMAGEN + FILTRO + BLEND + BOTÓN
+// ============================================================
+function openHeroImgModal(){
+    document.getElementById('heroUrlInput').value=heroState.url;
+    document.getElementById('heroFilterColor').value=heroState.color;
+    document.getElementById('heroFilterOpacity').value=heroState.opacity;
+    document.getElementById('heroOpacityVal').textContent=heroState.opacity+'%';
+    // Restaurar chip de blend activo
+    document.querySelectorAll('.bchip').forEach(c=>{
+        c.classList.toggle('active', c.getAttribute('onclick').includes("'"+heroState.blend+"'"));
+    });
+    // Botón
+    document.getElementById('heroBtnText').value=heroState.btnText;
+    document.getElementById('heroBtnColor').value=heroState.btnBg;
+    document.getElementById('heroBtnTextColor').value=heroState.btnColor;
+    updateHeroPreview();
+    updateHeroBtnPreview();
+    document.getElementById('heroImgOverlay').classList.add('open');
+}
+
+function updateHeroPreview(){
+    const url=document.getElementById('heroUrlInput').value.trim();
+    const color=document.getElementById('heroFilterColor').value;
+    const op=parseInt(document.getElementById('heroFilterOpacity').value);
+    document.getElementById('heroOpacityVal').textContent=op+'%';
+    const hex=color;
+    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    const alpha=(op/100).toFixed(2);
+    // El preview bar actúa como .hero-bg-img (imagen de fondo)
+    const bar=document.getElementById('heroPreviewBar');
+    bar.style.backgroundImage=url?"url('"+url+"')":'none';
+    bar.style.backgroundColor=url?'#888':'#9aafa0';
+    bar.style.isolation='';  // sin isolation en el contenedor
+    // La capa de tinte con blend mode
+    const tint=document.getElementById('heroPreviewTint');
+    tint.style.backgroundColor=`rgba(${r},${g},${b},${alpha})`;
+    tint.style.mixBlendMode=heroState.blend||'normal';
+}
+
+function setHeroPreset(color,op){
+    document.getElementById('heroFilterColor').value=color;
+    document.getElementById('heroFilterOpacity').value=op;
+    updateHeroPreview();
+}
+
+function setBlendMode(mode, btn){
+    heroState.blend=mode;
+    document.querySelectorAll('.bchip').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    updateHeroPreview();
+}
+
+function updateHeroBtnPreview(){
+    const text=document.getElementById('heroBtnText').value||'Botón';
+    const bg=document.getElementById('heroBtnColor').value;
+    const col=document.getElementById('heroBtnTextColor').value;
+    const prev=document.getElementById('heroBtnPreview');
+    prev.textContent=text;
+    prev.style.background=bg;
+    prev.style.color=col;
+}
+
+function applyHeroImg(){
+    const url=document.getElementById('heroUrlInput').value.trim();
+    const color=document.getElementById('heroFilterColor').value;
+    const op=parseInt(document.getElementById('heroFilterOpacity').value);
+    const btnText=document.getElementById('heroBtnText').value.trim()||'Explorar Catálogo';
+    const btnBg=document.getElementById('heroBtnColor').value;
+    const btnColor=document.getElementById('heroBtnTextColor').value;
+    heroState={url,color,opacity:op,blend:heroState.blend,btnText,btnBg,btnColor};
+    applyHeroToDOM();
+    applyHeroBtnToDOM();
+    closeHeroImgModal(null);
+    showToast('✅ Banner actualizado.');
+}
+
+function applyHeroToDOM(){
+    // Capa de imagen — solo recibe la foto, sin blend
+    const bgImg=document.getElementById('heroBgImg');
+    if(heroState.url){
+        bgImg.style.backgroundImage="url('"+heroState.url+"')";
+    } else {
+        bgImg.style.backgroundImage='none';
+    }
+
+    // Capa de tinte — aplica color + blend mode SOLO sobre la imagen (z-index entre bg e img y content)
+    const layer=document.getElementById('heroFilterLayer');
+    const hex=heroState.color;
+    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    const alpha=(heroState.opacity/100).toFixed(2);
+    layer.style.backgroundColor=`rgba(${r},${g},${b},${alpha})`;
+
+    const blend=heroState.blend||'normal';
+    if(blend==='normal'){
+        // Normal: sin mix-blend-mode, solo color plano sobre la imagen
+        layer.style.mixBlendMode='normal';
+    } else {
+        layer.style.mixBlendMode=blend;
+    }
+
+    // El hero contenedor solo define el color base de fondo (cuando no hay imagen)
+    const hero=document.getElementById('hero-bg');
+    hero.style.background='';      // limpiar shorthand previo
+    hero.style.backgroundImage=''; // limpiar imagen previa en el contenedor
+    hero.style.backgroundColor=heroState.url?'':'#a0b0a6';
+    // Quitar isolation del hero — el blend solo aplica entre heroBgImg y heroFilterLayer
+    hero.style.isolation='';
+}
+
+function applyHeroBtnToDOM(){
+    const btn=document.getElementById('heroCTABtn');
+    if(!btn)return;
+    btn.textContent=heroState.btnText;
+    btn.style.background=heroState.btnBg;
+    btn.style.color=heroState.btnColor;
+    btn.style.borderColor=heroState.btnBg;
+    // re-add click handler (textContent wipes it for btn, but onclick attr is separate)
+}
+
+function closeHeroImgModal(e){if(e&&e.target!==document.getElementById('heroImgOverlay'))return;document.getElementById('heroImgOverlay').classList.remove('open');}
+
+// ============================================================
+// ICONOS BENEFICIOS / TIPS
+// ============================================================
+let isTarget={prefix:'',idx:0};
+let isTab='emoji';
+function openIconSwap(prefix,idx){
+    isTarget={prefix,idx};
+    const icon=document.getElementById(prefix+'-icon-'+idx);
+    const img=document.getElementById(prefix+'-img-'+idx);
+    if(img&&img.style.display!=='none'&&img.src){
+        switchIsTab('img');
+        document.getElementById('isImgInput').value=img.src;
+    } else {
+        switchIsTab('emoji');
+        document.getElementById('isEmojiInput').value=icon?icon.textContent:'';
+    }
+    updateIsPreview();
+    document.getElementById('iconSwapOverlay').classList.add('open');
+}
+function switchIsTab(t){
+    isTab=t;
+    document.getElementById('isTabEmoji').classList.toggle('active',t==='emoji');
+    document.getElementById('isTabImg').classList.toggle('active',t==='img');
+    document.getElementById('isPanelEmoji').classList.toggle('active',t==='emoji');
+    document.getElementById('isPanelImg').classList.toggle('active',t==='img');
+    updateIsPreview();
+}
+function updateIsPreview(){
+    const prev=document.getElementById('isPreview');
+    if(isTab==='emoji'){
+        const v=document.getElementById('isEmojiInput').value||'?';
+        prev.innerHTML='<span style="font-size:2.4rem;">'+v+'</span>';
+    } else {
+        const url=document.getElementById('isImgInput').value.trim();
+        prev.innerHTML=url?'<img src="'+url+'" style="max-height:56px;max-width:120px;object-fit:contain;">':'<span style="color:#ccc;font-size:0.8rem;">Vista previa</span>';
+    }
+}
+function applyIconSwap(){
+    const {prefix,idx}=isTarget;
+    const icon=document.getElementById(prefix+'-icon-'+idx);
+    const img=document.getElementById(prefix+'-img-'+idx);
+    if(isTab==='emoji'){
+        const v=document.getElementById('isEmojiInput').value||'•';
+        if(icon){icon.textContent=v;icon.style.display='block';}
+        if(img)img.style.display='none';
+    } else {
+        const url=document.getElementById('isImgInput').value.trim();
+        if(!url){showToast('Ingresa la URL.');return;}
+        if(img){img.src=url;img.style.display='block';}
+        if(icon)icon.style.display='none';
+    }
+    closeIconSwapDirect();showToast('✅ Ícono actualizado.');
+}
+function closeIconSwap(e){if(e&&e.target!==document.getElementById('iconSwapOverlay'))return;closeIconSwapDirect();}
+function closeIconSwapDirect(){document.getElementById('iconSwapOverlay').classList.remove('open');}
+document.getElementById('isEmojiInput').addEventListener('input',updateIsPreview);
+
+// ============================================================
+// PÁRRAFOS ACERCA DE
+// ============================================================
+function addPara(){
+    const bio=document.getElementById('aboutBio');
+    const addBtn=bio.querySelector('.add-para-btn');
+    const wrap=document.createElement('div');
+    wrap.className='bio-p';
+    wrap.innerHTML='<p contenteditable="true">Nuevo párrafo — haz clic para editar este texto.</p><div class="para-controls"><button class="para-btn" onclick="removePara(this)" title="Eliminar párrafo">✕</button></div>';
+    bio.insertBefore(wrap,addBtn);
+    wrap.querySelector('p').focus();
+}
+function removePara(btn){
+    const wrap=btn.closest('.bio-p');
+    const bio=document.getElementById('aboutBio');
+    const paras=bio.querySelectorAll('.bio-p');
+    if(paras.length<=1){showToast('Debe quedar al menos un párrafo.');return;}
+    if(confirm('¿Eliminar este párrafo?'))wrap.remove();
+}
+
+// ============================================================
+// INFO LINKS CONTACTO
+// ============================================================
+function addInfoLink(){
+    const c=document.getElementById('infoLinksContainer');
+    const div=document.createElement('div');
+    div.className='info-link';
+    div.innerHTML='<span class="info-link-icon" onclick="openCiModal(this)" title="Clic para cambiar ícono">📌</span><span class="info-link-text" contenteditable="true">Nuevo ítem — edita este texto</span><div class="info-link-actions"><button class="il-btn" onclick="removeInfoLink(this)" title="Eliminar">✕</button></div>';
+    c.appendChild(div);
+    div.querySelector('.info-link-text').focus();
+}
+function removeInfoLink(btn){
+    const link=btn.closest('.info-link');
+    const c=document.getElementById('infoLinksContainer');
+    if(c.querySelectorAll('.info-link').length<=1){showToast('Debe quedar al menos un ítem.');return;}
+    link.remove();
+}
+
+// ÍCONO DE ÍTEM DE CONTACTO
+let currentCiIcon=null;
+let ciTab='emoji';
+function switchCiTab(t){
+    ciTab=t;
+    document.getElementById('ciTabEmoji').classList.toggle('active',t==='emoji');
+    document.getElementById('ciTabFa').classList.toggle('active',t==='fa');
+    document.getElementById('ciPanelEmoji').classList.toggle('active',t==='emoji');
+    document.getElementById('ciPanelFa').classList.toggle('active',t==='fa');
+    updateCiPreview();
+}
+function updateCiPreview(){
+    const color=document.getElementById('ciColorInput').value;
+    const prev=document.getElementById('ciPreview');
+    if(ciTab==='emoji'){
+        const v=document.getElementById('ciEmojiInput').value||'📍';
+        prev.innerHTML='<span style="font-size:1.8rem;color:'+color+'">'+v+'</span>';
+    } else {
+        const cls=document.getElementById('ciFaInput').value.trim();
+        prev.innerHTML=cls?'<i class="'+cls+'" style="font-size:1.6rem;color:'+color+'"></i>':'<span style="color:#ccc;font-size:0.8rem;">Escribe una clase FA</span>';
+    }
+}
+function openCiModal(el){
+    currentCiIcon=el;
+    const i=el.querySelector('i');
+    if(i){
+        switchCiTab('fa');
+        document.getElementById('ciFaInput').value=i.className;
+        document.getElementById('ciColorInput').value=i.style.color||'#6e8174';
+    } else {
+        switchCiTab('emoji');
+        document.getElementById('ciEmojiInput').value=el.textContent.trim();
+        document.getElementById('ciColorInput').value=el.style.color||'#6e8174';
+    }
+    updateCiPreview();
+    document.getElementById('ciOverlay').classList.add('open');
+}
+function applyCiIcon(){
+    if(!currentCiIcon)return;
+    const color=document.getElementById('ciColorInput').value;
+    if(ciTab==='emoji'){
+        const v=document.getElementById('ciEmojiInput').value.trim()||'📌';
+        currentCiIcon.innerHTML=v;
+        currentCiIcon.style.color=color;
+    } else {
+        const cls=document.getElementById('ciFaInput').value.trim();
+        if(!cls){showToast('Escribe la clase del ícono FontAwesome.');return;}
+        currentCiIcon.innerHTML='<i class="'+cls+'" style="color:'+color+';font-size:1.2rem;"></i>';
+        currentCiIcon.style.color='';
+    }
+    closeCiModal(null);showToast('✅ Ícono actualizado.');
+}
+function closeCiModal(e){if(e&&e.target!==document.getElementById('ciOverlay'))return;document.getElementById('ciOverlay').classList.remove('open');currentCiIcon=null;}
+
+// ============================================================
+// LOGO
+// ============================================================
+let loTab='text';
+function openLogoModal(){
+    document.getElementById('loTextInput').value=document.getElementById('logoText').textContent;
+    document.getElementById('loImgInput').value=logoState.imgUrl||'';
+    previewLo();switchLoTab(logoState.mode==='img'?'img':'text');
+    document.getElementById('logoOverlay').classList.add('open');
+}
+function switchLoTab(t){
+    loTab=t;
+    document.getElementById('loTabText').classList.toggle('active',t==='text');
+    document.getElementById('loTabImg').classList.toggle('active',t==='img');
+    document.getElementById('loPanelText').classList.toggle('active',t==='text');
+    document.getElementById('loPanelImg').classList.toggle('active',t==='img');
+}
+function previewLo(){
+    const url=document.getElementById('loImgInput').value.trim();
+    const pi=document.getElementById('loPreviewImg'),pe=document.getElementById('loPreviewEmpty');
+    if(url){pi.src=url;pi.style.display='block';pe.style.display='none';}
+    else{pi.style.display='none';pe.style.display='block';}
+}
+function applyLogo(){
+    const li=document.getElementById('logoImg'),lt=document.getElementById('logoText');
+    if(loTab==='text'){
+        const t=document.getElementById('loTextInput').value.trim()||'Vibra Candela';
+        lt.textContent=t;lt.style.display='block';li.style.display='none';
+        logoState={mode:'text',text:t,imgUrl:''};
+    } else {
+        const url=document.getElementById('loImgInput').value.trim();
+        if(!url){showToast('Ingresa la URL del logo.');return;}
+        li.src=url;li.style.display='block';lt.style.display='none';
+        logoState={mode:'img',text:'',imgUrl:url};
+    }
+    closeLogoModalDirect();showToast('✅ Logo actualizado.');
+}
+function resetLogo(){
+    document.getElementById('logoImg').style.display='none';
+    document.getElementById('logoText').style.display='block';
+    document.getElementById('logoText').textContent='Vibra Candela';
+    logoState={mode:'text',text:'Vibra Candela',imgUrl:''};
+    closeLogoModalDirect();showToast('Logo restablecido.');
+}
+function closeLogoModal(e){if(e&&e.target!==document.getElementById('logoOverlay'))return;closeLogoModalDirect();}
+function closeLogoModalDirect(){document.getElementById('logoOverlay').classList.remove('open');}
+
+// ============================================================
+// FORMULARIO CONTACTO
+// ============================================================
+
+const form = document.getElementById('form');
+const result = document.getElementById('result');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Por favor espera..."
+
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = "¡Gracias! Tu mensaje ha sido enviado con éxito.";
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Algo malo pasó - Intenta nuevamente!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+});
+
+// ============================================================
+// HINTS
+// ============================================================
+let hintsOn=true;
+function toggleHints(){
+    hintsOn=!hintsOn;
+    document.querySelectorAll('[contenteditable]').forEach(el=>{el.style.outline=hintsOn?'':'none';});
+    document.querySelectorAll('.img-editable').forEach(el=>{el.style.pointerEvents=hintsOn?'':'none';});
+    document.getElementById('hintBtn').textContent=hintsOn?'👁 Ocultar pistas':'👁 Mostrar pistas';
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3000);}
+
+// ============================================================
+// SERIALIZAR ESTADO DE ÍCONOS
+// ============================================================
+function serializeIcons(){
+    const icons={};
+    ['bi','ti'].forEach(prefix=>{
+        for(let i=0;i<3;i++){
+            const em=document.getElementById(prefix+'-icon-'+i);
+            const im=document.getElementById(prefix+'-img-'+i);
+            icons[prefix+'-'+i]={emoji:em?em.textContent:'',imgUrl:(im&&im.style.display!=='none')?im.src:'',mode:(im&&im.style.display!=='none'&&im.src)?'img':'emoji'};
+        }
+    });
+    return icons;
+}
+function restoreIcons(icons){
+    if(!icons)return;
+    Object.keys(icons).forEach(k=>{
+        const parts=k.split('-'),prefix=parts[0]+'-'+parts[1],idx=parts[2];
+        const d=icons[k];
+        const em=document.getElementById(prefix+'-icon-'+idx);
+        const im=document.getElementById(prefix+'-img-'+idx);
+        if(d.mode==='img'&&d.imgUrl){if(im){im.src=d.imgUrl;im.style.display='block';}if(em)em.style.display='none';}
+        else{if(em){em.textContent=d.emoji;em.style.display='block';}if(im)im.style.display='none';}
+    });
+}
+
+// ============================================================
+// SERIALIZAR INFO LINKS
+// ============================================================
+function serializeInfoLinks(){
+    return Array.from(document.querySelectorAll('#infoLinksContainer .info-link')).map(el=>({
+        icon:el.querySelector('.info-link-icon').textContent,
+        text:el.querySelector('.info-link-text').textContent
+    }));
+}
+
+// ============================================================
+// GUARDAR CON EDITOR
+// ============================================================
+function saveWithEditor(){
+    const clone=document.documentElement.cloneNode(true);
+    clone.querySelectorAll('.modal-overlay.open,.pe-overlay.open,.iu-overlay.open,.lo-overlay.open,.is-overlay.open,.ci-overlay.open').forEach(el=>el.classList.remove('open'));
+    const ei=clone.querySelector('#destEmail');if(ei)ei.value=document.getElementById('destEmail').value;
+    // Logo
+    syncLogoToClone(clone);
+    // Inyectar estado JS
+    clone.querySelectorAll('script').forEach(s=>{
+        s.textContent=s.textContent
+            .replace(/let products=\[[\s\S]*?\];/,'let products='+JSON.stringify(products)+';')
+            .replace(/let nextId=\d+;/,'let nextId='+nextId+';')
+            .replace(/let logoState=\{[^}]+\};/,'let logoState='+JSON.stringify(logoState)+';')
+            .replace(/let heroState=\{[^;]+\};/,'let heroState='+JSON.stringify(heroState)+';');
+    });
+    download('<!DOCTYPE html>\n'+clone.outerHTML,'vibra_Candela_EDITOR.html');
+    setTimeout(()=>showToast('💾 Editor guardado.'),350);
+}
+
+// ============================================================
+// PUBLICAR LIMPIO
+// ============================================================
+function saveClean(){
+    const clone=document.documentElement.cloneNode(true);
+
+    // 1. Quitar toolbar
+    const tb=clone.querySelector('#editorToolbar');if(tb)tb.remove();
+    // 2. Quitar modales de edición (dejar solo product-modal)
+    ['prodEditOverlay','imgUrlOverlay','heroImgOverlay','iconSwapOverlay','ciOverlay','logoOverlay'].forEach(id=>{
+        const el=clone.querySelector('#'+id);if(el)el.remove();
+    });
+    // 3. Toast
+    const t=clone.querySelector('#toast');if(t)t.remove();
+    // 4. Logo edit btn
+    clone.querySelectorAll('.logo-edit-btn').forEach(b=>b.remove());
+    // 5. Hero edit btn
+    clone.querySelectorAll('.hero button').forEach(b=>{if(b.textContent.includes('Cambiar imagen'))b.remove();});
+    // 6. Icon swap btns
+    clone.querySelectorAll('.icon-swap-btn').forEach(b=>b.remove());
+    // 7. Para controls & add-para-btn
+    clone.querySelectorAll('.para-controls,.add-para-btn').forEach(el=>el.remove());
+    // 8. Info link actions & add-link-btn
+    clone.querySelectorAll('.info-link-actions,.add-link-btn').forEach(el=>el.remove());
+    // 9. card-edt
+    clone.querySelectorAll('.card-edt').forEach(el=>el.remove());
+    // 10. add-product-card
+    clone.querySelectorAll('.add-product-card').forEach(el=>el.remove());
+    // 11. Quitar contenteditable
+    clone.querySelectorAll('[contenteditable]').forEach(el=>{el.removeAttribute('contenteditable');el.style.outline='';el.style.boxShadow='';el.style.cursor='';el.style.background='';});
+    // 12. Quitar img-editable
+    clone.querySelectorAll('.img-editable').forEach(el=>{el.classList.remove('img-editable');el.removeAttribute('onclick');el.removeAttribute('title');el.style.cursor='';});
+    // 13. Quitar onclick de icon-box
+    clone.querySelectorAll('.icon-box').forEach(el=>el.removeAttribute('onclick'));
+    // 14. Quitar info-link-icon onclick
+    clone.querySelectorAll('.info-link-icon').forEach(el=>{el.removeAttribute('onclick');el.removeAttribute('title');el.style.cursor='';});
+    // 15. Ajustar margin-top
+    clone.querySelectorAll('.page').forEach(el=>el.style.marginTop='70px');
+    // 16. Catálogo estático
+    const cg=clone.querySelector('#catalogGrid');
+    if(cg){
+        cg.innerHTML='';
+        cg.style.gridTemplateColumns='repeat(3,1fr)';
+        products.forEach(p=>{
+            const card=document.createElement('div');
+            card.className='seller-card';card.style.cursor='pointer';
+            card.setAttribute('onclick',"openProductModal_s('"+escA(p.name)+"','"+escA(p.cat)+"','"+escA(p.price)+"','"+escA(p.longDesc)+"','"+escA(p.img)+"')");
+            card.innerHTML='<div class="seller-img" style="background-image:'+(p.img?"url('"+escA(p.img)+"')":'none')+';background-size:cover;background-position:center;background-color:#e8e0d8;height:240px;"></div><div class="seller-info"><h3>'+esc(p.name)+'</h3><p>'+esc(p.shortDesc)+'</p><div class="seller-meta"><span class="price">'+esc(p.price)+'</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>';
+            cg.appendChild(card);
+        });
+    }
+    // 17. Unwrap seller-card-wrappers
+    clone.querySelectorAll('.seller-card-wrapper').forEach(w=>{const c=w.querySelector('.seller-card');if(c)w.replaceWith(c.cloneNode(true));});
+    // 18. Sincronizar logo
+    syncLogoToClone(clone);
+    // 19. Sincronizar hero — arquitectura de dos capas
+    const heroClone=clone.querySelector('#hero-bg');
+    if(heroClone){
+        heroClone.removeAttribute('onclick');
+        // Quitar botón de edición
+        heroClone.querySelectorAll('button').forEach(b=>{if(b.textContent.includes('Cambiar imagen'))b.remove();});
+        // Limpiar estilos del contenedor
+        heroClone.style.background='';
+        heroClone.style.backgroundImage='';
+        heroClone.style.isolation='';
+        heroClone.style.backgroundColor=heroState.url?'':'#a0b0a6';
+        // Capa imagen
+        const bgImgClone=heroClone.querySelector('#heroBgImg');
+        if(bgImgClone) bgImgClone.style.backgroundImage=heroState.url?"url('"+heroState.url+"')":'none';
+        // Capa tinte + blend
+        const hex=heroState.color;
+        const r2=parseInt(hex.slice(1,3),16),g2=parseInt(hex.slice(3,5),16),b2=parseInt(hex.slice(5,7),16);
+        const alpha2=(heroState.opacity/100).toFixed(2);
+        const blend=heroState.blend||'normal';
+        const layerClone=heroClone.querySelector('#heroFilterLayer');
+        if(layerClone){
+            layerClone.style.backgroundColor=`rgba(${r2},${g2},${b2},${alpha2})`;
+            layerClone.style.mixBlendMode=blend;
+        }
+    }
+    // Botón CTA del hero en el clon
+    const ctaClone=clone.querySelector('#heroCTABtn');
+    if(ctaClone){
+        ctaClone.textContent=heroState.btnText;
+        ctaClone.style.background=heroState.btnBg;
+        ctaClone.style.color=heroState.btnColor;
+    }
+    // 20. Script limpio
+    clone.querySelectorAll('script').forEach(s=>s.remove());
+    const st=document.createElement('script');
+    st.textContent=`var WA="${WA_NUMBER}";
+function navigateTo(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));var pg=document.getElementById('page-'+p);if(pg)pg.classList.add('active');var lk=document.getElementById('nav-'+p);if(lk)lk.classList.add('active');window.scrollTo(0,0);}
+function openProductModal_s(title,cat,price,desc,img){
+    document.getElementById('modal-product-title').innerText=title;
+    document.getElementById('modal-product-meta').innerText=cat+' | '+price;
+    document.getElementById('modal-product-desc').innerText=desc;
+    document.getElementById('modal-product-img').style.backgroundImage=img?"url('"+img+"')":'';
+    document.getElementById('modal-whatsapp-link').dataset.productInfo=JSON.stringify({name:title,cat:cat,price:price,img:img});
+    document.getElementById('product-modal').classList.add('open');
+}
+function closeProductModal(e){if(!e||e.target===document.getElementById('product-modal'))document.getElementById('product-modal').classList.remove('open');}
+async function sendWhatsApp(e){
+    e.preventDefault();
+    var info=JSON.parse(document.getElementById('modal-whatsapp-link').dataset.productInfo||'{}');
+    var textMsg='¡Hola! Me interesa:\\n\\n\\uD83D\\uDED2 *Producto:* '+info.name+'\\n\\u2728 *Categoría:* '+info.cat+'\\n\\uD83D\\uDCB0 *Precio:* '+info.price+(info.img?'\\n\\uD83D\\uDDBC\\uFE0F *Imagen:* '+info.img:'')+'\\n\\n¿Tienen stock disponible?';
+    var waUrl='https://wa.me/'+WA+'?text='+encodeURIComponent(textMsg);
+    if(info.img&&navigator.share&&navigator.canShare){
+        try{
+            var resp=await fetch(info.img);
+            var blob=await resp.blob();
+            var ext=blob.type.split('/')[1]||'jpg';
+            var file=new File([blob],(info.name||'producto').replace(/\\s+/g,'_')+'.'+ext,{type:blob.type});
+            var shareData={title:info.name,text:textMsg,files:[file]};
+            if(navigator.canShare(shareData)){await navigator.share(shareData);return;}
+        }catch(err){}
+    }
+    window.open(waUrl,'_blank');
+}
+const form = document.getElementById('form');
+const result = document.getElementById('result');
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Por favor espera...";
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: json
+  })
+  .then(async (response) => {
+    let json = await response.json();
+    if (response.status == 200) {
+      result.innerHTML = "\u00a1Gracias! Tu mensaje ha sido enviado con \u00e9xito.";
+    } else {
+      result.innerHTML = json.message;
+    }
+  })
+  .catch(error => {
+    result.innerHTML = "Algo malo pas\u00f3 - Intenta nuevamente!";
+  })
+  .then(function() {
+    form.reset();
+    setTimeout(() => { result.style.display = "none"; }, 3000);
+  });
+});
+`;
+    clone.querySelector('body').appendChild(st);
+    // 21. Limpiar CSS editor
+    clone.querySelectorAll('style').forEach(s=>{
+        s.textContent=s.textContent
+            .replace(/\.editor-toolbar\b[^}]*\}|\.tlabel\b[^}]*\}|\.tbtn\b[^}]*\}|\.tsep\b[^}]*\}|\.save-grp\b[^}]*\}|\.eml-cfg\b[^}]*\}|\.eml-note\b[^}]*\}/g,'')
+            .replace(/\[contenteditable[^\]]*\][^{]*\{[^}]*\}/g,'')
+            .replace(/\.img-editable[^{,]*\{[^}]*\}|\.img-editable::after[^{]*\{[^}]*\}|\.img-editable:hover[^{]*\{[^}]*\}/g,'')
+            .replace(/\.icon-swap-btn\b[^}]*\}/g,'')
+            .replace(/\.pe-overlay\b[^}]*\}|\.pe-modal\b[^}]*\}|\.pe-actions\b[^}]*\}|\.pe-cancel\b[^}]*\}|\.pe-del\b[^}]*\}|\.pe-ok\b[^}]*\}|\.fg\b[^}]*\}/g,'')
+            .replace(/\.card-edt\b[^}]*\}|\.seller-card-wrapper\b[^}]*\}|\.add-product-card\b[^}]*\}/g,'')
+            .replace(/\.iu-overlay\b[^}]*\}|\.iu-modal\b[^}]*\}|\.iu-hint\b[^}]*\}|\.iu-actions\b[^}]*\}/g,'')
+            .replace(/\.hero-img-section\b[^}]*\}|\.filter-row\b[^}]*\}|\.filter-presets\b[^}]*\}|\.fpreset\b[^}]*\}|\.hero-preview-bar\b[^}]*\}|\.hero-preview-tint\b[^}]*\}/g,'')
+            .replace(/\.is-overlay\b[^}]*\}|\.is-modal\b[^}]*\}|\.is-tabs\b[^}]*\}|\.is-tab\b[^}]*\}|\.is-panel\b[^}]*\}|\.is-emoji-input\b[^}]*\}|\.is-preview\b[^}]*\}|\.is-actions\b[^}]*\}/g,'')
+            .replace(/\.lo-overlay\b[^}]*\}|\.lo-modal\b[^}]*\}|\.lo-tabs\b[^}]*\}|\.lo-tab\b[^}]*\}|\.lo-panel\b[^}]*\}|\.lo-hint\b[^}]*\}|\.lo-preview\b[^}]*\}|\.lo-actions\b[^}]*\}/g,'')
+            .replace(/\.ci-overlay\b[^}]*\}|\.ci-modal\b[^}]*\}|\.ci-emoji-input\b[^}]*\}|\.ci-actions\b[^}]*\}/g,'')
+            .replace(/\.para-controls\b[^}]*\}|\.para-btn\b[^}]*\}|\.add-para-btn\b[^}]*\}/g,'')
+            .replace(/\.add-link-btn\b[^}]*\}|\.info-link-actions\b[^}]*\}|\.il-btn\b[^}]*\}/g,'')
+            .replace(/\.logo-edit-btn\b[^}]*\}/g,'')
+            .replace(/\.toast\b[^}]*\}/g,'')
+            .replace(/margin-top:\s*116px/g,'margin-top: 70px')
+            .replace(/top:\s*70px[^}]*\}[^/]*/g,s2=>s2.replace(/\.editor-toolbar[^}]*\}/g,''));
+    });
+    clone.querySelector('body').classList.remove('editor-active');
+    download('<!DOCTYPE html>\n'+clone.outerHTML,'vibra_Candela.html');
+    setTimeout(()=>showToast('🚀 Página publicada.'),350);
+}
+
+function syncLogoToClone(clone){
+    const ci=clone.querySelector('#logoImg'),ct=clone.querySelector('#logoText');
+    if(logoState.mode==='img'){if(ci){ci.src=logoState.imgUrl;ci.style.display='block';}if(ct)ct.style.display='none';}
+    else{if(ct){ct.textContent=logoState.text;ct.style.display='block';}if(ci)ci.style.display='none';}
+}
+function download(html,filename){const b=new Blob([html],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=filename;a.click();URL.revokeObjectURL(a.href);}
+
+// INIT
+renderProducts();
+navigateTo('inicio');
+</script>
+
+
+</body></html>
