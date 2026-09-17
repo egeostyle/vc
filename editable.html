@@ -1238,7 +1238,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                         <div class="seller-meta"><span class="price">S/. 99.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(3,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
                     <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(3)">
-                        <div class="seller-img" style="background-image:none;"></div>
+                        <div class="seller-img" style="background-image:url('vibraimgs/closeup-foto-hermosa-mariposa-texturas-interesantes-flor-petalos-naranja_181624-7640.avif');"></div>
                         <div class="seller-info"><h3>Vela Bosque de Pino</h3><p>Notas frescas y maderosas que te transportan a la naturaleza.</p>
                         <div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(4,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
@@ -1302,7 +1302,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <div class="fg"><label>Categoría</label><input type="text" id="pe-cat" placeholder="100% Soya"></div>
 
         <!-- PRECIO (oculto cuando hay variantes) -->
-        <div class="fg" id="pe-price-group" style="display: none;">
+        <div class="fg" id="pe-price-group" style="">
             <label>Precio</label>
             <input type="text" id="pe-price" placeholder="S/. 45.00" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)">
         </div>
@@ -1311,18 +1311,18 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <div class="fg"><label>Descripción larga (modal)</label><textarea id="pe-long" rows="3" placeholder="Descripción detallada..."></textarea></div>
 
         <!-- IMAGEN BASE (oculta cuando hay variantes con imagen propia) -->
-        <div class="fg" id="pe-img-group" style="display: none;">
+        <div class="fg" id="pe-img-group" style="">
             <label>Imagen del producto</label>
             <div class="img-tabs" style="margin-bottom:0.6rem;">
-                <button class="img-tab active" id="peTabUrl" onclick="switchPeTab('url')"><i class="fa-solid fa-link"></i> URL</button>
-                <button class="img-tab" id="peTabFile" onclick="switchPeTab('file')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Subir</button>
+                <button class="img-tab" id="peTabUrl" onclick="switchPeTab('url')"><i class="fa-solid fa-link"></i> URL</button>
+                <button class="img-tab active" id="peTabFile" onclick="switchPeTab('file')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Subir</button>
             </div>
-            <div class="img-panel active" id="pePanelUrl">
+            <div class="img-panel" id="pePanelUrl">
                 <input type="text" id="pe-img" placeholder="https://...">
             </div>
-            <div class="img-panel" id="pePanelFile">
+            <div class="img-panel active" id="pePanelFile">
                 <img class="img-upload-preview" id="pePreviewImg" src="" alt="" style="display: none;">
-                <div class="img-upload-name" id="peFileName" style="display: none;"></div>
+                <div class="img-upload-name" id="peFileName" style="display: block;">vibraimgs/closeup-foto-hermosa-mariposa-texturas-interesantes-flor-petalos-naranja_181624-7640.avif</div>
                 <div class="img-drop-zone">
                     <input type="file" id="peFileInput" accept="image/*" onchange="handlePeFile(this)">
                     <div class="dz-icon"><i class="fa-solid fa-image" style="font-size:1.8rem;color:#aaa;"></i></div>
@@ -1338,65 +1338,9 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         </label>
 
         <!-- SECCIÓN VARIANTES -->
-        <div class="pe-variants-section active" id="peVariantsSection">
+        <div class="pe-variants-section" id="peVariantsSection">
             <p style="font-size:0.72rem;color:#aaa;margin-bottom:0.75rem;">Cada variante puede tener su propio precio e imagen. La imagen de la variante 1 se usa como imagen principal si las demás no tienen.</p>
-            <div id="peVariantsList"><div class="pe-variant-item" data-uid="vr17896108314651">
-        <div class="variant-header">
-            <span class="variant-label">Variante 1</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label>Nombre / tamaño</label><input class="v-name" type="text" placeholder="Ej. 100ml" value="10ml"></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="S/. 30.00" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab active" onclick="switchVTab('vr17896108314651','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab" onclick="switchVTab('vr17896108314651','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel active" id="vurl-vr17896108314651">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="vibraimgs/faq.jpg">
-                </div>
-                <div class="vimg-panel" id="vfile-vr17896108314651">
-                    <img class="vimg-preview" id="vprev-vr17896108314651" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17896108314651"></div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17896108314651')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div><div class="pe-variant-item" data-uid="vr17896108314662">
-        <div class="variant-header">
-            <span class="variant-label">Variante 2</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label>Nombre / tamaño</label><input class="v-name" type="text" placeholder="Ej. 100ml" value="20ml"></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="S/. 20.00" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab active" onclick="switchVTab('vr17896108314662','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab" onclick="switchVTab('vr17896108314662','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel active" id="vurl-vr17896108314662">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="vibraimgs/tips3.png">
-                </div>
-                <div class="vimg-panel" id="vfile-vr17896108314662">
-                    <img class="vimg-preview" id="vprev-vr17896108314662" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17896108314662"></div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17896108314662')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div></div>
+            <div id="peVariantsList"></div>
             <button class="add-variant-btn" onclick="addVariantRow()">＋ Agregar variante</button>
         </div>
 
@@ -1839,12 +1783,12 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 // ESTADO GLOBAL
 // ============================================================
 const WA_NUMBER="51930246770";
-let products=[{"id":1,"name":"Vela Lavanda Francesa","cat":"100% Soya","price":"","shortDesc":"Calma el estrés cotidiano con notas florales suaves.","longDesc":"Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.","soldOut":true,"img":"","imgData":"","variants":[{"name":"10ml","price":"S/. 30.00","img":"vibraimgs/faq.jpg","imgData":""},{"name":"20ml","price":"S/. 20.00","img":"vibraimgs/tips3.png","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 99.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/tips1.png","imgData":"","variants":[]},{"id":3,"name":"Vela Bosque de Pino","cat":"100% Soya","price":"S/. 45.00","shortDesc":"Notas frescas y maderosas que te transportan a la naturaleza.","longDesc":"Evoca la frescura de un bosque matutino. Pabilo de algodón puro y esencias maderosas que purifican el ambiente.","soldOut":false,"img":"","imgData":"","variants":[]},{"id":4,"name":"test1","cat":"muestra","price":"","shortDesc":"desc. corta","longDesc":"ioasjda sdjoiasjd iajsd oiajsdoaisjdaoisd ad asidjioasj","soldOut":false,"img":"","imgData":"","variants":[{"name":"10ml","price":"S/. 10","img":"vibraimgs/photo-1520209759809-a9bcb6cb3241.avif","imgData":""},{"name":"20ml","price":"S/. 20","img":"vibraimgs/closeup-foto-hermosa-mariposa-texturas-interesantes-flor-petalos-naranja_181624-7640.avif","imgData":""}]}];
+let products=[{"id":1,"name":"Vela Lavanda Francesa","cat":"100% Soya","price":"","shortDesc":"Calma el estrés cotidiano con notas florales suaves.","longDesc":"Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.","soldOut":true,"img":"","imgData":"","variants":[{"name":"10ml","price":"S/. 30.00","img":"vibraimgs/faq.jpg","imgData":""},{"name":"20ml","price":"S/. 20.00","img":"vibraimgs/tips3.png","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 99.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/tips1.png","imgData":"","variants":[]},{"id":3,"name":"Vela Bosque de Pino","cat":"100% Soya","price":"S/. 45.00","shortDesc":"Notas frescas y maderosas que te transportan a la naturaleza.","longDesc":"Evoca la frescura de un bosque matutino. Pabilo de algodón puro y esencias maderosas que purifican el ambiente.","soldOut":false,"img":"vibraimgs/closeup-foto-hermosa-mariposa-texturas-interesantes-flor-petalos-naranja_181624-7640.avif","imgData":"","variants":[]},{"id":4,"name":"test1","cat":"muestra","price":"","shortDesc":"desc. corta","longDesc":"ioasjda sdjoiasjd iajsd oiajsdoaisjdaoisd ad asidjioasj","soldOut":false,"img":"","imgData":"","variants":[{"name":"10ml","price":"S/. 10","img":"vibraimgs/photo-1520209759809-a9bcb6cb3241.avif","imgData":""},{"name":"20ml","price":"S/. 20","img":"vibraimgs/closeup-foto-hermosa-mariposa-texturas-interesantes-flor-petalos-naranja_181624-7640.avif","imgData":""}]}];
 let nextId=5;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif"};
 let heroState={"url":"","color":"#000000","opacity":30,"blend":"normal","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"1fb64491285ea2a9\",\"c\":\"6499b41c4b482be0a27bd17241a54757b9a71a4ae7cbff87d154a6d30bdc3586b7a05a5743325c0fe92e32595fa8462b92b04f93a216b57a61cd825209a4099642a6f367bff5deea6db75b383574e4790d63d09d1248d4f75d087c3d4c\",\"a\":\"140960d8f6aa81cf7b501794dc258d9acc7257d080d24da5beb05c8174956897\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"e57f653d2798c09d\",\"c\":\"4f419505e5d25667025fe82f009b8beba8cb4fc0cf39bb1485371925b895b3879c3cfb23e98bdb73e55d4eeca70b88f4b2fa077b5399502dc6062cfab5ac208dc7c42c4524ec5d391cb2862900153dd139990f66ad2a50fb7f90c57f8d\",\"a\":\"cc71b91458aea16b6a99f6b9c20633f3b8416654544ec69ddc71a0a46b440832\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -4318,4 +4262,5 @@ navigateTo('inicio');
 </script>
 
 
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 </body></html>
