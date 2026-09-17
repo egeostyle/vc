@@ -2461,146 +2461,172 @@ document.getElementById('imgUrlInput').addEventListener('keydown',e=>{if(e.key==
 // HERO IMAGEN + FILTRO + BLEND + BOTÓN
 // ============================================================
 function openHeroImgModal(){
-    const currentHeroVal = (heroState.publishUrl && !heroState.publishUrl.startsWith('data:')) ? heroState.publishUrl : (heroState.url && !heroState.url.startsWith('data:') ? heroState.url : '');
-    document.getElementById('heroUrlInput').value = currentHeroVal;
-    document.getElementById('heroFilterColor').value=heroState.color;
-    document.getElementById('heroFilterOpacity').value=heroState.opacity;
-    document.getElementById('heroOpacityVal').textContent=heroState.opacity+'%';
-    document.querySelectorAll('.bchip').forEach(ch=>{
-        ch.classList.toggle('active', ch.getAttribute('onclick').includes("'"+heroState.blend+"'"));
+    const currentHeroVal = (heroState.publishUrl && !heroState.publishUrl.startsWith("data:")) ? heroState.publishUrl : (heroState.url && !heroState.url.startsWith("data:") ? heroState.url : "");
+    document.getElementById("heroUrlInput").value = currentHeroVal;
+    document.getElementById("heroFilterColor").value = heroState.color;
+    document.getElementById("heroFilterOpacity").value = heroState.opacity;
+    document.getElementById("heroOpacityVal").textContent = heroState.opacity + "%";
+    document.querySelectorAll(".bchip").forEach(ch => {
+        ch.classList.toggle("active", ch.getAttribute("onclick").includes("'" + heroState.blend + "'"));
     });
-    document.getElementById('heroBtnText').value=heroState.btnText;
-    document.getElementById('heroBtnColor').value=heroState.btnBg;
-    document.getElementById('heroBtnTextColor').value=heroState.btnColor;
-    // Reset upload tab
-    heroUploadTab='url';
-    document.getElementById('heroTabUrl').classList.add('active');
-    document.getElementById('heroTabFile').classList.remove('active');
-    document.getElementById('heroPanelUrl').classList.add('active');
-    document.getElementById('heroPanelFile').classList.remove('active');
-    document.getElementById('heroUploadPreview').style.display='none';
-    document.getElementById('heroUploadName').style.display='none';
-    document.getElementById('heroUploadName').textContent='';
-    document.getElementById('heroFileInput').value='';
+    document.getElementById("heroBtnText").value = heroState.btnText;
+    document.getElementById("heroBtnColor").value = heroState.btnBg;
+    document.getElementById("heroBtnTextColor").value = heroState.btnColor;
+
+    // Si ya hay una imagen subida en esta sesión pendiente de sincronizar
+    if (heroState._uploadDataUrl && heroState.publishUrl) {
+        switchHeroTab("file");
+        document.getElementById("heroUploadPreview").src = heroState._uploadDataUrl;
+        document.getElementById("heroUploadPreview").style.display = "block";
+        document.getElementById("heroUploadName").textContent = heroState.publishUrl;
+        document.getElementById("heroUploadName").style.display = "block";
+    } else {
+        switchHeroTab("url");
+        document.getElementById("heroUploadPreview").style.display = "none";
+        document.getElementById("heroUploadName").style.display = "none";
+        document.getElementById("heroUploadName").textContent = "";
+        document.getElementById("heroFileInput").value = "";
+    }
     updateHeroPreview();
     updateHeroBtnPreview();
-    document.getElementById('heroImgOverlay').classList.add('open');
+    document.getElementById("heroImgOverlay").classList.add("open");
 }
 
 function updateHeroPreview(){
-    // Usar dataURL si hay imagen subida, si no la URL del campo
-    const urlField=document.getElementById('heroUrlInput').value.trim();
-    const previewUrl=heroState._uploadDataUrl||urlField||null;
-    const color=document.getElementById('heroFilterColor').value;
-    const op=parseInt(document.getElementById('heroFilterOpacity').value);
-    document.getElementById('heroOpacityVal').textContent=op+'%';
-    const hex=color;
-    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-    const alpha=(op/100).toFixed(2);
-    const bar=document.getElementById('heroPreviewBar');
-    bar.style.backgroundImage=previewUrl?"url('"+previewUrl+"')":'none';
-    bar.style.backgroundColor=previewUrl?'#888':'#9aafa0';
-    bar.style.isolation='';
-    const tint=document.getElementById('heroPreviewTint');
-    tint.style.backgroundColor=`rgba(${r},${g},${b},${alpha})`;
-    tint.style.mixBlendMode=heroState.blend||'normal';
+    const urlField = document.getElementById("heroUrlInput").value.trim();
+    let previewUrl = null;
+    if (heroUploadTab === "file") {
+        previewUrl = heroState._uploadDataUrl || (urlField ? urlField : null);
+    } else {
+        previewUrl = urlField || null;
+    }
+    const color = document.getElementById("heroFilterColor").value;
+    const op = parseInt(document.getElementById("heroFilterOpacity").value);
+    document.getElementById("heroOpacityVal").textContent = op + "%";
+    const hex = color;
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    const alpha = (op/100).toFixed(2);
+    const bar = document.getElementById("heroPreviewBar");
+    bar.style.backgroundImage = previewUrl ? "url('" + previewUrl + "')" : "none";
+    bar.style.backgroundColor = previewUrl ? "#888" : "#9aafa0";
+    bar.style.isolation = "";
+    const tint = document.getElementById("heroPreviewTint");
+    tint.style.backgroundColor = `rgba(${r},${g},${b},${alpha})`;
+    tint.style.mixBlendMode = heroState.blend || "normal";
 }
 
 function setHeroPreset(color,op){
-    document.getElementById('heroFilterColor').value=color;
-    document.getElementById('heroFilterOpacity').value=op;
+    document.getElementById("heroFilterColor").value = color;
+    document.getElementById("heroFilterOpacity").value = op;
     updateHeroPreview();
 }
 
 function setBlendMode(mode, btn){
-    heroState.blend=mode;
-    document.querySelectorAll('.bchip').forEach(c=>c.classList.remove('active'));
-    btn.classList.add('active');
+    heroState.blend = mode;
+    document.querySelectorAll(".bchip").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
     updateHeroPreview();
 }
 
 function updateHeroBtnPreview(){
-    const text=document.getElementById('heroBtnText').value||'Botón';
-    const bg=document.getElementById('heroBtnColor').value;
-    const col=document.getElementById('heroBtnTextColor').value;
-    const prev=document.getElementById('heroBtnPreview');
-    prev.textContent=text;
-    prev.style.background=bg;
-    prev.style.color=col;
+    const text = document.getElementById("heroBtnText").value || "Botón";
+    const bg = document.getElementById("heroBtnColor").value;
+    const col = document.getElementById("heroBtnTextColor").value;
+    const prev = document.getElementById("heroBtnPreview");
+    prev.textContent = text;
+    prev.style.background = bg;
+    prev.style.color = col;
 }
 
 function applyHeroImg(){
-    const urlField = document.getElementById('heroUrlInput').value.trim();
-    const color = document.getElementById('heroFilterColor').value;
-    const op = parseInt(document.getElementById('heroFilterOpacity').value);
-    const btnText = document.getElementById('heroBtnText').value.trim() || 'Explorar Catálogo';
-    const btnBg = document.getElementById('heroBtnColor').value;
-    const btnColor = document.getElementById('heroBtnTextColor').value;
-    const uploadName = document.getElementById('heroUploadName').textContent.trim();
-    const hasUpload = !!(heroState._uploadDataUrl && uploadName);
-    const displayUrl = hasUpload ? heroState._uploadDataUrl : urlField;
-    const publishUrl = hasUpload ? uploadName : urlField;
+    const urlField = document.getElementById("heroUrlInput").value.trim();
+    const color = document.getElementById("heroFilterColor").value;
+    const op = parseInt(document.getElementById("heroFilterOpacity").value);
+    const btnText = document.getElementById("heroBtnText").value.trim() || "Explorar Catálogo";
+    const btnBg = document.getElementById("heroBtnColor").value;
+    const btnColor = document.getElementById("heroBtnTextColor").value;
+    const uploadName = document.getElementById("heroUploadName").textContent.trim();
+
+    let displayUrl = urlField;
+    let publishUrl = urlField;
+    let uploadDataUrl = null;
+
+    const effectiveUploadName = uploadName || heroState.publishUrl;
+    if (heroUploadTab === "file" && heroState._uploadDataUrl && effectiveUploadName) {
+        const uploadName = effectiveUploadName;
+        displayUrl = heroState._uploadDataUrl;
+        publishUrl = uploadName;
+        uploadDataUrl = heroState._uploadDataUrl;
+        uploadedImages[uploadName] = uploadDataUrl;
+    } else {
+        displayUrl = urlField;
+        publishUrl = urlField;
+        uploadDataUrl = null;
+    }
+
     heroState = {
         url: displayUrl,
         publishUrl: publishUrl,
-        color,
+        color: color,
         opacity: op,
-        blend: heroState.blend || 'normal',
-        btnText,
-        btnBg,
-        btnColor,
-        _uploadDataUrl: hasUpload ? heroState._uploadDataUrl : null
+        blend: heroState.blend || "normal",
+        btnText: btnText,
+        btnBg: btnBg,
+        btnColor: btnColor,
+        _uploadDataUrl: uploadDataUrl
     };
     applyHeroToDOM();
     applyHeroBtnToDOM();
     closeHeroImgModal(null);
-    showToast('✅ Banner actualizado.');
+    showToast("✅ Banner actualizado.");
 }
 
 function applyHeroToDOM(){
-    const bgImg = document.getElementById('heroBgImg');
-    const heroImgUrl = (heroState.url && !heroState.url.startsWith('data:')) ? heroState.url : (heroState.publishUrl || heroState.url || '');
+    const bgImg = document.getElementById("heroBgImg");
+    // Visualización inmediata en el DOM activo del editor:
+    // Si hay imagen subida en base64 en la sesión actual, se usa directamente para que se vea sin esperar.
+    const heroImgUrl = heroState._uploadDataUrl || heroState.url || heroState.publishUrl || "";
     if(heroImgUrl){
         bgImg.style.backgroundImage = "url('" + heroImgUrl + "')";
     } else {
-        bgImg.style.backgroundImage = 'none';
+        bgImg.style.backgroundImage = "none";
     }
 
-    // Capa de tinte — aplica color + blend mode SOLO sobre la imagen (z-index entre bg e img y content)
-    const layer=document.getElementById('heroFilterLayer');
-    const hex=heroState.color;
-    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-    const alpha=(heroState.opacity/100).toFixed(2);
-    layer.style.backgroundColor=`rgba(${r},${g},${b},${alpha})`;
+    // Capa de tinte — aplica color + blend mode SOLO sobre la imagen
+    const layer = document.getElementById("heroFilterLayer");
+    const hex = heroState.color;
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    const alpha = (heroState.opacity/100).toFixed(2);
+    layer.style.backgroundColor = `rgba(${r},${g},${b},${alpha})`;
 
-    const blend=heroState.blend||'normal';
-    if(blend==='normal'){
-        // Normal: sin mix-blend-mode, solo color plano sobre la imagen
-        layer.style.mixBlendMode='normal';
+    const blend = heroState.blend || "normal";
+    if(blend === "normal"){
+        layer.style.mixBlendMode = "normal";
     } else {
-        layer.style.mixBlendMode=blend;
+        layer.style.mixBlendMode = blend;
     }
 
     // El hero contenedor solo define el color base de fondo (cuando no hay imagen)
-    const hero=document.getElementById('hero-bg');
-    hero.style.background='';      // limpiar shorthand previo
-    hero.style.backgroundImage=''; // limpiar imagen previa en el contenedor
-    hero.style.backgroundColor=heroState.url?'':'#a0b0a6';
-    // Quitar isolation del hero — el blend solo aplica entre heroBgImg y heroFilterLayer
-    hero.style.isolation='';
+    const hero = document.getElementById("hero-bg");
+    hero.style.background = "";
+    hero.style.backgroundImage = "";
+    hero.style.backgroundColor = heroImgUrl ? "" : "#a0b0a6";
+    hero.style.isolation = "";
 }
 
 function applyHeroBtnToDOM(){
-    const btn=document.getElementById('heroCTABtn');
-    if(!btn)return;
-    btn.textContent=heroState.btnText;
-    btn.style.background=heroState.btnBg;
-    btn.style.color=heroState.btnColor;
-    btn.style.borderColor=heroState.btnBg;
-    // re-add click handler (textContent wipes it for btn, but onclick attr is separate)
+    const btn = document.getElementById("heroCTABtn");
+    if(!btn) return;
+    btn.textContent = heroState.btnText;
+    btn.style.background = heroState.btnBg;
+    btn.style.color = heroState.btnColor;
+    btn.style.borderColor = heroState.btnBg;
 }
 
-function closeHeroImgModal(e){if(e&&e.target!==document.getElementById('heroImgOverlay'))return;document.getElementById('heroImgOverlay').classList.remove('open');}
+function closeHeroImgModal(e){
+    if(e && e.target !== document.getElementById("heroImgOverlay")) return;
+    document.getElementById("heroImgOverlay").classList.remove("open");
+}
 
 // ============================================================
 // ICONOS BENEFICIOS / TIPS
@@ -3132,7 +3158,7 @@ const uploadedImages = {};
 // ============================================================
 function compressImageFile(file, maxWidth = 1200, maxHeight = 1200, quality = 0.82) {
     return new Promise((resolve, reject) => {
-        if (!file || !file.type.startsWith('image/') || file.type === 'image/svg+xml' || file.type === 'image/gif') {
+        if (!file || !file.type || !file.type.startsWith('image/') || file.type === 'image/svg+xml' || file.type === 'image/gif') {
             const reader = new FileReader();
             reader.onload = ev => resolve(ev.target.result);
             reader.onerror = reject;
@@ -3234,31 +3260,43 @@ async function handlePeFile(input){
 }
 
 // Hero upload
-let heroUploadTab = 'url';
+let heroUploadTab = "url";
 function switchHeroTab(t){
-    heroUploadTab=t;
-    ['Url','File'].forEach(x=>{
-        document.getElementById('heroTab'+x).classList.toggle('active',t===x.toLowerCase());
-        document.getElementById('heroPanel'+x).classList.toggle('active',t===x.toLowerCase());
+    heroUploadTab = t;
+    ["Url","File"].forEach(x => {
+        const tabEl = document.getElementById("heroTab" + x);
+        const panelEl = document.getElementById("heroPanel" + x);
+        if (tabEl) tabEl.classList.toggle("active", t === x.toLowerCase());
+        if (panelEl) panelEl.classList.toggle("active", t === x.toLowerCase());
     });
+    updateHeroPreview();
 }
+
 async function handleHeroFile(input){
-    const file=input.files[0]; if(!file) return;
-    const safeName='vibraimgs/'+file.name.replace(/\s+/g,'_');
+    const file = input.files[0];
+    if(!file) return;
+    heroUploadTab = "file";
+    const dotIdx = file.name.lastIndexOf(".");
+    const rawExt = dotIdx !== -1 ? file.name.substring(dotIdx) : "";
+    const rawBase = dotIdx !== -1 ? file.name.substring(0, dotIdx) : file.name;
+    const cleanBase = rawBase.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().replace(/[\s_-]+/g, "_").replace(/[^\w-]/g, "");
+    const cleanExt = (rawExt || ".jpg").toLowerCase();
+    const safeName = "vibraimgs/" + (cleanBase || "hero") + cleanExt;
+
     try {
-        const dataUrl=await compressImageFile(file);
-        uploadedImages[safeName]=dataUrl;
-        document.getElementById('heroUploadPreview').src=dataUrl;
-        document.getElementById('heroUploadPreview').style.display='block';
-        document.getElementById('heroUploadName').textContent=safeName;
-        document.getElementById('heroUploadName').style.display='block';
-        // Actualizar preview del banner con el dataURL
-        document.getElementById('heroUrlInput').value=safeName;
-        heroState._uploadDataUrl=dataUrl;
-        heroState.publishUrl=safeName;
+        const dataUrl = await compressImageFile(file);
+        uploadedImages[safeName] = dataUrl;
+        document.getElementById("heroUploadPreview").src = dataUrl;
+        document.getElementById("heroUploadPreview").style.display = "block";
+        document.getElementById("heroUploadName").textContent = safeName;
+        document.getElementById("heroUploadName").style.display = "block";
+        document.getElementById("heroUrlInput").value = safeName;
+        heroState._uploadDataUrl = dataUrl;
+        heroState.publishUrl = safeName;
         updateHeroPreview();
     } catch(err) {
-        console.error('Error procesando imagen:', err);
+        console.error("Error procesando imagen:", err);
+        showToast("❌ Error al procesar la imagen.");
     }
 }
 
@@ -3905,6 +3943,7 @@ async function runGhPublish() {
         }
 
         // 1. Subir imágenes locales
+        if (heroState._uploadDataUrl && heroState.publishUrl) { uploadedImages[heroState.publishUrl] = heroState._uploadDataUrl; }
         const imgKeys = Object.keys(uploadedImages);
         if (imgKeys.length) {
             ghLog('🖼 Sincronizando ' + imgKeys.length + ' imagen(es)…', 'info');
@@ -4079,6 +4118,7 @@ async function runGhPublish() {
             heroState.url = cleanHeroUrl;
             heroState.publishUrl = cleanHeroUrl;
             if (heroState._uploadDataUrl) delete heroState._uploadDataUrl;
+            applyHeroToDOM();
         } else {
             htmlContent = generateCleanHTML(targetBaseUrl);
             fileName = 'index.html';
