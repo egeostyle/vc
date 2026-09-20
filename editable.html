@@ -1021,10 +1021,10 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 
     <!-- Enlaces de texto -->
     <nav class="nav">
-        <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+        <a onclick="navigateTo('inicio')" id="nav-inicio" class="">Inicio</a>
         <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
         <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
-        <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
+        <a onclick="navigateTo('contacto')" id="nav-contacto" class="active">Contacto</a>
     </nav>
 
     <!-- Íconos sociales agrupados -->
@@ -1044,7 +1044,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: INICIO
      ========================================================= -->
-<main id="page-inicio" class="page active">
+<main id="page-inicio" class="page">
 
     <!-- HERO -->
     <section class="hero" id="hero-bg">
@@ -1100,15 +1100,15 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
     <section class="bestsellers">
         <h2 contenteditable="true">Nuestros Favoritos de la Temporada</h2>
         <div class="bestsellers-grid">
-            <div class="seller-card featured-slot" id="featured-card-1" data-featured-slot="1" data-product-id="2" onclick="openFeaturedSelector(1)">
+            <div class="seller-card featured-slot" id="featured-card-1" data-featured-slot="1" data-product-id="3" onclick="openFeaturedSelector(1)">
                 <div class="featured-edit-badge" onclick="event.stopPropagation();openFeaturedSelector(1)" title="Toca para cambiar producto"><i class="fa-solid fa-arrows-rotate"></i> Cambiar Producto</div>
-                <div class="seller-img" id="bs1" style="background-image: url(&quot;vibraimgs/imgprod/sp3.jpg&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(1)"></div>
+                <div class="seller-img" id="bs1" style="background-image: url(&quot;vibraimgs/imgprod/sp2.jpg&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(1)"></div>
                 <div class="seller-info" onclick="openFeaturedSelector(1)">
-                    <h3>Difusor Vainilla Dulce</h3>
-                    <p>Fragancia reconfortante de larga duración.</p>
+                    <h3>Vela Bosque de Pino</h3>
+                    <p>Notas frescas y maderosas que te transportan a la naturaleza.</p>
                     <div class="seller-meta">
-                        <span class="price">Ambiental</span>
-                        <a href="p/difusor-vainilla-dulce" onclick="event.preventDefault(); event.stopPropagation(); navigateTo('productos'); openProductModal(2);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Pedir</a>
+                        <span class="price">100% Soya</span>
+                        <a href="https://vibracandela.com/p/vela-bosque-de-pino" onclick="event.preventDefault(); event.stopPropagation(); navigateTo('productos'); openProductModal(3);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Pedir</a>
                     </div>
                 </div>
             </div>
@@ -1255,16 +1255,16 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             <div id="modal-product-img" class="modal-img" style=""></div>
             <div class="modal-info">
                 <div>
-                    <h3 id="modal-product-title">Tabletas aromáticas de cera</h3>
-                    <div id="modal-product-meta" class="mprice">100% Soya | S/. 10.00 <span class="modal-sold-out-badge">Agotado</span></div>
-                    <div class="variant-selector" id="modal-variant-selector" style="display: block;">
+                    <h3 id="modal-product-title">Difusor Vainilla Dulce</h3>
+                    <div id="modal-product-meta" class="mprice">Ambiental | S/. 36.00</div>
+                    <div class="variant-selector" id="modal-variant-selector" style="display: none;">
                         <label>Selecciona una variante:</label>
-                        <div class="variant-chips" id="modal-variant-chips"><button class="vchip active">Unidad</button><button class="vchip">6 unidades</button></div>
+                        <div class="variant-chips" id="modal-variant-chips"></div>
                     </div>
-                    <p id="modal-product-desc">Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.</p>
+                    <p id="modal-product-desc">Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.</p>
                 </div>
                 <div class="modal-actions-grp">
-                    <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa btn-wa-soldout" data-product-id="1" data-active-variant="" data-product-info=""><i class="fa-brands fa-whatsapp"></i> Consultar reposición por WhatsApp</a>
+                    <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa" data-product-id="2" data-active-variant="" data-product-info=""><i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp</a>
                     <button type="button" class="modal-btn-close" onclick="closeProductModal(null)">Cerrar</button>
                 </div>
             </div>
@@ -1700,7 +1700,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: CONTACTO
      ========================================================= -->
-<div id="page-contacto" class="page">
+<div id="page-contacto" class="page active">
     <div class="contact-page">
         <h2 contenteditable="true">Cuéntanos tus Ideas</h2>
         <div class="contact-wrapper">
@@ -1710,7 +1710,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                 <div id="infoLinksContainer">
                     <div class="info-link">
                         <span class="info-link-icon" onclick="openCiModal(this)" title="Clic para cambiar ícono"><i class="fa-solid fa-location-dot" style="color:#6e8174;font-size:1.2rem;"></i></span>
-                        <span class="info-link-text" contenteditable="true">SJL, Perú</span>
+                        <span class="info-link-text" contenteditable="true">Lima, Perú</span>
                         <div class="info-link-actions">
                             <button class="il-btn" onclick="removeInfoLink(this)" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>
                         </div>
@@ -1837,7 +1837,7 @@ let nextId=5;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif"};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"376eeec15e3a7bbf\",\"c\":\"f1bb47db94665a48a032e36dd50e7f11169b29a68ee9d0ba8d86737880eaadb82f5deb48e17fba351943b6d961a2d70bbe1ff9a8acb566d7106d8780b7b5d6ef835639b55325718f7a466903baa17538812561da608e4576f69699ea9d\",\"a\":\"f036c588f94887b7d0ba543c33630a41a9f2b3a32f4848c7db3e844e156b290f\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"b302a319a09eceec\",\"c\":\"caef5e611c6920cf999c87d33890a65faf23be472c21ec82985ec8aa5b18488bcb8595c7cdf861aba60f711b77bffcef95ba8ca481b95620b5c721650c9d86fd1b9ce17eb8462a3e525198300e567b6d53c48f1940bd57e9b40f8c76d0\",\"a\":\"5e887c52e173a8888af7df89a4a4eaff9dfbcbc531ca5f2cb76c540184a49c40\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -4480,6 +4480,7 @@ applyHeroBtnToDOM();
 </script>
 
 
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
