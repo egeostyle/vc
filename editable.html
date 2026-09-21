@@ -1022,9 +1022,9 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
     <!-- Enlaces de texto -->
     <nav class="nav">
         <a onclick="navigateTo('inicio')" id="nav-inicio" class="">Inicio</a>
-        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
+        <a onclick="navigateTo('productos')" id="nav-productos" class="active">Productos</a>
         <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
-        <a onclick="navigateTo('contacto')" id="nav-contacto" class="active">Contacto</a>
+        <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
     </nav>
 
     <!-- Íconos sociales agrupados -->
@@ -1210,7 +1210,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: PRODUCTOS
      ========================================================= -->
-<div id="page-productos" class="page">
+<div id="page-productos" class="page active">
     <div class="catalog-container">
         <h2 contenteditable="true" style="text-align:center;">Nuestro Catálogo</h2>
         <!-- TOOLBAR: BUSCADOR Y PÍLDORAS DE CATEGORÍA -->
@@ -1700,7 +1700,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: CONTACTO
      ========================================================= -->
-<div id="page-contacto" class="page active">
+<div id="page-contacto" class="page">
     <div class="contact-page">
         <h2 contenteditable="true">Cuéntanos tus Ideas</h2>
         <div class="contact-wrapper">
@@ -1837,7 +1837,7 @@ let nextId=5;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif"};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"b302a319a09eceec\",\"c\":\"caef5e611c6920cf999c87d33890a65faf23be472c21ec82985ec8aa5b18488bcb8595c7cdf861aba60f711b77bffcef95ba8ca481b95620b5c721650c9d86fd1b9ce17eb8462a3e525198300e567b6d53c48f1940bd57e9b40f8c76d0\",\"a\":\"5e887c52e173a8888af7df89a4a4eaff9dfbcbc531ca5f2cb76c540184a49c40\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"ea696879d54cd4ea\",\"c\":\"e1e7e2730dbcf6aabecc156b09d0785e8493aaa931ca2e46a8eb275b6f2c96963163e89cb48270e6ebdf982ea83ad3593f9415850d29372a8d1067b776a0be1eab0b9f8a96aba4fd952a26e555b1c7195299f9d5c42fd4b69e600b740e\",\"a\":\"e4443826e5928a737ca49feb9a487207278253251c0e0f59e0773f35167ec548\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -4480,6 +4480,7 @@ applyHeroBtnToDOM();
 </script>
 
 
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
