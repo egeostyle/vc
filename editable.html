@@ -1241,6 +1241,11 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                         <div class="seller-img" style="background-image:url('vibraimgs/imgprod/sp2.jpg');"></div>
                         <div class="seller-info"><h3>Vela Bosque de Pino</h3><p>Notas frescas y maderosas que te transportan a la naturaleza.</p>
                         <div class="seller-meta"><span class="price">S/. 45.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(5,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(5)">
+                        <div class="seller-img" style="background-image:url('vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png');"></div>
+                        <div class="seller-info"><h3>Tulipán</h3><p>Por confirmar</p>
+                        <div class="seller-meta"><span class="price">S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="add-product-card"><span class="ic">＋</span><span>Agregar producto</span></div></div>
     </div>
 </div>
@@ -1295,7 +1300,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <div class="fg"><label>Categoría</label><input type="text" id="pe-cat" placeholder="100% Soya"></div>
 
         <!-- PRECIO (oculto cuando hay variantes) -->
-        <div class="fg" id="pe-price-group" style="display: none;">
+        <div class="fg" id="pe-price-group" style="">
             <label>Precio</label>
             <input type="text" id="pe-price" placeholder="S/. 45.00" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)">
         </div>
@@ -1304,18 +1309,18 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <div class="fg"><label>Descripción larga (modal)</label><textarea id="pe-long" rows="3" placeholder="Descripción detallada..."></textarea></div>
 
         <!-- IMAGEN BASE (oculta cuando hay variantes con imagen propia) -->
-        <div class="fg" id="pe-img-group" style="display: none;">
+        <div class="fg" id="pe-img-group" style="">
             <label>Imagen del producto</label>
             <div class="img-tabs" style="margin-bottom:0.6rem;">
-                <button class="img-tab active" id="peTabUrl" onclick="switchPeTab('url')"><i class="fa-solid fa-link"></i> URL</button>
-                <button class="img-tab" id="peTabFile" onclick="switchPeTab('file')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Subir</button>
+                <button class="img-tab" id="peTabUrl" onclick="switchPeTab('url')"><i class="fa-solid fa-link"></i> URL</button>
+                <button class="img-tab active" id="peTabFile" onclick="switchPeTab('file')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Subir</button>
             </div>
-            <div class="img-panel active" id="pePanelUrl">
+            <div class="img-panel" id="pePanelUrl">
                 <input type="text" id="pe-img" placeholder="https://...">
             </div>
-            <div class="img-panel" id="pePanelFile">
+            <div class="img-panel active" id="pePanelFile">
                 <img class="img-upload-preview" id="pePreviewImg" src="" alt="" style="display: none;">
-                <div class="img-upload-name" id="peFileName" style="display: none;"></div>
+                <div class="img-upload-name" id="peFileName" style="display: block;">vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png</div>
                 <div class="img-drop-zone">
                     <input type="file" id="peFileInput" accept="image/*" onchange="handlePeFile(this)">
                     <div class="dz-icon"><i class="fa-solid fa-image" style="font-size:1.8rem;color:#aaa;"></i></div>
@@ -1331,65 +1336,9 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         </label>
 
         <!-- SECCIÓN VARIANTES -->
-        <div class="pe-variants-section active" id="peVariantsSection">
+        <div class="pe-variants-section" id="peVariantsSection">
             <p style="font-size:0.72rem;color:#aaa;margin-bottom:0.75rem;">Cada variante puede tener su propio precio e imagen. La imagen de la variante 1 se usa como imagen principal si las demás no tienen.</p>
-            <div id="peVariantsList"><div class="pe-variant-item" data-uid="vr17896546009471">
-        <div class="variant-header">
-            <span class="variant-label">Variante 1</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label>Nombre / tamaño</label><input class="v-name" type="text" placeholder="Ej. 100ml" value="Unidad"></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="S/. 10.00" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab" onclick="switchVTab('vr17896546009471','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab active" onclick="switchVTab('vr17896546009471','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel" id="vurl-vr17896546009471">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="vibraimgs/faq.jpg">
-                </div>
-                <div class="vimg-panel active" id="vfile-vr17896546009471">
-                    <img class="vimg-preview" id="vprev-vr17896546009471" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17896546009471" style="display: block;">vibraimgs/imgprod/tab1.jpg</div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17896546009471')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div><div class="pe-variant-item" data-uid="vr17896546009472">
-        <div class="variant-header">
-            <span class="variant-label">Variante 2</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label>Nombre / tamaño</label><input class="v-name" type="text" placeholder="Ej. 100ml" value="6 unidades"></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="S/. 50.00" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab" onclick="switchVTab('vr17896546009472','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab active" onclick="switchVTab('vr17896546009472','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel" id="vurl-vr17896546009472">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="vibraimgs/imgprod/tab2.jpg">
-                </div>
-                <div class="vimg-panel active" id="vfile-vr17896546009472">
-                    <img class="vimg-preview" id="vprev-vr17896546009472" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17896546009472" style="display: block;">vibraimgs/imgprod/tab2.jpg</div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17896546009472')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div></div>
+            <div id="peVariantsList"></div>
             <button class="add-variant-btn" onclick="addVariantRow()">＋ Agregar variante</button>
         </div>
 
@@ -1717,7 +1666,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                     </div>
                     <div class="info-link">
                         <span class="info-link-icon" onclick="openCiModal(this)" title="Clic para cambiar ícono"><i class="fa-brands fa-whatsapp" style="color:#6e8174;font-size:1.2rem;"></i></span>
-                        <span class="info-link-text" contenteditable="true">WhatsApp: +51 926 997 276</span>
+                        <span class="info-link-text" contenteditable="true">WhatsApp: <a href="tel:+51 926 997 276">+51 926 997 276</a></span>
                         <div class="info-link-actions">
                             <button class="il-btn" onclick="removeInfoLink(this)" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>
                         </div>
@@ -1832,12 +1781,12 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 // ESTADO GLOBAL
 // ============================================================
 const WA_NUMBER="51926997276";
-let products=[{"id":1,"name":"Tabletas aromáticas de cera","cat":"100% Soya","price":"","shortDesc":"Calma el estrés cotidiano con notas florales suaves.","longDesc":"Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.","soldOut":true,"img":"","imgData":"","variants":[{"name":"Unidad","price":"S/. 10.00","img":"vibraimgs/imgprod/tab1.jpg","imgData":""},{"name":"6 unidades","price":"S/. 50.00","img":"vibraimgs/imgprod/tab2.jpg","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/sp3.jpg","imgData":"","variants":[]},{"id":3,"name":"Vela Bosque de Pino","cat":"100% Soya","price":"S/. 45.00","shortDesc":"Notas frescas y maderosas que te transportan a la naturaleza.","longDesc":"Evoca la frescura de un bosque matutino. Pabilo de algodón puro y esencias maderosas que purifican el ambiente.","soldOut":false,"img":"vibraimgs/imgprod/sp2.jpg","imgData":"","variants":[]}];
-let nextId=5;
+let products=[{"id":1,"name":"Tabletas aromáticas de cera","cat":"100% Soya","price":"","shortDesc":"Calma el estrés cotidiano con notas florales suaves.","longDesc":"Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.","soldOut":true,"img":"","imgData":"","variants":[{"name":"Unidad","price":"S/. 10.00","img":"vibraimgs/imgprod/tab1.jpg","imgData":""},{"name":"6 unidades","price":"S/. 50.00","img":"vibraimgs/imgprod/tab2.jpg","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/sp3.jpg","imgData":"","variants":[]},{"id":3,"name":"Vela Bosque de Pino","cat":"100% Soya","price":"S/. 45.00","shortDesc":"Notas frescas y maderosas que te transportan a la naturaleza.","longDesc":"Evoca la frescura de un bosque matutino. Pabilo de algodón puro y esencias maderosas que purifican el ambiente.","soldOut":false,"img":"vibraimgs/imgprod/sp2.jpg","imgData":"","variants":[]},{"id":5,"name":"Tulipán","cat":"","price":"S/. 44.90","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png","imgData":"","variants":[]}];
+let nextId=6;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif"};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"ea696879d54cd4ea\",\"c\":\"e1e7e2730dbcf6aabecc156b09d0785e8493aaa931ca2e46a8eb275b6f2c96963163e89cb48270e6ebdf982ea83ad3593f9415850d29372a8d1067b776a0be1eab0b9f8a96aba4fd952a26e555b1c7195299f9d5c42fd4b69e600b740e\",\"a\":\"e4443826e5928a737ca49feb9a487207278253251c0e0f59e0773f35167ec548\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"90dd8f35df56b689\",\"c\":\"b17b480ac30884ecc4270568df8ca9e889fd2c6abf3320f10dad5cbd0038a4b428e3a1547a79122e0d5c67f06659a2547769f85cdf5d963e135aff49c15e0daa48fceede3005000f321133f837259a037080edeb7ddeb89e4977dd61c3\",\"a\":\"6dca811c94d5a14478ab902feae8dc574622d16924ad45934afebc5e65986da8\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -4486,4 +4435,5 @@ applyHeroBtnToDOM();
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 </body></html>
