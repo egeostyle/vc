@@ -1022,8 +1022,8 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
     <!-- Enlaces de texto -->
     <nav class="nav">
         <a onclick="navigateTo('inicio')" id="nav-inicio" class="">Inicio</a>
-        <a onclick="navigateTo('productos')" id="nav-productos" class="active">Productos</a>
-        <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
+        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
+        <a onclick="navigateTo('acerca')" id="nav-acerca" class="active">Acerca de</a>
         <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
     </nav>
 
@@ -1210,7 +1210,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: PRODUCTOS
      ========================================================= -->
-<div id="page-productos" class="page active">
+<div id="page-productos" class="page">
     <div class="catalog-container">
         <h2 contenteditable="true" style="text-align:center;">Nuestro Catálogo</h2>
         <!-- TOOLBAR: BUSCADOR Y PÍLDORAS DE CATEGORÍA -->
@@ -1621,25 +1621,20 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: ACERCA DE
      ========================================================= -->
-<div id="page-acerca" class="page">
+<div id="page-acerca" class="page active">
     <section>
         <h2 contenteditable="true">Nuestra Historia</h2>
         <div class="about-wrapper">
             <div class="about-bio" id="aboutBio">
                 <h3 contenteditable="true">Hola, soy Yenka</h3>
                 <div class="bio-p">
-                    <p contenteditable="true">Este proyecto nació de una búsqueda personal por transformar mi hogar en un santuario de paz sin comprometer mi salud. Al descubrir que las velas convencionales de parafina liberaban toxinas al quemarse, decidí investigar alternativas conscientes.</p>
+                    <p contenteditable="true">Hola, soy Yenka. 🤍<div><br></div><div>Vibra Candela nació de una pausa inesperada que terminó convirtiéndose en una pasión.</div><div><br></div><div>Lo que comenzó como una forma de encontrar tranquilidad a través de los aromas y las velas, poco a poco se transformó en un espacio de creatividad, experimentación y descubrimiento.</div><div><br></div><div>Me gusta investigar, entender el porqué de las cosas y explorar nuevas posibilidades. Entre fragancias, colores, texturas y formas, descubrí el encanto de crear piezas únicas.</div><div><br></div><div>Hoy, Vibra Candela reúne esa curiosidad y pasión por los detalles, dando vida a velas artesanales elaboradas con dedicación, ingredientes cuidadosamente seleccionados y una inspiración en lo natural.</div></p>
                     <div class="para-controls">
                         <button class="para-btn" onclick="removePara(this)" title="Eliminar párrafo"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
-                <div class="bio-p">
-                    <p contenteditable="true">Vibra Candela se fundó con el concepto de fusionar el diseño minimalista, la botánica y el respeto al medio ambiente. Cada pieza es diseñada, mezclada y vertida individualmente a mano, cuidando la procedencia de los insumos y asegurando un producto ético de inicio a fin.</p>
-                    <div class="para-controls">
-                        <button class="para-btn" onclick="removePara(this)" title="Eliminar párrafo"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                </div>
-                <button class="add-para-btn" onclick="addPara()">＋ Agregar párrafo</button>
+                
+                <div class="bio-p"><p contenteditable="true">Porque a veces, de una pequeña pausa nacen cosas extraordinarias.&nbsp;</p><div class="para-controls"><button class="para-btn" onclick="removePara(this)" title="Eliminar párrafo"><i class="fa-solid fa-xmark"></i></button></div></div><button class="add-para-btn" onclick="addPara()">＋ Agregar párrafo</button>
             </div>
             <div class="about-img img-editable" id="about-img" onclick="openImgModal('about-img')" style="background-image: url(&quot;vibraimgs/659217144_18576869383055784_2080647906464403244_n.jpg&quot;); background-size: cover; background-position: center center;"></div>
         </div>
@@ -1786,7 +1781,7 @@ let nextId=6;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif"};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"90dd8f35df56b689\",\"c\":\"b17b480ac30884ecc4270568df8ca9e889fd2c6abf3320f10dad5cbd0038a4b428e3a1547a79122e0d5c67f06659a2547769f85cdf5d963e135aff49c15e0daa48fceede3005000f321133f837259a037080edeb7ddeb89e4977dd61c3\",\"a\":\"6dca811c94d5a14478ab902feae8dc574622d16924ad45934afebc5e65986da8\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"507bf77fa87a3e77\",\"c\":\"39b86e82e4e5d8def780e73eaded2d377d151e0ed5c0241e6360ca60b2345bee0284fc04b1e58d9e27224ac847b60606726598118b11d1c3138eae730df51f32b4fce6942894e276ff9e2a7a9c3cd5a25fe0cfb8a3202efda971f0b02e\",\"a\":\"2c7b8bf550abce550208aa5f53cba8ada09721d0bfec0b1ed025c907bc69c259\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -4435,5 +4430,6 @@ applyHeroBtnToDOM();
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 </body></html>
