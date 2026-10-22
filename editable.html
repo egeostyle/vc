@@ -1220,7 +1220,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                 <input type="text" id="catalogSearchInput" class="catalog-search-input" placeholder="Buscar por nombre, aroma o categoría..." oninput="handleCatalogSearch(this.value)">
                 <button type="button" id="catalogSearchClear" class="catalog-search-clear" onclick="clearCatalogSearch()" title="Limpiar búsqueda" style="display: none;">×</button>
             </div>
-            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill active">Todos</button><button type="button" class="cat-pill">100% Soya</button><button type="button" class="cat-pill">Ambiental</button><button type="button" class="cat-pill">Navidad</button></div>
+            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill">Todos</button><button type="button" class="cat-pill">100% Soya</button><button type="button" class="cat-pill">Ambiental</button><button type="button" class="cat-pill active">Navidad</button></div>
         </div>
         <div id="catalogEmptyMsg" class="catalog-empty" style="display:none;">
             <p>No encontramos productos que coincidan con tu búsqueda.</p>
@@ -1246,6 +1246,11 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                         <div class="seller-img" style="background-image:url('vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png');"></div>
                         <div class="seller-info"><h3>Tulipán</h3><p>Por confirmar</p>
                         <div class="seller-meta"><span class="price">S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(6,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(6)">
+                        <div class="seller-img" style="background-image:url('vibraimgs/imgprod/Vela_navideña_de_árbol_verde.png');"></div>
+                        <div class="seller-info"><h3>Pino Navideño</h3><p>Un clásico de Navidad con un toque especial.</p>
+                        <div class="seller-meta"><span class="price">S/. 24.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="add-product-card"><span class="ic">＋</span><span>Agregar producto</span></div></div>
     </div>
 </div>
@@ -1295,7 +1300,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- MODAL: EDITAR PRODUCTO -->
 <div id="prodEditOverlay" class="pe-overlay" onclick="closeProdEdit(event)">
     <div class="pe-modal" onclick="event.stopPropagation()">
-        <h3 id="prodEditTitle">Editar producto</h3>
+        <h3 id="prodEditTitle">Agregar producto</h3>
         <div class="fg"><label>Nombre</label><input type="text" id="pe-name" placeholder="Vela Lavanda"></div>
         <div class="fg"><label>Categoría</label><input type="text" id="pe-cat" placeholder="100% Soya"></div>
 
@@ -1320,7 +1325,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             </div>
             <div class="img-panel active" id="pePanelFile">
                 <img class="img-upload-preview" id="pePreviewImg" src="" alt="" style="display: none;">
-                <div class="img-upload-name" id="peFileName" style="display: block;">vibraimgs/imgprod/WhatsApp_Image_2026-10-21_at_7.34.35_PM.jpeg</div>
+                <div class="img-upload-name" id="peFileName" style="display: block;">vibraimgs/imgprod/Vela_navideña_de_árbol_verde.png</div>
                 <div class="img-drop-zone">
                     <input type="file" id="peFileInput" accept="image/*" onchange="handlePeFile(this)">
                     <div class="dz-icon"><i class="fa-solid fa-image" style="font-size:1.8rem;color:#aaa;"></i></div>
@@ -1353,7 +1358,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 
         <div class="pe-actions">
             <button class="pe-cancel" onclick="closeProdEditDirect()">Cancelar</button>
-            <button class="pe-del" id="peDeleteBtn" onclick="deleteProduct()" style="display: inline-block;">🗑 Eliminar</button>
+            <button class="pe-del" id="peDeleteBtn" onclick="deleteProduct()" style="display: none;">🗑 Eliminar</button>
             <button class="pe-ok" onclick="applyProductEdit()"><i class="fa-solid fa-check"></i> Aplicar</button>
         </div>
     </div>
@@ -1776,12 +1781,12 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 // ESTADO GLOBAL
 // ============================================================
 const WA_NUMBER="51926997276";
-let products=[{"id":1,"name":"Tabletas aromáticas de cera","cat":"100% Soya","price":"","shortDesc":"Calma el estrés cotidiano con notas florales suaves.","longDesc":"Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.","soldOut":true,"img":"","imgData":"","variants":[{"name":"Unidad","price":"S/. 10.00","img":"vibraimgs/imgprod/tab1.jpg","imgData":""},{"name":"6 unidades","price":"S/. 50.00","img":"vibraimgs/imgprod/tab2.jpg","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/sp3.jpg","imgData":"","variants":[]},{"id":3,"name":"Villa Navideña","cat":"Navidad","price":"S/. 59.90","shortDesc":"Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales","longDesc":"Disponible en tres aromas:\n\n🍪 Casa de Galletas\nEse delicioso aroma a galletas recién horneadas, con notas de jengibre, canela, clavo y un toque dulce de vainilla.\n\n🍎 Otoño en Casa\nManzana horneada con canela y naranja, acompañada de notas de bourbon, mantequilla, arce y vainilla. Un aroma cálido y acogedor.\n\n🍓 Dulce Tentación\nUna mezcla de fresas con suaves toques cítricos, vainilla, crema y galleta Graham. Dulce y delicada.\n\nUn poquito más sobre tu vela:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso de la vela 250 g \n. Los colores a disponibilidad\n\nCada pieza tiene pequeños detalles que la hacen única.","soldOut":false,"img":"vibraimgs/imgprod/WhatsApp_Image_2026-10-21_at_7.34.35_PM.jpeg","imgData":"","variants":[]},{"id":5,"name":"Tulipán","cat":"","price":"S/. 44.90","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png","imgData":"","variants":[]}];
-let nextId=6;
+let products=[{"id":1,"name":"Tabletas aromáticas de cera","cat":"100% Soya","price":"","shortDesc":"Calma el estrés cotidiano con notas florales suaves.","longDesc":"Relaja tu mente y cuerpo con el sutil aroma de la lavanda orgánica. Ideal para meditación, lectura o antes de dormir.","soldOut":true,"img":"","imgData":"","variants":[{"name":"Unidad","price":"S/. 10.00","img":"vibraimgs/imgprod/tab1.jpg","imgData":""},{"name":"6 unidades","price":"S/. 50.00","img":"vibraimgs/imgprod/tab2.jpg","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/sp3.jpg","imgData":"","variants":[]},{"id":3,"name":"Villa Navideña","cat":"Navidad","price":"S/. 59.90","shortDesc":"Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales","longDesc":"Disponible en tres aromas:\n\n🍪 Casa de Galletas\nEse delicioso aroma a galletas recién horneadas, con notas de jengibre, canela, clavo y un toque dulce de vainilla.\n\n🍎 Otoño en Casa\nManzana horneada con canela y naranja, acompañada de notas de bourbon, mantequilla, arce y vainilla. Un aroma cálido y acogedor.\n\n🍓 Dulce Tentación\nUna mezcla de fresas con suaves toques cítricos, vainilla, crema y galleta Graham. Dulce y delicada.\n\nUn poquito más sobre tu vela:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso de la vela 250 g \n. Los colores a disponibilidad\n\nCada pieza tiene pequeños detalles que la hacen única.","soldOut":false,"img":"vibraimgs/imgprod/WhatsApp_Image_2026-10-21_at_7.34.35_PM.jpeg","imgData":"","variants":[]},{"id":5,"name":"Tulipán","cat":"","price":"S/. 44.90","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png","imgData":"","variants":[]},{"id":6,"name":"Pino Navideño","cat":"Navidad","price":"S/. 24.90","shortDesc":"Un clásico de Navidad con un toque especial.","longDesc":"Aromas disponibles:\n\n🍪 Casa de Galletas\nEl irresistible aroma de galletas recién horneadas, con notas de jengibre, canela, clavo, azúcar y vainilla.\n\n🍎 Otoño en Casa\nUna cálida mezcla de manzana horneada, canela y naranja, acompañada de bourbon, mantequilla, arce y vainilla.\n\n🌿 Calma Natural\nUna combinación fresca y herbal de salvia, lavanda y romero, con suaves notas de sándalo y cedro.\n\nCaracterísticas:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso: 120 g.\n. Colores a elección.","soldOut":false,"img":"vibraimgs/imgprod/Vela_navideña_de_árbol_verde.png","imgData":"","variants":[]}];
+let nextId=7;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif"};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"742547454c8791e4\",\"c\":\"3c7194218376e4006317ac9220c294a573c0ed6eb13cb9ce393b8f859448df0d949eed4659223656a4ea10a7b190e63e003ca05a120f2d50183a695ec7e813d9267d88e7a39db354728efb0ffe192eab27bb9a580d2838ccb13eee6241\",\"a\":\"f74847357ffdff25e363e4cfeeb8777d88f7ab2b9e47eea4e58dcdb29e8b1dd8\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"ba0f558c124c9456\",\"c\":\"542e3877eef3eba38727c40cbc0a7ec36aeae61b5dfe311783d4a947fdf5c599331d06499fe8a240897eca069495be782307ed8e08201e125815577fd2c4bc364ede0ff565e8061f966847cefd8f3235c50813bbb8ab5dc822c26a2090\",\"a\":\"8a90b3d1d42aaeba0c6953c8d61a499a384b6d3fad43273f73382ef103456ad1\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
