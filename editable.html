@@ -1021,8 +1021,8 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 
     <!-- Enlaces de texto -->
     <nav class="nav">
-        <a onclick="navigateTo('inicio')" id="nav-inicio" class="">Inicio</a>
-        <a onclick="navigateTo('productos')" id="nav-productos" class="active">Productos</a>
+        <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
         <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
         <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
     </nav>
@@ -1044,7 +1044,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: INICIO
      ========================================================= -->
-<main id="page-inicio" class="page">
+<main id="page-inicio" class="page active">
 
     <!-- HERO -->
     <section class="hero" id="hero-bg">
@@ -1112,15 +1112,15 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                     </div>
                 </div>
             </div>
-            <div class="seller-card featured-slot" id="featured-card-2" data-featured-slot="2" data-product-id="3" onclick="openFeaturedSelector(2)">
+            <div class="seller-card featured-slot" id="featured-card-2" data-featured-slot="2" data-product-id="7" onclick="openFeaturedSelector(2)">
                 <div class="featured-edit-badge" onclick="event.stopPropagation();openFeaturedSelector(2)" title="Toca para cambiar producto"><i class="fa-solid fa-arrows-rotate"></i> Cambiar Producto</div>
-                <div class="seller-img" id="bs2" style="background-image: url(&quot;vibraimgs/imgprod/sp2.jpg&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(2)"></div>
+                <div class="seller-img" id="bs2" style="background-image: url(&quot;vibraimgs/Vela_de_Tarta_de_Fresa_Artesanal.png&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(2)"></div>
                 <div class="seller-info" onclick="openFeaturedSelector(2)">
-                    <h3>Vela Bosque de Pino</h3>
-                    <p>Notas frescas y maderosas que te transportan a la naturaleza.</p>
+                    <h3>Velas de autor</h3>
+                    <p>Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.</p>
                     <div class="seller-meta">
-                        <span class="price">100% Soya</span>
-                        <a href="p/vela-bosque-de-pino" onclick="event.preventDefault(); event.stopPropagation(); navigateTo('productos'); openProductModal(3);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Pedir</a>
+                        <span class="price">Autor</span>
+                        <a href="https://vibracandela.com/p/velas-de-autor" onclick="event.preventDefault(); event.stopPropagation(); navigateTo('productos'); openProductModal(7);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Pedir</a>
                     </div>
                 </div>
             </div>
@@ -1210,7 +1210,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: PRODUCTOS
      ========================================================= -->
-<div id="page-productos" class="page active">
+<div id="page-productos" class="page">
     <div class="catalog-container">
         <h2 contenteditable="true" style="text-align:center;">Nuestro Catálogo</h2>
         <!-- TOOLBAR: BUSCADOR Y PÍLDORAS DE CATEGORÍA -->
@@ -1299,7 +1299,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             <h3>Seleccionar Producto Destacado</h3>
             <p>Elige el producto que se mostrará en esta tarjeta de favoritos:</p>
         </div>
-        <div class="fps-list" id="fpsList"><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/imgprod/tab1.jpg&quot;);"></div><div class="fps-info"><div class="fps-title">Tabletas aromáticas de cera <span style="font-size:0.72rem;background:#eee;color:#777;padding:1px 6px;border-radius:6px;margin-left:4px;">Agotado</span></div><div class="fps-desc">Calma el estrés cotidiano con notas florales suaves.</div><div class="fps-tag">100% Soya • Desde S/. 10.00</div></div></div><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/imgprod/sp3.jpg&quot;);"></div><div class="fps-info"><div class="fps-title">Difusor Vainilla Dulce</div><div class="fps-desc">Fragancia reconfortante de larga duración.</div><div class="fps-tag">Ambiental • S/. 36.00</div></div></div><div class="fps-item selected"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/imgprod/sp2.jpg&quot;);"></div><div class="fps-info"><div class="fps-title">Vela Bosque de Pino</div><div class="fps-desc">Notas frescas y maderosas que te transportan a la naturaleza.</div><div class="fps-tag">100% Soya • S/. 45.00</div></div></div><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png&quot;);"></div><div class="fps-info"><div class="fps-title">Tulipán</div><div class="fps-desc">Por confirmar</div><div class="fps-tag">Vibra Candela • S/. 44.90</div></div></div></div>
+        <div class="fps-list" id="fpsList"><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/Vela_Emilia_con_flores_artesanales.png&quot;);"></div><div class="fps-info"><div class="fps-title">Velas Artesanales Decorativas</div><div class="fps-desc">Diseños</div><div class="fps-tag">Personalizadas • Desde S/. 59.90</div></div></div><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/imgprod/sp3.jpg&quot;);"></div><div class="fps-info"><div class="fps-title">Difusor Vainilla Dulce</div><div class="fps-desc">Fragancia reconfortante de larga duración.</div><div class="fps-tag">Ambiental • S/. 36.00</div></div></div><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/imgprod/WhatsApp_Image_2026-10-21_at_7.34.35_PM.jpeg&quot;);"></div><div class="fps-info"><div class="fps-title">Villa Navideña</div><div class="fps-desc">Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales</div><div class="fps-tag">Navidad • S/. 59.90</div></div></div><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png&quot;);"></div><div class="fps-info"><div class="fps-title">Tulipán</div><div class="fps-desc">Por confirmar</div><div class="fps-tag">Vibra Candela • S/. 44.90</div></div></div><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/Vela_navideña_de_árbol_verde.png&quot;);"></div><div class="fps-info"><div class="fps-title">Pino Navideño</div><div class="fps-desc">Un clásico de Navidad con un toque especial.</div><div class="fps-tag">Navidad • Desde S/. 24.90</div></div></div><div class="fps-item selected"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/Vela_de_Tarta_de_Fresa_Artesanal.png&quot;);"></div><div class="fps-info"><div class="fps-title">Velas de autor</div><div class="fps-desc">Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.</div><div class="fps-tag">Autor • Desde S/. 49.90</div></div></div><div class="fps-item"><div class="fps-thumb" style="background-image: url(&quot;vibraimgs/Vela_de_margaritas_en_crema.png&quot;);"></div><div class="fps-info"><div class="fps-title">Vela Naturale</div><div class="fps-desc">Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.</div><div class="fps-tag">Naturale • Desde S/. 59.90</div></div></div></div>
         <div class="fps-footer">
             <button type="button" class="fps-btn-confirm" id="fpsConfirmBtn" onclick="confirmFeaturedProduct()">Confirmar</button>
             <button type="button" class="fps-btn-cancel" id="fpsCancelBtn" onclick="closeFeaturedSelector(null)">Cancelar</button>
@@ -1824,7 +1824,7 @@ let nextId=9;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif"};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"3506d9860c69af46\",\"c\":\"9f534b388893d9410d7e1628e1600ec2c3b19d50f555ca19ce51f4bfbdca5b42abafd057e30281bcda9d6116ebb55a16f2c07fc9cc837c5315ba4d16f1edd72e2489b766def6bb31d17ec122ce9952f98bec19339563e0939289b47c3e\",\"a\":\"8699f886bdaa6a5f479588f56c65005a9566c4256c67f0d6135445d923945bf3\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"054952208c478d26\",\"c\":\"ae7987205c4ed5118bdbf6d46f048ea6722c9c9d7260dca5cb2f0b98697558ffab155b7c2c690d37fef0e7b13e56a45b1223d7b4cc4c28d1307d9fcd130998755b44c348b31f3014819f21f128fb9832fba2fcdfe0ce3447969851e059\",\"a\":\"f732c3f103d2b82a99f60af460d743239e978c0011c7eb82e3498155d468aaf5\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -4473,6 +4473,7 @@ applyHeroBtnToDOM();
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f6a4be2226f547218774749de404cbbf&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
