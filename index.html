@@ -1031,8 +1031,8 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 
     <!-- Enlaces de texto -->
     <nav class="nav">
-        <a onclick="navigateTo('inicio')" id="nav-inicio" class="">Inicio</a>
-        <a onclick="navigateTo('productos')" id="nav-productos" class="active">Productos</a>
+        <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
+        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
         <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
         <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
     </nav>
@@ -1054,7 +1054,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: INICIO
      ========================================================= -->
-<main id="page-inicio" class="page">
+<main id="page-inicio" class="page active">
 
     <!-- HERO -->
     <section class="hero" id="hero-bg">
@@ -1122,15 +1122,15 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                     </div>
                 </div>
             </div>
-            <div class="seller-card" id="featured-card-2" data-featured-slot="2" data-product-id="3">
+            <div class="seller-card" id="featured-card-2" data-featured-slot="2" data-product-id="7">
                 
-                <div class="seller-img" id="bs2" style="background-image: url(&quot;vibraimgs/imgprod/sp2.jpg&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(2)"></div>
+                <div class="seller-img" id="bs2" style="background-image: url(&quot;vibraimgs/Vela_de_Tarta_de_Fresa_Artesanal.png&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(2)"></div>
                 <div class="seller-info" onclick="openFeaturedSelector(2)">
-                    <h3>Vela Bosque de Pino</h3>
-                    <p>Notas frescas y maderosas que te transportan a la naturaleza.</p>
+                    <h3>Velas de autor</h3>
+                    <p>Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.</p>
                     <div class="seller-meta">
-                        <span class="price">100% Soya</span>
-                        <a href="p/vela-bosque-de-pino" onclick="event.preventDefault(); navigateTo('productos'); openProductModal(3);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Pedir</a>
+                        <span class="price">Autor</span>
+                        <a href="https://vibracandela.com/p/velas-de-autor" onclick="event.preventDefault(); navigateTo('productos'); openProductModal(7);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Pedir</a>
                     </div>
                 </div>
             </div>
@@ -1220,7 +1220,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <!-- =========================================================
      PÁGINA: PRODUCTOS
      ========================================================= -->
-<div id="page-productos" class="page active">
+<div id="page-productos" class="page">
     <div class="catalog-container">
         <h2 style="text-align:center;">Nuestro Catálogo</h2>
         <!-- TOOLBAR: BUSCADOR Y PÍLDORAS DE CATEGORÍA -->
@@ -1247,7 +1247,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
     <div class="modal-content" onclick="event.stopPropagation()">
         <button type="button" class="modal-close" onclick="closeProductModal(null)" aria-label="Cerrar modal" title="Cerrar">×</button>
         <div class="modal-flex">
-            <div id="modal-product-img" class="modal-img" style="background-image: url(&quot;vibraimgs/imgprod/Vela_navideña_de_árbol_verde.png&quot;);"></div>
+            <div id="modal-product-img" class="modal-img" style=""></div>
             <div class="modal-info">
                 <div>
                     <h3 id="modal-product-title">Pino Navideño</h3>
@@ -1259,7 +1259,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
                     <p id="modal-product-desc">Aromas disponibles:<br><br>🍪 Casa de Galletas<br>El irresistible aroma de galletas recién horneadas, con notas de jengibre, canela, clavo, azúcar y vainilla.<br><br>🍎 Otoño en Casa<br>Una cálida mezcla de manzana horneada, canela y naranja, acompañada de bourbon, mantequilla, arce y vainilla.<br><br>🌿 Calma Natural<br>Una combinación fresca y herbal de salvia, lavanda y romero, con suaves notas de sándalo y cedro.<br><br>Características:<br><br>. Elaborada artesanalmente con cera de soya.<br>. Peso: 120 g.<br>. Colores a elección.</p>
                 </div>
                 <div class="modal-actions-grp">
-                    <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa" data-product-id="6" data-active-variant="" data-product-info="{&quot;name&quot;:&quot;Pino Navideño&quot;,&quot;cat&quot;:&quot;Navidad&quot;,&quot;price&quot;:&quot;S/. 24.90&quot;,&quot;variant&quot;:&quot;&quot;,&quot;img&quot;:&quot;vibraimgs/imgprod/Vela_navideña_de_árbol_verde.png&quot;,&quot;soldOut&quot;:false}"><i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp</a>
+                    <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa" data-product-id="6" data-active-variant="" data-product-info=""><i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp</a>
                     <button type="button" class="modal-btn-close" onclick="closeProductModal(null)">Cerrar</button>
                 </div>
             </div>
@@ -1369,6 +1369,7 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 </footer>
 
 <!-- MODAL: GUARDAR -->
+
 
 
 
