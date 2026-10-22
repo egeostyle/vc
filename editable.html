@@ -8,8 +8,366 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://vibracandela.com/vibraimgs/tips1.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
+<style id="dynamic-theme-vars">
 :root{--cp:#6e8174;--cs:#f4eee6;--ca:#d9c3b0;--cd:#333333;--cl:#faf8f5;--f:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+
+/* ============================================================
+   ESTILOS FASE 2: NAVEGACIÓN CONFIGURABLE & PLANTILLAS TEMÁTICAS
+   ============================================================ */
+
+/* Botón flotante de temas (encima de guardar) */
+.editor-fab-theme{position:fixed;bottom:98px;right:28px;width:60px;height:60px;border-radius:50%;background:#4f46e5;color:#ffffff;border:2px solid rgba(255,255,255,0.25);box-shadow:0 8px 24px rgba(79,70,229,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;z-index:990;transition:all 0.25s cubic-bezier(0.4,0,0.2,1);outline:none;}
+.editor-fab-theme i{font-size:1.2rem;color:#ffffff;}
+.editor-fab-theme .fab-text{font-size:0.54rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;color:#e0e7ff;}
+.editor-fab-theme:hover{background:#4338ca;transform:scale(1.08);box-shadow:0 10px 28px rgba(67,56,202,0.45);border-color:rgba(255,255,255,0.5);}
+.editor-fab-theme:active{transform:scale(0.95);}
+
+@media(max-width:900px){
+    .editor-fab-theme{bottom:84px;right:20px;width:54px;height:54px;}
+    .editor-fab-theme i{font-size:1.1rem;}
+    .editor-fab-theme .fab-text{font-size:0.48rem;}
+}
+
+/* Ocultar botones flotantes si hay modales abiertos */
+body:has(.modal-overlay.open) .editor-fab-save,
+body:has(.modal-overlay.open) .editor-fab-theme,
+body:has(.pe-overlay.open) .editor-fab-save,
+body:has(.pe-overlay.open) .editor-fab-theme,
+body:has(.fps-overlay.open) .editor-fab-save,
+body:has(.fps-overlay.open) .editor-fab-theme,
+body:has(.iu-overlay.open) .editor-fab-save,
+body:has(.iu-overlay.open) .editor-fab-theme,
+body:has(.gh-overlay.open) .editor-fab-save,
+body:has(.gh-overlay.open) .editor-fab-theme,
+body:has(.nav-cfg-overlay.open) .editor-fab-save,
+body:has(.nav-cfg-overlay.open) .editor-fab-theme,
+body:has(.theme-overlay.open) .editor-fab-save,
+body:has(.theme-overlay.open) .editor-fab-theme {
+    opacity:0;
+    pointer-events:none;
+    transform:scale(0.7);
+}
+
+/* Botón tuerca de configuración del menú */
+.nav-cfg-btn{
+    background:rgba(110,129,116,0.12);
+    border:1px dashed var(--cp);
+    color:var(--cp);
+    border-radius:6px;
+    padding:3px 8px;
+    margin-left:8px;
+    font-size:0.85rem;
+    cursor:pointer;
+    transition:all 0.2s ease;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    vertical-align:middle;
+}
+.nav-cfg-btn:hover{
+    background:var(--cp);
+    color:#fff;
+    transform:scale(1.08) rotate(30deg);
+}
+
+/* Dropdown del menú Productos */
+.nav-item-dropdown{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+}
+.nav-item-dropdown .nav-caret{
+    font-size:0.65rem;
+    margin-left:3px;
+    transition:transform 0.2s ease;
+}
+.nav-item-dropdown:hover .nav-caret,
+.nav-item-dropdown.open .nav-caret{
+    transform:rotate(180deg);
+}
+.nav-submenu{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:1.2rem;
+    min-width:175px;
+    background:var(--cl,#faf8f5);
+    border:1px solid rgba(0,0,0,0.08);
+    border-radius:10px;
+    padding:6px 0;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    z-index:1100;
+    animation:fadeInSubmenu 0.2s ease;
+}
+@keyframes fadeInSubmenu{
+    from{opacity:0;transform:translateY(-6px);}
+    to{opacity:1;transform:translateY(0);}
+}
+.nav-item-dropdown:hover .nav-submenu,
+.nav-item-dropdown.open .nav-submenu{
+    display:block;
+}
+.nav-submenu a.nav-sub-link{
+    display:block;
+    margin:0!important;
+    padding:9px 16px!important;
+    font-size:0.88rem!important;
+    color:var(--cd)!important;
+    font-weight:500;
+    transition:background 0.15s, color 0.15s;
+    white-space:nowrap;
+    cursor:pointer;
+}
+.nav-submenu a.nav-sub-link:hover{
+    background:var(--cs);
+    color:var(--cp)!important;
+}
+
+/* Subcatálogo: Barra superior y estado vacío */
+.subcatalog-banner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--cs);
+    border:1px solid rgba(0,0,0,0.06);
+    border-left:4px solid var(--cp);
+    border-radius:10px;
+    padding:1rem 1.4rem;
+    margin:0 0 1.8rem 0;
+    animation:fadeInSubmenu 0.25s ease;
+}
+.subcatalog-banner-info{display:flex;flex-direction:column;gap:2px;}
+.subcatalog-badge{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--cp);}
+.subcatalog-banner h3{margin:0;font-size:1.3rem;color:var(--cd);}
+.subcatalog-clear-btn{
+    background:var(--cl);
+    color:var(--cd);
+    border:1px solid rgba(0,0,0,0.12);
+    border-radius:20px;
+    padding:0.45rem 1rem;
+    font-size:0.84rem;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:all 0.2s ease;
+}
+.subcatalog-clear-btn:hover{background:var(--cp);color:#fff;border-color:var(--cp);}
+
+.subcatalog-empty-state{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:3.5rem 1.5rem;
+    background:var(--cs);
+    border:1px dashed var(--ca);
+    border-radius:14px;
+    margin:1.5rem 0;
+    animation:fadeInSubmenu 0.3s ease;
+}
+.subcatalog-empty-icon{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2rem;
+    color:var(--cp);
+    margin-bottom:1rem;
+}
+.subcatalog-empty-state h3{font-size:1.35rem;color:var(--cd);margin-bottom:0.4rem;}
+.subcatalog-empty-state p{font-size:0.92rem;color:#666;max-width:440px;line-height:1.5;margin-bottom:1.4rem;}
+.subcatalog-empty-btn{
+    background:var(--cp);
+    color:#fff;
+    border:none;
+    border-radius:24px;
+    padding:0.65rem 1.4rem;
+    font-size:0.9rem;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:all 0.2s ease;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+.subcatalog-empty-btn:hover{opacity:0.92;transform:scale(1.03);}
+
+/* Modal: Configuración del menú y temas */
+.nav-cfg-overlay, .theme-overlay{
+    position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(15,23,42,0.65);
+    backdrop-filter:blur(4px);
+    display:none;align-items:center;justify-content:center;
+    z-index:10000;padding:1rem;
+}
+.nav-cfg-overlay.open, .theme-overlay.open{display:flex;animation:fadeInSubmenu 0.2s ease;}
+.nav-cfg-modal, .theme-modal{
+    background:#ffffff;
+    border-radius:16px;
+    width:100%;max-width:540px;
+    max-height:90vh;
+    display:flex;flex-direction:column;
+    box-shadow:0 20px 45px rgba(0,0,0,0.3);
+    overflow:hidden;
+}
+.theme-modal{max-width:680px;}
+.cfg-modal-header{
+    padding:1.2rem 1.5rem;
+    border-bottom:1px solid #f1f5f9;
+    display:flex;align-items:center;justify-content:space-between;
+}
+.cfg-modal-header h3{font-size:1.15rem;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:8px;}
+.cfg-modal-close{
+    background:transparent;border:none;font-size:1.2rem;
+    color:#94a3b8;cursor:pointer;padding:4px 8px;border-radius:6px;
+}
+.cfg-modal-close:hover{background:#f1f5f9;color:#334155;}
+.cfg-modal-body{
+    padding:1.4rem 1.5rem;
+    overflow-y:auto;
+    display:flex;flex-direction:column;gap:1.5rem;
+}
+.cfg-section-title{
+    font-size:0.86rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#64748b;margin-bottom:0.6rem;
+}
+.nav-sort-list{display:flex;flex-direction:column;gap:8px;}
+.nav-sort-item{
+    display:flex;align-items:center;justify-content:space-between;
+    background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;
+    padding:10px 14px;cursor:grab;transition:all 0.2s ease;
+}
+.nav-sort-item:active{cursor:grabbing;}
+.nav-sort-item.dragging{opacity:0.4;background:#e2e8f0;border-style:dashed;}
+.nav-sort-item.drag-over{border-color:var(--cp);background:#f0fdf4;}
+.nav-sort-left{display:flex;align-items:center;gap:10px;}
+.nav-drag-handle{color:#94a3b8;font-size:0.95rem;cursor:grab;}
+.nav-item-label{font-size:0.92rem;font-weight:600;color:#1e293b;}
+.nav-sort-controls{display:flex;align-items:center;gap:4px;}
+.btn-sort-arrow{
+    background:#ffffff;border:1px solid #cbd5e1;color:#475569;
+    width:28px;height:28px;border-radius:6px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;
+    transition:all 0.15s;
+}
+.btn-sort-arrow:hover:not(:disabled){background:#f1f5f9;color:#0f172a;border-color:#94a3b8;}
+.btn-sort-arrow:disabled{opacity:0.3;cursor:not-allowed;}
+
+/* Switch Toggle */
+.switch-control{
+    display:flex;align-items:center;justify-content:space-between;
+    background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;
+}
+.switch-info{display:flex;flex-direction:column;gap:2px;}
+.switch-title{font-size:0.92rem;font-weight:600;color:#1e293b;}
+.switch-desc{font-size:0.76rem;color:#64748b;}
+.switch-btn{position:relative;display:inline-block;width:44px;height:24px;}
+.switch-btn input{opacity:0;width:0;height:0;}
+.switch-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#cbd5e1;transition:.25s;border-radius:24px;}
+.switch-slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background-color:white;transition:.25s;border-radius:50%;}
+input:checked + .switch-slider{background-color:#16a34a;}
+input:checked + .switch-slider:before{transform:translateX(20px);}
+
+/* Subproductos Manager */
+.subprod-manager{
+    background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px;
+    display:flex;flex-direction:column;gap:12px;
+}
+.subprod-list{display:flex;flex-direction:column;gap:6px;}
+.subprod-row{
+    display:flex;align-items:center;justify-content:space-between;
+    background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;
+}
+.subprod-name{font-size:0.88rem;font-weight:600;color:#334155;}
+.subprod-del-btn{background:transparent;border:none;color:#ef4444;cursor:pointer;padding:4px 6px;border-radius:4px;}
+.subprod-del-btn:hover{background:#fee2e2;}
+.add-subprod-row{display:flex;gap:8px;}
+.add-subprod-row input{
+    flex:1;border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;font-size:0.86rem;outline:none;
+}
+.add-subprod-row input:focus{border-color:var(--cp);}
+.btn-add-sub{
+    background:var(--cp);color:#fff;border:none;border-radius:8px;padding:8px 14px;
+    font-size:0.84rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+}
+.btn-add-sub:hover{opacity:0.9;}
+
+.cfg-modal-footer{
+    padding:1rem 1.5rem;border-top:1px solid #f1f5f9;
+    display:flex;align-items:center;justify-content:flex-end;gap:10px;background:#ffffff;
+}
+.btn-cfg-cancel{
+    background:#ffffff;border:1px solid #cbd5e1;color:#475569;
+    padding:8px 16px;border-radius:8px;font-size:0.86rem;font-weight:600;cursor:pointer;
+}
+.btn-cfg-save{
+    background:#1e293b;border:none;color:#ffffff;
+    padding:8px 18px;border-radius:8px;font-size:0.86rem;font-weight:600;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;
+}
+.btn-cfg-save:hover{background:#0f172a;}
+
+/* Modal: Plantillas Temáticas */
+.theme-presets-grid{
+    display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:12px;
+}
+.theme-card{
+    background:#ffffff;border:2px solid #e2e8f0;border-radius:12px;
+    padding:14px;cursor:pointer;transition:all 0.2s ease;
+    display:flex;flex-direction:column;gap:10px;position:relative;
+}
+.theme-card:hover{
+    border-color:#6366f1;transform:translateY(-2px);box-shadow:0 8px 18px rgba(99,102,241,0.12);
+}
+.theme-card.active{
+    border-color:#4f46e5;background:#f5f3ff;
+}
+.theme-card-header{display:flex;align-items:center;justify-content:space-between;}
+.theme-card-title{font-size:0.96rem;font-weight:700;color:#0f172a;display:flex;align-items:center;gap:8px;}
+.theme-active-badge{
+    font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;
+    background:#4f46e5;color:#ffffff;padding:2px 8px;border-radius:12px;
+}
+.theme-swatches{display:flex;align-items:center;gap:6px;}
+.theme-dot{
+    width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,0.12);box-shadow:0 1px 3px rgba(0,0,0,0.1);
+}
+.theme-card-desc{font-size:0.78rem;color:#64748b;line-height:1.4;margin:0;}
+.theme-card-action{margin-top:auto;}
+.theme-card-btn{
+    width:100%;background:#ffffff;border:1px solid #cbd5e1;color:#1e293b;
+    border-radius:8px;padding:7px 10px;font-size:0.82rem;font-weight:600;cursor:pointer;
+    transition:all 0.15s;
+}
+.theme-card.active .theme-card-btn{background:#4f46e5;color:#ffffff;border-color:#4f46e5;}
+.theme-card:hover .theme-card-btn{border-color:#6366f1;color:#4f46e5;}
+
+/* Color Customizer Section */
+.theme-customizer-box{
+    background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;
+    display:flex;flex-direction:column;gap:12px;margin-top:0.5rem;
+}
+.color-picker-row{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));gap:10px;
+}
+.color-picker-item{
+    display:flex;flex-direction:column;gap:4px;
+}
+.color-picker-item label{font-size:0.72rem;font-weight:700;color:#64748b;}
+.color-picker-input-wrap{display:flex;align-items:center;gap:6px;background:#ffffff;border:1px solid #cbd5e1;border-radius:6px;padding:3px 6px;}
+.color-picker-input-wrap input[type="color"]{
+    border:none;width:24px;height:24px;border-radius:4px;cursor:pointer;padding:0;background:transparent;
+}
+.color-picker-hex{font-size:0.75rem;font-family:monospace;color:#334155;}
+
+</style>
+<style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--f);color:var(--cd);background:var(--cl);line-height:1.6;display:flex;flex-direction:column;min-height:100vh;}
 
@@ -1004,7 +1362,11 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 <meta property="og:url" content="https://vibracandela.com/"></head>
 <body class="editor-active" style="">
 
-<!-- BOTÓN FLOTANTE MODO EDITOR -->
+<!-- BOTONES FLOTANTES MODO EDITOR -->
+<button class="editor-fab-theme" id="editorFloatingTheme" onclick="openThemeModal()" title="Plantillas y Temas">
+    <i class="fa-solid fa-palette"></i>
+    <span class="fab-text">Temas</span>
+</button>
 <button class="editor-fab-save" id="editorFloatingSave" onclick="openGhModal()" title="Guardar cambios">
     <i class="fa-solid fa-floppy-disk"></i>
     <span class="fab-text">Guardar</span>
@@ -1020,11 +1382,12 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
     </div>
 
     <!-- Enlaces de texto -->
-    <nav class="nav">
+    <nav class="nav" id="mainNav">
         <a onclick="navigateTo('inicio')" id="nav-inicio" class="active">Inicio</a>
-        <a onclick="navigateTo('productos')" id="nav-productos" class="">Productos</a>
-        <a onclick="navigateTo('acerca')" id="nav-acerca" class="">Acerca de</a>
-        <a onclick="navigateTo('contacto')" id="nav-contacto" class="">Contacto</a>
+        <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos">Productos</a>
+        <a onclick="navigateTo('acerca')" id="nav-acerca">Acerca de</a>
+        <a onclick="navigateTo('contacto')" id="nav-contacto">Contacto</a>
+        <button type="button" class="nav-cfg-btn" id="navCfgBtn" onclick="openNavConfigModal(event)" title="Configurar menú"><i class="fa-solid fa-gear"></i></button>
     </nav>
 
     <!-- Íconos sociales agrupados -->
@@ -1226,6 +1589,25 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
             <p>No encontramos productos que coincidan con tu búsqueda.</p>
             <button type="button" class="catalog-empty-btn" onclick="resetCatalogFilters()">Ver todos los productos</button>
         </div>
+
+        <!-- SUBCATÁLOGO HEADER & ESTADO VACÍO -->
+        <div id="subCatalogBanner" class="subcatalog-banner" style="display: none;">
+            <div class="subcatalog-banner-info">
+                <span class="subcatalog-badge"><i class="fa-solid fa-tag"></i> Sub-categoría</span>
+                <h3 id="subCatalogTitle">Categoría</h3>
+            </div>
+            <button type="button" class="subcatalog-clear-btn" onclick="navigateToSubCatalog(null)">
+                <i class="fa-solid fa-arrow-left"></i> Ver todo el catálogo
+            </button>
+        </div>
+        <div id="subCatalogEmptyState" class="subcatalog-empty-state" style="display: none;">
+            <div class="subcatalog-empty-icon"><i class="fa-solid fa-box-open"></i></div>
+            <h3 id="subCatalogEmptyTitle">Aún no hay productos en esta sección</h3>
+            <p>Estamos preparando nuevos productos exclusivos para esta temporada. ¡Vuelve pronto!</p>
+            <button type="button" class="subcatalog-empty-btn" onclick="navigateToSubCatalog(null)">
+                <i class="fa-solid fa-arrow-left"></i> Volver a todos los productos
+            </button>
+        </div>
         <div class="catalog-grid" id="catalogGrid"><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(1,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
                     <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(1)">
                         <div class="seller-img" style="background-image:url('vibraimgs/Vela_Emilia_con_flores_artesanales.png');"></div>
@@ -1313,6 +1695,12 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
         <h3 id="prodEditTitle">Editar producto</h3>
         <div class="fg"><label>Nombre</label><input type="text" id="pe-name" placeholder="Vela Lavanda"></div>
         <div class="fg"><label>Categoría</label><input type="text" id="pe-cat" placeholder="100% Soya"></div>
+        <div class="fg" id="pe-subproduct-group">
+            <label>Sub-producto / Temporada <span style="font-weight:400;color:#888;">(opcional)</span></label>
+            <select id="pe-subproduct" style="width:100%;padding:0.6rem;border:1px solid #cbd5e1;border-radius:6px;background:#fff;font-size:0.9rem;color:var(--cd);">
+                <option value="">-- Ninguno (Catálogo general) --</option>
+            </select>
+        </div>
 
         <!-- PRECIO (oculto cuando hay variantes) -->
         <div class="fg" id="pe-price-group" style="display: none;">
@@ -1814,6 +2202,122 @@ h2::after{content:'';display:block;width:50px;height:2px;background:var(--ca);ma
 
 <div class="toast" id="toast"></div>
 
+
+<!-- MODAL CONFIGURACIÓN DE MENÚ -->
+<div id="navConfigOverlay" class="nav-cfg-overlay" onclick="closeNavConfigModal(event)">
+    <div class="nav-cfg-modal" onclick="event.stopPropagation()">
+        <div class="cfg-modal-header">
+            <h3><i class="fa-solid fa-bars-staggered" style="color:var(--cp);"></i> Configurar Menú Principal</h3>
+            <button type="button" class="cfg-modal-close" onclick="closeNavConfigModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cfg-modal-body">
+            <div>
+                <div class="cfg-section-title">Reorganizar orden de navegación</div>
+                <p style="font-size:0.8rem;color:#64748b;margin-bottom:0.75rem;">Arrastra los elementos o usa las flechas para definir el orden en la barra superior.</p>
+                <div class="nav-sort-list" id="navSortList">
+                    <!-- Elementos generados dinámicamente -->
+                </div>
+            </div>
+
+            <div class="switch-control">
+                <div class="switch-info">
+                    <span class="switch-title">Activar sub-productos</span>
+                    <span class="switch-desc">Permite desplegar un submenú bajo "Productos" para temporadas especiales.</span>
+                </div>
+                <label class="switch-btn">
+                    <input type="checkbox" id="navSubProductsToggle" onchange="toggleSubProductsConfig(this.checked)">
+                    <span class="switch-slider"></span>
+                </label>
+            </div>
+
+            <div class="subprod-manager" id="subProductsManager" style="display: none;">
+                <div class="cfg-section-title" style="margin-bottom:0.3rem;">Gestionar sub-categorías / temporadas</div>
+                <p style="font-size:0.78rem;color:#64748b;margin-bottom:0.6rem;">Cada sub-producto tendrá su propio filtro en el menú desplegable.</p>
+                <div class="subprod-list" id="subProductsList">
+                    <!-- Lista de subproductos -->
+                </div>
+                <div class="add-subprod-row">
+                    <input type="text" id="newSubProdInput" placeholder="Ej. Halloween, Navidad, etc." onkeydown="if(event.key==='Enter'){event.preventDefault();addNewSubProduct();}">
+                    <button type="button" class="btn-add-sub" onclick="addNewSubProduct()"><i class="fa-solid fa-plus"></i> Agregar</button>
+                </div>
+            </div>
+        </div>
+        <div class="cfg-modal-footer">
+            <button type="button" class="btn-cfg-cancel" onclick="closeNavConfigModal()">Cancelar</button>
+            <button type="button" class="btn-cfg-save" onclick="saveNavConfig()"><i class="fa-solid fa-check"></i> Aplicar al menú</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PLANTILLAS TEMÁTICAS -->
+<div id="themePresetsOverlay" class="theme-overlay" onclick="closeThemeModal(event)">
+    <div class="theme-modal" onclick="event.stopPropagation()">
+        <div class="cfg-modal-header">
+            <h3><i class="fa-solid fa-palette" style="color:#4f46e5;"></i> Plantillas Temáticas y Estilos</h3>
+            <button type="button" class="cfg-modal-close" onclick="closeThemeModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cfg-modal-body">
+            <div>
+                <div class="cfg-section-title">Elige una plantilla temática</div>
+                <p style="font-size:0.8rem;color:#64748b;margin-bottom:0.75rem;">Aplica una combinación armónica de colores diseñada especialmente para cada época del año.</p>
+                <div class="theme-presets-grid" id="themePresetsGrid">
+                    <!-- Tarjetas de presets generadas dinámicamente -->
+                </div>
+            </div>
+
+            <div class="theme-customizer-box">
+                <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="toggleCustomizerColors()">
+                    <span style="font-size:0.86rem;font-weight:700;color:#1e293b;"><i class="fa-solid fa-sliders" style="margin-right:6px;color:#6366f1;"></i> Personalizar paleta de colores activa</span>
+                    <i class="fa-solid fa-chevron-down" id="customizerArrow" style="font-size:0.8rem;color:#64748b;transition:transform 0.2s;"></i>
+                </div>
+                <div id="customizerBody" style="display:none;margin-top:0.6rem;">
+                    <p style="font-size:0.78rem;color:#64748b;margin-bottom:0.8rem;">Puedes modificar los valores individuales para adaptarlos a tu gusto exacto:</p>
+                    <div class="color-picker-row">
+                        <div class="color-picker-item">
+                            <label>Primario (--cp)</label>
+                            <div class="color-picker-input-wrap">
+                                <input type="color" id="themeColorCp" onchange="updateThemeCustomVar('--cp', this.value)">
+                                <span class="color-picker-hex" id="hexCp">#6e8174</span>
+                            </div>
+                        </div>
+                        <div class="color-picker-item">
+                            <label>Secundario (--cs)</label>
+                            <div class="color-picker-input-wrap">
+                                <input type="color" id="themeColorCs" onchange="updateThemeCustomVar('--cs', this.value)">
+                                <span class="color-picker-hex" id="hexCs">#f4eee6</span>
+                            </div>
+                        </div>
+                        <div class="color-picker-item">
+                            <label>Acento (--ca)</label>
+                            <div class="color-picker-input-wrap">
+                                <input type="color" id="themeColorCa" onchange="updateThemeCustomVar('--ca', this.value)">
+                                <span class="color-picker-hex" id="hexCa">#d9c3b0</span>
+                            </div>
+                        </div>
+                        <div class="color-picker-item">
+                            <label>Texto (--cd)</label>
+                            <div class="color-picker-input-wrap">
+                                <input type="color" id="themeColorCd" onchange="updateThemeCustomVar('--cd', this.value)">
+                                <span class="color-picker-hex" id="hexCd">#333333</span>
+                            </div>
+                        </div>
+                        <div class="color-picker-item">
+                            <label>Fondo (--cl)</label>
+                            <div class="color-picker-input-wrap">
+                                <input type="color" id="themeColorCl" onchange="updateThemeCustomVar('--cl', this.value)">
+                                <span class="color-picker-hex" id="hexCl">#faf8f5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cfg-modal-footer">
+            <button type="button" class="btn-cfg-save" onclick="closeThemeModal()"><i class="fa-solid fa-check"></i> Listo</button>
+        </div>
+    </div>
+</div>
+
 <script>
 // ============================================================
 // ESTADO GLOBAL
@@ -1831,6 +2335,454 @@ let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25a
 let activeGhToken = "";
 
 // ============================================================
+// FASE 2: PLANTILLAS TEMÁTICAS Y ESTILOS
+// ============================================================
+const THEME_PRESETS = {
+    default: {
+        id: 'default',
+        name: 'Default (Actual)',
+        icon: '🌿',
+        desc: 'Verde salvia artesanal y tonos neutros cálidos y luminosos',
+        vars: {
+            '--cp': '#6e8174',
+            '--cs': '#f4eee6',
+            '--ca': '#d9c3b0',
+            '--cd': '#333333',
+            '--cl': '#faf8f5'
+        }
+    },
+    halloween: {
+        id: 'halloween',
+        name: 'Halloween',
+        icon: '🎃',
+        desc: 'Naranja calabaza vibrante, violeta nocturno y carbón místico',
+        vars: {
+            '--cp': '#e65c00',
+            '--cs': '#23182b',
+            '--ca': '#9b51e0',
+            '--cd': '#1c1520',
+            '--cl': '#faf5f0'
+        }
+    },
+    navidad: {
+        id: 'navidad',
+        name: 'Navidad',
+        icon: '🎄',
+        desc: 'Verde pino tradicional, rojo cereza festivo y acentos dorados',
+        vars: {
+            '--cp': '#165b33',
+            '--cs': '#faecee',
+            '--ca': '#d4af37',
+            '--cd': '#222222',
+            '--cl': '#faf7f2'
+        }
+    },
+    flores_amarillas: {
+        id: 'flores_amarillas',
+        name: 'Flores Amarillas',
+        icon: '🌻',
+        desc: 'Amarillo girasol radiante, crema miel y sutil verde primavera',
+        vars: {
+            '--cp': '#d49e1e',
+            '--cs': '#fff9e6',
+            '--ca': '#7da376',
+            '--cd': '#382e1e',
+            '--cl': '#fdfbf4'
+        }
+    },
+    san_valentin: {
+        id: 'san_valentin',
+        name: 'San Valentín',
+        icon: '💖',
+        desc: 'Rosa frambuesa romántico, rubor pastel y vino aterciopelado',
+        vars: {
+            '--cp': '#c25975',
+            '--cs': '#faeef1',
+            '--ca': '#8e2848',
+            '--cd': '#2d1a22',
+            '--cl': '#fffafa'
+        }
+    },
+    fiestas_patrias: {
+        id: 'fiestas_patrias',
+        name: 'Fiestas Patrias (Perú)',
+        icon: '🇵🇪',
+        desc: 'Rojo bandera artesanal, crema marfil andino y detalles dorados',
+        vars: {
+            '--cp': '#c61d23',
+            '--cs': '#fdf0f1',
+            '--ca': '#d4af37',
+            '--cd': '#2b2020',
+            '--cl': '#faf6f3'
+        }
+    }
+};
+
+let themeState = {
+    activePreset: 'default',
+    vars: {
+        '--cp': '#6e8174',
+        '--cs': '#f4eee6',
+        '--ca': '#d9c3b0',
+        '--cd': '#333333',
+        '--cl': '#faf8f5'
+    }
+};
+
+let navState = {
+    items: [
+        { id: 'inicio', label: 'Inicio', target: 'inicio' },
+        { id: 'productos', label: 'Productos', target: 'productos' },
+        { id: 'acerca', label: 'Acerca de', target: 'acerca' },
+        { id: 'contacto', label: 'Contacto', target: 'contacto' }
+    ],
+    subProductsEnabled: false,
+    subProducts: [
+        { id: 'halloween', name: 'Halloween' },
+        { id: 'navidad', name: 'Navidad' }
+    ]
+};
+
+let currentSubCatalog = null;
+
+function applyTheme(presetIdOrVars, saveState = true) {
+    let varsToApply = {};
+    if (typeof presetIdOrVars === 'string') {
+        const p = THEME_PRESETS[presetIdOrVars] || THEME_PRESETS.default;
+        themeState.activePreset = p.id;
+        themeState.vars = { ...p.vars };
+        varsToApply = themeState.vars;
+    } else if (presetIdOrVars && typeof presetIdOrVars === 'object') {
+        themeState.vars = { ...themeState.vars, ...presetIdOrVars };
+        varsToApply = themeState.vars;
+    }
+
+    for (const [k, v] of Object.entries(varsToApply)) {
+        document.documentElement.style.setProperty(k, v);
+    }
+    const dynamicStyle = document.getElementById('dynamic-theme-vars');
+    if (dynamicStyle) {
+        dynamicStyle.textContent = `:root{--cp:${themeState.vars['--cp']};--cs:${themeState.vars['--cs']};--ca:${themeState.vars['--ca']};--cd:${themeState.vars['--cd']};--cl:${themeState.vars['--cl']};--f:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}`;
+    }
+    updateThemeCustomizerInputs();
+    renderThemePresetsGrid();
+}
+
+function updateThemeCustomizerInputs() {
+    const cp = document.getElementById('themeColorCp');
+    const cs = document.getElementById('themeColorCs');
+    const ca = document.getElementById('themeColorCa');
+    const cd = document.getElementById('themeColorCd');
+    const cl = document.getElementById('themeColorCl');
+    if (cp && themeState.vars['--cp']) { cp.value = themeState.vars['--cp']; const h = document.getElementById('hexCp'); if (h) h.textContent = themeState.vars['--cp']; }
+    if (cs && themeState.vars['--cs']) { cs.value = themeState.vars['--cs']; const h = document.getElementById('hexCs'); if (h) h.textContent = themeState.vars['--cs']; }
+    if (ca && themeState.vars['--ca']) { ca.value = themeState.vars['--ca']; const h = document.getElementById('hexCa'); if (h) h.textContent = themeState.vars['--ca']; }
+    if (cd && themeState.vars['--cd']) { cd.value = themeState.vars['--cd']; const h = document.getElementById('hexCd'); if (h) h.textContent = themeState.vars['--cd']; }
+    if (cl && themeState.vars['--cl']) { cl.value = themeState.vars['--cl']; const h = document.getElementById('hexCl'); if (h) h.textContent = themeState.vars['--cl']; }
+}
+
+function updateThemeCustomVar(prop, val) {
+    themeState.vars[prop] = val;
+    themeState.activePreset = 'custom';
+    document.documentElement.style.setProperty(prop, val);
+    const dynamicStyle = document.getElementById('dynamic-theme-vars');
+    if (dynamicStyle) {
+        dynamicStyle.textContent = `:root{--cp:${themeState.vars['--cp']};--cs:${themeState.vars['--cs']};--ca:${themeState.vars['--ca']};--cd:${themeState.vars['--cd']};--cl:${themeState.vars['--cl']};--f:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}`;
+    }
+    updateThemeCustomizerInputs();
+    renderThemePresetsGrid();
+}
+
+function renderThemePresetsGrid() {
+    const grid = document.getElementById('themePresetsGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    Object.values(THEME_PRESETS).forEach(p => {
+        const isActive = themeState.activePreset === p.id;
+        const card = document.createElement('div');
+        card.className = 'theme-card' + (isActive ? ' active' : '');
+        card.onclick = () => selectThemePreset(p.id);
+        card.innerHTML = `
+            <div class="theme-card-header">
+                <span class="theme-card-title">${p.icon} ${esc(p.name)}</span>
+                ${isActive ? '<span class="theme-active-badge">Activo</span>' : ''}
+            </div>
+            <p class="theme-card-desc">${esc(p.desc)}</p>
+            <div class="theme-swatches">
+                <div class="theme-dot" style="background:${p.vars['--cp']};" title="Primario (${p.vars['--cp']})"></div>
+                <div class="theme-dot" style="background:${p.vars['--cs']};" title="Secundario (${p.vars['--cs']})"></div>
+                <div class="theme-dot" style="background:${p.vars['--ca']};" title="Acento (${p.vars['--ca']})"></div>
+                <div class="theme-dot" style="background:${p.vars['--cd']};" title="Texto (${p.vars['--cd']})"></div>
+                <div class="theme-dot" style="background:${p.vars['--cl']};" title="Fondo (${p.vars['--cl']})"></div>
+            </div>
+            <div class="theme-card-action">
+                <button type="button" class="theme-card-btn">${isActive ? '✓ Seleccionada' : 'Aplicar plantilla'}</button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function selectThemePreset(presetId) {
+    applyTheme(presetId);
+    const p = THEME_PRESETS[presetId];
+    if (p) showToast('🎨 Plantilla "' + p.name + '" aplicada.');
+}
+
+function openThemeModal() {
+    renderThemePresetsGrid();
+    updateThemeCustomizerInputs();
+    document.getElementById('themePresetsOverlay').classList.add('open');
+}
+
+function closeThemeModal(e) {
+    if (e && e.target !== document.getElementById('themePresetsOverlay')) return;
+    document.getElementById('themePresetsOverlay').classList.remove('open');
+}
+
+function toggleCustomizerColors() {
+    const b = document.getElementById('customizerBody');
+    const arr = document.getElementById('customizerArrow');
+    if (!b) return;
+    if (b.style.display === 'none') {
+        b.style.display = 'block';
+        if (arr) arr.style.transform = 'rotate(180deg)';
+    } else {
+        b.style.display = 'none';
+        if (arr) arr.style.transform = 'rotate(0deg)';
+    }
+}
+
+// ============================================================
+// FASE 2: NAVEGACIÓN CONFIGURABLE & SUBPRODUCTOS
+// ============================================================
+
+function renderNav(isClean = false) {
+    const nav = document.getElementById('mainNav');
+    if (!nav) return;
+    nav.innerHTML = '';
+
+    navState.items.forEach(item => {
+        if (item.id === 'productos' && navState.subProductsEnabled && navState.subProducts && navState.subProducts.length > 0) {
+            const dropdown = document.createElement('div');
+            dropdown.className = 'nav-item-dropdown';
+            dropdown.id = 'navItemDropdown-productos';
+            dropdown.innerHTML = `
+                <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos">
+                    ${esc(item.label)} <i class="fa-solid fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-submenu" id="navSubmenu-productos">
+                    ${navState.subProducts.map(sub => `
+                        <a class="nav-sub-link" onclick="navigateToSubCatalog('${escA(sub.id)}')">${esc(sub.name)}</a>
+                    `).join('')}
+                </div>
+            `;
+            nav.appendChild(dropdown);
+        } else {
+            const a = document.createElement('a');
+            a.id = 'nav-' + item.id;
+            a.onclick = () => {
+                navigateTo(item.target);
+                if (item.id === 'productos') navigateToSubCatalog(null);
+            };
+            a.textContent = item.label;
+            nav.appendChild(a);
+        }
+
+        if (!isClean && item.id === 'contacto') {
+            const cfgBtn = document.createElement('button');
+            cfgBtn.type = 'button';
+            cfgBtn.className = 'nav-cfg-btn';
+            cfgBtn.id = 'navCfgBtn';
+            cfgBtn.title = 'Configurar menú';
+            cfgBtn.onclick = (e) => { e.stopPropagation(); openNavConfigModal(e); };
+            cfgBtn.innerHTML = '<i class="fa-solid fa-gear"></i>';
+            nav.appendChild(cfgBtn);
+        }
+    });
+
+    if (!isClean && !nav.querySelector('#navCfgBtn')) {
+        const cfgBtn = document.createElement('button');
+        cfgBtn.type = 'button';
+        cfgBtn.className = 'nav-cfg-btn';
+        cfgBtn.id = 'navCfgBtn';
+        cfgBtn.title = 'Configurar menú';
+        cfgBtn.onclick = (e) => { e.stopPropagation(); openNavConfigModal(e); };
+        cfgBtn.innerHTML = '<i class="fa-solid fa-gear"></i>';
+        nav.appendChild(cfgBtn);
+    }
+}
+
+let tempNavItems = [];
+let tempSubProducts = [];
+
+function openNavConfigModal(e) {
+    if (e) e.stopPropagation();
+    tempNavItems = JSON.parse(JSON.stringify(navState.items));
+    tempSubProducts = JSON.parse(JSON.stringify(navState.subProducts || []));
+    const toggle = document.getElementById('navSubProductsToggle');
+    if (toggle) toggle.checked = !!navState.subProductsEnabled;
+    toggleSubProductsConfig(!!navState.subProductsEnabled);
+    renderNavSortList();
+    renderSubProductsList();
+    document.getElementById('navConfigOverlay').classList.add('open');
+}
+
+function closeNavConfigModal(e) {
+    if (e && e.target !== document.getElementById('navConfigOverlay')) return;
+    document.getElementById('navConfigOverlay').classList.remove('open');
+}
+
+function toggleSubProductsConfig(enabled) {
+    const box = document.getElementById('subProductsManager');
+    if (box) box.style.display = enabled ? 'flex' : 'none';
+}
+
+function renderNavSortList() {
+    const list = document.getElementById('navSortList');
+    if (!list) return;
+    list.innerHTML = '';
+
+    tempNavItems.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = 'nav-sort-item';
+        row.draggable = true;
+        row.dataset.index = index;
+
+        row.innerHTML = `
+            <div class="nav-sort-left">
+                <i class="fa-solid fa-grip-vertical nav-drag-handle"></i>
+                <span class="nav-item-label">${esc(item.label)}</span>
+            </div>
+            <div class="nav-sort-controls">
+                <button type="button" class="btn-sort-arrow" onclick="moveNavItemUp(${index})" ${index === 0 ? 'disabled' : ''} title="Subir">▲</button>
+                <button type="button" class="btn-sort-arrow" onclick="moveNavItemDown(${index})" ${index === tempNavItems.length - 1 ? 'disabled' : ''} title="Bajar">▼</button>
+            </div>
+        `;
+
+        row.addEventListener('dragstart', handleNavDragStart);
+        row.addEventListener('dragover', handleNavDragOver);
+        row.addEventListener('dragleave', handleNavDragLeave);
+        row.addEventListener('drop', handleNavDrop);
+        row.addEventListener('dragend', handleNavDragEnd);
+
+        list.appendChild(row);
+    });
+}
+
+let draggedNavIndex = null;
+function handleNavDragStart(e) {
+    draggedNavIndex = parseInt(this.dataset.index, 10);
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+}
+function handleNavDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    this.classList.add('drag-over');
+}
+function handleNavDragLeave() {
+    this.classList.remove('drag-over');
+}
+function handleNavDrop(e) {
+    e.preventDefault();
+    this.classList.remove('drag-over');
+    const targetIndex = parseInt(this.dataset.index, 10);
+    if (draggedNavIndex !== null && draggedNavIndex !== targetIndex) {
+        const movedItem = tempNavItems.splice(draggedNavIndex, 1)[0];
+        tempNavItems.splice(targetIndex, 0, movedItem);
+        renderNavSortList();
+    }
+}
+function handleNavDragEnd() {
+    this.classList.remove('dragging');
+    draggedNavIndex = null;
+    document.querySelectorAll('.nav-sort-item').forEach(el => el.classList.remove('drag-over'));
+}
+
+function moveNavItemUp(idx) {
+    if (idx > 0) {
+        const item = tempNavItems.splice(idx, 1)[0];
+        tempNavItems.splice(idx - 1, 0, item);
+        renderNavSortList();
+    }
+}
+function moveNavItemDown(idx) {
+    if (idx < tempNavItems.length - 1) {
+        const item = tempNavItems.splice(idx, 1)[0];
+        tempNavItems.splice(idx + 1, 0, item);
+        renderNavSortList();
+    }
+}
+
+function renderSubProductsList() {
+    const list = document.getElementById('subProductsList');
+    if (!list) return;
+    list.innerHTML = '';
+    if (tempSubProducts.length === 0) {
+        list.innerHTML = '<div style="font-size:0.8rem;color:#94a3b8;font-style:italic;padding:4px 0;">No hay sub-productos registrados.</div>';
+        return;
+    }
+    tempSubProducts.forEach((sub, idx) => {
+        const row = document.createElement('div');
+        row.className = 'subprod-row';
+        row.innerHTML = `
+            <span class="subprod-name"><i class="fa-solid fa-tag" style="color:var(--cp);margin-right:6px;font-size:0.78rem;"></i> ${esc(sub.name)}</span>
+            <button type="button" class="subprod-del-btn" onclick="removeSubProduct(${idx})" title="Eliminar sub-producto"><i class="fa-solid fa-trash-can"></i></button>
+        `;
+        list.appendChild(row);
+    });
+}
+
+function addNewSubProduct() {
+    const input = document.getElementById('newSubProdInput');
+    const val = (input ? input.value : '').trim();
+    if (!val) return;
+    const slug = val.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (tempSubProducts.some(s => s.id === slug || s.name.toLowerCase() === val.toLowerCase())) {
+        showToast('Ese sub-producto ya está registrado.');
+        return;
+    }
+    tempSubProducts.push({ id: slug, name: val });
+    if (input) input.value = '';
+    renderSubProductsList();
+}
+
+function removeSubProduct(idx) {
+    tempSubProducts.splice(idx, 1);
+    renderSubProductsList();
+}
+
+function saveNavConfig() {
+    navState.items = tempNavItems;
+    navState.subProductsEnabled = document.getElementById('navSubProductsToggle').checked;
+    navState.subProducts = tempSubProducts;
+    renderNav();
+    closeNavConfigModal();
+    showToast('✅ Menú actualizado con éxito.');
+}
+
+function navigateToSubCatalog(subId) {
+    currentSubCatalog = subId;
+    navigateTo('productos');
+    const banner = document.getElementById('subCatalogBanner');
+    const titleEl = document.getElementById('subCatalogTitle');
+    const toolbar = document.querySelector('.catalog-toolbar');
+
+    if (subId) {
+        const subObj = (navState.subProducts || []).find(s => s.id === subId) || { name: subId };
+        if (titleEl) titleEl.textContent = subObj.name;
+        if (banner) banner.style.display = 'flex';
+        if (toolbar) toolbar.style.display = 'none';
+    } else {
+        if (banner) banner.style.display = 'none';
+        if (toolbar) toolbar.style.display = '';
+    }
+    renderProducts();
+}
+
+
+// ============================================================
 // NAV
 // ============================================================
 function navigateTo(p){
@@ -1838,6 +2790,15 @@ function navigateTo(p){
     document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));
     var pg=document.getElementById('page-'+p); if(pg)pg.classList.add('active');
     var lk=document.getElementById('nav-'+p); if(lk)lk.classList.add('active');
+    if (p !== 'productos') {
+        currentSubCatalog = null;
+        const banner = document.getElementById('subCatalogBanner');
+        const emptyState = document.getElementById('subCatalogEmptyState');
+        const toolbar = document.querySelector('.catalog-toolbar');
+        if (banner) banner.style.display = 'none';
+        if (emptyState) emptyState.style.display = 'none';
+        if (toolbar) toolbar.style.display = '';
+    }
     window.scrollTo(0,0);
 }
 
@@ -1928,10 +2889,18 @@ function renderProducts(){
     renderCategoryPills();
     const g = document.getElementById('catalogGrid');
     const emptyMsg = document.getElementById('catalogEmptyMsg');
+    const emptyState = document.getElementById('subCatalogEmptyState');
+    const emptyTitle = document.getElementById('subCatalogEmptyTitle');
     if (!g) return;
     g.innerHTML = '';
 
     let filtered = products.filter(p => {
+        if (currentSubCatalog) {
+            const matchSub = (p.subProduct && p.subProduct === currentSubCatalog) ||
+                             (p.cat && p.cat.toLowerCase().includes(currentSubCatalog.toLowerCase())) ||
+                             (p.name && p.name.toLowerCase().includes(currentSubCatalog.toLowerCase()));
+            return matchSub;
+        }
         if (currentCatalogCategory !== 'all' && (p.cat || '').trim().toLowerCase() !== currentCatalogCategory.toLowerCase()) {
             return false;
         }
@@ -1948,23 +2917,33 @@ function renderProducts(){
         return aSold - bSold;
     });
 
-    if (filtered.length === 0) {
-        if (emptyMsg) emptyMsg.style.display = 'block';
-    } else {
+    if (currentSubCatalog && filtered.length === 0) {
         if (emptyMsg) emptyMsg.style.display = 'none';
-        filtered.forEach(p => {
-            const w = document.createElement('div');
-            w.className = 'seller-card-wrapper';
-            const isSold = !!p.soldOut;
-            w.innerHTML = `<button class="card-edt" onclick="openProdEdit(${p.id},event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-            <div class="seller-card ${isSold ? 'is-sold-out' : ''}" id="product-card-${p.id}" data-product-id="${p.id}" style="cursor:pointer;" onclick="openProductModal(${p.id})">
-                ${isSold ? '<span class="badge-sold-out">Agotado</span>' : ''}
-                <div class="seller-img" style="background-image:${getProductImg(p)?'url(\''+esc(getProductImg(p))+'\')':'none'};"></div>
-                <div class="seller-info"><h3>${esc(p.name)}</h3><p>${esc(p.shortDesc)}</p>
-                <div class="seller-meta"><span class="price">${esc(getProductPriceLabel(p))}</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
-            </div>`;
-            g.appendChild(w);
-        });
+        if (emptyState) {
+            const subObj = (navState.subProducts || []).find(s => s.id === currentSubCatalog) || { name: currentSubCatalog };
+            if (emptyTitle) emptyTitle.textContent = 'Catálogo ' + subObj.name;
+            emptyState.style.display = 'flex';
+        }
+    } else {
+        if (emptyState) emptyState.style.display = 'none';
+        if (filtered.length === 0) {
+            if (emptyMsg) emptyMsg.style.display = 'block';
+        } else {
+            if (emptyMsg) emptyMsg.style.display = 'none';
+            filtered.forEach(p => {
+                const w = document.createElement('div');
+                w.className = 'seller-card-wrapper';
+                const isSold = !!p.soldOut;
+                w.innerHTML = `<button class="card-edt" onclick="openProdEdit(${p.id},event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                <div class="seller-card ${isSold ? 'is-sold-out' : ''}" id="product-card-${p.id}" data-product-id="${p.id}" style="cursor:pointer;" onclick="openProductModal(${p.id})">
+                    ${isSold ? '<span class="badge-sold-out">Agotado</span>' : ''}
+                    <div class="seller-img" style="background-image:${getProductImg(p)?'url(\''+esc(getProductImg(p))+'\')':'none'};"></div>
+                    <div class="seller-info"><h3>${esc(p.name)}</h3><p>${esc(p.shortDesc)}</p>
+                    <div class="seller-meta"><span class="price">${esc(getProductPriceLabel(p))}</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+                </div>`;
+                g.appendChild(w);
+            });
+        }
     }
 
     const a = document.createElement('div');
@@ -2332,6 +3311,23 @@ function openProdEdit(id,e){
     document.getElementById('pe-short').value=p.shortDesc||'';
     document.getElementById('pe-long').value=p.longDesc||'';
     document.getElementById('peSoldOutCheck').checked=!!p.soldOut;
+
+    // Sub-producto selector
+    const peSubSelect = document.getElementById('pe-subproduct');
+    if (peSubSelect) {
+        peSubSelect.innerHTML = '<option value="">-- Ninguno (Catálogo general) --</option>';
+        if (navState && navState.subProducts && navState.subProducts.length > 0) {
+            navState.subProducts.forEach(sp => {
+                const opt = document.createElement('option');
+                opt.value = sp.id;
+                opt.textContent = sp.name;
+                if (p.subProduct === sp.id || (!p.subProduct && currentSubCatalog === sp.id)) {
+                    opt.selected = true;
+                }
+                peSubSelect.appendChild(opt);
+            });
+        }
+    }
     const peImgField=document.getElementById('pe-img');
     peImgField.value=p.img||'';
     // Restaurar dataURL: del producto guardado, o de uploadedImages si la ruta existe
@@ -2389,7 +3385,8 @@ function applyProductEdit(){
     }
 
     const soldOut=document.getElementById('peSoldOutCheck').checked;
-    const data={name,cat:document.getElementById('pe-cat').value.trim(),price:useVariants?'':formatPrice(document.getElementById('pe-price').value.trim()),shortDesc:document.getElementById('pe-short').value.trim(),longDesc:document.getElementById('pe-long').value.trim(),soldOut,img:useVariants?'':imgVal,imgData:useVariants?'':imgData,variants:variants};
+    const subProductVal=document.getElementById('pe-subproduct')?document.getElementById('pe-subproduct').value.trim():'';
+    const data={name,cat:document.getElementById('pe-cat').value.trim(),subProduct:subProductVal,price:useVariants?'':formatPrice(document.getElementById('pe-price').value.trim()),shortDesc:document.getElementById('pe-short').value.trim(),longDesc:document.getElementById('pe-long').value.trim(),soldOut,img:useVariants?'':imgVal,imgData:useVariants?'':imgData,variants:variants};
     if(editingProductId===null){products.push({id:nextId++,...data});showToast('✅ Producto agregado.');}
     else{Object.assign(products.find(x=>x.id===editingProductId),data);showToast('✅ Producto actualizado.');}
     closeProdEditDirect();renderProducts();
@@ -4056,6 +5053,10 @@ async function runGhPublish() {
             cleanHeroState.publishUrl = cleanHeroUrl;
             delete cleanHeroState._uploadDataUrl;
 
+            const themeStyleClone = clone.querySelector('#dynamic-theme-vars');
+            if (themeStyleClone) {
+                themeStyleClone.textContent = `:root{--cp:${themeState.vars['--cp']};--cs:${themeState.vars['--cs']};--ca:${themeState.vars['--ca']};--cd:${themeState.vars['--cd']};--cl:${themeState.vars['--cl']};--f:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}`;
+            }
             const heroBg = clone.querySelector('#heroBgImg');
             if (heroBg) {
                 heroBg.style.backgroundImage = cleanHeroUrl ? "url('" + cleanHeroUrl + "')" : 'none';
@@ -4082,10 +5083,12 @@ async function runGhPublish() {
             clone.querySelectorAll('script').forEach(s => {
                 if (s.textContent.includes('let products=')) {
                     s.textContent = s.textContent
-                        .replace(/let products=\[[\s\S]*?\];/, 'let products=' + JSON.stringify(cleanProducts) + ';')
+                        .replace(/let products=\[[\s\S]*?\;/, 'let products=' + JSON.stringify(cleanProducts) + ';')
                         .replace(/let nextId=\d+;/, 'let nextId=' + nextId + ';')
                         .replace(/let logoState\s*=\s*\{[\s\S]*?\};/, 'let logoState=' + JSON.stringify(logoState) + ';')
                         .replace(/let heroState\s*=\s*\{[\s\S]*?\};/, 'let heroState=' + JSON.stringify(cleanHeroState) + ';')
+                        .replace(/let navState\s*=\s*\{[\s\S]*?\};/, 'let navState=' + JSON.stringify(navState) + ';')
+                        .replace(/let themeState\s*=\s*\{[\s\S]*?\};/, 'let themeState=' + JSON.stringify(themeState) + ';')
                         .replace(/(?:const|let) uploadedImages\s*=\s*\{[\s\S]*?\};/, 'const uploadedImages = {};')
                         .replace(/let ghEncryptedToken\s*=\s*".*?";/, 'let ghEncryptedToken = ' + JSON.stringify(encryptedTokenStr) + ';')
                         .replace(/let ghSavedRepo\s*=\s*".*?";/, 'let ghSavedRepo = ' + JSON.stringify(repo) + ';')
@@ -4177,14 +5180,380 @@ async function runGhPublish() {
 }
 
 // ── Genera el HTML limpio (igual que saveClean pero devuelve string) ──
+
+function generatePublicScript(cleanProductsData, navState) {
+    return 'let products = ' + JSON.stringify(cleanProductsData) + ';\n' +
+        'let navState = ' + JSON.stringify(navState) + ';\n' +
+        'let currentSubCatalog = null;\n\n' +
+        'const WA_NUMBER = "51926997276";\n\n' +
+        'function navigateTo(p){\n' +
+        '    document.querySelectorAll(".page").forEach(x => x.classList.remove("active"));\n' +
+        '    document.querySelectorAll(".nav a").forEach(x => x.classList.remove("active"));\n' +
+        '    var pg = document.getElementById("page-" + p); if(pg) pg.classList.add("active");\n' +
+        '    var lk = document.getElementById("nav-" + p); if(lk) lk.classList.add("active");\n' +
+        '    if (p !== "productos") {\n' +
+        '        currentSubCatalog = null;\n' +
+        '        var banner = document.getElementById("subCatalogBanner");\n' +
+        '        var emptyState = document.getElementById("subCatalogEmptyState");\n' +
+        '        var toolbar = document.querySelector(".catalog-toolbar");\n' +
+        '        if (banner) banner.style.display = "none";\n' +
+        '        if (emptyState) emptyState.style.display = "none";\n' +
+        '        if (toolbar) toolbar.style.display = "";\n' +
+        '    }\n' +
+        '    window.scrollTo(0,0);\n' +
+        '}\n\n' +
+        'function navigateToSubCatalog(subId){\n' +
+        '    currentSubCatalog = subId;\n' +
+        '    navigateTo("productos");\n' +
+        '    var banner = document.getElementById("subCatalogBanner");\n' +
+        '    var titleEl = document.getElementById("subCatalogTitle");\n' +
+        '    var toolbar = document.querySelector(".catalog-toolbar");\n' +
+        '    if (subId) {\n' +
+        '        var subObj = (navState.subProducts || []).find(function(s){ return s.id === subId; }) || { name: subId };\n' +
+        '        if (titleEl) titleEl.textContent = subObj.name;\n' +
+        '        if (banner) banner.style.display = "flex";\n' +
+        '        if (toolbar) toolbar.style.display = "none";\n' +
+        '    } else {\n' +
+        '        if (banner) banner.style.display = "none";\n' +
+        '        if (toolbar) toolbar.style.display = "";\n' +
+        '    }\n' +
+        '    renderProducts();\n' +
+        '}\n\n' +
+        'function getProductImg(p){\n' +
+        '    if(p.variants && p.variants.length > 0){\n' +
+        '        return p.variants[0].img || p.img || "";\n' +
+        '    }\n' +
+        '    return p.img || "";\n' +
+        '}\n\n' +
+        'function formatPrice(val){\n' +
+        '    if(val === null || val === undefined) return "";\n' +
+        '    let s = val.toString().trim();\n' +
+        '    if(!s) return "";\n' +
+        '    let clean = s.replace(/^[sS]\\/?\\.?\\s*/i, "").replace(/\\s*[sS]\\/?\\.?$/i, "").trim().replace(",", ".");\n' +
+        '    if(!clean) return "";\n' +
+        '    let num = parseFloat(clean);\n' +
+        '    if(!isNaN(num)){\n' +
+        '        let formatted = clean.includes(".") ? num.toFixed(2) : clean;\n' +
+        '        return "S/. " + formatted;\n' +
+        '    }\n' +
+        '    return clean ? "S/. " + clean : s;\n' +
+        '}\n\n' +
+        'function getProductPriceLabel(p){\n' +
+        '    if(p.variants && p.variants.length > 0){\n' +
+        '        const prices = p.variants.map(v => {\n' +
+        '            let s = (v.price || "0").toString();\n' +
+        '            let clean = s.replace(/^[sS]\\/?\\.?\\s*/i, "").replace(/\\s*[sS]\\/?\\.?$/i, "").trim().replace(",", ".");\n' +
+        '            return parseFloat(clean.replace(/[^0-9.]/g, ""));\n' +
+        '        }).filter(x => !isNaN(x) && x > 0);\n' +
+        '        if(prices.length){\n' +
+        '            const min = Math.min(...prices);\n' +
+        '            return "Desde S/. " + min.toFixed(2);\n' +
+        '        }\n' +
+        '    }\n' +
+        '    return formatPrice(p.price) || "";\n' +
+        '}\n\n' +
+        'function esc(s){return (s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}\n' +
+        'function escA(s){return (s || "").replace(/\'/g,"\\\'").replace(/"/g,"&quot;");}\n\n' +
+        'let currentCatalogCategory = "all";\n' +
+        'let currentCatalogQuery = "";\n\n' +
+        'function renderCategoryPills() {\n' +
+        '    const container = document.getElementById("catalogCategoryPills");\n' +
+        '    if (!container) return;\n' +
+        '    const cats = ["all"];\n' +
+        '    products.forEach(p => {\n' +
+        '        const c = (p.cat || "").trim();\n' +
+        '        if (c && !cats.includes(c)) cats.push(c);\n' +
+        '    });\n' +
+        '    container.innerHTML = "";\n' +
+        '    cats.forEach(c => {\n' +
+        '        const btn = document.createElement("button");\n' +
+        '        btn.type = "button";\n' +
+        '        btn.className = "cat-pill" + (currentCatalogCategory === c ? " active" : "");\n' +
+        '        btn.textContent = c === "all" ? "Todos" : c;\n' +
+        '        btn.onclick = () => filterByCategory(c);\n' +
+        '        container.appendChild(btn);\n' +
+        '    });\n' +
+        '}\n\n' +
+        'function filterByCategory(cat) {\n' +
+        '    currentCatalogCategory = cat;\n' +
+        '    renderCategoryPills();\n' +
+        '    renderProducts();\n' +
+        '}\n\n' +
+        'function handleCatalogSearch(val) {\n' +
+        '    currentCatalogQuery = (val || "").toLowerCase().trim();\n' +
+        '    const clearBtn = document.getElementById("catalogSearchClear");\n' +
+        '    if (clearBtn) clearBtn.style.display = currentCatalogQuery ? "flex" : "none";\n' +
+        '    renderProducts();\n' +
+        '}\n\n' +
+        'function clearCatalogSearch() {\n' +
+        '    const input = document.getElementById("catalogSearchInput");\n' +
+        '    if (input) input.value = "";\n' +
+        '    handleCatalogSearch("");\n' +
+        '}\n\n' +
+        'function resetCatalogFilters() {\n' +
+        '    currentCatalogCategory = "all";\n' +
+        '    clearCatalogSearch();\n' +
+        '}\n\n' +
+        'function renderProducts(){\n' +
+        '    renderCategoryPills();\n' +
+        '    const g = document.getElementById("catalogGrid");\n' +
+        '    const emptyMsg = document.getElementById("catalogEmptyMsg");\n' +
+        '    const emptyState = document.getElementById("subCatalogEmptyState");\n' +
+        '    const emptyTitle = document.getElementById("subCatalogEmptyTitle");\n' +
+        '    if(!g) return;\n' +
+        '    g.innerHTML = "";\n\n' +
+        '    let filtered = products.filter(p => {\n' +
+        '        if (currentSubCatalog) {\n' +
+        '            var matchSub = (p.subProduct && p.subProduct === currentSubCatalog) || (p.cat && p.cat.toLowerCase().includes(currentSubCatalog.toLowerCase())) || (p.name && p.name.toLowerCase().includes(currentSubCatalog.toLowerCase()));\n' +
+        '            return matchSub;\n' +
+        '        }\n' +
+        '        if (currentCatalogCategory !== "all" && (p.cat || "").trim().toLowerCase() !== currentCatalogCategory.toLowerCase()) {\n' +
+        '            return false;\n' +
+        '        }\n' +
+        '        if (currentCatalogQuery) {\n' +
+        '            const hay = ((p.name || "") + " " + (p.cat || "") + " " + (p.shortDesc || "") + " " + (p.longDesc || "")).toLowerCase();\n' +
+        '            if (!hay.includes(currentCatalogQuery)) return false;\n' +
+        '        }\n' +
+        '        return true;\n' +
+        '    });\n\n' +
+        '    filtered.sort((a, b) => {\n' +
+        '        const aSold = a.soldOut ? 1 : 0;\n' +
+        '        const bSold = b.soldOut ? 1 : 0;\n' +
+        '        return aSold - bSold;\n' +
+        '    });\n\n' +
+        '    if (currentSubCatalog && filtered.length === 0) {\n' +
+        '        if (emptyMsg) emptyMsg.style.display = "none";\n' +
+        '        if (emptyState) {\n' +
+        '            var subObj = (navState.subProducts || []).find(function(s){ return s.id === currentSubCatalog; }) || { name: currentSubCatalog };\n' +
+        '            if (emptyTitle) emptyTitle.textContent = "Catálogo " + subObj.name;\n' +
+        '            emptyState.style.display = "flex";\n' +
+        '        }\n' +
+        '    } else {\n' +
+        '        if (emptyState) emptyState.style.display = "none";\n' +
+        '        if (filtered.length === 0) {\n' +
+        '            if (emptyMsg) emptyMsg.style.display = "block";\n' +
+        '        } else {\n' +
+        '            if (emptyMsg) emptyMsg.style.display = "none";\n' +
+        '            filtered.forEach(p => {\n' +
+        '                const card = document.createElement("div");\n' +
+        '                const isSold = !!p.soldOut;\n' +
+        '                card.className = "seller-card" + (isSold ? " is-sold-out" : "");\n' +
+        '                card.id = "product-card-" + p.id;\n' +
+        '                card.dataset.productId = p.id;\n' +
+        '                card.style.cursor = "pointer";\n' +
+        '                card.onclick = () => openProductModal(p.id);\n' +
+        '                const img = getProductImg(p);\n' +
+        '                card.innerHTML = (isSold ? \'<span class="badge-sold-out">Agotado</span>\' : "")\n' +
+        '                    + \'<div class="seller-img" style="background-image:\' + (img ? "url(\'" + escA(img) + "\')" : "none") + \';background-size:cover;background-position:center;background-color:#e8e0d8;"></div>\'\n' +
+        '                    + \'<div class="seller-info"><h3>\' + esc(p.name) + \'</h3><p>\' + esc(p.shortDesc) + \'</p>\'\n' +
+        '                    + \'<div class="seller-meta"><span class="price">\' + esc(getProductPriceLabel(p)) + \'</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>\';\n' +
+        '                g.appendChild(card);\n' +
+        '            });\n' +
+        '        }\n' +
+        '    }\n' +
+        '}\n\n' +
+        'function openProductModal(id){\n' +
+        '    const p = products.find(x => x.id === id); if(!p) return;\n' +
+        '    const isSold = !!p.soldOut;\n' +
+        '    document.getElementById("modal-product-title").innerText = p.name;\n' +
+        '    document.getElementById("modal-product-desc").innerText = p.longDesc;\n' +
+        '    const waLink = document.getElementById("modal-whatsapp-link");\n' +
+        '    waLink.dataset.productId = id;\n' +
+        '    if (isSold) {\n' +
+        '        waLink.className = "btn btn-wa btn-wa-soldout";\n' +
+        '        waLink.innerHTML = \'<i class="fa-brands fa-whatsapp"></i> Consultar reposición por WhatsApp\';\n' +
+        '    } else {\n' +
+        '        waLink.className = "btn btn-wa";\n' +
+        '        waLink.innerHTML = \'<i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp\';\n' +
+        '    }\n' +
+        '    const hasVariants = p.variants && p.variants.length > 0;\n' +
+        '    const varSelector = document.getElementById("modal-variant-selector");\n' +
+        '    const chipsEl = document.getElementById("modal-variant-chips");\n' +
+        '    const metaEl = document.getElementById("modal-product-meta");\n' +
+        '    const imgEl = document.getElementById("modal-product-img");\n' +
+        '    if(hasVariants){\n' +
+        '        varSelector.style.display = "block";\n' +
+        '        chipsEl.innerHTML = "";\n' +
+        '        p.variants.forEach((v, i) => {\n' +
+        '            const chip = document.createElement("button");\n' +
+        '            chip.className = "vchip" + (i === 0 ? " active" : "");\n' +
+        '            chip.textContent = v.name;\n' +
+        '            chip.onclick = () => selectVariant(p, i);\n' +
+        '            chipsEl.appendChild(chip);\n' +
+        '        });\n' +
+        '        selectVariant(p, 0);\n' +
+        '    } else {\n' +
+        '        varSelector.style.display = "none";\n' +
+        '        metaEl.textContent = formatPrice(p.price);\n' +
+        '        const im = getProductImg(p);\n' +
+        '        imgEl.style.backgroundImage = im ? "url(\'" + escA(im) + "\')" : "none";\n' +
+        '        waLink.onclick = () => sendWhatsApp(p);\n' +
+        '    }\n' +
+        '    document.getElementById("product-modal").classList.add("open");\n' +
+        '}\n\n' +
+        'function selectVariant(p, vIdx){\n' +
+        '    const v = p.variants[vIdx];\n' +
+        '    document.querySelectorAll("#modal-variant-chips .vchip").forEach((c, i) => {\n' +
+        '        c.classList.toggle("active", i === vIdx);\n' +
+        '    });\n' +
+        '    document.getElementById("modal-product-meta").textContent = formatPrice(v.price) || formatPrice(p.price);\n' +
+        '    const im = v.img || getProductImg(p);\n' +
+        '    document.getElementById("modal-product-img").style.backgroundImage = im ? "url(\'" + escA(im) + "\')" : "none";\n' +
+        '    const waLink = document.getElementById("modal-whatsapp-link");\n' +
+        '    waLink.onclick = () => sendWhatsApp(p, v);\n' +
+        '}\n\n' +
+        'function closeProductModal(e){\n' +
+        '    if(e && e.target !== document.getElementById("product-modal")) return;\n' +
+        '    document.getElementById("product-modal").classList.remove("open");\n' +
+        '}\n\n' +
+        'function getBaseUrl(){\n' +
+        '    let base = window.location.origin + window.location.pathname;\n' +
+        '    base = base.replace(/\\/[^\\/]*$/, "/");\n' +
+        '    return base;\n' +
+        '}\n\n' +
+        'function sendWhatsApp(p, v){\n' +
+        '    var base = getBaseUrl();\n' +
+        '    var pUrl = base + "p/" + p.id + ".html";\n' +
+        '    if(v && v.name){\n' +
+        '        function _slug(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[\\s_-]+/g,"-").replace(/[^\\w-]/g,"");}\n' +
+        '        pUrl += "?var=" + encodeURIComponent(_slug(v.name));\n' +
+        '    }\n' +
+        '    var msg = "¡Hola Vibra Candela! Deseo más información sobre " + p.name;\n' +
+        '    if(v && v.name){ msg += " (" + v.name + (v.price ? " - " + formatPrice(v.price) : "") + ")"; }\n' +
+        '    else if(p.price){ msg += " (" + formatPrice(p.price) + ")"; }\n' +
+        '    msg += " " + pUrl;\n' +
+        '    var waUrl = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);\n' +
+        '    window.open(waUrl, "_blank");\n' +
+        '}\n\n' +
+        '(function initContactForm(){\n' +
+        '    const form = document.getElementById("contactForm");\n' +
+        '    if(!form) return;\n' +
+        '    const submitBtn = form.querySelector(\'button[type="submit"]\');\n' +
+        '    let result = document.getElementById("result");\n' +
+        '    if(!result){\n' +
+        '        result = document.createElement("div");\n' +
+        '        result.id = "result";\n' +
+        '        form.appendChild(result);\n' +
+        '    }\n' +
+        '    form.addEventListener("submit", function(e){\n' +
+        '        e.preventDefault();\n' +
+        '        const formData = new FormData(form);\n' +
+        '        const object = Object.fromEntries(formData);\n' +
+        '        const json = JSON.stringify(object);\n' +
+        '        const originalBtnHtml = submitBtn ? submitBtn.innerHTML : "Enviar Mensaje";\n' +
+        '        if(submitBtn){\n' +
+        '            submitBtn.disabled = true;\n' +
+        '            submitBtn.innerHTML = \'<i class="fa-solid fa-spinner fa-spin"></i> Enviando...\';\n' +
+        '        }\n' +
+        '        result.style.display = "block";\n' +
+        '        result.innerHTML = \'<p style="color:#666;font-size:0.88rem;margin-top:0.8rem;text-align:center;"><i class="fa-solid fa-spinner fa-spin"></i> Enviando tu mensaje...</p>\';\n' +
+        '        fetch("https://api.web3forms.com/submit", {\n' +
+        '            method: "POST",\n' +
+        '            headers: { "Content-Type": "application/json", "Accept": "application/json" },\n' +
+        '            body: json\n' +
+        '        })\n' +
+        '        .then(async (response) => {\n' +
+        '            let res = await response.json();\n' +
+        '            if (response.status === 200) {\n' +
+        '                result.innerHTML = \'<div class="form-alert success"><i class="fa-solid fa-circle-check" style="font-size:1.3rem;"></i><span><strong>¡Mensaje enviado con éxito!</strong> Nos comunicaremos contigo muy pronto.</span></div>\';\n' +
+        '                form.reset();\n' +
+        '            } else {\n' +
+        '                result.innerHTML = \'<div class="form-alert error"><i class="fa-solid fa-circle-exclamation" style="font-size:1.2rem;"></i><span>\' + (res.message || "Error al enviar mensaje. Por favor intenta de nuevo.") + \'</span></div>\';\n' +
+        '            }\n' +
+        '        })\n' +
+        '        .catch(error => {\n' +
+        '            result.innerHTML = \'<div class="form-alert error"><i class="fa-solid fa-triangle-exclamation" style="font-size:1.2rem;"></i><span>No se pudo enviar el mensaje. Puedes escribirnos directamente a nuestro WhatsApp: <a href="https://wa.me/51926997276" target="_blank" style="color:inherit;font-weight:700;text-decoration:underline;">+51 926 997 276</a></span></div>\';\n' +
+        '        })\n' +
+        '        .finally(() => {\n' +
+        '            if(submitBtn){\n' +
+        '                submitBtn.disabled = false;\n' +
+        '                submitBtn.innerHTML = originalBtnHtml;\n' +
+        '            }\n' +
+        '        });\n' +
+        '    });\n' +
+        '})();\n\n' +
+        'renderProducts();\n' +
+        'navigateTo("inicio");\n\n' +
+        '(function checkUrlDeepLink(){\n' +
+        '    try{\n' +
+        '        var params = new URLSearchParams(window.location.search);\n' +
+        '        var pid = params.get("prod") || params.get("p");\n' +
+        '        if(!pid && window.location.hash){\n' +
+        '            var m = window.location.hash.match(/#prod[=-]?([a-zA-Z0-9_À-ſ-]+)/);\n' +
+        '            if(m) pid = m[1];\n' +
+        '        }\n' +
+        '        if(pid){\n' +
+        '            function _slug(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[\\s_-]+/g,"-").replace(/[^\\w-]/g,"");}\n' +
+        '            var targetSlug = _slug(pid);\n' +
+        '            var numId = parseInt(pid);\n' +
+        '            setTimeout(function(){\n' +
+        '                if(typeof products !== "undefined" && Array.isArray(products)){\n' +
+        '                    var p = products.find(function(x){\n' +
+        '                        return (!isNaN(numId) && x.id === numId) || _slug(x.name) === targetSlug || _slug(x.name).includes(targetSlug) || targetSlug.includes(_slug(x.name));\n' +
+        '                    });\n' +
+        '                    if(p){\n' +
+        '                        navigateTo("productos");\n' +
+        '                        openProductModal(p.id);\n' +
+        '                        var vParam = params.get("var") || params.get("v");\n' +
+        '                        if(vParam && p.variants && p.variants.length > 0){\n' +
+        '                            var vIdx = p.variants.findIndex(function(v){ return _slug(v.name) === _slug(vParam); });\n' +
+        '                            if(vIdx === -1 && /^\\d+$/.test(vParam)){\n' +
+        '                                var num = parseInt(vParam, 10);\n' +
+        '                                if(num >= 0 && num < p.variants.length){ vIdx = num; }\n' +
+        '                            }\n' +
+        '                            if(vIdx >= 0 && vIdx < p.variants.length){\n' +
+        '                                selectVariant(p, vIdx);\n' +
+        '                            }\n' +
+        '                        }\n' +
+        '                        return;\n' +
+        '                    }\n' +
+        '                }\n' +
+        '                var card = document.getElementById("product-card-" + pid) || document.querySelector(\'[data-product-id="\' + pid + \'"]\');\n' +
+        '                if(card) {\n' +
+        '                    navigateTo("productos");\n' +
+        '                    card.click();\n' +
+        '                }\n' +
+        '            }, 300);\n' +
+        '        }\n' +
+        '    } catch(_) {}\n' +
+        '})();\n';
+}
+
 function generateCleanHTML(targetBaseUrl) {
     targetBaseUrl = targetBaseUrl || getBaseUrl();
     if (!targetBaseUrl.endsWith('/')) targetBaseUrl += '/';
     const clone = document.documentElement.cloneNode(true);
-    clone.querySelectorAll('#editorFloatingSave, #editorToolbar').forEach(el => el.remove());
-    ['prodEditOverlay','imgUrlOverlay','heroImgOverlay','iconSwapOverlay','ciOverlay','logoOverlay','ghOverlay','featuredProductOverlay'].forEach(id=>{
+    clone.querySelectorAll('#editorFloatingSave, #editorFloatingTheme, #editorToolbar, .nav-cfg-btn').forEach(el => el.remove());
+    ['prodEditOverlay','imgUrlOverlay','heroImgOverlay','iconSwapOverlay','ciOverlay','logoOverlay','ghOverlay','featuredProductOverlay','navConfigOverlay','themePresetsOverlay'].forEach(id=>{
         const el=clone.querySelector('#'+id);if(el)el.remove();
     });
+
+    // Sincronizar tema dinámico en clean
+    const cleanThemeStyle = clone.querySelector('#dynamic-theme-vars');
+    if (cleanThemeStyle) {
+        cleanThemeStyle.textContent = `:root{--cp:${themeState.vars['--cp']};--cs:${themeState.vars['--cs']};--ca:${themeState.vars['--ca']};--cd:${themeState.vars['--cd']};--cl:${themeState.vars['--cl']};--f:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}`;
+    }
+
+    // Generar navegación limpia
+    const cleanNavEl = clone.querySelector('#mainNav');
+    if (cleanNavEl) {
+        cleanNavEl.innerHTML = '';
+        navState.items.forEach(item => {
+            if (item.id === 'productos' && navState.subProductsEnabled && navState.subProducts && navState.subProducts.length > 0) {
+                const dd = document.createElement('div');
+                dd.className = 'nav-item-dropdown';
+                dd.innerHTML = `<a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos">${esc(item.label)} <i class="fa-solid fa-chevron-down nav-caret"></i></a><div class="nav-submenu">${navState.subProducts.map(s => `<a class="nav-sub-link" onclick="navigateToSubCatalog('${escA(s.id)}')">${esc(s.name)}</a>`).join('')}</div>`;
+                cleanNavEl.appendChild(dd);
+            } else {
+                const a = document.createElement('a');
+                a.id = 'nav-' + item.id;
+                a.setAttribute('onclick', item.id === 'productos' ? "navigateTo('productos'); navigateToSubCatalog(null);" : "navigateTo('" + item.target + "');");
+                a.textContent = item.label;
+                if (item.id === 'inicio') a.className = 'active';
+                cleanNavEl.appendChild(a);
+            }
+        });
+    }
     
     clone.querySelectorAll('.featured-edit-badge').forEach(b => b.remove());
     clone.querySelectorAll('.featured-slot').forEach(el => {
@@ -4278,9 +5647,9 @@ function generateCleanHTML(targetBaseUrl) {
     // Override CSS seguro (igual que saveClean)
     const ghOverrideStyle=document.createElement('style');
     ghOverrideStyle.textContent=`
-        #editorFloatingSave,#editorToolbar,.logo-edit-btn,.icon-swap-btn,.para-controls,.add-para-btn,
+        #editorFloatingSave,#editorFloatingTheme,.editor-fab-theme,.nav-cfg-btn,#editorToolbar,.logo-edit-btn,.icon-swap-btn,.para-controls,.add-para-btn,
         .info-link-actions,.add-link-btn,.card-edt,.add-product-card,.toast,
-        .pe-overlay,.iu-overlay,.is-overlay,.lo-overlay,.ci-overlay,.gh-overlay,.fps-overlay,.featured-edit-badge
+        .pe-overlay,.iu-overlay,.is-overlay,.lo-overlay,.ci-overlay,.gh-overlay,.fps-overlay,.featured-edit-badge,.nav-cfg-overlay,.theme-overlay
         {display:none!important;}
         [contenteditable]{outline:none!important;box-shadow:none!important;}
         [contenteditable]:hover{background:none!important;box-shadow:none!important;cursor:inherit!important;}
@@ -4300,6 +5669,7 @@ function generateCleanHTML(targetBaseUrl) {
         id: p.id,
         name: p.name,
         cat: p.cat,
+        subProduct: p.subProduct || '',
         price: p.price,
         shortDesc: p.shortDesc,
         longDesc: p.longDesc,
@@ -4309,7 +5679,7 @@ function generateCleanHTML(targetBaseUrl) {
     }));
 
         var cleanScriptEl = document.createElement('script');
-        cleanScriptEl.textContent = 'let products = ' + JSON.stringify(cleanProductsData) + ';\n' + "const WA_NUMBER = \"51926997276\";\n\nfunction navigateTo(p){\n    document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));\n    document.querySelectorAll('.nav a').forEach(x => x.classList.remove('active'));\n    var pg = document.getElementById('page-' + p); if(pg) pg.classList.add('active');\n    var lk = document.getElementById('nav-' + p); if(lk) lk.classList.add('active');\n    window.scrollTo(0,0);\n}\n\nfunction getProductImg(p){\n    if(p.variants && p.variants.length > 0){\n        return p.variants[0].img || p.img || '';\n    }\n    return p.img || '';\n}\n\nfunction formatPrice(val){\n    if(val === null || val === undefined) return '';\n    let s = val.toString().trim();\n    if(!s) return '';\n    let clean = s.replace(/^[sS]\\/?\\.?\\s*/i, '').replace(/\\s*[sS]\\/?\\.?$/i, '').trim().replace(',', '.');\n    if(!clean) return '';\n    let num = parseFloat(clean);\n    if(!isNaN(num)){\n        let formatted = clean.includes('.') ? num.toFixed(2) : clean;\n        return 'S/. ' + formatted;\n    }\n    return clean ? 'S/. ' + clean : s;\n}\n\nfunction getProductPriceLabel(p){\n    if(p.variants && p.variants.length > 0){\n        const prices = p.variants.map(v => {\n            let s = (v.price || '0').toString();\n            let clean = s.replace(/^[sS]\\/?\\.?\\s*/i, '').replace(/\\s*[sS]\\/?\\.?$/i, '').trim().replace(',', '.');\n            return parseFloat(clean.replace(/[^0-9.]/g, ''));\n        }).filter(x => !isNaN(x) && x > 0);\n        if(prices.length){\n            const min = Math.min(...prices);\n            return 'Desde S/. ' + min.toFixed(2);\n        }\n    }\n    return formatPrice(p.price) || '';\n}\n\nfunction esc(s){return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;');}\nfunction escA(s){return (s || '').replace(/'/g,\"\\\\'\").replace(/\"/g,'&quot;');}\n\nlet currentCatalogCategory = 'all';\nlet currentCatalogQuery = '';\n\nfunction renderCategoryPills() {\n    const container = document.getElementById('catalogCategoryPills');\n    if (!container) return;\n    const cats = ['all'];\n    products.forEach(p => {\n        const c = (p.cat || '').trim();\n        if (c && !cats.includes(c)) cats.push(c);\n    });\n    container.innerHTML = '';\n    cats.forEach(c => {\n        const btn = document.createElement('button');\n        btn.type = 'button';\n        btn.className = 'cat-pill' + (currentCatalogCategory === c ? ' active' : '');\n        btn.textContent = c === 'all' ? 'Todos' : c;\n        btn.onclick = () => filterByCategory(c);\n        container.appendChild(btn);\n    });\n}\n\nfunction filterByCategory(cat) {\n    currentCatalogCategory = cat;\n    renderCategoryPills();\n    renderProducts();\n}\n\nfunction handleCatalogSearch(val) {\n    currentCatalogQuery = (val || '').toLowerCase().trim();\n    const clearBtn = document.getElementById('catalogSearchClear');\n    if (clearBtn) clearBtn.style.display = currentCatalogQuery ? 'flex' : 'none';\n    renderProducts();\n}\n\nfunction clearCatalogSearch() {\n    const input = document.getElementById('catalogSearchInput');\n    if (input) input.value = '';\n    handleCatalogSearch('');\n}\n\nfunction resetCatalogFilters() {\n    currentCatalogCategory = 'all';\n    clearCatalogSearch();\n}\n\nfunction renderProducts(){\n    renderCategoryPills();\n    const g = document.getElementById('catalogGrid');\n    const emptyMsg = document.getElementById('catalogEmptyMsg');\n    if(!g) return;\n    g.innerHTML = '';\n\n    let filtered = products.filter(p => {\n        if (currentCatalogCategory !== 'all' && (p.cat || '').trim().toLowerCase() !== currentCatalogCategory.toLowerCase()) {\n            return false;\n        }\n        if (currentCatalogQuery) {\n            const hay = ((p.name || '') + ' ' + (p.cat || '') + ' ' + (p.shortDesc || '') + ' ' + (p.longDesc || '')).toLowerCase();\n            if (!hay.includes(currentCatalogQuery)) return false;\n        }\n        return true;\n    });\n\n    filtered.sort((a, b) => {\n        const aSold = a.soldOut ? 1 : 0;\n        const bSold = b.soldOut ? 1 : 0;\n        return aSold - bSold;\n    });\n\n    if (filtered.length === 0) {\n        if (emptyMsg) emptyMsg.style.display = 'block';\n    } else {\n        if (emptyMsg) emptyMsg.style.display = 'none';\n        filtered.forEach(p => {\n            const card = document.createElement('div');\n            const isSold = !!p.soldOut;\n            card.className = 'seller-card' + (isSold ? ' is-sold-out' : '');\n            card.id = 'product-card-' + p.id;\n            card.dataset.productId = p.id;\n            card.style.cursor = 'pointer';\n            card.onclick = () => openProductModal(p.id);\n            const img = getProductImg(p);\n            card.innerHTML = (isSold ? '<span class=\"badge-sold-out\">Agotado</span>' : '')\n                + '<div class=\"seller-img\" style=\"background-image:' + (img ? \"url('\" + esc(img) + \"')\" : 'none') + ';background-size:cover;background-position:center;background-color:#e8e0d8;\"></div>'\n                + '<div class=\"seller-info\"><h3>' + esc(p.name) + '</h3><p>' + esc(p.shortDesc) + '</p>'\n                + '<div class=\"seller-meta\"><span class=\"price\">' + esc(getProductPriceLabel(p)) + '</span><span style=\"font-size:0.82rem;color:var(--cp);\">Ver más →</span></div></div>';\n            g.appendChild(card);\n        });\n    }\n}\n\nfunction openProductModal(id){\n    const p = products.find(x => x.id === id); if(!p) return;\n    const isSold = !!p.soldOut;\n    document.getElementById('modal-product-title').innerText = p.name;\n    document.getElementById('modal-product-desc').innerText = p.longDesc;\n    const waLink = document.getElementById('modal-whatsapp-link');\n    waLink.dataset.productId = id;\n\n    if (isSold) {\n        waLink.className = 'btn btn-wa btn-wa-soldout';\n        waLink.innerHTML = '<i class=\"fa-brands fa-whatsapp\"></i> Consultar reposición por WhatsApp';\n    } else {\n        waLink.className = 'btn btn-wa';\n        waLink.innerHTML = '<i class=\"fa-brands fa-whatsapp\"></i> Solicitar por WhatsApp';\n    }\n\n    const hasV = p.variants && p.variants.length > 0;\n    const vs = document.getElementById('modal-variant-selector');\n    const ce = document.getElementById('modal-variant-chips');\n    const me = document.getElementById('modal-product-meta');\n    const ie = document.getElementById('modal-product-img');\n\n    if(hasV){\n        vs.style.display = 'block';\n        ce.innerHTML = '';\n        p.variants.forEach((v, i) => {\n            const b = document.createElement('button');\n            b.className = 'vchip' + (i === 0 ? ' active' : '');\n            b.textContent = v.name;\n            b.onclick = () => selectVariant(p, i);\n            ce.appendChild(b);\n        });\n        selectVariant(p, 0);\n    } else {\n        vs.style.display = 'none';\n        ce.innerHTML = '';\n        me.innerHTML = esc(p.cat) + ' | ' + esc(formatPrice(p.price)) + (isSold ? ' <span class=\"modal-sold-out-badge\">Agotado</span>' : '');\n        const bi = p.img || '';\n        ie.style.backgroundImage = bi ? \"url('\" + bi + \"')\" : 'none';\n        waLink.dataset.activeVariant = '';\n        waLink.dataset.productInfo = JSON.stringify({name: p.name, cat: p.cat, price: formatPrice(p.price), variant: '', img: bi, soldOut: isSold});\n    }\n    document.getElementById('product-modal').classList.add('open');\n    document.body.style.overflow = 'hidden';\n}\n\nfunction selectVariant(p, idx){\n    const v = p.variants[idx];\n    const isSold = !!p.soldOut;\n    document.getElementById('modal-product-meta').innerHTML = esc(p.cat) + ' | ' + esc(formatPrice(v.price)) + (isSold ? ' <span class=\"modal-sold-out-badge\">Agotado</span>' : '');\n    const img = v.img || (p.variants[0] && p.variants[0].img) || p.img || '';\n    document.getElementById('modal-product-img').style.backgroundImage = img ? \"url('\" + img + \"')\" : 'none';\n    document.querySelectorAll('#modal-variant-chips .vchip').forEach((c, i) => c.classList.toggle('active', i === idx));\n    const waLink = document.getElementById('modal-whatsapp-link');\n    waLink.dataset.activeVariant = JSON.stringify({name: v.name, price: formatPrice(v.price), img: img});\n    waLink.dataset.productInfo = JSON.stringify({name: p.name, cat: p.cat, price: formatPrice(v.price), variant: v.name, img: img, soldOut: isSold});\n}\n\nfunction closeProductModal(e){\n    if(!e || e.target === document.getElementById('product-modal')) {\n        var m = document.getElementById('product-modal');\n        if(m) m.classList.remove('open');\n        document.body.style.overflow = '';\n    }\n}\nwindow.addEventListener('keydown', function(e){ if(e.key === 'Escape' || e.key === 'Esc') closeProductModal(null); });\n\nfunction getBaseUrl() {\n    try {\n        if (typeof window !== 'undefined' && window.location) {\n            var loc = window.location;\n            if (loc.origin && loc.origin !== 'null' && loc.protocol !== 'file:') {\n                var pathname = loc.pathname || '/';\n                pathname = pathname.replace(/\\/[^\\/]+\\.[a-zA-Z0-9]+$/, '/');\n                pathname = pathname.replace(/\\/p(\\/.*)?$/, '/');\n                if (!pathname.endsWith('/')) pathname += '/';\n                return loc.origin + pathname;\n            }\n        }\n        if (typeof ghSavedRepo !== 'undefined' && ghSavedRepo && ghSavedRepo.includes('/')) {\n            var parts = ghSavedRepo.split('/');\n            if (parts[0] && parts[1]) {\n                return 'https://' + parts[0].trim() + '.github.io/' + parts[1].trim() + '/';\n            }\n        }\n    } catch (_) {}\n    return '" + targetBaseUrl + "';\n}\n\nfunction sendWhatsApp(e){\n    e.preventDefault();\n    const btn = document.getElementById('modal-whatsapp-link');\n    const id = parseInt(btn.dataset.productId);\n    let n='', c='', p='', v='', img='', isSold=false;\n    if(btn.dataset.productInfo){\n        try{\n            const pi = JSON.parse(btn.dataset.productInfo);\n            n = pi.name || '';\n            c = pi.cat || '';\n            p = pi.price || '';\n            v = pi.variant || '';\n            img = pi.img || '';\n            isSold = !!pi.soldOut;\n        }catch(_){}\n    }\n    if(typeof products !== 'undefined' && Array.isArray(products) && !isNaN(id) && id){\n        const prod = products.find(x => x.id === id);\n        if(prod){\n            n = prod.name || n;\n            c = prod.cat || c;\n            p = prod.price || p;\n            img = prod.img || img;\n            isSold = !!prod.soldOut;\n            const av = btn.dataset.activeVariant;\n            if(av){\n                try{\n                    const a = JSON.parse(av);\n                    if(a && a.name){\n                        v = a.name;\n                        p = a.price || p;\n                        if(a.img) img = a.img;\n                    }\n                }catch(_){}\n            }\n        }\n    }\n    function _slug(s){return (s || '').toString().toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').trim().replace(/[\\s_-]+/g, '-').replace(/[^\\w-]+/g, '').replace(/^-+|-+$/g, '');}\n    let prodSlug = _slug(n) || ('prod-' + id);\n    let pageSlug = prodSlug;\n    if(v){\n        pageSlug = prodSlug + '-' + _slug(v);\n    }\n    let prodUrl = getBaseUrl() + 'p/' + pageSlug;\n\n    let msg = '';\n    if(isSold) {\n        msg = '¡Hola *Vibra Candela*! Vi que este producto se encuentra agotado en su tienda:\\n\\n';\n        msg += '• *Producto:* ' + n + '\\n';\n        if(c) msg += '• *Categoría:* ' + c + '\\n';\n        if(v) msg += '• *Variante:* ' + v + '\\n';\n        msg += '• *Enlace:* ' + prodUrl + '\\n\\n';\n        msg += '¿Tienen una fecha estimada de reposición? ¡Muchas gracias!';\n    } else {\n        msg = '¡Hola *Vibra Candela*! Me interesa solicitar este producto:\\n\\n';\n        msg += '• *Producto:* ' + n + '\\n';\n        if(c) msg += '• *Categoría:* ' + c + '\\n';\n        if(v) msg += '• *Variante:* ' + v + '\\n';\n        if(p) msg += '• *Precio:* ' + formatPrice(p) + '\\n';\n        msg += '• *Enlace:* ' + prodUrl + '\\n\\n';\n        msg += '¿Tienen disponibilidad para entrega? ¡Muchas gracias!';\n    }\n    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');\n}\n\n// WEB3FORMS AJAX CON FEEDBACK VISUAL\n(function initContactForm(){\n    const form = document.getElementById('form');\n    if(!form) return;\n    const submitBtn = document.getElementById('formSubmitBtn') || form.querySelector('button[type=\"submit\"]');\n    let result = document.getElementById('result');\n    if(!result){\n        result = document.createElement('div');\n        result.id = 'result';\n        form.appendChild(result);\n    }\n    \n    form.addEventListener('submit', function(e){\n        e.preventDefault();\n        const formData = new FormData(form);\n        const object = Object.fromEntries(formData);\n        const json = JSON.stringify(object);\n        \n        const originalBtnHtml = submitBtn ? submitBtn.innerHTML : 'Enviar Mensaje';\n        if(submitBtn){\n            submitBtn.disabled = true;\n            submitBtn.innerHTML = '<i class=\"fa-solid fa-spinner fa-spin\"></i> Enviando...';\n        }\n        result.style.display = 'block';\n        result.innerHTML = '<p style=\"color:#666;font-size:0.88rem;margin-top:0.8rem;text-align:center;\"><i class=\"fa-solid fa-spinner fa-spin\"></i> Enviando tu mensaje...</p>';\n\n        fetch('https://api.web3forms.com/submit', {\n            method: 'POST',\n            headers: {\n                'Content-Type': 'application/json',\n                'Accept': 'application/json'\n            },\n            body: json\n        })\n        .then(async (response) => {\n            let res = await response.json();\n            if (response.status === 200) {\n                result.innerHTML = '<div class=\"form-alert success\"><i class=\"fa-solid fa-circle-check\" style=\"font-size:1.3rem;\"></i><span><strong>¡Mensaje enviado con éxito!</strong> Nos comunicaremos contigo muy pronto.</span></div>';\n                form.reset();\n            } else {\n                result.innerHTML = '<div class=\"form-alert error\"><i class=\"fa-solid fa-circle-exclamation\" style=\"font-size:1.2rem;\"></i><span>' + (res.message || 'Error al enviar mensaje. Por favor intenta de nuevo.') + '</span></div>';\n            }\n        })\n        .catch(error => {\n            result.innerHTML = '<div class=\"form-alert error\"><i class=\"fa-solid fa-triangle-exclamation\" style=\"font-size:1.2rem;\"></i><span>No se pudo enviar el mensaje. Puedes escribirnos directamente a nuestro WhatsApp: <a href=\"https://wa.me/51926997276\" target=\"_blank\" style=\"color:inherit;font-weight:700;text-decoration:underline;\">+51 926 997 276</a></span></div>';\n        })\n        .finally(() => {\n            if(submitBtn){\n                submitBtn.disabled = false;\n                submitBtn.innerHTML = originalBtnHtml;\n            }\n        });\n    });\n})();\n\nrenderProducts();\nnavigateTo('inicio');\n\n(function checkUrlDeepLink(){\n    try{\n        var params = new URLSearchParams(window.location.search);\n        var pid = params.get('prod') || params.get('p');\n        if(!pid && window.location.hash){\n            var m = window.location.hash.match(/#prod[=-]?([a-zA-Z0-9_À-ſ-]+)/);\n            if(m) pid = m[1];\n        }\n        if(pid){\n            function _slug(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[\\s_-]+/g,'-').replace(/[^\\w-]/g,'');}\n            var targetSlug = _slug(pid);\n            var numId = parseInt(pid);\n            setTimeout(function(){\n                if(typeof products !== 'undefined' && Array.isArray(products)){\n                    var p = products.find(function(x){\n                        return (!isNaN(numId) && x.id === numId) || _slug(x.name) === targetSlug || _slug(x.name).includes(targetSlug) || targetSlug.includes(_slug(x.name));\n                    });\n                    if(p){\n                        navigateTo('productos');\n                        openProductModal(p.id);\n                        var vParam = params.get('var') || params.get('v');\n                        if(vParam && p.variants && p.variants.length > 0){\n                            var vIdx = p.variants.findIndex(function(v){ return _slug(v.name) === _slug(vParam); });\n                            if(vIdx === -1 && /^\\d+$/.test(vParam)){\n                                var num = parseInt(vParam, 10);\n                                if(num >= 0 && num < p.variants.length){ vIdx = num; }\n                            }\n                            if(vIdx >= 0 && vIdx < p.variants.length){\n                                selectVariant(p, vIdx);\n                            }\n                        }\n                        return;\n                    }\n                }\n                var card = document.getElementById('product-card-' + pid) || document.querySelector('[data-product-id=\"' + pid + '\"]');\n                if(card) {\n                    navigateTo('productos');\n                    card.click();\n                }\n            }, 300);\n        }\n    } catch(_) {}\n})();\n";
+        cleanScriptEl.textContent = generatePublicScript(cleanProductsData, navState);
         clone.querySelector('body').appendChild(cleanScriptEl);
 
     let cleanOutput = '<!DOCTYPE html>\n' + clone.outerHTML;
@@ -4420,6 +5790,8 @@ function renderVariantRows(variants){
 }
 
 // INIT
+applyTheme(themeState.activePreset || 'default', false);
+renderNav();
 renderProducts();
 navigateTo('inicio');
 applyHeroToDOM(); // init-hero
