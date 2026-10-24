@@ -3218,6 +3218,11 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                         <div class="seller-img" style="background-image:url('vibraimgs/3._Vela_floral_oval_en_tonos_crema_y_rosa.png');"></div>
                         <div class="seller-info"><h3>Aura Oval</h3><p>Diseño ovalado con delicados detalles florales en cera de soya</p>
                         <div class="seller-meta"><span class="price">Desde S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(12,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(12)">
+                        <div class="seller-img" style="background-image:url('vibraimgs/5._Vela_floral_blanca_en_luz_cálida.png');"></div>
+                        <div class="seller-info"><h3>Atenea</h3><p>Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.</p>
+                        <div class="seller-meta"><span class="price">Desde S/. 39.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="add-product-card"><span class="ic">＋</span><span>Agregar producto</span></div></div>
     </div>
 </div>
@@ -3267,7 +3272,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 <!-- MODAL: EDITAR PRODUCTO -->
 <div id="prodEditOverlay" class="pe-overlay" onclick="closeProdEdit(event)">
     <div class="pe-modal" onclick="event.stopPropagation()">
-        <h3 id="prodEditTitle">Editar producto</h3>
+        <h3 id="prodEditTitle">Agregar producto</h3>
         <div class="fg"><label>Nombre</label><input type="text" id="pe-name" placeholder="Vela Lavanda"></div>
         <div class="fg"><label>Categoría</label><input type="text" id="pe-cat" placeholder="100% Soya"></div>
         <div class="fg" id="pe-subproduct-group">
@@ -3327,114 +3332,58 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                 <option value="Opción">Opción general / Otro</option>
             </select>
         </div>
-            <div id="peVariantsList"><div class="pe-variant-item" data-uid="vr17928087516681">
+            <div id="peVariantsList"><div class="pe-variant-item" data-uid="vr17928102858021">
         <div class="variant-header">
             <span class="variant-label">Variante 1</span>
             <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="pe-variant-row">
-            <div><label class="v-name-label">Nombre (Color)</label><input class="v-name" type="text" placeholder="Ej. Blanco, Verde Olivo, Terracota" value="Rosa"></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="S/. 44.90" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab active" onclick="switchVTab('vr17928087516681','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab" onclick="switchVTab('vr17928087516681','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel active" id="vurl-vr17928087516681">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="vibraimgs/3._Vela_floral_oval_en_tonos_crema_y_rosa.png">
-                </div>
-                <div class="vimg-panel" id="vfile-vr17928087516681">
-                    <img class="vimg-preview" id="vprev-vr17928087516681" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17928087516681"></div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17928087516681')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div><div class="pe-variant-item" data-uid="vr17928087516682">
-        <div class="variant-header">
-            <span class="variant-label">Variante 2</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label class="v-name-label">Nombre (Color)</label><input class="v-name" type="text" placeholder="Ej. Blanco, Verde Olivo, Terracota" value="Lila"></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="S/. 44.90" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab active" onclick="switchVTab('vr17928087516682','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab" onclick="switchVTab('vr17928087516682','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel active" id="vurl-vr17928087516682">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="vibraimgs/3._Vela_floral_oval_en_tonos_pastel.png">
-                </div>
-                <div class="vimg-panel" id="vfile-vr17928087516682">
-                    <img class="vimg-preview" id="vprev-vr17928087516682" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17928087516682"></div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17928087516682')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div><div class="pe-variant-item" data-uid="vr17928087516693">
-        <div class="variant-header">
-            <span class="variant-label">Variante 3</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label class="v-name-label">Nombre (Color)</label><input class="v-name" type="text" placeholder="Ej. Blanco, Verde Olivo, Terracota" value="Uva"></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="S/. 44.90" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab active" onclick="switchVTab('vr17928087516693','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab" onclick="switchVTab('vr17928087516693','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel active" id="vurl-vr17928087516693">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="vibraimgs/3._Flores_de_cera_en_bandeja_crema.png">
-                </div>
-                <div class="vimg-panel" id="vfile-vr17928087516693">
-                    <img class="vimg-preview" id="vprev-vr17928087516693" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17928087516693"></div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17928087516693')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div><div class="pe-variant-item" data-uid="vr17928087545614">
-        <div class="variant-header">
-            <span class="variant-label">Variante 4</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label class="v-name-label">Nombre (Color)</label><input class="v-name" type="text" placeholder="Ej. Blanco, Verde Olivo, Terracota" value=""></div>
+            <div><label class="v-name-label">Nombre (Aroma)</label><input class="v-name" type="text" placeholder="Ej. Vainilla, Canela, Lavanda" value=""></div>
             <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
         </div>
         <div class="pe-variant-row full">
             <div>
                 <label>Imagen (opcional)</label>
                 <div class="vimg-tabs">
-                    <button class="vimg-tab" onclick="switchVTab('vr17928087545614','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab active" onclick="switchVTab('vr17928087545614','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
+                    <button class="vimg-tab" onclick="switchVTab('vr17928102858021','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
+                    <button class="vimg-tab active" onclick="switchVTab('vr17928102858021','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
                 </div>
-                <div class="vimg-panel" id="vurl-vr17928087545614">
+                <div class="vimg-panel" id="vurl-vr17928102858021">
                     <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="">
                 </div>
-                <div class="vimg-panel active" id="vfile-vr17928087545614">
-                    <img class="vimg-preview" id="vprev-vr17928087545614" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17928087545614" style="display: block;">vibraimgs/4._Vela_oval_con_amatistas_y_lavanda.png</div>
+                <div class="vimg-panel active" id="vfile-vr17928102858021">
+                    <img class="vimg-preview" id="vprev-vr17928102858021" src="" alt="" style="display: none;">
+                    <div class="vimg-name" id="vname-vr17928102858021" style="display: block;">vibraimgs/5._Vela_floral_blanca_en_luz_cálida.png</div>
                     <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17928087545614')">
+                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17928102858021')">
+                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
+                    </div>
+                </div>
+            </div>
+        </div></div><div class="pe-variant-item" data-uid="vr17928103189212">
+        <div class="variant-header">
+            <span class="variant-label">Variante 2</span>
+            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="pe-variant-row">
+            <div><label class="v-name-label">Nombre (Aroma)</label><input class="v-name" type="text" placeholder="Ej. Vainilla, Canela, Lavanda" value=""></div>
+            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
+        </div>
+        <div class="pe-variant-row full">
+            <div>
+                <label>Imagen (opcional)</label>
+                <div class="vimg-tabs">
+                    <button class="vimg-tab" onclick="switchVTab('vr17928103189212','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
+                    <button class="vimg-tab active" onclick="switchVTab('vr17928103189212','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
+                </div>
+                <div class="vimg-panel" id="vurl-vr17928103189212">
+                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="">
+                </div>
+                <div class="vimg-panel active" id="vfile-vr17928103189212">
+                    <img class="vimg-preview" id="vprev-vr17928103189212" src="" alt="" style="display: none;">
+                    <div class="vimg-name" id="vname-vr17928103189212" style="display: block;">vibraimgs/5.Vela_floral_lavanda_en_luz_cálida.png</div>
+                    <div class="vimg-drop">
+                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17928103189212')">
                         <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
                     </div>
                 </div>
@@ -3454,7 +3403,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 
         <div class="pe-actions">
             <button class="pe-cancel" onclick="closeProdEditDirect()">Cancelar</button>
-            <button class="pe-del" id="peDeleteBtn" onclick="deleteProduct()" style="display: inline-block;"><i class="fa-solid fa-trash-can"></i> Eliminar</button>
+            <button class="pe-del" id="peDeleteBtn" onclick="deleteProduct()" style="display: none;"><i class="fa-solid fa-trash-can"></i> Eliminar</button>
             <button class="pe-ok" onclick="applyProductEdit()"><i class="fa-solid fa-check"></i> Aplicar</button>
         </div>
     </div>
@@ -4221,12 +4170,12 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 // ESTADO GLOBAL
 // ============================================================
 const WA_NUMBER="51926997276";
-let products=[{"id":1,"name":"Velas Artesanales Decorativas","cat":"Personalizadas","price":"","shortDesc":"Diseños","longDesc":"Velas elaboradas a mano con 100% cera de soya, en envases de vidrio y con delicadas figuras decorativas de cera. \n\nCada diseño tiene su propio encanto, ideal para regalar, celebrar momentos especiales o darle un toque único a tus espacios.\n\nCaracterísticas:\n\n. Cera: 100% de soya\n. Presentación: Envase de vidrio transparente\n. Diseños: Florales, temáticos, religiosos y personalizados\n. Aromas y colores: A elección, según disponibilidad\n. Personalización: Nombre o mensaje especial","soldOut":false,"img":"","imgData":"","variants":[{"name":"Floral 01","price":"S/. 59.90","img":"vibraimgs/Vela_Emilia_con_flores_artesanales.png","imgData":""},{"name":"Flora 02","price":"S/. 59.90","img":"vibraimgs/Vela_floral_Bienvenida_Perla.png","imgData":""},{"name":"Virgen","price":"S/. 59.90","img":"vibraimgs/Vela_María_con_flores_pastel.png","imgData":""},{"name":"Halloween","price":"S/. 59.90","img":"vibraimgs/Vela_otoñal_Trick_or_Treat_(1).png","imgData":""},{"name":"Peonía","price":"S/. 59.90","img":"vibraimgs/Vela_Gloria_con_flor_rosa.png","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/sp3.jpg","imgData":"","variants":[]},{"id":3,"name":"Villa Navideña","cat":"Navidad","price":"S/. 59.90","shortDesc":"Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales","longDesc":"Disponible en tres aromas:\n\n🍪 Casa de Galletas\nEse delicioso aroma a galletas recién horneadas, con notas de jengibre, canela, clavo y un toque dulce de vainilla.\n\n🍎 Otoño en Casa\nManzana horneada con canela y naranja, acompañada de notas de bourbon, mantequilla, arce y vainilla. Un aroma cálido y acogedor.\n\n🍓 Dulce Tentación\nUna mezcla de fresas con suaves toques cítricos, vainilla, crema y galleta Graham. Dulce y delicada.\n\nUn poquito más sobre tu vela:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso de la vela 250 g \n. Los colores a disponibilidad\n\nCada pieza tiene pequeños detalles que la hacen única.","soldOut":false,"img":"vibraimgs/imgprod/WhatsApp_Image_2026-10-21_at_7.34.35_PM.jpeg","imgData":"","variants":[]},{"id":5,"name":"Tulipán","cat":"","price":"S/. 44.90","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png","imgData":"","variants":[]},{"id":6,"name":"Pino Navideño","cat":"Navidad","price":"","shortDesc":"Un clásico de Navidad con un toque especial.","longDesc":"Aromas disponibles:\n\n🍪 Casa de Galletas\nEl irresistible aroma de galletas recién horneadas, con notas de jengibre, canela, clavo, azúcar y vainilla.\n\n🍎 Otoño en Casa\nUna cálida mezcla de manzana horneada, canela y naranja, acompañada de bourbon, mantequilla, arce y vainilla.\n\n🌿 Calma Natural\nUna combinación fresca y herbal de salvia, lavanda y romero, con suaves notas de sándalo y cedro.\n\nCaracterísticas:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso: 120 g.\n. Colores a elección.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Modelo 01","price":"S/. 24.90","img":"vibraimgs/Vela_navideña_de_árbol_verde.png","imgData":""}]},{"id":7,"name":"Velas de autor","cat":"Autor","price":"","shortDesc":"Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.","longDesc":"Nuestra colección Velas de Autor reúne diseños elaborados artesanalmente con cera de soya, donde cada detalle forma parte de una creación especial.\n\nDesde delicadas flores hasta diseños inspirados en postres, cada vela combina aromas, colores y texturas para convertirse en un detalle perfecto para regalar o decorar tus espacios.\n\nCaracterísticas para la ficha del producto\n. Cera de soya 100%\n. Diseños: Florales, frutales, inspirados en postres y personalizados\n. Colores: Personalizables según diseño y disponibilidad\n. Aromas: A elección según disponibilidad\n.Etiquetas con nombres o mensajes especiales (cortos)","soldOut":false,"img":"","imgData":"","variants":[{"name":"Postre de fresas","price":"S/. 49.90","img":"vibraimgs/Vela_de_Tarta_de_Fresa_Artesanal.png","imgData":""},{"name":"Postre floral","price":"S/. 49.90","img":"vibraimgs/Vela_floral_artesanal_con_mensaje_de_cumpleaños.png","imgData":""}]},{"id":8,"name":"Vela Naturale","cat":"Naturale","price":"","shortDesc":"Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.","longDesc":"Nuestra colección Naturale combina la delicadeza de las flores con la sencillez de un diseño atemporal.\n\nCada vela está elaborada artesanalmente con cera de soya, decorada con flores de cera en diferentes formas y tonalidades, y presentada en un envase de acabado tipo concreto blanco.\n\nCaracterísticas\n- Cera: 100% soya.\n- Envase: Artesanal, con acabado tipo concreto blanco.\n- Decoración: Flores de cera en relieve.\n- Colores: Personalizables según disponibilidad.\n- Aromas: A elección según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Margaritas","price":"S/. 59.90","img":"vibraimgs/Vela_de_margaritas_en_crema.png","imgData":""},{"name":"Rosa Floral","price":"S/. 59.90","img":"vibraimgs/Vela_floral_rosada_artesanal.png","imgData":""},{"name":"Lila & Rosa Floral","price":"S/. 59.90","img":"vibraimgs/Vela_floral_pastel_en_cuenco_artesanal.png","imgData":""}]},{"id":9,"name":"Ondas","cat":"Floral","subProduct":"navidad","variantType":"Diseño","price":"","shortDesc":"Diseño floral de bordes ondulados y acabados en plata o dorado","longDesc":"Diseño en cera de soya, con un recipiente de acabado en concreto blanco con bordes ondulados en color plata o dorado.\n\nCaracterísticas \n\n. Cera: 100% de coya \n. Envase: Acabado tipo concreto\n. Decoración:Flores en relieve \n. Aromas según disponibilidad","soldOut":false,"img":"","imgData":"","variants":[{"name":"Plata","price":"S/. 49","img":"vibraimgs/0._Ondas_.jpeg","imgData":""},{"name":"Dorado","price":"S/. 49","img":"vibraimgs/0._Ondas_2.jpeg","imgData":""}]},{"id":10,"name":"Valentín","cat":"San Valentín","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.","longDesc":"Vela artesanal  decorada con corazones en tonos rojos y rosados  en un envase de vidrio transparente. \n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Vidrio transparente.\n. Decoración: Corazones de cera en relieve.\n. Diseños: Corazones pequeños o grandes.\n. Aromas: A elección, según disponibilidad.\n. Personalización: Nombres, mensajes y colores.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 54.90","img":"vibraimgs/1._Vela_de_Corazones_“Fabiola”.png","imgData":""},{"name":"Red","price":"S/. 54.90","img":"vibraimgs/1._Vela_Valeria_con_corazones_rojos.png","imgData":""}]},{"id":11,"name":"Aura Oval","cat":"Oval","subProduct":"","variantType":"Color","price":"","shortDesc":"Diseño ovalado con delicados detalles florales en cera de soya","longDesc":"Diseño ovalado de acabado minimalista, decorado con flores de cera en relieve y tonos delicados. Incorpora una mecha de madera de cerezo que aporta un toque natural.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Ovalado, con acabado tipo concreto blanco.\n. Decoración: Flores de cera en relieve, con colores a elección.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/3._Vela_floral_oval_en_tonos_crema_y_rosa.png","imgData":""},{"name":"Lila","price":"S/. 44.90","img":"vibraimgs/3._Vela_floral_oval_en_tonos_pastel.png","imgData":""},{"name":"Uva","price":"S/. 44.90","img":"vibraimgs/3._Flores_de_cera_en_bandeja_crema.png","imgData":""},{"name":"Cuarzo","price":"S/. 44.90","img":"vibraimgs/4._Vela_oval_con_amatistas_y_lavanda.png","imgData":""}]}];
-let nextId=12;
+let products=[{"id":1,"name":"Velas Artesanales Decorativas","cat":"Personalizadas","price":"","shortDesc":"Diseños","longDesc":"Velas elaboradas a mano con 100% cera de soya, en envases de vidrio y con delicadas figuras decorativas de cera. \n\nCada diseño tiene su propio encanto, ideal para regalar, celebrar momentos especiales o darle un toque único a tus espacios.\n\nCaracterísticas:\n\n. Cera: 100% de soya\n. Presentación: Envase de vidrio transparente\n. Diseños: Florales, temáticos, religiosos y personalizados\n. Aromas y colores: A elección, según disponibilidad\n. Personalización: Nombre o mensaje especial","soldOut":false,"img":"","imgData":"","variants":[{"name":"Floral 01","price":"S/. 59.90","img":"vibraimgs/Vela_Emilia_con_flores_artesanales.png","imgData":""},{"name":"Flora 02","price":"S/. 59.90","img":"vibraimgs/Vela_floral_Bienvenida_Perla.png","imgData":""},{"name":"Virgen","price":"S/. 59.90","img":"vibraimgs/Vela_María_con_flores_pastel.png","imgData":""},{"name":"Halloween","price":"S/. 59.90","img":"vibraimgs/Vela_otoñal_Trick_or_Treat_(1).png","imgData":""},{"name":"Peonía","price":"S/. 59.90","img":"vibraimgs/Vela_Gloria_con_flor_rosa.png","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/sp3.jpg","imgData":"","variants":[]},{"id":3,"name":"Villa Navideña","cat":"Navidad","price":"S/. 59.90","shortDesc":"Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales","longDesc":"Disponible en tres aromas:\n\n🍪 Casa de Galletas\nEse delicioso aroma a galletas recién horneadas, con notas de jengibre, canela, clavo y un toque dulce de vainilla.\n\n🍎 Otoño en Casa\nManzana horneada con canela y naranja, acompañada de notas de bourbon, mantequilla, arce y vainilla. Un aroma cálido y acogedor.\n\n🍓 Dulce Tentación\nUna mezcla de fresas con suaves toques cítricos, vainilla, crema y galleta Graham. Dulce y delicada.\n\nUn poquito más sobre tu vela:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso de la vela 250 g \n. Los colores a disponibilidad\n\nCada pieza tiene pequeños detalles que la hacen única.","soldOut":false,"img":"vibraimgs/imgprod/WhatsApp_Image_2026-10-21_at_7.34.35_PM.jpeg","imgData":"","variants":[]},{"id":5,"name":"Tulipán","cat":"","price":"S/. 44.90","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png","imgData":"","variants":[]},{"id":6,"name":"Pino Navideño","cat":"Navidad","price":"","shortDesc":"Un clásico de Navidad con un toque especial.","longDesc":"Aromas disponibles:\n\n🍪 Casa de Galletas\nEl irresistible aroma de galletas recién horneadas, con notas de jengibre, canela, clavo, azúcar y vainilla.\n\n🍎 Otoño en Casa\nUna cálida mezcla de manzana horneada, canela y naranja, acompañada de bourbon, mantequilla, arce y vainilla.\n\n🌿 Calma Natural\nUna combinación fresca y herbal de salvia, lavanda y romero, con suaves notas de sándalo y cedro.\n\nCaracterísticas:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso: 120 g.\n. Colores a elección.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Modelo 01","price":"S/. 24.90","img":"vibraimgs/Vela_navideña_de_árbol_verde.png","imgData":""}]},{"id":7,"name":"Velas de autor","cat":"Autor","price":"","shortDesc":"Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.","longDesc":"Nuestra colección Velas de Autor reúne diseños elaborados artesanalmente con cera de soya, donde cada detalle forma parte de una creación especial.\n\nDesde delicadas flores hasta diseños inspirados en postres, cada vela combina aromas, colores y texturas para convertirse en un detalle perfecto para regalar o decorar tus espacios.\n\nCaracterísticas para la ficha del producto\n. Cera de soya 100%\n. Diseños: Florales, frutales, inspirados en postres y personalizados\n. Colores: Personalizables según diseño y disponibilidad\n. Aromas: A elección según disponibilidad\n.Etiquetas con nombres o mensajes especiales (cortos)","soldOut":false,"img":"","imgData":"","variants":[{"name":"Postre de fresas","price":"S/. 49.90","img":"vibraimgs/Vela_de_Tarta_de_Fresa_Artesanal.png","imgData":""},{"name":"Postre floral","price":"S/. 49.90","img":"vibraimgs/Vela_floral_artesanal_con_mensaje_de_cumpleaños.png","imgData":""}]},{"id":8,"name":"Vela Naturale","cat":"Naturale","price":"","shortDesc":"Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.","longDesc":"Nuestra colección Naturale combina la delicadeza de las flores con la sencillez de un diseño atemporal.\n\nCada vela está elaborada artesanalmente con cera de soya, decorada con flores de cera en diferentes formas y tonalidades, y presentada en un envase de acabado tipo concreto blanco.\n\nCaracterísticas\n- Cera: 100% soya.\n- Envase: Artesanal, con acabado tipo concreto blanco.\n- Decoración: Flores de cera en relieve.\n- Colores: Personalizables según disponibilidad.\n- Aromas: A elección según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Margaritas","price":"S/. 59.90","img":"vibraimgs/Vela_de_margaritas_en_crema.png","imgData":""},{"name":"Rosa Floral","price":"S/. 59.90","img":"vibraimgs/Vela_floral_rosada_artesanal.png","imgData":""},{"name":"Lila & Rosa Floral","price":"S/. 59.90","img":"vibraimgs/Vela_floral_pastel_en_cuenco_artesanal.png","imgData":""}]},{"id":9,"name":"Ondas","cat":"Floral","subProduct":"navidad","variantType":"Diseño","price":"","shortDesc":"Diseño floral de bordes ondulados y acabados en plata o dorado","longDesc":"Diseño en cera de soya, con un recipiente de acabado en concreto blanco con bordes ondulados en color plata o dorado.\n\nCaracterísticas \n\n. Cera: 100% de coya \n. Envase: Acabado tipo concreto\n. Decoración:Flores en relieve \n. Aromas según disponibilidad","soldOut":false,"img":"","imgData":"","variants":[{"name":"Plata","price":"S/. 49","img":"vibraimgs/0._Ondas_.jpeg","imgData":""},{"name":"Dorado","price":"S/. 49","img":"vibraimgs/0._Ondas_2.jpeg","imgData":""}]},{"id":10,"name":"Valentín","cat":"San Valentín","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.","longDesc":"Vela artesanal  decorada con corazones en tonos rojos y rosados  en un envase de vidrio transparente. \n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Vidrio transparente.\n. Decoración: Corazones de cera en relieve.\n. Diseños: Corazones pequeños o grandes.\n. Aromas: A elección, según disponibilidad.\n. Personalización: Nombres, mensajes y colores.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 54.90","img":"vibraimgs/1._Vela_de_Corazones_“Fabiola”.png","imgData":""},{"name":"Red","price":"S/. 54.90","img":"vibraimgs/1._Vela_Valeria_con_corazones_rojos.png","imgData":""}]},{"id":11,"name":"Aura Oval","cat":"Oval","subProduct":"","variantType":"Color","price":"","shortDesc":"Diseño ovalado con delicados detalles florales en cera de soya","longDesc":"Diseño ovalado de acabado minimalista, decorado con flores de cera en relieve y tonos delicados. Incorpora una mecha de madera de cerezo que aporta un toque natural.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Ovalado, con acabado tipo concreto blanco.\n. Decoración: Flores de cera en relieve, con colores a elección.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/3._Vela_floral_oval_en_tonos_crema_y_rosa.png","imgData":""},{"name":"Lila","price":"S/. 44.90","img":"vibraimgs/3._Vela_floral_oval_en_tonos_pastel.png","imgData":""},{"name":"Uva","price":"S/. 44.90","img":"vibraimgs/3._Flores_de_cera_en_bandeja_crema.png","imgData":""},{"name":"Cuarzo","price":"S/. 44.90","img":"vibraimgs/4._Vela_oval_con_amatistas_y_lavanda.png","imgData":""}]},{"id":12,"name":"Atenea","cat":"Floral","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.","longDesc":"Diseño de inspiración clásica, con un envase de líneas acanaladas y acabado tipo concreto blanco. Decorado artesanalmente con flores de cera de soya en relieve, en diferentes formas y tonalidades.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Acabado tipo concreto blanco, con relieve acanalado.\n. Decoración: Flores y detalles de cera en relieve.\n. Colores: A elección, según disponibilidad.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Mini Margaritas","price":"S/. 39.90","img":"vibraimgs/5._Vela_floral_blanca_en_luz_cálida.png","imgData":""},{"name":"Margarita","price":"S/. 39.90","img":"vibraimgs/5.Vela_floral_lavanda_en_luz_cálida.png","imgData":""}]}];
+let nextId=13;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif","whiteImgUrl":""};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"c15c461bc432f92a\",\"c\":\"01dae0d12cd46549bdc1940db48af0446998a70e9ff9d276f0ff04bdf4407cb9f2e2d3bfc69f9f188dccf4b6b7b2e47194d4945669a225b74185c9f017778867518de7aaf24f9bbea61ed83eee01a0e72fabb47a900b0e0799c908cf90\",\"a\":\"52b8a797980d58dcd99590271aa7994139440c5402f50ee73cac903a1163388e\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"4e80004a324d0ad4\",\"c\":\"3f89e795462e3e3f293302ca75c8d87975ac9a119658718a5a5c8c74b32f4b06a3242e97874e239bb49c857ba0f094270598b2141f9c32415e88964e8118800df290cf7745dfd6b2e0b82313ff29adca433f1fbd890d1aaee80bf5a4e9\",\"a\":\"449183d42cc6759edd1f7648d84fbdff299a302fed55e2ea4cf393cf84bd912e\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
