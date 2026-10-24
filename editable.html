@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" style="--header-offset: 82px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
+<html lang="es" style="--header-offset: 69px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibra Candela | Editor</title>
@@ -3125,7 +3125,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 
     <!-- Enlaces de texto -->
     <nav class="nav" id="mainNav"><a id="nav-inicio" class="active">Inicio</a><div class="nav-item-dropdown" id="navItemDropdown-productos">
-                <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos">
+                <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos" class="">
                     Productos <i class="fa-solid fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-submenu" id="navSubmenu-productos">
@@ -3137,7 +3137,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                         <a class="nav-sub-link" onclick="navigateToSubCatalog('halloween')">- Halloween</a>
                     
                 </div>
-            </div><a id="nav-acerca">Acerca de</a><a id="nav-contacto">Contacto</a><button type="button" class="nav-cfg-btn" id="navCfgBtn" title="Configurar menú"><i class="fa-solid fa-gear"></i></button></nav>
+            </div><a id="nav-acerca" class="">Acerca de</a><a id="nav-contacto" class="">Contacto</a><button type="button" class="nav-cfg-btn" id="navCfgBtn" title="Configurar menú"><i class="fa-solid fa-gear"></i></button></nav>
 
     <!-- Íconos sociales agrupados -->
     <div class="social-nav">
@@ -3221,7 +3221,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- BESTSELLERS -->
-    <section class="bestsellers">
+    <section class="bestsellers" style="">
         <h2 contenteditable="true" class="" style="">Nuestros Favoritos de la Temporada</h2>
         <div class="bestsellers-grid">
             <div class="seller-card featured-slot" id="featured-card-1" data-featured-slot="1" data-product-id="3" onclick="openFeaturedSelector(1)" style="">
@@ -3252,7 +3252,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- TIPS -->
-    <section class="tips-section" style="background:var(--cs);">
+    <section class="tips-section" style="background: var(--cs);">
         <h2 contenteditable="true" class="" style="">Tips para Cuidar tu Vela</h2>
         <p contenteditable="true" style="max-width:580px;margin:-1.5rem auto 2.5rem;color:#555;">Sigue estas recomendaciones para que tus velas duren más y quemen de una forma más uniforme.</p>
         <div class="benefits-grid">
@@ -3287,7 +3287,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- FAQ -->
-    <section class="faq-section">
+    <section class="faq-section" style="">
         <h2 contenteditable="true" class="" style="">Preguntas Frecuentes</h2>
         <div style="display:flex;align-items:flex-start;gap:3rem;max-width:1100px;margin:0 auto;text-align:left;flex-wrap:wrap;padding:1rem 0;">
             <div style="flex:1;min-width:280px;" class="faq-accordion-container">
@@ -3324,7 +3324,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- TESTIMONIOS -->
-    <section class="testimonials-section" style="background:var(--cs, #f4eee6);border-top:1px solid rgba(0,0,0,0.06);">
+    <section class="testimonials-section" style="background: var(--cs, #f4eee6); border-top: 1px solid rgba(0, 0, 0, 0.06);">
         <h2 contenteditable="true" class="" style="">Lo que dicen de Vibra Candela</h2>
         <div class="benefits-grid" style="margin-top:2rem;">
             <div class="testimonial-card" style="">
@@ -3945,7 +3945,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
      ========================================================= -->
 <div id="page-acerca" class="page">
     <section>
-        <h2 contenteditable="true">Nuestra Historia</h2>
+        <h2 contenteditable="true" class="" style="">Nuestra Historia</h2>
         <div class="about-wrapper">
             <div class="about-bio" id="aboutBio">
                 <h3 contenteditable="true">Hola, soy Yenka</h3>
@@ -4094,26 +4094,6 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
             <input type="file" id="ghRecursosFilesInput" accept=".png,.svg,image/*" multiple="" style="display:none;" onchange="handleGhRecursosFiles(this)">
             <div id="ghRecursosStatus" style="font-size:0.72rem;color:#64748b;margin-top:0.35rem;line-height:1.35;">Para subir o actualizar las guirnaldas, viñetas y fondos desde tu equipo, selecciona la carpeta <strong>recursos</strong> (o archivos sueltos).</div>
         </div>
-
-        <div class="gh-recursos-box" id="ghImgprodBox" style="background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 10px; padding: 0.65rem 0.8rem; margin-bottom: 0.85rem;">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap;">
-                <span style="font-size:0.76rem;font-weight:700;color:#334155;">
-                    <i class="fa-solid fa-box-open" style="color:var(--cp);margin-right:4px;"></i> Fotos de Catálogo (<code>vibraimgs/imgprod/</code>)
-                </span>
-                <div style="display:flex;gap:0.35rem;flex-wrap:wrap;">
-                    <button type="button" class="gh-small-btn" onclick="document.getElementById('ghImgprodFolderInput').click()" style="font-size:0.72rem;padding:0.25rem 0.55rem;background:#fff;border:1px solid #cbd5e1;border-radius:6px;cursor:pointer;font-weight:600;color:#334155;">
-                        <i class="fa-solid fa-folder-open" style="color:var(--cp);margin-right:3px;"></i> Seleccionar carpeta imgprod
-                    </button>
-                    <button type="button" class="gh-small-btn" onclick="document.getElementById('ghImgprodFilesInput').click()" style="font-size:0.72rem;padding:0.25rem 0.55rem;background:#fff;border:1px solid #cbd5e1;border-radius:6px;cursor:pointer;font-weight:600;color:#334155;">
-                        <i class="fa-solid fa-images" style="color:var(--cp);margin-right:3px;"></i> Archivos sueltos
-                    </button>
-                </div>
-            </div>
-            <input type="file" id="ghImgprodFolderInput" webkitdirectory="" directory="" multiple="" style="display:none;" onchange="handleGhImgprodFolder(this)">
-            <input type="file" id="ghImgprodFilesInput" accept=".webp,.png,.jpg,.jpeg,image/*" multiple="" style="display:none;" onchange="handleGhImgprodFiles(this)">
-            <div id="ghImgprodStatus" style="font-size:0.72rem;color:#64748b;margin-top:0.35rem;line-height:1.35;">Para sincronizar tus fotos optimizadas a GitHub, selecciona la carpeta <strong>vibraimgs/imgprod</strong> (o archivos sueltos).</div>
-        </div>
-
 
         <div class="gh-pass-group">
             <div class="gh-group" style="margin-bottom:0;">
@@ -4428,7 +4408,7 @@ let nextId=14;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif","whiteImgUrl":""};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"dc7c7cbbfd18187d\",\"c\":\"c9fd508a9883385a5a52f64bbe33d41c9ca047a673abbe47f27967a5f497b78d7ace7399eeaa58d6a7e652fe2a6d31e9601c4726208c265127dd8764ed5f94f9976a2f18b83eb3badbd3e0eadc05160cb29d9e3c2fd48bee505f02715a\",\"a\":\"9dba7a7901a5148b069772ce801fe3fb993044136a79b9a2a9fd389849fd0eb8\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"81e0d8b4a11911f5\",\"c\":\"f953377a247a6858f96c4d3bd584eb94c898b6649db77cefa741a5713c3e03d8790d352937b970a2ba2641d8720e47a72b09fd909710b639555c479c2749bea33997def61d38088d3420bfe0094af051e788ffbe49e1cccf4710023ce7\",\"a\":\"955c0a149cb283e94b2878094dda76ba0ba548176e80dbd00d2413cd86961b93\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -5774,19 +5754,19 @@ function sendWhatsApp(e){
     if(isSold) {
         msg = '¡Hola *Vibra Candela*! Vi que este producto se encuentra agotado en su tienda:\n\n';
         const attrLabel = (p && p.variantType) || 'Variante';
-        msg += '• *Producto:* ' + prodName + '\n';
-        if(prodCat) msg += '• *Categoría:* ' + prodCat + '\n';
-        if(prodVariant) msg += '• *' + attrLabel + ':* ' + prodVariant + '\n';
-        msg += '• *Enlace:* ' + prodUrl + '\n\n';
+        msg += '· *Producto:* ' + prodName + '\n';
+        if(prodCat) msg += '· *Categoría:* ' + prodCat + '\n';
+        if(prodVariant) msg += '· *' + attrLabel + ':* ' + prodVariant + '\n';
+        msg += '· *Enlace:* ' + prodUrl + '\n\n';
         msg += '¿Tienen una fecha estimada de reposición? ¡Muchas gracias!';
     } else {
         msg = '¡Hola *Vibra Candela*! Me interesa solicitar este producto:\n\n';
         const attrLabel = (p && p.variantType) || 'Variante';
-        msg += '• *Producto:* ' + prodName + '\n';
-        if(prodCat) msg += '• *Categoría:* ' + prodCat + '\n';
-        if(prodVariant) msg += '• *' + attrLabel + ':* ' + prodVariant + '\n';
-        if(prodPrice) msg += '• *Precio:* ' + formatPrice(prodPrice) + '\n';
-        msg += '• *Enlace:* ' + prodUrl + '\n\n';
+        msg += '· *Producto:* ' + prodName + '\n';
+        if(prodCat) msg += '· *Categoría:* ' + prodCat + '\n';
+        if(prodVariant) msg += '· *' + attrLabel + ':* ' + prodVariant + '\n';
+        if(prodPrice) msg += '· *Precio:* ' + formatPrice(prodPrice) + '\n';
+        msg += '· *Enlace:* ' + prodUrl + '\n\n';
         msg += '¿Tienen disponibilidad para entrega? ¡Muchas gracias!';
     }
 
@@ -6983,65 +6963,6 @@ async function handleGhRecursosFiles(input) {
     if (added > 0) showToast('🎨 ' + added + ' archivo(s) cargados para recursos/.');
 }
 
-function updateGhImgprodStatusUI() {
-    const statusEl = document.getElementById('ghImgprodStatus');
-    const boxEl = document.getElementById('ghImgprodBox');
-    if (!statusEl) return;
-    const imgprodKeys = Object.keys(uploadedImages).filter(k => k.startsWith('vibraimgs/imgprod/'));
-    if (imgprodKeys.length > 0) {
-        statusEl.innerHTML = '<span style="color:#15803d;font-weight:600;"><i class="fa-solid fa-circle-check"></i> ' + imgprodKeys.length + ' foto(s) de <code>vibraimgs/imgprod/</code> listas para sincronizar con GitHub.</span>';
-        if (boxEl) boxEl.style.borderColor = '#86efac';
-    } else {
-        statusEl.innerHTML = 'Para sincronizar o actualizar fotos de producto en GitHub, selecciona la carpeta <strong>vibraimgs/imgprod</strong> (o archivos sueltos).';
-        if (boxEl) boxEl.style.borderColor = '#e2e8f0';
-    }
-}
-
-async function handleGhImgprodFolder(input) {
-    const files = Array.from(input.files || []);
-    if (!files.length) return;
-    let added = 0;
-    for (const file of files) {
-        const name = file.name || '';
-        if (!/\.(webp|png|jpg|jpeg|gif)$/i.test(name) || name.startsWith('.')) continue;
-        const rel = (file.webkitRelativePath || '').replace(/\\/g, '/');
-        let targetPath = 'vibraimgs/imgprod/' + name;
-        if (rel.includes('imgprod/')) {
-            targetPath = 'vibraimgs/imgprod/' + rel.split('imgprod/')[1].split('/')[0];
-        } else if (rel.startsWith('vibraimgs/')) {
-            targetPath = rel;
-        }
-        try {
-            const dataUrl = await readRawFileAsDataUrl(file);
-            uploadedImages[targetPath] = dataUrl;
-            added++;
-        } catch (err) {
-            console.warn('Error leyendo foto:', name, err);
-        }
-    }
-    updateGhImgprodStatusUI();
-    if (added > 0) showToast('📸 ' + added + ' foto(s) de catálogo listas para subir a GitHub.');
-}
-
-async function handleGhImgprodFiles(input) {
-    const files = Array.from(input.files || []);
-    if (!files.length) return;
-    let added = 0;
-    for (const file of files) {
-        const name = file.name || '';
-        if (!/\.(webp|png|jpg|jpeg|gif)$/i.test(name) || name.startsWith('.')) continue;
-        try {
-            const dataUrl = await readRawFileAsDataUrl(file);
-            uploadedImages['vibraimgs/imgprod/' + name] = dataUrl;
-            added++;
-        } catch (err) {
-            console.warn('Error leyendo foto:', name, err);
-        }
-    }
-    updateGhImgprodStatusUI();
-    if (added > 0) showToast('📸 ' + added + ' foto(s) cargadas para imgprod/.');
-}
-
 // ============================================================
 // COMPRESIÓN CLIENT-SIDE DE IMÁGENES (Móvil / Desktop)
 // Reduce fotos de 4MB-10MB a ~100-180 KB en el navegador
@@ -7455,7 +7376,6 @@ function toggleGhConfigAccordion() {
 
 // ── UI del Modal de GitHub ────────────────────────────────────
 function updateGhModalUI() {
-    updateGhImgprodStatusUI();
     updateGhRecursosStatusUI();
     const localToken = localStorage.getItem('vibra_gh_token') || activeGhToken;
     const localRepo = localStorage.getItem('vibra_gh_repo') || ghSavedRepo;
@@ -7998,11 +7918,6 @@ async function runGhPublish() {
             const _grb = clone.querySelector('#ghRecursosBox');
             if (_grb) _grb.style.borderColor = '#e2e8f0';
 
-            const _gis = clone.querySelector('#ghImgprodStatus');
-            if (_gis) _gis.innerHTML = 'Para sincronizar tus fotos optimizadas a GitHub, selecciona la carpeta <strong>vibraimgs/imgprod</strong> (o archivos sueltos).';
-            const _gib = clone.querySelector('#ghImgprodBox');
-            if (_gib) _gib.style.borderColor = '#e2e8f0';
-
             // Limpiar inputs sensibles en el HTML para evitar cualquier exposición
             const _gt=clone.querySelector('#ghToken');if(_gt){_gt.value='';_gt.removeAttribute('value');}
             const _gp=clone.querySelector('#ghPass');if(_gp){_gp.value='';_gp.removeAttribute('value');}
@@ -8484,23 +8399,45 @@ function generatePublicScript(cleanProductsData, navState) {
         '    document.getElementById("product-modal").classList.remove("open");\n' +
         '}\n\n' +
         'function getBaseUrl(){\n' +
-        '    let base = window.location.origin + window.location.pathname;\n' +
-        '    base = base.replace(/\\/[^\\/]*$/, "/");\n' +
+        '    var can = document.querySelector(\'link[rel="canonical"]\');\n' +
+        '    if(can && can.href) return can.href.endsWith(\"/\") ? can.href : (can.href + \"/\");\n' +
+        '    if(window.location.protocol === \"file:\" || !window.location.origin || window.location.origin === \"null\") return \"https://vibracandela.com/\";\n' +
+        '    var base = window.location.origin + window.location.pathname;\n' +
+        '    base = base.replace(/\\/[^\\/]*$/, \"/\");\n' +
         '    return base;\n' +
         '}\n\n' +
         'function sendWhatsApp(p, v){\n' +
+        '    function _slug(s){return (s||\"\").toString().toLowerCase().normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g,\"\").trim().replace(/[\\s_-]+/g,\"-\").replace(/[^\\w-]+/g,\"\").replace(/^-+|-+$/g,\"\");}\n' +
         '    var base = getBaseUrl();\n' +
-        '    var pUrl = base + "p/" + p.id + ".html";\n' +
+        '    if(!base.endsWith(\"/\")) base += \"/\";\n' +
+        '    var prodSlug = _slug(p.name) || (\"prod-\" + p.id);\n' +
+        '    var pageSlug = prodSlug;\n' +
         '    if(v && v.name){\n' +
-        '        function _slug(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[\\s_-]+/g,"-").replace(/[^\\w-]/g,"");}\n' +
-        '        pUrl += "?var=" + encodeURIComponent(_slug(v.name));\n' +
+        '        pageSlug = prodSlug + \"-\" + _slug(v.name);\n' +
         '    }\n' +
-        '    var msg = "¡Hola Vibra Candela! Deseo más información sobre " + p.name;\n' +
-        '    if(v && v.name){ var vType = p.variantType || "Variante"; msg += " (" + vType + ": " + v.name + (v.price ? " - " + formatPrice(v.price) : "") + ")"; }\n' +
-        '    else if(p.price){ msg += " (" + formatPrice(p.price) + ")"; }\n' +
-        '    msg += " " + pUrl;\n' +
-        '    var waUrl = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);\n' +
-        '    window.open(waUrl, "_blank");\n' +
+        '    var prodUrl = base + \"p/\" + pageSlug;\n' +
+        '    var prodPrice = (v && v.price) ? formatPrice(v.price) : (p.price ? formatPrice(p.price) : \"\");\n' +
+        '    var attrLabel = p.variantType || \"Variante\";\n' +
+        '    var isSold = !!p.soldOut;\n' +
+        '    var msg = \"\";\n' +
+        '    if(isSold){\n' +
+        '        msg = \"¡Hola *Vibra Candela*! Vi que este producto se encuentra agotado en su tienda:\\n\\n\";\n' +
+        '        msg += \"· *Producto:* \" + p.name + \"\\n\";\n' +
+        '        if(p.cat) msg += \"· *Categoría:* \" + p.cat + \"\\n\";\n' +
+        '        if(v && v.name) msg += \"· *\" + attrLabel + \":* \" + v.name + \"\\n\";\n' +
+        '        msg += \"· *Enlace:* \" + prodUrl + \"\\n\\n\";\n' +
+        '        msg += \"¿Tienen una fecha estimada de reposición? ¡Muchas gracias!\";\n' +
+        '    } else {\n' +
+        '        msg = \"¡Hola *Vibra Candela*! Me interesa solicitar este producto:\\n\\n\";\n' +
+        '        msg += \"· *Producto:* \" + p.name + \"\\n\";\n' +
+        '        if(p.cat) msg += \"· *Categoría:* \" + p.cat + \"\\n\";\n' +
+        '        if(v && v.name) msg += \"· *\" + attrLabel + \":* \" + v.name + \"\\n\";\n' +
+        '        if(prodPrice) msg += \"· *Precio:* \" + prodPrice + \"\\n\";\n' +
+        '        msg += \"· *Enlace:* \" + prodUrl + \"\\n\\n\";\n' +
+        '        msg += \"¿Tienen disponibilidad para entrega? ¡Muchas gracias!\";\n' +
+        '    }\n' +
+        '    var waUrl = \"https://wa.me/\" + WA_NUMBER + \"?text=\" + encodeURIComponent(msg);\n' +
+        '    window.open(waUrl, \"_blank\");\n' +
         '}\n\n' +
         '(function initContactForm(){\n' +
         '    const form = document.getElementById("contactForm");\n' +
