@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" style="--header-offset: 82px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
+<html lang="es" style="--header-offset: 65px; --cp: #ff6b00; --cs: #1f1135; --ca: #ff9e00; --cd: #f1ebfa; --cl: #0b0711;"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibra Candela | Editor</title>
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style id="dynamic-theme-vars">:root{--cp:#6e8174;--cs:#f4eee6;--ca:#d9c3b0;--cd:#333333;--cl:#faf8f5;--font-heading:'Lora',Georgia,serif;--font-body:'Plus Jakarta Sans',system-ui,sans-serif;--f:var(--font-body);}</style>
+<style id="dynamic-theme-vars">:root{--cp:#ff6b00;--cs:#1f1135;--ca:#ff9e00;--cd:#f1ebfa;--cl:#0b0711;--font-heading:'Lora',Georgia,serif;--font-body:'Plus Jakarta Sans',system-ui,sans-serif;--f:var(--font-body);}</style>
 <style id="phase2-styles">
 /* ============================================================
    ESTILOS FASE 2: NAVEGACIÓN CONFIGURABLE & PLANTILLAS TEMÁTICAS
@@ -2882,10 +2882,64 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         @media(max-width:900px){.page{margin-top:104px!important;}}
         @media(min-width:901px){.page{margin-top:70px!important;}}
     </style></head>
-<body class="" data-theme="default" style="">
+<body class="" data-theme="halloween" style="">
 
 <!-- CAPA DE EFECTOS AMBIENTALES TEMÁTICOS (Nieve, Pétalos, Murciélagos, Destellos) -->
-<div id="themeAmbientOverlay" class="theme-ambient-overlay" aria-hidden="true"></div>
+<div id="themeAmbientOverlay" class="theme-ambient-overlay" aria-hidden="true"><div class="theme-particle" style="left:3.5%;top:68px;animation:spiderDangleBob 3.2s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(255,107,0,0.45));">
+                    <svg width="24" height="72" viewBox="0 0 24 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="12" y1="0" x2="12" y2="52" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="2,2"></line>
+                        <g transform="translate(12, 56)">
+                            <circle cx="0" cy="0" r="4.5" fill="#1e142b" stroke="#ff6b00" stroke-width="0.8"></circle>
+                            <circle cx="0" cy="5" r="2.8" fill="#1e142b" stroke="#ff6b00" stroke-width="0.7"></circle>
+                            <path d="M-3,-1 Q-9,-5 -11,-1 M-3,0 Q-10,-1 -11,3 M-3,1 Q-9,4 -9,8" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round"></path>
+                            <path d="M3,-1 Q9,-5 11,-1 M3,0 Q10,-1 11,3 M3,1 Q9,4 9,8" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round"></path>
+                            <circle cx="-1.1" cy="5.5" r="0.9" fill="#ff6b00"></circle>
+                            <circle cx="1.1" cy="5.5" r="0.9" fill="#ff6b00"></circle>
+                        </g>
+                    </svg>
+                </div><div class="theme-particle" style="left:96.2%;top:68px;animation:spiderDangleBob 3.9s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(255,107,0,0.45));">
+                    <svg width="24" height="88" viewBox="0 0 24 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="12" y1="0" x2="12" y2="68" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="2,2"></line>
+                        <g transform="translate(12, 72)">
+                            <circle cx="0" cy="0" r="4.5" fill="#1e142b" stroke="#ff6b00" stroke-width="0.8"></circle>
+                            <circle cx="0" cy="5" r="2.8" fill="#1e142b" stroke="#ff6b00" stroke-width="0.7"></circle>
+                            <path d="M-3,-1 Q-9,-5 -11,-1 M-3,0 Q-10,-1 -11,3 M-3,1 Q-9,4 -9,8" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round"></path>
+                            <path d="M3,-1 Q9,-5 11,-1 M3,0 Q10,-1 11,3 M3,1 Q9,4 9,8" stroke="#e2e8f0" stroke-width="1.2" stroke-linecap="round"></path>
+                            <circle cx="-1.1" cy="5.5" r="0.9" fill="#ff6b00"></circle>
+                            <circle cx="1.1" cy="5.5" r="0.9" fill="#ff6b00"></circle>
+                        </g>
+                    </svg>
+                </div><span class="theme-particle" style="top:12vh;left:0;animation:themeBatFly 13s linear 0s infinite;">
+                        <svg width="28" height="16" viewBox="0 0 36 20" style="transform:scale(0.65);filter:drop-shadow(0 0 6px rgba(255,107,0,0.5));">
+                            <path d="M18,6 C14,0 5,-2 0,4 C6,6 9,10 10,14 C13,10 16,11 18,15 C20,11 23,10 26,14 C27,10 30,6 36,4 C31,-2 22,0 18,6 Z" fill="#2d1b38" stroke="#ff7b1a" stroke-width="0.9"></path>
+                            <circle cx="17" cy="6" r="0.9" fill="#ff6b00"></circle><circle cx="19" cy="6" r="0.9" fill="#ff6b00"></circle>
+                        </svg>
+                    </span><span class="theme-particle" style="top:26vh;left:0;animation:themeBatFly 15.5s linear -3.1s infinite;">
+                        <svg width="28" height="16" viewBox="0 0 36 20" style="transform:scale(0.83);filter:drop-shadow(0 0 6px rgba(255,107,0,0.5));">
+                            <path d="M18,6 C14,0 5,-2 0,4 C6,6 9,10 10,14 C13,10 16,11 18,15 C20,11 23,10 26,14 C27,10 30,6 36,4 C31,-2 22,0 18,6 Z" fill="#2d1b38" stroke="#ff7b1a" stroke-width="0.9"></path>
+                            <circle cx="17" cy="6" r="0.9" fill="#ff6b00"></circle><circle cx="19" cy="6" r="0.9" fill="#ff6b00"></circle>
+                        </svg>
+                    </span><span class="theme-particle" style="top:40vh;left:0;animation:themeBatFly 18s linear -6.2s infinite;">
+                        <svg width="28" height="16" viewBox="0 0 36 20" style="transform:scale(1.01);filter:drop-shadow(0 0 6px rgba(255,107,0,0.5));">
+                            <path d="M18,6 C14,0 5,-2 0,4 C6,6 9,10 10,14 C13,10 16,11 18,15 C20,11 23,10 26,14 C27,10 30,6 36,4 C31,-2 22,0 18,6 Z" fill="#2d1b38" stroke="#ff7b1a" stroke-width="0.9"></path>
+                            <circle cx="17" cy="6" r="0.9" fill="#ff6b00"></circle><circle cx="19" cy="6" r="0.9" fill="#ff6b00"></circle>
+                        </svg>
+                    </span><span class="theme-particle" style="top:54vh;left:0;animation:themeBatFly 20.5s linear -9.3s infinite;">
+                        <svg width="28" height="16" viewBox="0 0 36 20" style="transform:scale(0.65);filter:drop-shadow(0 0 6px rgba(255,107,0,0.5));">
+                            <path d="M18,6 C14,0 5,-2 0,4 C6,6 9,10 10,14 C13,10 16,11 18,15 C20,11 23,10 26,14 C27,10 30,6 36,4 C31,-2 22,0 18,6 Z" fill="#2d1b38" stroke="#ff7b1a" stroke-width="0.9"></path>
+                            <circle cx="17" cy="6" r="0.9" fill="#ff6b00"></circle><circle cx="19" cy="6" r="0.9" fill="#ff6b00"></circle>
+                        </svg>
+                    </span><span class="theme-particle" style="top:68vh;left:0;animation:themeBatFly 13s linear -12.4s infinite;">
+                        <svg width="28" height="16" viewBox="0 0 36 20" style="transform:scale(0.83);filter:drop-shadow(0 0 6px rgba(255,107,0,0.5));">
+                            <path d="M18,6 C14,0 5,-2 0,4 C6,6 9,10 10,14 C13,10 16,11 18,15 C20,11 23,10 26,14 C27,10 30,6 36,4 C31,-2 22,0 18,6 Z" fill="#2d1b38" stroke="#ff7b1a" stroke-width="0.9"></path>
+                            <circle cx="17" cy="6" r="0.9" fill="#ff6b00"></circle><circle cx="19" cy="6" r="0.9" fill="#ff6b00"></circle>
+                        </svg>
+                    </span><span class="theme-particle" style="top:82vh;left:0;animation:themeBatFly 15.5s linear -0.5s infinite;">
+                        <svg width="28" height="16" viewBox="0 0 36 20" style="transform:scale(1.01);filter:drop-shadow(0 0 6px rgba(255,107,0,0.5));">
+                            <path d="M18,6 C14,0 5,-2 0,4 C6,6 9,10 10,14 C13,10 16,11 18,15 C20,11 23,10 26,14 C27,10 30,6 36,4 C31,-2 22,0 18,6 Z" fill="#2d1b38" stroke="#ff7b1a" stroke-width="0.9"></path>
+                            <circle cx="17" cy="6" r="0.9" fill="#ff6b00"></circle><circle cx="19" cy="6" r="0.9" fill="#ff6b00"></circle>
+                        </svg>
+                    </span><span class="theme-particle" style="left:45.8%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #ff8c24 0%, rgba(255,107,0,0) 70%);animation:themeGlowRise 9.5s ease-in-out -11.4s infinite;"></span><span class="theme-particle" style="left:53.1%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #fbbf24 0%, rgba(245,158,11,0) 70%);animation:themeGlowRise 11s ease-in-out -1.3s infinite;"></span><span class="theme-particle" style="left:60.4%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #ff8c24 0%, rgba(255,107,0,0) 70%);animation:themeGlowRise 12.5s ease-in-out -3.2s infinite;"></span><span class="theme-particle" style="left:67.7%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #fbbf24 0%, rgba(245,158,11,0) 70%);animation:themeGlowRise 14s ease-in-out -5.1s infinite;"></span><span class="theme-particle" style="left:75.0%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #ff8c24 0%, rgba(255,107,0,0) 70%);animation:themeGlowRise 8s ease-in-out -7s infinite;"></span><span class="theme-particle" style="left:82.3%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #fbbf24 0%, rgba(245,158,11,0) 70%);animation:themeGlowRise 9.5s ease-in-out -8.9s infinite;"></span><span class="theme-particle" style="left:89.6%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #ff8c24 0%, rgba(255,107,0,0) 70%);animation:themeGlowRise 11s ease-in-out -10.8s infinite;"></span><span class="theme-particle" style="left:2.9%;top:0;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle, #fbbf24 0%, rgba(245,158,11,0) 70%);animation:themeGlowRise 12.5s ease-in-out -0.7s infinite;"></span></div>
 
 <!-- BOTONES FLOTANTES MODO EDITOR -->
 
@@ -2930,13 +2984,13 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         <!-- Capa imagen (z-index:0) -->
         <div class="hero-bg-img" id="heroBgImg" style="background-image: url(&quot;vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg&quot;);"></div>
         <!-- Capa tinte + blend (z-index:1) — NO toca el texto ni el botón -->
-        <div class="hero-filter-layer" id="heroFilterLayer" style="background-color: rgba(110, 129, 116, 0.45); mix-blend-mode: overlay;"></div>
+        <div class="hero-filter-layer" id="heroFilterLayer" style="background-color: rgba(255, 107, 0, 0.45); mix-blend-mode: overlay;"></div>
         <!-- Contenido (z-index:10) — completamente fuera del blend -->
         <div class="hero-content">
             <h1 onclick="event.stopPropagation()">Aromatiza tu espacio naturalmente</h1>
             <p onclick="event.stopPropagation()">Velas artesanales de cera de soya y difusores ambientales para tu bienestar.</p>
             <div class="hero-cta-wrap">
-                <button id="heroCTABtn" onclick="navigateTo('productos');event.stopPropagation();" class="btn" style="background: rgb(110, 129, 116); color: rgb(255, 255, 255); border-color: rgb(110, 129, 116);">Explorar Catálogo</button>
+                <button id="heroCTABtn" onclick="navigateTo('productos');event.stopPropagation();" class="btn" style="background: rgb(255, 107, 0); color: rgb(255, 255, 255); border-color: rgb(255, 107, 0);">Explorar Catálogo</button>
             </div>
         </div>
         <!-- Barra inferior de garantías a ancho completo (Glassmorphism) -->
@@ -2952,10 +3006,10 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- BENEFICIOS -->
-    <section class="benefits" style="background: var(--cs, #f4eee6); --parallax-offset: -10.1px;">
+    <section class="benefits" style="background: var(--cs, #f4eee6); --parallax-offset: -10.5px;">
         <h2 class="reveal-on-scroll is-visible" style="--reveal-delay: 0ms;">¿Por qué elegir Cera de Soya?</h2>
         <div class="benefits-grid" id="benefitsGrid">
-            <div class="benefit-item reveal-on-scroll" style="--reveal-delay: 0ms;">
+            <div class="benefit-item reveal-on-scroll is-visible" style="--reveal-delay: 0ms;">
                 <div class="icon-box">
                     <span class="icon-emoji" id="bi-icon-0" style="display: none;">🌱</span>
                     <img class="icon-img" id="bi-img-0" src="vibraimgs/why1.png" alt="" style="display: block;">
@@ -2964,7 +3018,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                 <h3>100% Ecológica</h3>
                 <p>Derivada de fuentes renovables, biodegradable y libre de derivados del petróleo.</p>
             </div>
-            <div class="benefit-item reveal-on-scroll" style="--reveal-delay: 85ms;">
+            <div class="benefit-item reveal-on-scroll is-visible" style="--reveal-delay: 85ms;">
                 <div class="icon-box">
                     <span class="icon-emoji" id="bi-icon-1" style="display: none;">⏳</span>
                     <img class="icon-img" id="bi-img-1" src="vibraimgs/why2.png" alt="" style="display: block;">
@@ -2973,7 +3027,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                 <h3>Mayor Duración</h3>
                 <p>Quema a menor temperatura, permitiendo que tu vela dure hasta el doble que una de parafina.</p>
             </div>
-            <div class="benefit-item reveal-on-scroll" style="--reveal-delay: 170ms;">
+            <div class="benefit-item reveal-on-scroll is-visible" style="--reveal-delay: 170ms; --mouse-x: 139.3px; --mouse-y: 194.7px;">
                 <div class="icon-box">
                     <span class="icon-emoji" id="bi-icon-2" style="display: none;">🍃</span>
                     <img class="icon-img" id="bi-img-2" src="vibraimgs/why3.png" alt="" style="display: block;">
@@ -2986,10 +3040,10 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- BESTSELLERS -->
-    <section class="bestsellers">
-        <h2 class="reveal-on-scroll" style="--reveal-delay: 0ms;">Nuestros Favoritos de la Temporada</h2>
+    <section class="bestsellers" style="--parallax-offset: -21.3px;">
+        <h2 class="reveal-on-scroll is-visible" style="--reveal-delay: 0ms;">Nuestros Favoritos de la Temporada</h2>
         <div class="bestsellers-grid">
-            <div class="seller-card reveal-on-scroll" id="featured-card-1" data-featured-slot="1" data-product-id="5" style="--reveal-delay: 0ms;">
+            <div class="seller-card reveal-on-scroll is-visible" id="featured-card-1" data-featured-slot="1" data-product-id="5" style="--reveal-delay: 0ms;">
                 
                 <div class="seller-img" id="bs1" style="background-image: url(&quot;vibraimgs/imgprod/580D8B33-5013-4CC4-8C45-BCA09549621B.png&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(1)"></div>
                 <div class="seller-info" onclick="openFeaturedSelector(1)">
@@ -3001,7 +3055,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                     </div>
                 </div>
             </div>
-            <div class="seller-card reveal-on-scroll" id="featured-card-2" data-featured-slot="2" data-product-id="7" style="--reveal-delay: 85ms;">
+            <div class="seller-card reveal-on-scroll is-visible" id="featured-card-2" data-featured-slot="2" data-product-id="7" style="--reveal-delay: 85ms; --mouse-x: 344.2px; --mouse-y: 3.1px;">
                 
                 <div class="seller-img" id="bs2" style="background-image: url(&quot;vibraimgs/Vela_de_Tarta_de_Fresa_Artesanal.png&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);" onclick="openFeaturedSelector(2)"></div>
                 <div class="seller-info" onclick="openFeaturedSelector(2)">
