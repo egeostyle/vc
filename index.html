@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" style="--header-offset: 82px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
+<html lang="es" style="--header-offset: 69px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibra Candela | Velas y Difusores Artesanales</title>
@@ -3229,7 +3229,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- BESTSELLERS -->
-    <section class="bestsellers">
+    <section class="bestsellers" style="">
         <h2 class="" style="">Nuestros Favoritos de la Temporada</h2>
         <div class="bestsellers-grid">
             <div class="seller-card" id="featured-card-1" data-featured-slot="1" data-product-id="3" onclick="navigateTo('productos'); openProductModal(3);" style="cursor: pointer;">
@@ -3260,7 +3260,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- TIPS -->
-    <section class="tips-section" style="background:var(--cs);">
+    <section class="tips-section" style="background: var(--cs);">
         <h2 class="" style="">Tips para Cuidar tu Vela</h2>
         <p style="max-width:580px;margin:-1.5rem auto 2.5rem;color:#555;">Sigue estas recomendaciones para que tus velas duren más y quemen de una forma más uniforme.</p>
         <div class="benefits-grid">
@@ -3295,7 +3295,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- FAQ -->
-    <section class="faq-section">
+    <section class="faq-section" style="">
         <h2 class="" style="">Preguntas Frecuentes</h2>
         <div style="display:flex;align-items:flex-start;gap:3rem;max-width:1100px;margin:0 auto;text-align:left;flex-wrap:wrap;padding:1rem 0;">
             <div style="flex:1;min-width:280px;" class="faq-accordion-container">
@@ -3332,7 +3332,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- TESTIMONIOS -->
-    <section class="testimonials-section" style="background:var(--cs, #f4eee6);border-top:1px solid rgba(0,0,0,0.06);">
+    <section class="testimonials-section" style="background: var(--cs, #f4eee6); border-top: 1px solid rgba(0, 0, 0, 0.06);">
         <h2 class="" style="">Lo que dicen de Vibra Candela</h2>
         <div class="benefits-grid" style="margin-top:2rem;">
             <div class="testimonial-card" style="">
@@ -3469,7 +3469,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
      ========================================================= -->
 <div id="page-acerca" class="page">
     <section>
-        <h2>Nuestra Historia</h2>
+        <h2 class="" style="">Nuestra Historia</h2>
         <div class="about-wrapper">
             <div class="about-bio" id="aboutBio">
                 <h3>Hola, soy Yenka</h3>
@@ -3851,22 +3851,44 @@ function closeProductModal(e){
 }
 
 function getBaseUrl(){
-    let base = window.location.origin + window.location.pathname;
+    var can = document.querySelector('link[rel="canonical"]');
+    if(can && can.href) return can.href.endsWith("/") ? can.href : (can.href + "/");
+    if(window.location.protocol === "file:" || !window.location.origin || window.location.origin === "null") return "https://vibracandela.com/";
+    var base = window.location.origin + window.location.pathname;
     base = base.replace(/\/[^\/]*$/, "/");
     return base;
 }
 
 function sendWhatsApp(p, v){
+    function _slug(s){return (s||"").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().replace(/[\s_-]+/g,"-").replace(/[^\w-]+/g,"").replace(/^-+|-+$/g,"");}
     var base = getBaseUrl();
-    var pUrl = base + "p/" + p.id + ".html";
+    if(!base.endsWith("/")) base += "/";
+    var prodSlug = _slug(p.name) || ("prod-" + p.id);
+    var pageSlug = prodSlug;
     if(v && v.name){
-        function _slug(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[\s_-]+/g,"-").replace(/[^\w-]/g,"");}
-        pUrl += "?var=" + encodeURIComponent(_slug(v.name));
+        pageSlug = prodSlug + "-" + _slug(v.name);
     }
-    var msg = "¡Hola Vibra Candela! Deseo más información sobre " + p.name;
-    if(v && v.name){ var vType = p.variantType || "Variante"; msg += " (" + vType + ": " + v.name + (v.price ? " - " + formatPrice(v.price) : "") + ")"; }
-    else if(p.price){ msg += " (" + formatPrice(p.price) + ")"; }
-    msg += " " + pUrl;
+    var prodUrl = base + "p/" + pageSlug;
+    var prodPrice = (v && v.price) ? formatPrice(v.price) : (p.price ? formatPrice(p.price) : "");
+    var attrLabel = p.variantType || "Variante";
+    var isSold = !!p.soldOut;
+    var msg = "";
+    if(isSold){
+        msg = "¡Hola *Vibra Candela*! Vi que este producto se encuentra agotado en su tienda:\n\n";
+        msg += "· *Producto:* " + p.name + "\n";
+        if(p.cat) msg += "· *Categoría:* " + p.cat + "\n";
+        if(v && v.name) msg += "· *" + attrLabel + ":* " + v.name + "\n";
+        msg += "· *Enlace:* " + prodUrl + "\n\n";
+        msg += "¿Tienen una fecha estimada de reposición? ¡Muchas gracias!";
+    } else {
+        msg = "¡Hola *Vibra Candela*! Me interesa solicitar este producto:\n\n";
+        msg += "· *Producto:* " + p.name + "\n";
+        if(p.cat) msg += "· *Categoría:* " + p.cat + "\n";
+        if(v && v.name) msg += "· *" + attrLabel + ":* " + v.name + "\n";
+        if(prodPrice) msg += "· *Precio:* " + prodPrice + "\n";
+        msg += "· *Enlace:* " + prodUrl + "\n\n";
+        msg += "¿Tienen disponibilidad para entrega? ¡Muchas gracias!";
+    }
     var waUrl = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
     window.open(waUrl, "_blank");
 }
