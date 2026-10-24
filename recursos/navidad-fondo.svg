@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <g fill="none" stroke="#d4af37" stroke-width="1.2" opacity="0.22">
+    <!-- Snowflake 1 -->
+    <g transform="translate(70, 70)">
+      <line x1="-24" y1="0" x2="24" y2="0"/>
+      <line x1="0" y1="-24" x2="0" y2="24"/>
+      <line x1="-17" y1="-17" x2="17" y2="17"/>
+      <line x1="-17" y1="17" x2="17" y2="-17"/>
+      <polyline points="-6,-18 0,-12 6,-18"/>
+      <polyline points="-6,18 0,12 6,18"/>
+      <polyline points="-18,-6 -12,0 -18,6"/>
+      <polyline points="18,-6 12,0 18,6"/>
+      <circle cx="0" cy="0" r="5"/>
+    </g>
+    <!-- Snowflake 2 -->
+    <g transform="translate(240, 210) scale(0.85)">
+      <line x1="-24" y1="0" x2="24" y2="0"/>
+      <line x1="0" y1="-24" x2="0" y2="24"/>
+      <line x1="-17" y1="-17" x2="17" y2="17"/>
+      <line x1="-17" y1="17" x2="17" y2="-17"/>
+      <polygon points="0,-10 3,-3 10,0 3,3 0,10 -3,3 -10,0 -3,-3"/>
+    </g>
+    <!-- North Star -->
+    <g transform="translate(230, 65)" fill="#d4af37" stroke="none">
+      <path d="M0,-18 L3.5,-3.5 L18,0 L3.5,3.5 L0,18 L-3.5,3.5 L-18,0 L-3.5,-3.5 Z"/>
+    </g>
+    <g transform="translate(85, 245) scale(0.75)" fill="#165b33" stroke="none">
+      <path d="M0,-18 L3.5,-3.5 L18,0 L3.5,3.5 L0,18 L-3.5,3.5 L-18,0 L-3.5,-3.5 Z"/>
+    </g>
+    <!-- Holly Sprig -->
+    <g transform="translate(160, 150)" stroke="#165b33" opacity="0.8">
+      <path d="M-22,8 C-16,-6 -4,-8 0,0 C-4,8 -16,12 -22,8 Z" fill="#165b33" fill-opacity="0.15"/>
+      <path d="M22,8 C16,-6 4,-8 0,0 C4,8 16,12 22,8 Z" fill="#165b33" fill-opacity="0.15"/>
+      <circle cx="-3" cy="2" r="3" fill="#c61d23" stroke="none"/>
+      <circle cx="3" cy="2" r="3" fill="#c61d23" stroke="none"/>
+      <circle cx="0" cy="-2" r="3" fill="#c61d23" stroke="none"/>
+    </g>
+    <!-- Small sparkles -->
+    <circle cx="40" cy="160" r="2" fill="#d4af37"/>
+    <circle cx="150" cy="40" r="2.5" fill="#d4af37"/>
+    <circle cx="285" cy="135" r="2" fill="#165b33"/>
+    <circle cx="175" cy="280" r="2.5" fill="#d4af37"/>
+  </g>
+</svg>
