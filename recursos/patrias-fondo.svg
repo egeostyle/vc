@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <!-- Fiestas Patrias Section Background: Andean Chakana & Escarapela Motif -->
+  <g opacity="0.13">
+    <!-- Chakana (Andean Cross) at (240, 230) -->
+    <g transform="translate(240, 230)" fill="none" stroke="#c61d23" stroke-width="3">
+      <polygon points="-14,-42 14,-42 14,-28 28,-28 28,-14 42,-14 42,14 28,14 28,28 14,28 14,42 -14,42 -14,28 -28,28 -28,14 -42,14 -42,-14 -28,-14 -28,-28 -14,-28"/>
+      <circle cx="0" cy="0" r="11" stroke="#d4af37" stroke-width="2.5"/>
+    </g>
+    <!-- Smaller Golden Chakana at (75, 85) -->
+    <g transform="translate(75, 85) scale(0.65)" fill="none" stroke="#d4af37" stroke-width="3.5">
+      <polygon points="-14,-42 14,-42 14,-28 28,-28 28,-14 42,-14 42,14 28,14 28,28 14,28 14,42 -14,42 -14,28 -28,28 -28,14 -42,14 -42,-14 -28,-14 -28,-28 -14,-28"/>
+      <circle cx="0" cy="0" r="11"/>
+    </g>
+    <!-- Andean Geometric Diamonds -->
+    <g transform="translate(230, 75)" fill="none" stroke="#c61d23" stroke-width="2">
+      <polygon points="0,-18 18,0 0,18 -18,0"/>
+      <polygon points="0,-9 9,0 0,9 -9,0" fill="#d4af37" stroke="none"/>
+    </g>
+    <g transform="translate(85, 240)" fill="none" stroke="#d4af37" stroke-width="2">
+      <polygon points="0,-16 16,0 0,16 -16,0"/>
+      <polygon points="0,-7 7,0 0,7 -7,0" fill="#c61d23" stroke="none"/>
+    </g>
+  </g>
+</svg>
