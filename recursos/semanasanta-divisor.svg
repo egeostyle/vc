@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 24" width="180" height="24">
+  <!-- Semana Santa Section Title Divider: Olive Branches & Lit Paschal Candle Flame -->
+  <line x1="15" y1="13" x2="72" y2="13" stroke="#c89b3c" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="108" y1="13" x2="165" y2="13" stroke="#c89b3c" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Left olive leaves -->
+  <ellipse cx="66" cy="10" rx="5" ry="2" fill="#5c6b4d" transform="rotate(-22, 66, 10)"/>
+  <ellipse cx="58" cy="16" rx="4.5" ry="1.8" fill="#849b69" transform="rotate(18, 58, 16)"/>
+  <!-- Right olive leaves -->
+  <ellipse cx="114" cy="10" rx="5" ry="2" fill="#5c6b4d" transform="rotate(22, 114, 10)"/>
+  <ellipse cx="122" cy="16" rx="4.5" ry="1.8" fill="#849b69" transform="rotate(-18, 122, 16)"/>
+  <!-- Center Medallion: Mini Lit Candle -->
+  <g transform="translate(90, 12)">
+    <circle cx="0" cy="0" r="8.5" fill="#fcfaf5" stroke="#c89b3c" stroke-width="1.5"/>
+    <rect x="-2.5" y="0" width="5" height="6.5" rx="0.8" fill="#c89b3c"/>
+    <path d="M0,-7 C-2.5,-3.5 -2.5,-0.5 0,0 C2.5,-0.5 2.5,-3.5 0,-7 Z" fill="#d97706"/>
+    <path d="M0,-5.5 C-1.2,-3 -1.2,-1 0,-0.5 C1.2,-1 1.2,-3 0,-5.5 Z" fill="#fde047"/>
+  </g>
+</svg>
