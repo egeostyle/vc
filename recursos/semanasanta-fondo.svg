@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <!-- Semana Santa Section Background: Artisanal Lit Candle (Cirio) & Domingo de Ramos Palm/Olive Branch -->
+  <defs>
+    <g id="velaRamosMotif">
+      <!-- Soft Warm Candlelight Halo -->
+      <circle cx="0" cy="-34" r="28" fill="none" stroke="#c89b3c" stroke-width="1.3" stroke-dasharray="3,4"/>
+      <circle cx="0" cy="-34" r="18" fill="#fde68a" opacity="0.35"/>
+
+      <!-- Crossed Domingo de Ramos Palm Frond behind/beside the candle -->
+      <path d="M-34,36 Q-8,8 28,-16" fill="none" stroke="#5c6b4d" stroke-width="2.2" stroke-linecap="round"/>
+      <g fill="#6b7f52">
+        <ellipse cx="-20" cy="24" rx="7" ry="2.2" transform="rotate(-15, -20, 24)"/>
+        <ellipse cx="-10" cy="14" rx="7" ry="2.2" transform="rotate(-15, -10, 14)"/>
+        <ellipse cx="14" cy="-6" rx="7" ry="2.2" transform="rotate(-15, 14, -6)"/>
+        <ellipse cx="22" cy="-12" rx="6" ry="2" transform="rotate(-15, 22, -12)"/>
+        <ellipse cx="-16" cy="28" rx="7" ry="2.2" transform="rotate(-65, -16, 28)"/>
+        <ellipse cx="18" cy="-2" rx="7" ry="2.2" transform="rotate(-65, 18, -2)"/>
+      </g>
+
+      <!-- Olive Branch on the other side -->
+      <path d="M32,36 Q8,12 -24,-10" fill="none" stroke="#5c6b4d" stroke-width="2" stroke-linecap="round"/>
+      <g fill="#849b69">
+        <ellipse cx="20" cy="24" rx="6.5" ry="2.5" transform="rotate(20, 20, 24)"/>
+        <ellipse cx="-14" cy="-4" rx="6.5" ry="2.5" transform="rotate(20, -14, -4)"/>
+        <ellipse cx="-22" cy="-9" rx="5.5" ry="2.2" transform="rotate(20, -22, -9)"/>
+      </g>
+
+      <!-- Artisanal Soy/Beeswax Candle (Cirio) -->
+      <rect x="-12" y="-16" width="24" height="48" rx="3" fill="#fffdf7" stroke="#c89b3c" stroke-width="2"/>
+      <!-- Decorative Golden Wax Relief Bands on the Candle -->
+      <line x1="-12" y1="-4" x2="12" y2="-4" stroke="#c89b3c" stroke-width="2"/>
+      <line x1="-12" y1="20" x2="12" y2="20" stroke="#c89b3c" stroke-width="2"/>
+      <!-- Subtle Cross Relief on the Candle Body -->
+      <line x1="0" y1="1" x2="0" y2="15" stroke="#c89b3c" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="-4.5" y1="6" x2="4.5" y2="6" stroke="#c89b3c" stroke-width="1.8" stroke-linecap="round"/>
+
+      <!-- Candle Holder Base -->
+      <path d="M-18,32 L18,32 L14,38 L-14,38 Z" fill="#c89b3c"/>
+
+      <!-- Candle Wick & Radiant Flame -->
+      <line x1="0" y1="-16" x2="0" y2="-20" stroke="#5c4033" stroke-width="1.6"/>
+      <path d="M0,-38 C-6,-28 -6,-20 0,-18 C6,-20 6,-28 0,-38 Z" fill="#d97706"/>
+      <path d="M0,-34 C-3,-26 -3,-21 0,-19 C3,-21 3,-26 0,-34 Z" fill="#fbbf24"/>
+    </g>
+  </defs>
+
+  <g opacity="0.18">
+    <!-- Primary Candle & Palm/Olive Motif at Bottom-Right (235, 225) -->
+    <use href="#velaRamosMotif" x="235" y="225"/>
+    <!-- Secondary Smaller Candle & Palm/Olive Motif at Top-Left (75, 95) -->
+    <use href="#velaRamosMotif" x="75" y="95" transform="scale(0.78)" style="transform-origin: 75px 95px;"/>
+  </g>
+</svg>
