@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" style="--header-offset: 110px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
+<html lang="es" style="--header-offset: 82px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibra Candela | Editor</title>
@@ -3125,7 +3125,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 
     <!-- Enlaces de texto -->
     <nav class="nav" id="mainNav"><a id="nav-inicio" class="active">Inicio</a><div class="nav-item-dropdown" id="navItemDropdown-productos">
-                <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos">
+                <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos" class="">
                     Productos <i class="fa-solid fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-submenu" id="navSubmenu-productos">
@@ -3137,7 +3137,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                         <a class="nav-sub-link" onclick="navigateToSubCatalog('halloween')">- Halloween</a>
                     
                 </div>
-            </div><a id="nav-acerca">Acerca de</a><a id="nav-contacto">Contacto</a><button type="button" class="nav-cfg-btn" id="navCfgBtn" title="Configurar menú"><i class="fa-solid fa-gear"></i></button></nav>
+            </div><a id="nav-acerca" class="">Acerca de</a><a id="nav-contacto">Contacto</a><button type="button" class="nav-cfg-btn" id="navCfgBtn" title="Configurar menú"><i class="fa-solid fa-gear"></i></button></nav>
 
     <!-- Íconos sociales agrupados -->
     <div class="social-nav">
@@ -3221,7 +3221,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- BESTSELLERS -->
-    <section class="bestsellers">
+    <section class="bestsellers" style="">
         <h2 contenteditable="true" class="" style="">Nuestros Favoritos de la Temporada</h2>
         <div class="bestsellers-grid">
             <div class="seller-card featured-slot" id="featured-card-1" data-featured-slot="1" data-product-id="3" onclick="openFeaturedSelector(1)" style="">
@@ -3252,7 +3252,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- TIPS -->
-    <section class="tips-section" style="background:var(--cs);">
+    <section class="tips-section" style="background: var(--cs);">
         <h2 contenteditable="true" class="" style="">Tips para Cuidar tu Vela</h2>
         <p contenteditable="true" style="max-width:580px;margin:-1.5rem auto 2.5rem;color:#555;">Sigue estas recomendaciones para que tus velas duren más y quemen de una forma más uniforme.</p>
         <div class="benefits-grid">
@@ -3287,7 +3287,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- FAQ -->
-    <section class="faq-section">
+    <section class="faq-section" style="">
         <h2 contenteditable="true" class="" style="">Preguntas Frecuentes</h2>
         <div style="display:flex;align-items:flex-start;gap:3rem;max-width:1100px;margin:0 auto;text-align:left;flex-wrap:wrap;padding:1rem 0;">
             <div style="flex:1;min-width:280px;" class="faq-accordion-container">
@@ -3324,7 +3324,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     </section>
 
     <!-- TESTIMONIOS -->
-    <section class="testimonials-section" style="background:var(--cs, #f4eee6);border-top:1px solid rgba(0,0,0,0.06);">
+    <section class="testimonials-section" style="background: var(--cs, #f4eee6); border-top: 1px solid rgba(0, 0, 0, 0.06);">
         <h2 contenteditable="true" class="" style="">Lo que dicen de Vibra Candela</h2>
         <div class="benefits-grid" style="margin-top:2rem;">
             <div class="testimonial-card" style="">
@@ -3376,9 +3376,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                 <button type="button" id="subCatalogClearBtn" class="subcatalog-clear-btn" onclick="navigateToSubCatalog(null)" style="display: none;">
                     <i class="fa-solid fa-arrow-left"></i> Ver todo el catálogo
                 </button>
-                <button type="button" id="catalogReorderBtn" class="catalog-reorder-btn" onclick="toggleCatalogReorderMode()" title="Reordenar productos en pantalla">
-                    <i class="fa-solid fa-arrows-up-down-left-right"></i> Reordenar
-                </button>
+                <button type="button" id="catalogReorderBtn" class="catalog-reorder-btn is-active" onclick="toggleCatalogReorderMode()" title="Finalizar orden"><i class="fa-solid fa-check"></i> Listo</button>
             </div>
             <div class="catalog-header-right">
                 <div class="catalog-search-wrap">
@@ -3390,7 +3388,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         </div>
         <!-- TOOLBAR: PÍLDORAS DE CATEGORÍA -->
         <div class="catalog-toolbar">
-            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill active">Todos</button><button type="button" class="cat-pill">Personalizadas</button><button type="button" class="cat-pill">Ambiental</button><button type="button" class="cat-pill">Navidad</button><button type="button" class="cat-pill">Autor</button><button type="button" class="cat-pill">Naturale</button><button type="button" class="cat-pill">Floral</button><button type="button" class="cat-pill">San Valentín</button><button type="button" class="cat-pill">Oval</button><button type="button" class="cat-pill">Recuerdos</button></div>
+            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill">Todos</button><button type="button" class="cat-pill">Navidad</button><button type="button" class="cat-pill">Personalizadas</button><button type="button" class="cat-pill active">Ambiental</button><button type="button" class="cat-pill">Autor</button><button type="button" class="cat-pill">Naturale</button><button type="button" class="cat-pill">Floral</button><button type="button" class="cat-pill">San Valentín</button><button type="button" class="cat-pill">Oval</button><button type="button" class="cat-pill">Recuerdos</button></div>
         </div>
         <div id="catalogEmptyMsg" class="catalog-empty" style="display: none;">
             <p>No encontramos productos que coincidan con tu búsqueda.</p>
@@ -3406,26 +3404,26 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                 <i class="fa-solid fa-arrow-left"></i> Volver a todos los productos
             </button>
         </div>
-        <div class="catalog-grid" id="catalogGrid"><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(1,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(1)">
-                        <div class="seller-img" style="background-image:url('vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp');"></div>
-                        <div class="seller-info"><h3>Velas Artesanales Decorativas</h3><p>Diseños</p>
-                        <div class="seller-meta"><span class="price">Desde S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
-                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(2,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(2)">
-                        <div class="seller-img" style="background-image:url('vibraimgs/imgprod/difusor-vainilla-dulce-vibracandela.webp');"></div>
-                        <div class="seller-info"><h3>Difusor Vainilla Dulce</h3><p>Fragancia reconfortante de larga duración.</p>
-                        <div class="seller-meta"><span class="price">S/. 36.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
-                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(3,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+        <div class="catalog-grid catalog-reordering" id="catalogGrid"><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(3,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
                     <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(3)">
                         <div class="seller-img" style="background-image:url('vibraimgs/imgprod/villa-navidena-vibracandela.webp');"></div>
                         <div class="seller-info"><h3>Villa Navideña</h3><p>Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales</p>
                         <div class="seller-meta"><span class="price">S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(1,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(1)">
+                        <div class="seller-img" style="background-image:url('vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp');"></div>
+                        <div class="seller-info"><h3>Velas de edición  especial</h3><p>Edición especial</p>
+                        <div class="seller-meta"><span class="price">Desde S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(5,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
                     <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(5)">
                         <div class="seller-img" style="background-image:url('vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp');"></div>
                         <div class="seller-info"><h3>Tulipán</h3><p>Por confirmar</p>
                         <div class="seller-meta"><span class="price">Desde S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(2,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(2)">
+                        <div class="seller-img" style="background-image:url('vibraimgs/imgprod/difusor-vainilla-dulce-vibracandela.webp');"></div>
+                        <div class="seller-info"><h3>Difusor Vainilla Dulce</h3><p>Fragancia reconfortante de larga duración.</p>
+                        <div class="seller-meta"><span class="price">S/. 36.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(6,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
                     <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(6)">
                         <div class="seller-img" style="background-image:url('vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp');"></div>
@@ -3466,6 +3464,11 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                         <div class="seller-img" style="background-image:url('vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp');"></div>
                         <div class="seller-info"><h3>Recuerdos</h3><p>Pequeñas velas personalizadas para grandes momentos.</p>
                         <div class="seller-meta"><span class="price">Desde S/. 10.50</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
+                    </div></div><div class="seller-card-wrapper"><button class="card-edt" onclick="openProdEdit(14,event)"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                    <div class="seller-card" style="cursor:pointer;" onclick="openProductModal(14)">
+                        <div class="seller-img" style="background-image:url('vibraimgs/imgprod/villa-nevada-vibracandela-3xbd3q.webp');"></div>
+                        <div class="seller-info"><h3>Villa    nevada</h3><p>Maceta decorativa de ecoresina o cemento en acabado blanco</p>
+                        <div class="seller-meta"><span class="price">S/. 45</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div>
                     </div></div><div class="add-product-card"><span class="ic">＋</span><span>Agregar producto</span></div></div>
     </div>
 </div>
@@ -3477,19 +3480,19 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
     <div class="modal-content" onclick="event.stopPropagation()">
         <button type="button" class="modal-close" onclick="closeProductModal(null)" aria-label="Cerrar modal" title="Cerrar">×</button>
         <div class="modal-flex">
-            <div id="modal-product-img" class="modal-img" style=""></div>
+            <div id="modal-product-img" class="modal-img" style="" role="img" aria-label="Velas Artesanales Decorativas Floral 01 - Velas Artesanales Vibra Candela"><img src="vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp" alt="Velas Artesanales Decorativas Floral 01 - Velas Artesanales Vibra Candela" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;opacity:0.001;pointer-events:none;"></div>
             <div class="modal-info">
                 <div>
-                    <h3 id="modal-product-title">Pino Navideño</h3>
-                    <div id="modal-product-meta" class="mprice">Navidad | S/. 24.90</div>
-                    <div class="variant-selector" id="modal-variant-selector" style="display: none;">
-                        <label>Selecciona una variante:</label>
-                        <div class="variant-chips" id="modal-variant-chips"></div>
+                    <h3 id="modal-product-title">Velas Artesanales Decorativas</h3>
+                    <div id="modal-product-meta" class="mprice">Personalizadas | S/. 59.90</div>
+                    <div class="variant-selector" id="modal-variant-selector" style="display: block;">
+                        <label>Aroma:</label>
+                        <div class="variant-chips" id="modal-variant-chips"><button class="vchip active">Floral 01</button><button class="vchip">Flora 02</button><button class="vchip">Virgen</button><button class="vchip">Halloween</button><button class="vchip">Peonía</button></div>
                     </div>
-                    <p id="modal-product-desc">Aromas disponibles:<br><br>🍪 Casa de Galletas<br>El irresistible aroma de galletas recién horneadas, con notas de jengibre, canela, clavo, azúcar y vainilla.<br><br>🍎 Otoño en Casa<br>Una cálida mezcla de manzana horneada, canela y naranja, acompañada de bourbon, mantequilla, arce y vainilla.<br><br>🌿 Calma Natural<br>Una combinación fresca y herbal de salvia, lavanda y romero, con suaves notas de sándalo y cedro.<br><br>Características:<br><br>. Elaborada artesanalmente con cera de soya.<br>. Peso: 120 g.<br>. Colores a elección.</p>
+                    <p id="modal-product-desc">Velas elaboradas a mano con 100% cera de soya, en envases de vidrio y con delicadas figuras decorativas de cera. <br><br>Cada diseño tiene su propio encanto, ideal para regalar, celebrar momentos especiales o darle un toque único a tus espacios.<br><br>Características:<br><br>. Cera: 100% de soya<br>. Presentación: Envase de vidrio transparente<br>. Diseños: Florales, temáticos, religiosos y personalizados<br>. Aromas y colores: A elección, según disponibilidad<br>. Personalización: Nombre o mensaje especial</p>
                 </div>
                 <div class="modal-actions-grp">
-                    <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa" data-product-id="6" data-active-variant="" data-product-info=""><i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp</a>
+                    <a id="modal-whatsapp-link" href="#" onclick="sendWhatsApp(event)" class="btn btn-wa" data-product-id="1" data-active-variant="" data-product-info=""><i class="fa-brands fa-whatsapp"></i> Solicitar por WhatsApp</a>
                     <button type="button" class="modal-btn-close" onclick="closeProductModal(null)">Cerrar</button>
                 </div>
             </div>
@@ -3520,13 +3523,11 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         <div class="fg"><label>Categoría</label><input type="text" id="pe-cat" placeholder="100% Soya"></div>
         <div class="fg" id="pe-subproduct-group">
             <label>Sub-producto / Temporada <span style="font-weight:400;color:#888;">(opcional)</span></label>
-            <select id="pe-subproduct" style="width:100%;padding:0.6rem;border:1px solid #cbd5e1;border-radius:6px;background:#fff;font-size:0.9rem;color:var(--cd);">
-                <option value="">-- Ninguno (Catálogo general) --</option>
-            </select>
+            <select id="pe-subproduct" style="width:100%;padding:0.6rem;border:1px solid #cbd5e1;border-radius:6px;background:#fff;font-size:0.9rem;color:var(--cd);"><option value="">-- Ninguno (Catálogo general) --</option><option value="navidad">Navidad</option><option value="halloween">Halloween</option></select>
         </div>
 
         <!-- PRECIO (oculto cuando hay variantes) -->
-        <div class="fg" id="pe-price-group" style="display: none;">
+        <div class="fg" id="pe-price-group" style="">
             <label>Precio</label>
             <input type="text" id="pe-price" placeholder="S/. 45.00" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)">
         </div>
@@ -3535,18 +3536,18 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         <div class="fg"><label>Descripción larga (modal)</label><textarea id="pe-long" rows="3" placeholder="Descripción detallada..." style="width: 489px; height: 228px;"></textarea></div>
 
         <!-- IMAGEN BASE (oculta cuando hay variantes con imagen propia) -->
-        <div class="fg" id="pe-img-group" style="display: none;">
+        <div class="fg" id="pe-img-group" style="">
             <label>Imagen del producto</label>
             <div class="img-tabs" style="margin-bottom:0.6rem;">
-                <button class="img-tab" id="peTabUrl" onclick="switchPeTab('url')"><i class="fa-solid fa-link"></i> URL</button>
-                <button class="img-tab active" id="peTabFile" onclick="switchPeTab('file')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Subir</button>
+                <button class="img-tab active" id="peTabUrl" onclick="switchPeTab('url')"><i class="fa-solid fa-link"></i> URL</button>
+                <button class="img-tab" id="peTabFile" onclick="switchPeTab('file')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Subir</button>
             </div>
-            <div class="img-panel" id="pePanelUrl">
+            <div class="img-panel active" id="pePanelUrl">
                 <input type="text" id="pe-img" placeholder="https://...">
             </div>
-            <div class="img-panel active" id="pePanelFile">
+            <div class="img-panel" id="pePanelFile">
                 <img class="img-upload-preview" id="pePreviewImg" src="" alt="" style="display: none;">
-                <div class="img-upload-name" id="peFileName" style="display: block;">vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp</div>
+                <div class="img-upload-name" id="peFileName" style="display: none;" data-safe-name="vibraimgs/imgprod/villa-nevada-vibracandela-3xbd3q.webp"></div>
                 <div class="img-drop-zone">
                     <input type="file" id="peFileInput" accept="image/*" onchange="handlePeFile(this)">
                     <div class="dz-icon"><i class="fa-solid fa-image" style="font-size:1.8rem;color:#aaa;"></i></div>
@@ -3562,7 +3563,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         </label>
 
         <!-- SECCIÓN VARIANTES -->
-        <div class="pe-variants-section active" id="peVariantsSection">
+        <div class="pe-variants-section" id="peVariantsSection">
             <p style="font-size:0.72rem;color:#aaa;margin-bottom:0.75rem;">Cada variante puede tener su propio precio e imagen. La imagen de la variante 1 se usa como imagen principal si las demás no tienen.</p>
         <div class="fg" id="pe-variant-type-group" style="margin-bottom:1rem;background:#f8fafc;padding:0.75rem;border-radius:8px;border:1px solid #e2e8f0;">
             <label style="font-size:0.82rem;font-weight:700;color:#334155;margin-bottom:4px;display:flex;align-items:center;gap:6px;">
@@ -3577,35 +3578,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                 <option value="Opción">Opción general / Otro</option>
             </select>
         </div>
-            <div id="peVariantsList"><div class="pe-variant-item" data-uid="vr17926344007941">
-        <div class="variant-header">
-            <span class="variant-label">Variante 1</span>
-            <button class="variant-del" onclick="this.closest('.pe-variant-item').remove();renumberVariants();" title="Eliminar variante"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="pe-variant-row">
-            <div><label>Nombre / tamaño</label><input class="v-name" type="text" placeholder="Ej. 100ml" value=""></div>
-            <div><label>Precio</label><input class="v-price" type="text" placeholder="S/. 35.00" value="" onblur="if(this.value.trim()) this.value=formatPrice(this.value)" onchange="if(this.value.trim()) this.value=formatPrice(this.value)"></div>
-        </div>
-        <div class="pe-variant-row full">
-            <div>
-                <label>Imagen (opcional)</label>
-                <div class="vimg-tabs">
-                    <button class="vimg-tab" onclick="switchVTab('vr17926344007941','url');event.preventDefault()"><i class="fa-solid fa-link"></i> URL</button>
-                    <button class="vimg-tab active" onclick="switchVTab('vr17926344007941','file');event.preventDefault()"><i class="fa-solid fa-upload"></i> Subir</button>
-                </div>
-                <div class="vimg-panel" id="vurl-vr17926344007941">
-                    <input class="v-img" type="text" placeholder="https://... o vibraimgs/..." value="">
-                </div>
-                <div class="vimg-panel active" id="vfile-vr17926344007941">
-                    <img class="vimg-preview" id="vprev-vr17926344007941" src="" alt="" style="display: none;">
-                    <div class="vimg-name" id="vname-vr17926344007941" style="display: block;">vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp</div>
-                    <div class="vimg-drop">
-                        <input type="file" accept="image/*" onchange="handleVariantFile(this,'vr17926344007941')">
-                        <p><i class="fa-solid fa-camera"></i> Clic o arrastra imagen</p>
-                    </div>
-                </div>
-            </div>
-        </div></div></div>
+            <div id="peVariantsList"></div>
             <button class="add-variant-btn" onclick="addVariantRow()">＋ Agregar variante</button>
         </div>
 
@@ -3945,7 +3918,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
      ========================================================= -->
 <div id="page-acerca" class="page">
     <section>
-        <h2 contenteditable="true">Nuestra Historia</h2>
+        <h2 contenteditable="true" class="">Nuestra Historia</h2>
         <div class="about-wrapper">
             <div class="about-bio" id="aboutBio">
                 <h3 contenteditable="true">Hola, soy Yenka</h3>
@@ -4403,12 +4376,12 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 // ESTADO GLOBAL
 // ============================================================
 const WA_NUMBER="51926997276";
-let products=[{"id":1,"name":"Velas Artesanales Decorativas","cat":"Personalizadas","price":"","shortDesc":"Diseños","longDesc":"Velas elaboradas a mano con 100% cera de soya, en envases de vidrio y con delicadas figuras decorativas de cera. \n\nCada diseño tiene su propio encanto, ideal para regalar, celebrar momentos especiales o darle un toque único a tus espacios.\n\nCaracterísticas:\n\n. Cera: 100% de soya\n. Presentación: Envase de vidrio transparente\n. Diseños: Florales, temáticos, religiosos y personalizados\n. Aromas y colores: A elección, según disponibilidad\n. Personalización: Nombre o mensaje especial","soldOut":false,"img":"","imgData":"","variants":[{"name":"Floral 01","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp","imgData":""},{"name":"Flora 02","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-flora-02-vibracandela.webp","imgData":""},{"name":"Virgen","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-virgen-vibracandela.webp","imgData":""},{"name":"Halloween","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-halloween-vibracandela.webp","imgData":""},{"name":"Peonía","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-peonia-vibracandela.webp","imgData":""}]},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/difusor-vainilla-dulce-vibracandela.webp","imgData":"","variants":[]},{"id":3,"name":"Villa Navideña","cat":"Navidad","price":"S/. 59.90","shortDesc":"Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales","longDesc":"Disponible en tres aromas:\n\n🍪 Casa de Galletas\nEse delicioso aroma a galletas recién horneadas, con notas de jengibre, canela, clavo y un toque dulce de vainilla.\n\n🍎 Otoño en Casa\nManzana horneada con canela y naranja, acompañada de notas de bourbon, mantequilla, arce y vainilla. Un aroma cálido y acogedor.\n\n🍓 Dulce Tentación\nUna mezcla de fresas con suaves toques cítricos, vainilla, crema y galleta Graham. Dulce y delicada.\n\nUn poquito más sobre tu vela:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso de la vela 250 g \n. Los colores a disponibilidad\n\nCada pieza tiene pequeños detalles que la hacen única.","soldOut":false,"img":"vibraimgs/imgprod/villa-navidena-vibracandela.webp","imgData":"","variants":[]},{"id":5,"name":"Tulipán","cat":"","price":"","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"","imgData":"","variants":[{"name":"Amarillo patito","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp","imgData":""},{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-rosa-vibracandela.webp","imgData":""},{"name":"Red","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-red-vibracandela.webp","imgData":""}],"subProduct":"","variantType":"Color"},{"id":6,"name":"Pino Navideño","cat":"Navidad","price":"","shortDesc":"Un clásico de Navidad con un toque especial.","longDesc":"Aromas disponibles:\n\n🍪 Casa de Galletas\nEl irresistible aroma de galletas recién horneadas, con notas de jengibre, canela, clavo, azúcar y vainilla.\n\n🍎 Otoño en Casa\nUna cálida mezcla de manzana horneada, canela y naranja, acompañada de bourbon, mantequilla, arce y vainilla.\n\n🌿 Calma Natural\nUna combinación fresca y herbal de salvia, lavanda y romero, con suaves notas de sándalo y cedro.\n\nCaracterísticas:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso: 120 g.\n. Colores a elección.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Modelo 01","price":"S/. 24.90","img":"vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp","imgData":""}]},{"id":7,"name":"Velas de autor","cat":"Autor","price":"","shortDesc":"Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.","longDesc":"Nuestra colección Velas de Autor reúne diseños elaborados artesanalmente con cera de soya, donde cada detalle forma parte de una creación especial.\n\nDesde delicadas flores hasta diseños inspirados en postres, cada vela combina aromas, colores y texturas para convertirse en un detalle perfecto para regalar o decorar tus espacios.\n\nCaracterísticas para la ficha del producto\n. Cera de soya 100%\n. Diseños: Florales, frutales, inspirados en postres y personalizados\n. Colores: Personalizables según diseño y disponibilidad\n. Aromas: A elección según disponibilidad\n.Etiquetas con nombres o mensajes especiales (cortos)","soldOut":false,"img":"","imgData":"","variants":[{"name":"Postre de fresas","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp","imgData":""},{"name":"Postre floral","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-floral-vibracandela.webp","imgData":""}]},{"id":8,"name":"Vela Naturale","cat":"Naturale","price":"","shortDesc":"Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.","longDesc":"Nuestra colección Naturale combina la delicadeza de las flores con la sencillez de un diseño atemporal.\n\nCada vela está elaborada artesanalmente con cera de soya, decorada con flores de cera en diferentes formas y tonalidades, y presentada en un envase de acabado tipo concreto blanco.\n\nCaracterísticas\n- Cera: 100% soya.\n- Envase: Artesanal, con acabado tipo concreto blanco.\n- Decoración: Flores de cera en relieve.\n- Colores: Personalizables según disponibilidad.\n- Aromas: A elección según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Margaritas","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp","imgData":""},{"name":"Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-rosa-floral-vibracandela.webp","imgData":""},{"name":"Lila & Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-lila-rosa-floral-vibracandela.webp","imgData":""}]},{"id":9,"name":"Ondas","cat":"Floral","subProduct":"navidad","variantType":"Diseño","price":"","shortDesc":"Diseño floral de bordes ondulados y acabados en plata o dorado","longDesc":"Diseño en cera de soya, con un recipiente de acabado en concreto blanco con bordes ondulados en color plata o dorado.\n\nCaracterísticas \n\n. Cera: 100% de coya \n. Envase: Acabado tipo concreto\n. Decoración:Flores en relieve \n. Aromas según disponibilidad","soldOut":false,"img":"","imgData":"","variants":[{"name":"Plata","price":"S/. 49","img":"vibraimgs/imgprod/ondas-plata-vibracandela.webp","imgData":""},{"name":"Dorado","price":"S/. 49","img":"vibraimgs/imgprod/ondas-dorado-vibracandela.webp","imgData":""}]},{"id":10,"name":"Valentín","cat":"San Valentín","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.","longDesc":"Vela artesanal  decorada con corazones en tonos rojos y rosados  en un envase de vidrio transparente. \n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Vidrio transparente.\n. Decoración: Corazones de cera en relieve.\n. Diseños: Corazones pequeños o grandes.\n. Aromas: A elección, según disponibilidad.\n. Personalización: Nombres, mensajes y colores.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-rosa-vibracandela.webp","imgData":""},{"name":"Red","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-red-vibracandela.webp","imgData":""}]},{"id":11,"name":"Aura Oval","cat":"Oval","subProduct":"","variantType":"Color","price":"","shortDesc":"Diseño ovalado con delicados detalles florales en cera de soya","longDesc":"Diseño ovalado de acabado minimalista, decorado con flores de cera en relieve y tonos delicados. Incorpora una mecha de madera de cerezo que aporta un toque natural.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Ovalado, con acabado tipo concreto blanco.\n. Decoración: Flores de cera en relieve, con colores a elección.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp","imgData":""},{"name":"Lila","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-lila-vibracandela.webp","imgData":""},{"name":"Uva","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-uva-vibracandela.webp","imgData":""},{"name":"Cuarzo","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-cuarzo-vibracandela.webp","imgData":""}]},{"id":12,"name":"Atenea","cat":"Floral","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.","longDesc":"Diseño de inspiración clásica, con un envase de líneas acanaladas y acabado tipo concreto blanco. Decorado artesanalmente con flores de cera de soya en relieve, en diferentes formas y tonalidades.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Acabado tipo concreto blanco, con relieve acanalado.\n. Decoración: Flores y detalles de cera en relieve.\n. Colores: A elección, según disponibilidad.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Mini Margaritas","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp","imgData":""},{"name":"Margarita","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-margarita-vibracandela.webp","imgData":""}]},{"id":13,"name":"Recuerdos","cat":"Recuerdos","subProduct":"","variantType":"Diseño","price":"","shortDesc":"Pequeñas velas personalizadas para grandes momentos.","longDesc":"Velitas con mensajes personalizados para celebrar ocasiones especiales y sorprender a quienes más quieres.\n\nCaracterísticas\n\n. Cera: 100 % soya.\n. Contenido: 25 g.\n. Envase: Frasco de vidrio transparente con tapa de corcho.\n. Personalización: Nombres, fechas, frases o mensajes especiales.\n. Decoración: Cinta decorativa y detalles florales según disponibilidad.\n. Aromas: A elección, según disponibilidad.\n. Presentación: Caja kraft con relleno decorativo (opcional con costo adiciona).\n. Ocasiones: Baby showers, bautizos, matrimonios, cumpleaños, anuncios especiales y eventos.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Bienvenida","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp","imgData":""},{"name":"Anuncio","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-anuncio-vibracandela.webp","imgData":""}]}];
-let nextId=14;
+let products=[{"id":3,"name":"Villa Navideña","cat":"Navidad","price":"S/. 59.90","shortDesc":"Lleva la magia de la navidad a tus espacios. Un diseño ideal para regalar y crear momentos especiales","longDesc":"Disponible en tres aromas:\n\n🍪 Casa de Galletas\nEse delicioso aroma a galletas recién horneadas, con notas de jengibre, canela, clavo y un toque dulce de vainilla.\n\n🍎 Otoño en Casa\nManzana horneada con canela y naranja, acompañada de notas de bourbon, mantequilla, arce y vainilla. Un aroma cálido y acogedor.\n\n🍓 Dulce Tentación\nUna mezcla de fresas con suaves toques cítricos, vainilla, crema y galleta Graham. Dulce y delicada.\n\nUn poquito más sobre tu vela:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso de la vela 250 g \n. Los colores a disponibilidad\n\nCada pieza tiene pequeños detalles que la hacen única.","soldOut":false,"img":"vibraimgs/imgprod/villa-navidena-vibracandela.webp","imgData":"","variants":[]},{"id":1,"name":"Velas de edición  especial","cat":"Personalizadas","price":"","shortDesc":"Edición especial","longDesc":"Velas elaboradas artesanalmente  con cera de soya, en envases de vidrio y con delicadas figuras decorativas de cera. \n\nCaracterísticas:\n\n. Cera: 100% de soya\n. Presentación: Envase de vidrio transparente\n. Diseños: Florales, temáticos, religiosos y personalizados\n. Aromas y colores: A elección, según disponibilidad\n. Personalización: Nombre o mensaje especial","soldOut":false,"img":"","imgData":"","variants":[{"name":"Floral 01","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp","imgData":""},{"name":"Floral 02","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-flora-02-vibracandela.webp","imgData":""},{"name":"Virgen","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-virgen-vibracandela.webp","imgData":""},{"name":"Halloween","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-halloween-vibracandela.webp","imgData":""},{"name":"Peonía","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-peonia-vibracandela.webp","imgData":""}],"subProduct":"","variantType":"Aroma"},{"id":5,"name":"Tulipán","cat":"","price":"","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"","imgData":"","variants":[{"name":"Amarillo patito","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp","imgData":""},{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-rosa-vibracandela.webp","imgData":""},{"name":"Red","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-red-vibracandela.webp","imgData":""}],"subProduct":"","variantType":"Color"},{"id":2,"name":"Difusor Vainilla Dulce","cat":"Ambiental","price":"S/. 36.00","shortDesc":"Fragancia reconfortante de larga duración.","longDesc":"Base eco-amigable libre de alcohol. Notas cálidas de vainilla que envuelven tus espacios por más de 3 meses.","soldOut":false,"img":"vibraimgs/imgprod/difusor-vainilla-dulce-vibracandela.webp","imgData":"","variants":[]},{"id":6,"name":"Pino Navideño","cat":"Navidad","price":"","shortDesc":"Un clásico de Navidad con un toque especial.","longDesc":"Aromas disponibles:\n\n🍪 Casa de Galletas\nEl irresistible aroma de galletas recién horneadas, con notas de jengibre, canela, clavo, azúcar y vainilla.\n\n🍎 Otoño en Casa\nUna cálida mezcla de manzana horneada, canela y naranja, acompañada de bourbon, mantequilla, arce y vainilla.\n\n🌿 Calma Natural\nUna combinación fresca y herbal de salvia, lavanda y romero, con suaves notas de sándalo y cedro.\n\nCaracterísticas:\n\n. Elaborada artesanalmente con cera de soya.\n. Peso: 120 g.\n. Colores a elección.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Modelo 01","price":"S/. 24.90","img":"vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp","imgData":""}]},{"id":7,"name":"Velas de autor","cat":"Autor","price":"","shortDesc":"Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.","longDesc":"Nuestra colección Velas de Autor reúne diseños elaborados artesanalmente con cera de soya, donde cada detalle forma parte de una creación especial.\n\nDesde delicadas flores hasta diseños inspirados en postres, cada vela combina aromas, colores y texturas para convertirse en un detalle perfecto para regalar o decorar tus espacios.\n\nCaracterísticas para la ficha del producto\n. Cera de soya 100%\n. Diseños: Florales, frutales, inspirados en postres y personalizados\n. Colores: Personalizables según diseño y disponibilidad\n. Aromas: A elección según disponibilidad\n.Etiquetas con nombres o mensajes especiales (cortos)","soldOut":false,"img":"","imgData":"","variants":[{"name":"Postre de fresas","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp","imgData":""},{"name":"Postre floral","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-floral-vibracandela.webp","imgData":""}]},{"id":8,"name":"Vela Naturale","cat":"Naturale","price":"","shortDesc":"Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.","longDesc":"Nuestra colección Naturale combina la delicadeza de las flores con la sencillez de un diseño atemporal.\n\nCada vela está elaborada artesanalmente con cera de soya, decorada con flores de cera en diferentes formas y tonalidades, y presentada en un envase de acabado tipo concreto blanco.\n\nCaracterísticas\n- Cera: 100% soya.\n- Envase: Artesanal, con acabado tipo concreto blanco.\n- Decoración: Flores de cera en relieve.\n- Colores: Personalizables según disponibilidad.\n- Aromas: A elección según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Margaritas","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp","imgData":""},{"name":"Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-rosa-floral-vibracandela.webp","imgData":""},{"name":"Lila & Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-lila-rosa-floral-vibracandela.webp","imgData":""}]},{"id":9,"name":"Ondas","cat":"Floral","subProduct":"navidad","variantType":"Diseño","price":"","shortDesc":"Diseño floral de bordes ondulados y acabados en plata o dorado","longDesc":"Diseño en cera de soya, con un recipiente de acabado en concreto blanco con bordes ondulados en color plata o dorado.\n\nCaracterísticas \n\n. Cera: 100% de coya \n. Envase: Acabado tipo concreto\n. Decoración:Flores en relieve \n. Aromas según disponibilidad","soldOut":false,"img":"","imgData":"","variants":[{"name":"Plata","price":"S/. 49","img":"vibraimgs/imgprod/ondas-plata-vibracandela.webp","imgData":""},{"name":"Dorado","price":"S/. 49","img":"vibraimgs/imgprod/ondas-dorado-vibracandela.webp","imgData":""}]},{"id":10,"name":"Valentín","cat":"San Valentín","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.","longDesc":"Vela artesanal  decorada con corazones en tonos rojos y rosados  en un envase de vidrio transparente. \n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Vidrio transparente.\n. Decoración: Corazones de cera en relieve.\n. Diseños: Corazones pequeños o grandes.\n. Aromas: A elección, según disponibilidad.\n. Personalización: Nombres, mensajes y colores.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-rosa-vibracandela.webp","imgData":""},{"name":"Red","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-red-vibracandela.webp","imgData":""}]},{"id":11,"name":"Aura Oval","cat":"Oval","subProduct":"","variantType":"Color","price":"","shortDesc":"Diseño ovalado con delicados detalles florales en cera de soya","longDesc":"Diseño ovalado de acabado minimalista, decorado con flores de cera en relieve y tonos delicados. Incorpora una mecha de madera de cerezo que aporta un toque natural.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Ovalado, con acabado tipo concreto blanco.\n. Decoración: Flores de cera en relieve, con colores a elección.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp","imgData":""},{"name":"Lila","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-lila-vibracandela.webp","imgData":""},{"name":"Uva","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-uva-vibracandela.webp","imgData":""},{"name":"Cuarzo","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-cuarzo-vibracandela.webp","imgData":""}]},{"id":12,"name":"Atenea","cat":"Floral","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.","longDesc":"Diseño de inspiración clásica, con un envase de líneas acanaladas y acabado tipo concreto blanco. Decorado artesanalmente con flores de cera de soya en relieve, en diferentes formas y tonalidades.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Acabado tipo concreto blanco, con relieve acanalado.\n. Decoración: Flores y detalles de cera en relieve.\n. Colores: A elección, según disponibilidad.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Mini Margaritas","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp","imgData":""},{"name":"Margarita","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-margarita-vibracandela.webp","imgData":""}]},{"id":13,"name":"Recuerdos","cat":"Recuerdos","subProduct":"","variantType":"Diseño","price":"","shortDesc":"Pequeñas velas personalizadas para grandes momentos.","longDesc":"Velitas con mensajes personalizados para celebrar ocasiones especiales y sorprender a quienes más quieres.\n\nCaracterísticas\n\n. Cera: 100 % soya.\n. Contenido: 25 g.\n. Envase: Frasco de vidrio transparente con tapa de corcho.\n. Personalización: Nombres, fechas, frases o mensajes especiales.\n. Decoración: Cinta decorativa y detalles florales según disponibilidad.\n. Aromas: A elección, según disponibilidad.\n. Presentación: Caja kraft con relleno decorativo (opcional con costo adiciona).\n. Ocasiones: Baby showers, bautizos, matrimonios, cumpleaños, anuncios especiales y eventos.","soldOut":false,"img":"","imgData":"","variants":[{"name":"Bienvenida","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp","imgData":""},{"name":"Anuncio","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-anuncio-vibracandela.webp","imgData":""}]},{"id":14,"name":"Villa    nevada","cat":"","subProduct":"navidad","variantType":"Aroma","price":"S/. 45","shortDesc":"Maceta decorativa de ecoresina o cemento en acabado blanco","longDesc":"","soldOut":false,"img":"vibraimgs/imgprod/villa-nevada-vibracandela-3xbd3q.webp","imgData":"","variants":[]}];
+let nextId=15;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif","whiteImgUrl":""};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"205689fee3b6d362\",\"c\":\"a7fe3405362a8ebd61e61b844d208d26adb2692b5701b069026f78eb866c02ce13d2a93bfadb12fa7d1814a1521f00087575747a1280cab6adb14a7ec0a68c93cbd798f9e05213af304df01367e6951e68b6347b5cd1e437d2bed78ed7\",\"a\":\"7d46fa3e3f5d622662f50ee76274400ae776dcf081a6843afcbf9079983adb9b\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"fa76317da745dc18\",\"c\":\"651c849172a2ebe2bf74f4f4fa43101e3e31d0101364cc44910bb9db88fc3336708a485aff73ce9cb91e04796991f8cd555b8b7844ad9e9c4b4090a785d27b696e3855cca3e810c4b9e9550dab8daab0beaa68fec72980cee5842e6197\",\"a\":\"ec8fd38f3ef9c1b5ee36ca56e5ddfd9af99319bff03dc298a8a800f37de278f8\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -9109,4 +9082,5 @@ refreshScrollReveal();
     }catch(_){}
 })();
 </script>
+
 </body></html>
