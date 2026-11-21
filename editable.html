@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" style="--header-offset: 72px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
+<html lang="es" style="--header-offset: 82px; --cp: #6e8174; --cs: #f4eee6; --ca: #d9c3b0; --cd: #333333; --cl: #faf8f5;"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vibra Candela | Editor</title>
@@ -3125,7 +3125,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 
     <!-- Enlaces de texto -->
     <nav class="nav" id="mainNav"><a id="nav-inicio" class="active">Inicio</a><div class="nav-item-dropdown" id="navItemDropdown-productos">
-                <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos">
+                <a onclick="navigateTo('productos'); navigateToSubCatalog(null);" id="nav-productos" class="">
                     Productos <i class="fa-solid fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-submenu" id="navSubmenu-productos">
@@ -3390,7 +3390,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         </div>
         <!-- TOOLBAR: PÍLDORAS DE CATEGORÍA -->
         <div class="catalog-toolbar">
-            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill">Todos</button><button type="button" class="cat-pill">De edición</button><button type="button" class="cat-pill">Difusores</button><button type="button" class="cat-pill">Navidad</button><button type="button" class="cat-pill">Autor</button><button type="button" class="cat-pill active">Floral</button><button type="button" class="cat-pill">San Valentín</button><button type="button" class="cat-pill">Recuerdos</button></div>
+            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill active">Todos</button><button type="button" class="cat-pill">De edición</button><button type="button" class="cat-pill">Difusores</button><button type="button" class="cat-pill">Navidad</button><button type="button" class="cat-pill">Autor</button><button type="button" class="cat-pill">Floral</button><button type="button" class="cat-pill">San Valentín</button><button type="button" class="cat-pill">Recuerdos</button></div>
         </div>
         <div id="catalogEmptyMsg" class="catalog-empty" style="display: none;">
             <p>No encontramos productos que coincidan con tu búsqueda.</p>
@@ -4480,7 +4480,7 @@ let nextId=15;
 let editingProductId=null;
 let logoState={"mode":"img","text":"","imgUrl":"vibraimgs/logo.gif","whiteImgUrl":""};
 let heroState={"url":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","publishUrl":"vibraimgs/730320912_17940493944252683_8501733020269616275_n.jpg","color":"#6e8174","opacity":45,"blend":"overlay","btnText":"Explorar Catálogo","btnBg":"#6e8174","btnColor":"#ffffff"};
-let ghEncryptedToken = "{\"v\":2,\"s\":\"d896d10c7042ee61\",\"c\":\"8940657db025dded67a9c1cc764d48e36a86e9be732f75f5300148ee61fe778d577077820c3fd00f08beb32b8f27827358f219569894dcd0d2c9d233d27f097ce5787c5bf933765512d720a04124c2f83927f4dbc496e694966f9db64e\",\"a\":\"f2c23ef117d35866643e81a9ee58ee86dff00b6aed0e66e18f2a3a00c265df46\"}";
+let ghEncryptedToken = "{\"v\":2,\"s\":\"1ac10ad5799599cf\",\"c\":\"c42af3d3d712083572389affc1dcd6e4a48ddb4dd595b987cdbd4db4b30eae1a9e8c150d98260d952d76e8d2958e9754cfc6e8bfd93e5440d899fd1f97c8151d8fbce65541c323e4805176112e54b91df6bdc79a8a6b581161ab17cabd\",\"a\":\"c10b656a05d7eadb52e376c6151494c09c96ecbbc0c6b1d955e1e0de9dfb427b\"}";
 let ghSavedRepo = "egeostyle/vc";
 let ghSavedBranch = "main";
 let ghAuthHash = "c620d7dec27fe977ffb786cda8010c431c59ff1f0d20f20129e9df78e2e25ac5";
@@ -9181,6 +9181,7 @@ refreshScrollReveal();
     }catch(_){}
 })();
 </script>
+
 
 
 </body></html>
