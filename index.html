@@ -20,7 +20,8 @@
 }
 </script>
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://vibracandela.com/vibraimgs/tips1.png">
+<meta property="og:image" content="https://vibracandela.com/vibraimgs/imgprod/villa-navidena-vibracandela.webp">
+    <meta property="og:image:secure_url" content="https://vibracandela.com/vibraimgs/imgprod/villa-navidena-vibracandela.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;display=swap" rel="stylesheet">
@@ -31,112 +32,6 @@
    ESTILOS FASE 2: NAVEGACIÓN CONFIGURABLE & PLANTILLAS TEMÁTICAS
    ============================================================ */
 
-/* Botones flotantes (Guardar y Temas) - Solo íconos circulares */
-.editor-fab-save, .editor-fab-theme {
-    position: fixed !important;
-    right: 28px !important;
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    z-index: 990 !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    outline: none !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
-}
-.editor-fab-save {
-    bottom: 28px !important;
-    background: #1e293b !important;
-    color: #ffffff !important;
-    border: 2px solid rgba(255, 255, 255, 0.25) !important;
-}
-.editor-fab-save:hover {
-    background: #0f172a !important;
-    transform: scale(1.08) !important;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
-}
-.editor-fab-theme {
-    bottom: 94px !important;
-    background: #475569 !important;
-    color: #ffffff !important;
-    border: 2px solid rgba(255, 255, 255, 0.25) !important;
-}
-.editor-fab-theme:hover {
-    background: #334155 !important;
-    transform: scale(1.08) !important;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38) !important;
-}
-.editor-fab-save i, .editor-fab-theme i {
-    font-size: 1.35rem !important;
-    color: #ffffff !important;
-    margin: 0 !important;
-    line-height: 1 !important;
-}
-.editor-fab-save:active, .editor-fab-theme:active {
-    transform: scale(0.94) !important;
-}
-
-@media(max-width: 900px) {
-    .editor-fab-save, .editor-fab-theme {
-        right: 20px !important;
-        width: 48px !important;
-        height: 48px !important;
-    }
-    .editor-fab-save { bottom: 20px !important; }
-    .editor-fab-theme { bottom: 78px !important; }
-    .editor-fab-save i, .editor-fab-theme i { font-size: 1.2rem !important; }
-}
-
-/* Ocultar botones flotantes si hay modales abiertos */
-body:has(.modal-overlay.open) .editor-fab-save,
-body:has(.modal-overlay.open) .editor-fab-theme,
-body:has(.pe-overlay.open) .editor-fab-save,
-body:has(.pe-overlay.open) .editor-fab-theme,
-body:has(.fps-overlay.open) .editor-fab-save,
-body:has(.fps-overlay.open) .editor-fab-theme,
-body:has(.iu-overlay.open) .editor-fab-save,
-body:has(.iu-overlay.open) .editor-fab-theme,
-body:has(.gh-overlay.open) .editor-fab-save,
-body:has(.gh-overlay.open) .editor-fab-theme,
-body:has(.nav-cfg-overlay.open) .editor-fab-save,
-body:has(.nav-cfg-overlay.open) .editor-fab-theme,
-body:has(.theme-overlay.open) .editor-fab-save,
-body:has(.theme-overlay.open) .editor-fab-theme {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform: scale(0.7) !important;
-}
-
-/* Botón tuerca de configuración del menú (estilo armonizado con Vibra Candela) */
-.nav-cfg-btn {
-    background: rgba(85, 107, 94, 0.08) !important;
-    border: 1px solid rgba(85, 107, 94, 0.25) !important;
-    color: var(--cp, #556b5e) !important;
-    border-radius: 50% !important;
-    width: 28px !important;
-    height: 28px !important;
-    padding: 0 !important;
-    margin-left: 0.6rem !important;
-    font-size: 0.8rem !important;
-    cursor: pointer !important;
-    transition: all 0.22s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    vertical-align: middle !important;
-    line-height: 1 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
-}
-.nav-cfg-btn:hover {
-    border-color: var(--cp, #556b5e) !important;
-    color: #ffffff !important;
-    background: var(--cp, #556b5e) !important;
-    transform: rotate(35deg) scale(1.08) !important;
-    box-shadow: 0 3px 8px rgba(85, 107, 94, 0.25) !important;
-}
 
 /* Dropdown del menú Productos */
 .nav-item-dropdown {
@@ -271,45 +166,6 @@ body:has(.theme-overlay.open) .editor-fab-theme {
     color: var(--cp, #556b5e) !important;
 }
 
-/* Botón de Modo Reordenar en Catálogo */
-.catalog-reorder-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 0.45rem 0.95rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    font-family: var(--f);
-    color: var(--cd, #333333);
-    background: #ffffff;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-.catalog-reorder-btn:hover {
-    border-color: var(--cp, #556b5e);
-    color: var(--cp, #556b5e);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-.catalog-reorder-btn.is-active {
-    background: #166534 !important;
-    color: #ffffff !important;
-    border-color: #15803d !important;
-    box-shadow: 0 4px 14px rgba(22, 101, 52, 0.35) !important;
-}
-body[data-theme="halloween"] .catalog-reorder-btn {
-    background: #1b1128 !important;
-    color: #f1ebfa !important;
-    border-color: rgba(255, 107, 0, 0.4) !important;
-}
-body[data-theme="halloween"] .catalog-reorder-btn.is-active {
-    background: #ff6b00 !important;
-    color: #120720 !important;
-    border-color: #ff8533 !important;
-}
-
 
 /* ============================================================
    CONTROL MODULAR DE CAPAS TEMÁTICAS (DECORACIONES POR SWITCH)
@@ -356,100 +212,6 @@ body[data-hide-particles="true"] .theme-particle {
     pointer-events: none;
 }
 
-/* Modo Reordenar en la Grilla del Catálogo */
-.catalog-reordering .seller-card-wrapper {
-    cursor: grab;
-    user-select: none;
-    -webkit-user-select: none;
-    transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.2s ease, opacity 0.2s ease;
-}
-.catalog-reordering .seller-card-wrapper:active {
-    cursor: grabbing;
-}
-.catalog-reordering .seller-card-wrapper.is-dragging {
-    opacity: 0.35;
-    transform: scale(0.95);
-}
-.catalog-reordering .seller-card-wrapper.drag-over {
-    outline: 3px dashed var(--cp, #556b5e) !important;
-    outline-offset: 4px;
-    border-radius: 14px;
-    transform: scale(1.02);
-}
-.catalog-reordering .card-edt {
-    display: none !important;
-}
-.catalog-reordering .add-product-card {
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-/* Barra de control de orden encima de cada card */
-.card-reorder-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 10px;
-    padding: 0.35rem 0.65rem;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-body[data-theme="halloween"] .card-reorder-bar {
-    background: rgba(27, 17, 40, 0.96) !important;
-    border-color: rgba(255, 107, 0, 0.35) !important;
-    color: #f1ebfa !important;
-}
-.card-reorder-handle {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--cp, #556b5e);
-    cursor: grab;
-}
-body[data-theme="halloween"] .card-reorder-handle {
-    color: #ff9e00 !important;
-}
-.card-reorder-arrows {
-    display: inline-flex;
-    gap: 4px;
-}
-.card-order-btn {
-    width: 28px;
-    height: 28px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    border: 1px solid #cbd5e1;
-    background: #f8fafc;
-    color: #1e293b;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.15s ease;
-}
-.card-order-btn:hover:not(:disabled) {
-    background: var(--cp, #556b5e);
-    color: #ffffff;
-    border-color: var(--cp, #556b5e);
-}
-.card-order-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-}
-body[data-theme="halloween"] .card-order-btn {
-    background: #2a1b3d;
-    border-color: rgba(255, 107, 0, 0.3);
-    color: #f1ebfa;
-}
-body[data-theme="halloween"] .card-order-btn:hover:not(:disabled) {
-    background: #ff6b00;
-    color: #120720;
-    border-color: #ff6b00;
-}
 
 /* Estado vacío del subcatálogo */
 .subcatalog-empty-state {
@@ -496,319 +258,6 @@ body[data-theme="halloween"] .card-order-btn:hover:not(:disabled) {
 }
 .subcatalog-empty-btn:hover { opacity: 0.92; transform: scale(1.03); }
 
-/* Modal: Configuración del menú y temas */
-.nav-cfg-overlay, .theme-overlay {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    background: rgba(15, 23, 42, 0.65) !important;
-    backdrop-filter: blur(4px) !important;
-    display: none !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 10000 !important;
-    padding: 1rem !important;
-}
-.nav-cfg-overlay.open, .theme-overlay.open {
-    display: flex !important;
-    animation: fadeInSubmenu 0.2s ease !important;
-}
-.nav-cfg-modal, .theme-modal {
-    background: #ffffff !important;
-    border-radius: 16px !important;
-    width: 100% !important;
-    max-width: 540px !important;
-    max-height: 90vh !important;
-    display: flex !important;
-    flex-direction: column !important;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3) !important;
-    overflow: hidden !important;
-}
-.theme-modal { max-width: 680px !important; }
-.cfg-modal-header {
-    padding: 1.2rem 1.5rem !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-}
-.cfg-modal-header h3 { font-size: 1.15rem !important; font-weight: 700 !important; color: #0f172a !important; display: flex !important; align-items: center !important; gap: 8px !important; }
-.cfg-modal-close {
-    background: transparent !important;
-    border: none !important;
-    font-size: 1.2rem !important;
-    color: #94a3b8 !important;
-    cursor: pointer !important;
-    padding: 4px 8px !important;
-    border-radius: 6px !important;
-}
-.cfg-modal-close:hover { background: #f1f5f9 !important; color: #334155 !important; }
-.cfg-modal-body {
-    padding: 1.4rem 1.5rem !important;
-    overflow-y: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1.5rem !important;
-}
-.cfg-section-title {
-    font-size: 0.86rem !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    color: #64748b !important;
-    margin-bottom: 0.6rem !important;
-}
-.nav-sort-list { display: flex; flex-direction: column; gap: 8px; }
-.nav-sort-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 10px 14px;
-    cursor: grab;
-    transition: all 0.2s ease;
-}
-.nav-sort-item:active { cursor: grabbing; }
-.nav-sort-item.dragging { opacity: 0.4; background: #e2e8f0; border-style: dashed; }
-.nav-sort-item.drag-over { border-color: var(--cp); background: #f0fdf4; }
-.nav-sort-left { display: flex; align-items: center; gap: 10px; }
-.nav-drag-handle { color: #94a3b8; font-size: 0.95rem; cursor: grab; }
-.nav-item-label { font-size: 0.92rem; font-weight: 600; color: #1e293b; }
-.nav-sort-controls { display: flex; align-items: center; gap: 4px; }
-.btn-sort-arrow {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    color: #475569;
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    transition: all 0.15s;
-}
-.btn-sort-arrow:hover:not(:disabled) { background: #f1f5f9; color: #0f172a; border-color: #94a3b8; }
-.btn-sort-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
-
-/* Switch Toggle */
-.switch-control {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 12px 14px;
-}
-.switch-info { display: flex; flex-direction: column; gap: 2px; }
-.switch-title { font-size: 0.92rem; font-weight: 600; color: #1e293b; }
-.switch-desc { font-size: 0.76rem; color: #64748b; }
-.switch-btn { position: relative; display: inline-block; width: 44px; height: 24px; }
-.switch-btn input { opacity: 0; width: 0; height: 0; }
-.switch-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .25s; border-radius: 24px; }
-.switch-slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .25s; border-radius: 50%; }
-input:checked + .switch-slider { background-color: #16a34a; }
-input:checked + .switch-slider:before { transform: translateX(20px); }
-
-/* Subproductos Manager */
-.subprod-manager {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.subprod-list { display: flex; flex-direction: column; gap: 6px; }
-.subprod-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 8px 12px;
-}
-.subprod-name { font-size: 0.88rem; font-weight: 600; color: #334155; }
-.subprod-del-btn { background: transparent; border: none; color: #ef4444; cursor: pointer; padding: 4px 6px; border-radius: 4px; }
-.subprod-del-btn:hover { background: #fee2e2; }
-.add-subprod-row { display: flex; gap: 8px; }
-.add-subprod-row input {
-    flex: 1;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 0.86rem;
-    outline: none;
-}
-.add-subprod-row input:focus { border-color: var(--cp); }
-.btn-add-sub {
-    background: var(--cp);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 0.84rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-.btn-add-sub:hover { opacity: 0.9; }
-
-.cfg-modal-footer {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid #f1f5f9;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    background: #ffffff;
-}
-.btn-cfg-cancel {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    color: #475569;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 0.86rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-.btn-cfg-save {
-    background: #1e293b;
-    border: none;
-    color: #ffffff;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 0.86rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-.btn-cfg-save:hover { background: #0f172a; }
-
-/* Modal: Plantillas Temáticas */
-.theme-presets-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-}
-.theme-card {
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: relative;
-}
-.theme-card:hover {
-    border-color: var(--cp, #6e8174);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-}
-.theme-card.active {
-    border-color: var(--cp, #6e8174);
-    background: #fdfbf7;
-}
-.theme-card-header { display: flex; align-items: center; justify-content: space-between; }
-.theme-card-title { font-size: 0.96rem; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 8px; }
-.theme-active-badge {
-    font-size: 0.68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: var(--cp, #6e8174);
-    color: #ffffff;
-    padding: 2px 8px;
-    border-radius: 12px;
-}
-.theme-swatches { display: flex; align-items: center; gap: 6px; }
-.theme-dot {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-.theme-card-desc { font-size: 0.78rem; color: #64748b; line-height: 1.4; margin: 0; }
-.theme-card-action { margin-top: auto; }
-.theme-card-btn {
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    color: #1e293b;
-    border-radius: 8px;
-    padding: 7px 10px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-.theme-card.active .theme-card-btn { background: var(--cp, #6e8174); color: #ffffff; border-color: var(--cp, #6e8174); }
-.theme-card:hover .theme-card-btn { border-color: var(--cp, #6e8174); color: var(--cp, #6e8174); }
-
-/* Color Customizer Section */
-.theme-customizer-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 0.5rem;
-}
-.color-picker-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 10px;
-}
-.color-picker-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-.color-picker-item label { font-size: 0.72rem; font-weight: 700; color: #64748b; }
-.color-picker-input-wrap { display: flex; align-items: center; gap: 6px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 3px 6px; }
-.color-picker-input-wrap input[type="color"] {
-    border: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 0;
-    background: transparent;
-}
-.color-picker-hex { font-size: 0.75rem; font-family: monospace; color: #334155; }
-
-.theme-fx-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.71rem;
-    font-weight: 600;
-    color: var(--cp, #6e8174);
-    background: rgba(110, 129, 116, 0.09);
-    border: 1px solid rgba(110, 129, 116, 0.2);
-    border-radius: 6px;
-    padding: 3px 8px;
-    width: fit-content;
-}
 
 /* ============================================================
    SISTEMA ATMOSFÉRICO Y DECORATIVO POR PLANTILLA TEMÁTICA
@@ -2281,150 +1730,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 .modal-btn-close{display:none;width:100%;text-align:center;background:transparent;border:1px solid #d1d5db;color:#4b5563;padding:0.55rem 1rem;border-radius:6px;font-size:0.88rem;cursor:pointer;transition:all 0.18s ease;font-weight:600;}
 .modal-btn-close:hover{background:#f3f4f6;color:#111827;border-color:#9ca3af;}
 
-/* PRODUCT EDITOR */
-.pe-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:3000;opacity:0;pointer-events:none;transition:opacity 0.22s;}
-.pe-overlay.open{opacity:1;pointer-events:auto;}
-.pe-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:520px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-18px);transition:transform 0.22s;max-height:90vh;overflow-y:auto;}
-.pe-overlay.open .pe-modal{transform:translateY(0);}
-.pe-modal h3{color:var(--cp);margin-bottom:1.1rem;font-size:1.1rem;}
-.fg{margin-bottom:0.8rem;}
-.fg label{display:block;font-size:0.78rem;font-weight:600;margin-bottom:0.25rem;color:#555;}
-.fg input,.fg textarea{width:100%;padding:0.5rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-family:var(--f);font-size:0.87rem;}
-.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--cp);}
-.pe-actions{display:flex;gap:0.6rem;margin-top:1.1rem;justify-content:flex-end;}
-.pe-actions button{padding:0.45rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.85rem;}
-.pe-cancel{background:#eee;color:#333;} .pe-cancel:hover{background:#ddd;}
-.pe-del{background:#fee2e2;color:#b91c1c;} .pe-del:hover{background:#fecaca;}
-.pe-ok{background:var(--cp);color:#fff;} .pe-ok:hover{background:#58685d;}
 
-/* CARD WRAPPER */
-.seller-card-wrapper{position:relative;}
-.card-edt{position:absolute;top:8px;right:8px;background:rgba(30,30,30,0.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#fff;border:1px solid rgba(255,255,255,0.22);border-radius:5px;padding:0.28rem 0.6rem;font-size:0.72rem;font-weight:600;cursor:pointer;z-index:10;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.3);transition:background 0.2s,transform 0.15s;}
-.card-edt:hover{background:rgba(0,0,0,0.95);transform:scale(1.04);}
-.card-edt:active{transform:scale(0.96);}
-.add-product-card{border:2px dashed var(--ca);border-radius:8px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;color:#999;font-size:0.88rem;}
-.add-product-card:hover{border-color:var(--cp);background:rgba(110,129,116,0.05);color:var(--cp);}
-.add-product-card .ic{font-size:1.9rem;}
-
-/* IMAGE URL MODAL */
-.iu-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4000;opacity:0;pointer-events:none;transition:opacity 0.18s;}
-.iu-overlay.open{opacity:1;pointer-events:auto;}
-.iu-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:460px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
-.iu-overlay.open .iu-modal{transform:translateY(0);}
-.iu-modal h4{margin-bottom:0.9rem;color:var(--cp);}
-.iu-modal input[type="text"]{width:100%;padding:0.6rem 0.75rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.35rem;}
-.iu-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
-.iu-hint{font-size:0.74rem;color:#888;margin-bottom:0.9rem;}
-.iu-actions{display:flex;gap:0.6rem;justify-content:flex-end;margin-top:0.5rem;}
-.iu-actions button{padding:0.45rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
-
-/* HERO IMAGE MODAL (extended) */
-.hero-img-section{border-top:1px solid #eee;padding-top:1rem;margin-top:1rem;}
-.hero-img-section h5{font-size:0.8rem;font-weight:700;color:#555;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.04em;}
-.filter-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.65rem;flex-wrap:wrap;}
-.filter-row label{font-size:0.78rem;color:#666;white-space:nowrap;}
-.filter-row input[type="color"]{width:34px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
-.filter-row input[type="range"]{flex:1;min-width:80px;accent-color:var(--cp);}
-.filter-row span{font-size:0.75rem;color:#888;min-width:30px;}
-.filter-row select{padding:0.28rem 0.5rem;border:1px solid #ddd;border-radius:4px;font-size:0.78rem;color:#555;background:#fff;cursor:pointer;flex:1;}
-.filter-presets{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.5rem;}
-.fpreset{border:none;border-radius:4px;padding:0.25rem 0.65rem;font-size:0.74rem;cursor:pointer;font-weight:600;transition:transform 0.15s;color:#fff;}
-.fpreset:hover{transform:scale(1.06);}
-.blend-chips{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.8rem;}
-.bchip{border:1px solid #ddd;border-radius:20px;padding:0.18rem 0.65rem;font-size:0.72rem;cursor:pointer;background:#f5f5f5;color:#555;transition:all 0.15s;white-space:nowrap;}
-.bchip:hover{border-color:var(--cp);color:var(--cp);}
-.bchip.active{background:var(--cp);color:#fff;border-color:var(--cp);}
-.hero-preview-bar{height:70px;border-radius:6px;margin-top:0.5rem;border:1px solid #eee;background:#ccc center/cover no-repeat;position:relative;overflow:hidden;}
-.hero-preview-tint{position:absolute;inset:0;}
-/* HERO BUTTON SECTION */
-.hero-btn-section{border-top:1px solid #eee;padding-top:1rem;margin-top:1rem;}
-.hero-btn-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.65rem;flex-wrap:wrap;}
-.hero-btn-row label{font-size:0.78rem;color:#666;white-space:nowrap;min-width:52px;}
-.hero-btn-row input[type="text"]{flex:1;padding:0.4rem 0.65rem;border:1px solid #ddd;border-radius:4px;font-size:0.84rem;}
-.hero-btn-row input[type="text"]:focus{outline:none;border-color:var(--cp);}
-.hero-btn-row input[type="color"]{width:34px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
-.hero-btn-preview{display:inline-block;padding:0.55rem 1.4rem;border-radius:4px;font-size:0.88rem;font-weight:600;color:#fff;margin-top:0.4rem;transition:all 0.2s;cursor:default;}
-
-
-/* IMAGE UPLOAD TAB */
-.img-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1rem;}
-.img-tab{flex:1;padding:0.4rem;text-align:center;cursor:pointer;font-size:0.78rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
-.img-tab.active{background:var(--cp);color:#fff;font-weight:600;}
-.img-panel{display:none;} .img-panel.active{display:block;}
-.img-drop-zone{border:2px dashed var(--ca);border-radius:8px;padding:1.5rem 1rem;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:0.4rem;position:relative;}
-.img-drop-zone:hover,.img-drop-zone.drag{border-color:var(--cp);background:rgba(110,129,116,0.05);}
-.img-drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.img-drop-zone .dz-icon{font-size:2rem;margin-bottom:0.4rem;}
-.img-drop-zone p{font-size:0.78rem;color:#888;margin:0;}
-.img-upload-preview{width:100%;height:90px;object-fit:contain;border-radius:4px;display:none;margin-bottom:0.4rem;background:#f5f5f5;}
-.img-upload-name{font-size:0.72rem;color:var(--cp);text-align:center;margin-bottom:0.3rem;display:none;word-break:break-all;}
-
-/* GITHUB MODAL */
-.gh-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);display:flex;justify-content:center;align-items:center;z-index:5000;opacity:0;pointer-events:none;transition:opacity 0.22s;}
-.gh-overlay.open{opacity:1;pointer-events:auto;}
-.gh-modal{background:#fff;border-radius:12px;padding:2rem;width:92%;max-width:500px;box-shadow:0 20px 50px rgba(0,0,0,0.25);transform:translateY(-16px);transition:transform 0.22s;max-height:92vh;overflow-y:auto;}
-.gh-overlay.open .gh-modal{transform:translateY(0);}
-.gh-modal h3{color:var(--cp);margin-bottom:0.25rem;font-size:1.1rem;}
-.gh-modal .gh-sub{font-size:0.76rem;color:#aaa;margin-bottom:1.2rem;}
-.gh-group{margin-bottom:1rem;}
-.gh-group label{display:block;font-size:0.78rem;font-weight:700;color:#555;margin-bottom:0.28rem;}
-.gh-group input[type="text"],.gh-group input[type="password"]{width:100%;padding:0.55rem 0.75rem;border:1px solid #ddd;border-radius:6px;font-size:0.87rem;font-family:var(--f);}
-.gh-group input:focus{outline:none;border-color:var(--cp);}
-.gh-token-hint{font-size:0.7rem;color:#aaa;margin-top:0.25rem;}
-.gh-token-hint a{color:var(--cp);text-decoration:none;}
-.gh-mode-group{display:flex;gap:0.6rem;margin-bottom:1.2rem;}
-.gh-mode-btn{flex:1;padding:0.7rem 0.5rem;border:2px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;font-size:0.82rem;font-weight:600;color:#666;transition:all 0.18s;text-align:center;line-height:1.4;}
-.gh-mode-btn:hover{border-color:var(--cp);color:var(--cp);}
-.gh-mode-btn.active{border-color:var(--cp);background:var(--cp);color:#fff;}
-.gh-mode-btn small{display:block;font-weight:400;font-size:0.7rem;margin-top:0.2rem;opacity:0.85;}
-.gh-pass-group{border-top:1px solid #eee;padding-top:1rem;margin-top:0.5rem;}
-.gh-actions{display:flex;gap:0.65rem;justify-content:flex-end;margin-top:1.2rem;}
-.gh-actions button{padding:0.5rem 1.2rem;border-radius:6px;border:none;cursor:pointer;font-size:0.86rem;font-weight:600;}
-.gh-cancel{background:#eee;color:#333;} .gh-cancel:hover{background:#ddd;}
-.gh-submit{background:var(--cp);color:#fff;} .gh-submit:hover{background:#58685d;}
-.gh-log{margin-top:1rem;padding:0.75rem;background:#1e293b;border-radius:6px;font-size:0.75rem;color:#94a3b8;font-family:monospace;min-height:48px;max-height:120px;overflow-y:auto;display:none;}
-.gh-log.show{display:block;}
-.gh-log .ok{color:#86efac;} .gh-log .err{color:#fca5a5;} .gh-log .info{color:#93c5fd;}
-.gh-token-saved-box{display:flex;align-items:center;justify-content:space-between;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:0.55rem 0.75rem;gap:0.5rem;}
-.gh-token-saved-box .status-text{font-size:0.8rem;color:#166534;font-weight:600;display:flex;align-items:center;gap:0.4rem;}
-.gh-btn-group{display:flex;gap:0.35rem;}
-.gh-small-btn{background:#fff;border:1px solid #ddd;color:#555;padding:0.22rem 0.55rem;border-radius:4px;font-size:0.72rem;cursor:pointer;transition:all 0.15s;font-weight:500;}
-.gh-small-btn:hover{background:#f3f4f6;color:var(--cd);}
-.gh-small-btn.danger{color:#b91c1c;border-color:#fecaca;}
-.gh-small-btn.danger:hover{background:#fee2e2;border-color:#fca5a5;color:#991b1b;}
-.gh-notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:0.55rem 0.75rem;font-size:0.76rem;color:#1e40af;margin-bottom:0.9rem;line-height:1.4;}
-
-
-
-/* VARIANTES */
-.pe-variants-toggle{display:flex;align-items:center;gap:0.6rem;padding:0.75rem 0;border-top:1px solid #eee;border-bottom:1px solid #eee;margin:0.75rem 0;cursor:pointer;user-select:none;}
-.pe-variants-toggle input[type="checkbox"]{width:16px;height:16px;accent-color:var(--cp);cursor:pointer;}
-.pe-variants-toggle span{font-size:0.82rem;font-weight:600;color:#555;}
-.pe-variants-section{display:none;}
-.pe-variants-section.active{display:block;}
-.pe-variant-item{border:1px solid #eee;border-radius:8px;padding:0.85rem;margin-bottom:0.65rem;background:#fafafa;position:relative;}
-.pe-variant-item .variant-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
-.pe-variant-item .variant-label{font-size:0.75rem;font-weight:700;color:var(--cp);}
-.pe-variant-item .variant-del{background:none;border:none;color:#ccc;cursor:pointer;font-size:1rem;padding:0;}
-.pe-variant-item .variant-del:hover{color:#e53e3e;}
-.pe-variant-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.4rem;}
-.pe-variant-row.full{grid-template-columns:1fr;}
-.pe-variant-row label{font-size:0.73rem;color:#777;display:block;margin-bottom:0.18rem;}
-.pe-variant-row input{width:100%;padding:0.42rem 0.6rem;border:1px solid #ddd;border-radius:4px;font-size:0.83rem;font-family:var(--f);}
-.pe-variant-row input:focus{outline:none;border-color:var(--cp);}
-/* Mini tabs imagen variante */
-.vimg-tabs{display:flex;border-radius:5px;overflow:hidden;border:1px solid #ddd;margin-bottom:0.4rem;}
-.vimg-tab{flex:1;padding:0.28rem;text-align:center;cursor:pointer;font-size:0.7rem;background:#f5f5f5;color:#666;border:none;transition:background 0.15s;}
-.vimg-tab.active{background:var(--cp);color:#fff;font-weight:600;}
-.vimg-panel{display:none;} .vimg-panel.active{display:block;}
-.vimg-drop{border:1.5px dashed var(--ca);border-radius:6px;padding:0.6rem;text-align:center;cursor:pointer;position:relative;transition:all 0.18s;}
-.vimg-drop:hover{border-color:var(--cp);}
-.vimg-drop input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.vimg-drop p{font-size:0.68rem;color:#aaa;margin:0;}
-.vimg-preview{width:100%;height:52px;object-fit:contain;border-radius:4px;display:none;background:#f5f5f5;margin-bottom:0.25rem;}
-.vimg-name{font-size:0.68rem;color:var(--cp);display:none;word-break:break-all;margin-bottom:0.2rem;}
-.add-variant-btn{display:flex;align-items:center;gap:0.4rem;padding:0.42rem 0.85rem;background:transparent;border:1.5px dashed var(--ca);color:#888;border-radius:6px;cursor:pointer;font-size:0.78rem;transition:all 0.18s;margin-top:0.3rem;}
-.add-variant-btn:hover{border-color:var(--cp);color:var(--cp);}
 /* Selector de variantes en el modal de producto */
 .variant-selector{margin:0.75rem 0 1rem;}
 .variant-selector label{font-size:0.78rem;font-weight:600;color:#555;display:block;margin-bottom:0.4rem;}
@@ -2433,80 +1739,6 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 .vchip:hover{border-color:var(--cp);color:var(--cp);}
 .vchip.active{background:var(--cp);color:#fff;border-color:var(--cp);}
 
-/* ICON SWAP MODAL */
-.is-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4500;opacity:0;pointer-events:none;transition:opacity 0.18s;}
-.is-overlay.open{opacity:1;pointer-events:auto;}
-.is-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:420px;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
-.is-overlay.open .is-modal{transform:translateY(0);}
-.is-modal h4{color:var(--cp);margin-bottom:0.4rem;}
-.is-modal p{font-size:0.78rem;color:#888;margin-bottom:1rem;}
-.is-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1rem;}
-.is-tab{flex:1;padding:0.42rem;text-align:center;cursor:pointer;font-size:0.8rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
-.is-tab.active{background:var(--cp);color:#fff;font-weight:600;}
-.is-panel{display:none;} .is-panel.active{display:block;}
-.is-modal input[type="text"]{width:100%;padding:0.55rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.4rem;}
-.is-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
-.is-emoji-input{font-size:1.8rem;width:100%;text-align:center;padding:0.4rem;border:1px solid #ddd;border-radius:4px;}
-.is-preview{margin:0.7rem 0;min-height:60px;display:flex;align-items:center;justify-content:center;border:1px solid #eee;border-radius:6px;background:var(--cl);}
-.is-actions{display:flex;gap:0.55rem;justify-content:flex-end;margin-top:1rem;}
-.is-actions button{padding:0.42rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
-
-/* LOGO MODAL */
-.lo-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4000;opacity:0;pointer-events:none;transition:opacity 0.18s;}
-.lo-overlay.open{opacity:1;pointer-events:auto;}
-.lo-modal{background:#fff;border-radius:10px;padding:1.8rem;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
-.lo-overlay.open .lo-modal{transform:translateY(0);}
-.lo-modal h4{color:var(--cp);margin-bottom:0.35rem;}
-.lo-modal .sub{font-size:0.78rem;color:#888;margin-bottom:1.1rem;}
-.lo-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1.1rem;}
-.lo-tab{flex:1;padding:0.42rem;text-align:center;cursor:pointer;font-size:0.8rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
-.lo-tab.active{background:var(--cp);color:#fff;font-weight:600;}
-.lo-panel{display:none;} .lo-panel.active{display:block;}
-.lo-modal input[type="text"]{width:100%;padding:0.58rem 0.75rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;margin-bottom:0.35rem;}
-.lo-modal input[type="text"]:focus{outline:none;border-color:var(--cp);}
-.lo-hint{font-size:0.74rem;color:#888;margin-bottom:0.9rem;}
-.lo-preview{margin:0.65rem 0;padding:0.85rem;background:rgba(250,248,245,0.98);border:1px solid #eee;border-radius:6px;display:flex;align-items:center;gap:0.65rem;min-height:64px;}
-.lo-actions{display:flex;gap:0.6rem;justify-content:flex-end;margin-top:1.1rem;}
-.lo-actions button{padding:0.42rem 1rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
-
-/* CONTACT LINK ICON MODAL */
-.ci-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:4500;opacity:0;pointer-events:none;transition:opacity 0.18s;}
-.ci-overlay.open{opacity:1;pointer-events:auto;}
-.ci-modal{background:#fff;border-radius:10px;padding:1.6rem;width:92%;max-width:440px;max-height:90vh;overflow-y:auto;box-shadow:0 15px 40px rgba(0,0,0,0.22);transform:translateY(-14px);transition:transform 0.18s;}
-.ci-overlay.open .ci-modal{transform:translateY(0);}
-.ci-modal h4{color:var(--cp);margin-bottom:0.3rem;}
-.ci-modal .ci-sub{font-size:0.76rem;color:#aaa;margin-bottom:0.9rem;}
-.ci-tabs{display:flex;border-radius:6px;overflow:hidden;border:1px solid #ddd;margin-bottom:1rem;}
-.ci-tab{flex:1;padding:0.4rem;text-align:center;cursor:pointer;font-size:0.78rem;background:#f5f5f5;color:#666;border:none;transition:background 0.18s;}
-.ci-tab.active{background:var(--cp);color:#fff;font-weight:600;}
-.ci-panel{display:none;} .ci-panel.active{display:block;}
-.ci-emoji-input{font-size:1.8rem;width:100%;text-align:center;padding:0.4rem;border:1px solid #ddd;border-radius:4px;margin-bottom:0.3rem;}
-.ci-fa-input{width:100%;padding:0.55rem 0.7rem;border:1px solid #ddd;border-radius:4px;font-size:0.87rem;font-family:monospace;margin-bottom:0.3rem;}
-.ci-fa-input:focus,.ci-emoji-input:focus{outline:none;border-color:var(--cp);}
-.ci-fa-hint{font-size:0.72rem;color:#aaa;margin-bottom:0.7rem;}
-.ci-fa-hint a{color:var(--cp);text-decoration:none;}
-.ci-catalog-toggle{display:inline-flex;align-items:center;justify-content:center;gap:0.45rem;width:100%;padding:0.48rem 0.8rem;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:6px;font-size:0.78rem;font-weight:600;color:#334155;cursor:pointer;margin-bottom:0.6rem;transition:all 0.15s;}
-.ci-catalog-toggle:hover{background:#e2e8f0;color:#0f172a;}
-.ci-catalog-box{border:1px solid #e2e8f0;border-radius:6px;padding:0.6rem;background:#f8fafc;margin-bottom:0.7rem;}
-.ci-catalog-search-wrap{position:relative;margin-bottom:0.45rem;}
-.ci-catalog-search-wrap .ci-search-icon{position:absolute;left:0.6rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:#94a3b8;pointer-events:none;}
-.ci-catalog-search{width:100%;padding:0.38rem 0.6rem 0.38rem 1.8rem;border:1px solid #cbd5e1;border-radius:4px;font-size:0.78rem;background:#fff;outline:none;}
-.ci-catalog-search:focus{border-color:var(--cp);}
-.ci-catalog-categories{display:flex;gap:0.25rem;flex-wrap:wrap;margin-bottom:0.5rem;}
-.ci-cat-btn{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:0.18rem 0.5rem;font-size:0.68rem;color:#64748b;cursor:pointer;transition:all 0.15s;}
-.ci-cat-btn:hover{background:#f1f5f9;color:#334155;}
-.ci-cat-btn.active{background:var(--cp);color:#fff;border-color:var(--cp);font-weight:600;}
-.ci-catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:5px;max-height:165px;overflow-y:auto;padding:2px;}
-.ci-icon-item{height:38px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #e2e8f0;border-radius:5px;cursor:pointer;font-size:1.05rem;color:#475569;transition:all 0.15s;}
-.ci-icon-item:hover{background:#f1f5f9;border-color:#94a3b8;color:var(--cp);transform:scale(1.06);}
-.ci-icon-item.active{background:#eaf0ec;border-color:var(--cp);color:var(--cp);box-shadow:0 0 0 2px var(--cp);}
-.ci-color-row{display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid #eee;}
-.ci-color-row label{font-size:0.78rem;color:#555;flex:1;}
-.ci-color-row input[type="color"]{width:36px;height:28px;border:1px solid #ddd;border-radius:4px;padding:2px;cursor:pointer;}
-.ci-color-row button{font-size:0.72rem;padding:0.22rem 0.6rem;border:1px solid #ddd;border-radius:4px;background:#f5f5f5;color:#666;cursor:pointer;}
-.ci-preview{margin:0.65rem 0;min-height:50px;display:flex;align-items:center;justify-content:center;border:1px solid #eee;border-radius:6px;background:var(--cl);}
-.ci-actions{display:flex;gap:0.55rem;justify-content:flex-end;margin-top:1rem;}
-.ci-actions button{padding:0.42rem 0.9rem;border-radius:4px;border:none;cursor:pointer;font-size:0.84rem;}
 
 /* FORM STATUS */
 .form-status{padding:0.65rem 0.9rem;border-radius:4px;font-size:0.84rem;margin-top:0.45rem;display:none;}
@@ -2903,200 +2135,6 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 
 
 
-/* =========================================================
-   SELECTOR MODAL DE PRODUCTO DESTACADO (MOCKUP BOCETO)
-   ========================================================= */
-.fps-overlay {
-    position: fixed !important;
-    inset: 0 !important;
-    background: rgba(20, 28, 24, 0.65) !important;
-    backdrop-filter: blur(5px) !important;
-    -webkit-backdrop-filter: blur(5px) !important;
-    display: none !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 99999 !important;
-    padding: 1.25rem !important;
-}
-.fps-overlay.open {
-    display: flex !important;
-}
-.fps-dialog {
-    background: #ffffff !important;
-    border-radius: 24px !important;
-    width: 100% !important;
-    max-width: 440px !important;
-    max-height: 85vh !important;
-    display: flex !important;
-    flex-direction: column !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35) !important;
-    overflow: hidden !important;
-    animation: fpsPopIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    box-sizing: border-box !important;
-}
-@keyframes fpsPopIn {
-    0% { opacity: 0; transform: scale(0.94) translateY(8px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
-}
-.fps-header {
-    padding: 1.35rem 1.5rem 0.85rem !important;
-    border-bottom: 1px solid #f0ebe4 !important;
-    text-align: left !important;
-}
-.fps-header h3 {
-    margin: 0 !important;
-    font-size: 1.2rem !important;
-    color: #2c3e35 !important;
-    font-weight: 700 !important;
-}
-.fps-header p {
-    margin: 4px 0 0 !important;
-    font-size: 0.84rem !important;
-    color: #777 !important;
-}
-.fps-list {
-    padding: 0.9rem 1.25rem !important;
-    overflow-y: auto !important;
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.65rem !important;
-    max-height: 380px !important;
-    box-sizing: border-box !important;
-}
-.fps-item {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.9rem !important;
-    padding: 0.75rem 0.9rem !important;
-    border-radius: 14px !important;
-    border: 1.5px solid #eae5de !important;
-    cursor: pointer !important;
-    background: #fff !important;
-    transition: all 0.15s ease !important;
-    user-select: none !important;
-    box-sizing: border-box !important;
-}
-.fps-item:hover {
-    border-color: #baa89b !important;
-    background: #faf8f5 !important;
-}
-.fps-item.selected {
-    border-color: #2c3e35 !important;
-    background: #f7f3ee !important;
-    box-shadow: 0 0 0 1.5px #2c3e35 !important;
-}
-.fps-thumb {
-    width: 56px !important;
-    height: 56px !important;
-    border-radius: 12px !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-color: #e4ddd5 !important;
-    flex-shrink: 0 !important;
-    border: 1px solid rgba(0,0,0,0.06) !important;
-}
-.fps-info {
-    flex: 1 !important;
-    min-width: 0 !important;
-    text-align: left !important;
-}
-.fps-title {
-    font-weight: 700 !important;
-    font-size: 0.95rem !important;
-    color: #222 !important;
-    line-height: 1.25 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
-.fps-desc {
-    font-size: 0.8rem !important;
-    color: #666 !important;
-    margin-top: 3px !important;
-    line-height: 1.3 !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-}
-.fps-tag {
-    font-size: 0.73rem !important;
-    color: var(--cp) !important;
-    font-weight: 600 !important;
-    margin-top: 4px !important;
-}
-.fps-footer {
-    padding: 1rem 1.5rem !important;
-    border-top: 1px solid #f0ebe4 !important;
-    display: flex !important;
-    gap: 0.75rem !important;
-    justify-content: flex-start !important;
-    background: #faf8f5 !important;
-}
-.fps-btn-confirm {
-    background: #4caf50 !important;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    padding: 0.65rem 1.5rem !important;
-    border-radius: 12px !important;
-    border: none !important;
-    cursor: pointer !important;
-    font-size: 0.92rem !important;
-    transition: background 0.15s ease, transform 0.1s ease !important;
-}
-.fps-btn-confirm:hover {
-    background: #43a047 !important;
-    transform: translateY(-1px) !important;
-}
-.fps-btn-cancel {
-    background: #b0b0b0 !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    padding: 0.65rem 1.5rem !important;
-    border-radius: 12px !important;
-    border: none !important;
-    cursor: pointer !important;
-    font-size: 0.92rem !important;
-    transition: background 0.15s ease !important;
-}
-.fps-btn-cancel:hover {
-    background: #9e9e9e !important;
-}
-
-/* ESTILOS DE TARJETAS DESTACADAS EN MODO EDITOR */
-.featured-slot {
-    position: relative !important;
-    cursor: pointer !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-.featured-slot:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 10px 24px rgba(44, 62, 53, 0.15) !important;
-}
-.featured-edit-badge {
-    position: absolute !important;
-    top: 12px !important;
-    right: 12px !important;
-    background: rgba(44, 62, 53, 0.92) !important;
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
-    color: #fff !important;
-    padding: 6px 14px !important;
-    border-radius: 20px !important;
-    font-size: 0.8rem !important;
-    font-weight: 600 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    z-index: 10 !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-    cursor: pointer !important;
-}
-.featured-edit-badge:hover {
-    background: #1e2b24 !important;
-    transform: scale(1.03) !important;
-}
 
 </style>
 <meta property="og:url" content="https://vibracandela.com/"><style>
@@ -3155,7 +2193,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         <a href="https://www.tiktok.com/@vibra_candela" target="_blank" rel="noopener noreferrer" class="nav-icon">
             <i class="fa-brands fa-tiktok"></i>
         </a>
-        <a href="https://wa.me/926997276" target="_blank" rel="noopener noreferrer" class="nav-icon">
+        <a href="https://wa.me/51926997276" target="_blank" rel="noopener noreferrer" class="nav-icon">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
     </div>
@@ -3244,15 +2282,15 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                     </div>
                 </div>
             </div>
-            <div class="seller-card" id="featured-card-2" data-featured-slot="2" data-product-id="7" onclick="navigateTo('productos'); openProductModal(7);" style="cursor: pointer;">
+            <div class="seller-card" id="featured-card-2" data-featured-slot="2" data-product-id="1" onclick="navigateTo('productos'); openProductModal(1);" style="cursor: pointer;">
                 
-                <div class="seller-img" id="bs2" style="background-image: url(&quot;vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);"></div>
+                <div class="seller-img" id="bs2" style="background-image: url(&quot;vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp&quot;); background-size: cover; background-position: center center; background-color: rgb(232, 224, 216);"></div>
                 <div class="seller-info">
-                    <h3>Velas de autor</h3>
-                    <p>Velas artesanales de soya con decoraciones hechas en cera, inspiradas en flores, postres y pequeños detalles que hacen especial cada ocasión.</p>
+                    <h3>Velas de edición</h3>
+                    <p>Velas de cera de soya en envases de vidrio, con diseños decorativos y opciones de personalización para crear un detalle especial.</p>
                     <div class="seller-meta">
-                        <span class="price">Autor</span>
-                        <a href="https://vibracandela.com/p/velas-de-autor" onclick="event.preventDefault(); event.stopPropagation(); navigateTo('productos'); openProductModal(7);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Ver más</a>
+                        <span class="price">De edición</span>
+                        <a href="https://vibracandela.com/p/velas-de-edicion" onclick="event.preventDefault(); event.stopPropagation(); navigateTo('productos'); openProductModal(1);" class="btn" style="padding:0.35rem 0.9rem;font-size:0.82rem;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -3396,7 +2434,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
         </div>
         <!-- TOOLBAR: PÍLDORAS DE CATEGORÍA -->
         <div class="catalog-toolbar">
-            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill active">Todos</button><button type="button" class="cat-pill">De edición</button><button type="button" class="cat-pill">Difusores</button><button type="button" class="cat-pill">Navidad</button><button type="button" class="cat-pill">Autor</button><button type="button" class="cat-pill">Floral</button><button type="button" class="cat-pill">San Valentín</button><button type="button" class="cat-pill">Recuerdos</button></div>
+            <div class="catalog-cat-pills" id="catalogCategoryPills"><button type="button" class="cat-pill">Todos</button><button type="button" class="cat-pill">De edición</button><button type="button" class="cat-pill">Difusores</button><button type="button" class="cat-pill active">Navidad</button><button type="button" class="cat-pill">Autor</button><button type="button" class="cat-pill">Floral</button><button type="button" class="cat-pill">San Valentín</button><button type="button" class="cat-pill">Recuerdos</button><button type="button" class="cat-pill">Piezas decorativas</button></div>
         </div>
         <div id="catalogEmptyMsg" class="catalog-empty" style="display: none;">
             <p>No encontramos productos que coincidan con tu búsqueda.</p>
@@ -3412,7 +2450,7 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
                 <i class="fa-solid fa-arrow-left"></i> Volver a todos los productos
             </button>
         </div>
-        <div class="catalog-grid" id="catalogGrid" style="grid-template-columns: repeat(3, 1fr);"><div class="seller-card" id="product-card-1" data-product-id="1" onclick="openProductModal(1)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Velas de edición - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp" alt="Velas de edición - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">5 Aromas</span></div><div class="seller-info"><h3>Velas de edición</h3><p>Velas de cera de soya en envases de vidrio, con diseños decorativos y opciones de personalización para crear un detalle especial.</p><div class="seller-meta"><span class="price">Desde S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-2" data-product-id="2" onclick="openProductModal(2)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/difusor-de-auto-colgante-vibracandela-nsxnvd.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Difusor de auto - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/difusor-de-auto-colgante-vibracandela-nsxnvd.webp" alt="Difusor de auto - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Opciones</span></div><div class="seller-info"><h3>Difusor de auto</h3><p>Difusores aromáticos para auto con tapita de bambú, disponibles en presentación colgante y fija para perfumar el interior de tu vehículo.</p><div class="seller-meta"><span class="price">Desde S/. 29.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-3" data-product-id="3" onclick="openProductModal(3)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/villa-navidena-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Villa Navideña - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/villa-navidena-vibracandela.webp" alt="Villa Navideña - Velas Artesanales Vibra Candela" loading="lazy"></div><div class="seller-info"><h3>Villa Navideña</h3><p>Villa navideña elaborada artesanalmente con cera de soya, con detalles decorativos que aportan encanto y calidez a tus espacios mientras los aromatizan.</p><div class="seller-meta"><span class="price">S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-5" data-product-id="5" onclick="openProductModal(5)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Tulipán - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp" alt="Tulipán - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">3 Colores</span></div><div class="seller-info"><h3>Tulipán</h3><p>Por confirmar</p><div class="seller-meta"><span class="price">Desde S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-6" data-product-id="6" onclick="openProductModal(6)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Pino Navideño - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp" alt="Pino Navideño - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">1 Aroma</span></div><div class="seller-info"><h3>Pino Navideño</h3><p>Vela artesanal de cera de soya con diseño de pino navideño, ideal para decorar tus espacios y llenar de aroma y espíritu navideño cada rincón.</p><div class="seller-meta"><span class="price">Desde S/. 24.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-7" data-product-id="7" onclick="openProductModal(7)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Velas de autor - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp" alt="Velas de autor - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Aromas</span></div><div class="seller-info"><h3>Velas de autor</h3><p>Velas artesanales de cera de soya con diseños decorativos y detalles elaborados en cera, inspirados en flores, postres y creaciones especiales.</p><div class="seller-meta"><span class="price">Desde S/. 49.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-8" data-product-id="8" onclick="openProductModal(8)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Vela Naturale - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp" alt="Vela Naturale - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">3 Aromas</span></div><div class="seller-info"><h3>Vela Naturale</h3><p>Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.</p><div class="seller-meta"><span class="price">Desde S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-9" data-product-id="9" onclick="openProductModal(9)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/ondas-plata-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Ondas - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/ondas-plata-vibracandela.webp" alt="Ondas - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Diseños</span></div><div class="seller-info"><h3>Ondas</h3><p>Vela artesanal de cera de soya en un recipiente de diseño ondulado, con delicados detalles florales y acabados en tonos plata o dorado.</p><div class="seller-meta"><span class="price">Desde S/. 49.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-10" data-product-id="10" onclick="openProductModal(10)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/valentin-rosa-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Valentín - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/valentin-rosa-vibracandela.webp" alt="Valentín - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Aromas</span></div><div class="seller-info"><h3>Valentín</h3><p>Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.</p><div class="seller-meta"><span class="price">Desde S/. 54.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-11" data-product-id="11" onclick="openProductModal(11)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Aura Oval - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp" alt="Aura Oval - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">4 Colores</span></div><div class="seller-info"><h3>Aura Oval</h3><p>Vela artesanal de cera de soya en un elegante diseño ovalado, decorada con delicadas flores de cera en diferentes colores.</p><div class="seller-meta"><span class="price">Desde S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-12" data-product-id="12" onclick="openProductModal(12)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Atenea - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp" alt="Atenea - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Aromas</span></div><div class="seller-info"><h3>Atenea</h3><p>Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.</p><div class="seller-meta"><span class="price">Desde S/. 39.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-13" data-product-id="13" onclick="openProductModal(13)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Recuerdos - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp" alt="Recuerdos - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Diseños</span></div><div class="seller-info"><h3>Recuerdos</h3><p>Pequeñas velas personalizadas para grandes momentos.</p><div class="seller-meta"><span class="price">Desde S/. 10.50</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-14" data-product-id="14" onclick="openProductModal(14)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/difusores-de-varillas-varillas-negras-vibracandela-5x73d1.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Difusores de varillas - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/difusores-de-varillas-varillas-negras-vibracandela-5x73d1.webp" alt="Difusores de varillas - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Opciones</span></div><div class="seller-info"><h3>Difusores de varillas</h3><p>Difusor ambiental de 40 ml en envase de vidrio modelo Luma, con varillas de ratán y disponible en diferentes combinaciones de colores.</p><div class="seller-meta"><span class="price">Desde S/. 49.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div></div>
+        <div class="catalog-grid" id="catalogGrid" style="grid-template-columns: repeat(3, 1fr);"><div class="seller-card" id="product-card-1" data-product-id="1" onclick="openProductModal(1)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Velas de edición - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp" alt="Velas de edición - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">5 Aromas</span></div><div class="seller-info"><h3>Velas de edición</h3><p>Velas de cera de soya en envases de vidrio, con diseños decorativos y opciones de personalización para crear un detalle especial.</p><div class="seller-meta"><span class="price">Desde S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-2" data-product-id="2" onclick="openProductModal(2)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/difusor-de-auto-colgante-vibracandela-nsxnvd.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Difusor de auto - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/difusor-de-auto-colgante-vibracandela-nsxnvd.webp" alt="Difusor de auto - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Opciones</span></div><div class="seller-info"><h3>Difusor de auto</h3><p>Difusores aromáticos para auto con tapita de bambú, disponibles en presentación colgante y fija para perfumar el interior de tu vehículo.</p><div class="seller-meta"><span class="price">Desde S/. 29.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-3" data-product-id="3" onclick="openProductModal(3)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/villa-navidena-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Villa Navideña - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/villa-navidena-vibracandela.webp" alt="Villa Navideña - Velas Artesanales Vibra Candela" loading="lazy"></div><div class="seller-info"><h3>Villa Navideña</h3><p>Villa navideña elaborada artesanalmente con cera de soya, con detalles decorativos que aportan encanto y calidez a tus espacios mientras los aromatizan.</p><div class="seller-meta"><span class="price">S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-5" data-product-id="5" onclick="openProductModal(5)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Tulipán - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp" alt="Tulipán - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">3 Colores</span></div><div class="seller-info"><h3>Tulipán</h3><p>Por confirmar</p><div class="seller-meta"><span class="price">Desde S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-6" data-product-id="6" onclick="openProductModal(6)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Pino Navideño - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp" alt="Pino Navideño - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">1 Aroma</span></div><div class="seller-info"><h3>Pino Navideño</h3><p>Vela artesanal de cera de soya con diseño de pino navideño, ideal para decorar tus espacios y llenar de aroma y espíritu navideño cada rincón.</p><div class="seller-meta"><span class="price">Desde S/. 24.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-7" data-product-id="7" onclick="openProductModal(7)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Velas de autor - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp" alt="Velas de autor - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Aromas</span></div><div class="seller-info"><h3>Velas de autor</h3><p>Velas artesanales de cera de soya con diseños decorativos y detalles elaborados en cera, inspirados en flores, postres y creaciones especiales.</p><div class="seller-meta"><span class="price">Desde S/. 49.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-8" data-product-id="8" onclick="openProductModal(8)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Vela Naturale - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp" alt="Vela Naturale - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">3 Aromas</span></div><div class="seller-info"><h3>Vela Naturale</h3><p>Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.</p><div class="seller-meta"><span class="price">Desde S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-9" data-product-id="9" onclick="openProductModal(9)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/ondas-plata-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Ondas - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/ondas-plata-vibracandela.webp" alt="Ondas - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Diseños</span></div><div class="seller-info"><h3>Ondas</h3><p>Vela artesanal de cera de soya en un recipiente de diseño ondulado, con delicados detalles florales y acabados en tonos plata o dorado.</p><div class="seller-meta"><span class="price">Desde S/. 49.00</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-10" data-product-id="10" onclick="openProductModal(10)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/valentin-rosa-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Valentín - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/valentin-rosa-vibracandela.webp" alt="Valentín - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Aromas</span></div><div class="seller-info"><h3>Valentín</h3><p>Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.</p><div class="seller-meta"><span class="price">Desde S/. 54.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-11" data-product-id="11" onclick="openProductModal(11)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Aura Oval - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp" alt="Aura Oval - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">4 Colores</span></div><div class="seller-info"><h3>Aura Oval</h3><p>Vela artesanal de cera de soya en un elegante diseño ovalado, decorada con delicadas flores de cera en diferentes colores.</p><div class="seller-meta"><span class="price">Desde S/. 44.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-12" data-product-id="12" onclick="openProductModal(12)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Atenea - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp" alt="Atenea - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Aromas</span></div><div class="seller-info"><h3>Atenea</h3><p>Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.</p><div class="seller-meta"><span class="price">Desde S/. 39.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-13" data-product-id="13" onclick="openProductModal(13)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Recuerdos - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp" alt="Recuerdos - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Diseños</span></div><div class="seller-info"><h3>Recuerdos</h3><p>Pequeñas velas personalizadas para grandes momentos.</p><div class="seller-meta"><span class="price">Desde S/. 10.50</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-14" data-product-id="14" onclick="openProductModal(14)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/difusores-de-varillas-varillas-negras-vibracandela-5x73d1.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Difusores de varillas - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/difusores-de-varillas-varillas-negras-vibracandela-5x73d1.webp" alt="Difusores de varillas - Velas Artesanales Vibra Candela" loading="lazy"><span class="badge-variants">2 Opciones</span></div><div class="seller-info"><h3>Difusores de varillas</h3><p>Difusor ambiental de 40 ml en envase de vidrio modelo Luma, con varillas de ratán y disponible en diferentes combinaciones de colores.</p><div class="seller-meta"><span class="price">Desde S/. 49.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-15" data-product-id="15" onclick="openProductModal(15)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/villa-navidena-curvy-vibracandela-xlp6t0.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Villa navideña curvy - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/villa-navidena-curvy-vibracandela-xlp6t0.webp" alt="Villa navideña curvy - Velas Artesanales Vibra Candela" loading="lazy"></div><div class="seller-info"><h3>Villa navideña curvy</h3><p>Villa Navideña es una vela decorativa elaborada artesanalmente con cera de soya. Su maceta de diseño curvy enmarca una pequeña escena navideña llena de encanto, ideal para decorar y aromatizar tus espacios.</p><div class="seller-meta"><span class="price">S/. 49</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-16" data-product-id="16" onclick="openProductModal(16)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/pino-navideno-curvy-vibracandela-zk5p7n.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Pino navideño curvy - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/pino-navideno-curvy-vibracandela-zk5p7n.webp" alt="Pino navideño curvy - Velas Artesanales Vibra Candela" loading="lazy"></div><div class="seller-info"><h3>Pino navideño curvy</h3><p>Pino Navideño Curvy es una vela decorativa elaborada artesanalmente con cera de soya. Presenta un árbol navideño de cera sobre una maceta de diseño curvy, creando una pieza original que aporta un toque festivo a tus espacios.</p><div class="seller-meta"><span class="price">S/. 59.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-17" data-product-id="17" onclick="openProductModal(17)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/ciudad-de-nieve-vibracandela-douck9.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Ciudad de Nieve - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/ciudad-de-nieve-vibracandela-douck9.webp" alt="Ciudad de Nieve - Velas Artesanales Vibra Candela" loading="lazy"></div><div class="seller-info"><h3>Ciudad de Nieve</h3><p>Vela artesanal de cera de soya en envase decorativo con diseños en relieve, inspirados en una pequeña ciudad navideña que aporta encanto y aroma a tus espacios.</p><div class="seller-meta"><span class="price">S/. 39.90</span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div><div class="seller-card" id="product-card-18" data-product-id="18" onclick="openProductModal(18)" style="cursor: pointer;"><div class="seller-img" style="background-image:url('vibraimgs/imgprod/duo-de-nieve-vibracandela-hx7xwo.webp');background-size:cover;background-position:center;background-color:#e8e0d8;position:relative;" role="img" aria-label="Dúo de nieve - Velas Artesanales Vibra Candela"><img class="seller-seo-img" src="vibraimgs/imgprod/duo-de-nieve-vibracandela-hx7xwo.webp" alt="Dúo de nieve - Velas Artesanales Vibra Candela" loading="lazy"></div><div class="seller-info"><h3>Dúo de nieve</h3><p>Adorno decorativo de cemento y marmolina con dos simpáticos muñecos de nieve y luz LED central, ideal para llenar tus espacios de espíritu navideño.</p><div class="seller-meta"><span class="price"></span><span style="font-size:0.82rem;color:var(--cp);">Ver más →</span></div></div></div></div>
     </div>
 </div>
 
@@ -3561,7 +2599,10 @@ body[data-theme="halloween"] .footer{background:#07040b !important;border-top:1p
 
 
 
-<script>let products = [{"id":1,"name":"Velas de edición","cat":"De edición","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Velas de cera de soya en envases de vidrio, con diseños decorativos y opciones de personalización para crear un detalle especial.","longDesc":"Velas elaboradas artesanalmente con cera de soya, en envases de vidrio y con delicadas figuras decorativas de cera. \n\nCaracterísticas:\n\n. Cera: 100% de soya\n. Presentación: Envase de vidrio transparente\n. Diseños: Florales, temáticos, religiosos y personalizados\n. Aromas y colores: A elección, según disponibilidad\n. Peso: 250 gramos\n. Personalización: Nombre o mensaje especial","soldOut":false,"img":"","variants":[{"name":"Floral 01","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp"},{"name":"Floral 02","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-flora-02-vibracandela.webp"},{"name":"Virgen","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-virgen-vibracandela.webp"},{"name":"Halloween","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-halloween-vibracandela.webp"},{"name":"Peonía","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-peonia-vibracandela.webp"}]},{"id":2,"name":"Difusor de auto","cat":"Difusores","subProduct":"","variantType":"Opción","price":"","shortDesc":"Difusores aromáticos para auto con tapita de bambú, disponibles en presentación colgante y fija para perfumar el interior de tu vehículo.","longDesc":"Dale un toque especial a tus viajes con nuestros difusores aromáticos para auto. Diseñados para perfumar tus espacios con delicadas fragancias y un estilo minimalista, cuentan con tapita de bambú y están disponibles en dos presentaciones:\n\nColgante: ideal para colocar en el espejo retrovisor.\nFijo: Idela para colocarse en la salida del aire acondicionado.\n\nCaracterísticas:\n\nPresentación: Difusor para auto con tapita de bambú.\nFormatos: Colgante y fijo.\nAromas: A elección, según disponibilidad.\nUso: Aromatización del interior del vehículo.","soldOut":false,"img":"","variants":[{"name":"Colgante","price":"S/. 29.90","img":"vibraimgs/imgprod/difusor-de-auto-colgante-vibracandela-nsxnvd.webp"},{"name":"Fijo","price":"S/. 34.90","img":"vibraimgs/imgprod/difusor-de-auto-fijo-vibracandela-oo160d.webp"}]},{"id":3,"name":"Villa Navideña","cat":"Navidad","subProduct":"","variantType":"Aroma","price":"S/. 59.90","shortDesc":"Villa navideña elaborada artesanalmente con cera de soya, con detalles decorativos que aportan encanto y calidez a tus espacios mientras los aromatizan.","longDesc":"Villa Navideña es una vela decorativa elaborada artesanalmente con cera de soya, inspirada en la magia de la Navidad. Su composición incluye pequeños árboles, una casita y un farol que recrean una encantadora escena navideña. \n\nCaracterísticas:\n\nMaterial: 100 % cera de soya.\nPresentación:D iseño decorativo en recipiente de ecoresina.\nPeso: 250 g.\nAromas: A elección, según disponibilidad.","soldOut":false,"img":"vibraimgs/imgprod/villa-navidena-vibracandela.webp","variants":[]},{"id":5,"name":"Tulipán","cat":"","subProduct":"","variantType":"Color","price":"","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"","variants":[{"name":"Amarillo patito","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp"},{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-rosa-vibracandela.webp"},{"name":"Red","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-red-vibracandela.webp"}]},{"id":6,"name":"Pino Navideño","cat":"Navidad","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Vela artesanal de cera de soya con diseño de pino navideño, ideal para decorar tus espacios y llenar de aroma y espíritu navideño cada rincón.","longDesc":"El Pino Navideño es una vela decorativa elaborada artesanalmente con cera de soya, inspirada en uno de los símbolos más representativos de la Navidad. \n\nCaracterísticas:\n\nMaterial: 100 % cera de soya.\nPresentación: En base circular blanco o diseño de tronco\nPeso: 120 g.\nColor: Verde, según disponibilidad.\nAromas: Casa de Galletas, Otoño en Casa y Calma Natural.","soldOut":false,"img":"","variants":[{"name":"Modelo 01","price":"S/. 24.90","img":"vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp"}]},{"id":7,"name":"Velas de autor","cat":"Autor","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Velas artesanales de cera de soya con diseños decorativos y detalles elaborados en cera, inspirados en flores, postres y creaciones especiales.","longDesc":"Nuestra colección Velas de Autor reúne velas elaboradas artesanalmente con cera de soya y decoraciones hechas en cera, inspiradas en flores, postres y otros diseños especiales. Cada pieza combina formas, colores y aromas, convirtiéndose en una opción especial para regalar o decorar tus espacios.\n\nCaracterísticas para la ficha del producto\n. Cera de soya 100%\n. Diseños: Florales, frutales, inspirados en postres y personalizados\n. Colores: Personalizables según diseño y disponibilidad\n. Aromas: A elección según disponibilidad\n.Etiquetas con nombres o mensajes especiales (cortos)","soldOut":false,"img":"","variants":[{"name":"Postre de fresas","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp"},{"name":"Postre floral","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-floral-vibracandela.webp"}]},{"id":8,"name":"Vela Naturale","cat":"Floral","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.","longDesc":"Nuestra colección Naturale combina la delicadeza de las flores con la sencillez de un diseño atemporal.\n\nCada vela está elaborada artesanalmente con cera de soya, decorada con flores de cera en diferentes formas y tonalidades, y presentada en un envase de acabado tipo concreto blanco.\n\nCaracterísticas\n- Cera: 100% soya.\n- Envase: Artesanal, con acabado tipo concreto blanco.\n- Decoración: Flores de cera en relieve.\n- Colores: Personalizables según disponibilidad.\n- Aromas: A elección según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Margaritas","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp"},{"name":"Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-rosa-floral-vibracandela.webp"},{"name":"Lila & Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-lila-rosa-floral-vibracandela.webp"}]},{"id":9,"name":"Ondas","cat":"Floral","subProduct":"navidad","variantType":"Diseño","price":"","shortDesc":"Vela artesanal de cera de soya en un recipiente de diseño ondulado, con delicados detalles florales y acabados en tonos plata o dorado.","longDesc":"Diseño en cera de soya, con un recipiente de acabado en concreto blanco con bordes ondulados en color plata o dorado.\n\nCaracterísticas \n\n. Cera: 100% de coya \n. Envase: Acabado tipo concreto\n. Decoración:Flores en relieve \n. Aromas según disponibilidad","soldOut":false,"img":"","variants":[{"name":"Plata","price":"S/. 49","img":"vibraimgs/imgprod/ondas-plata-vibracandela.webp"},{"name":"Dorado","price":"S/. 49","img":"vibraimgs/imgprod/ondas-dorado-vibracandela.webp"}]},{"id":10,"name":"Valentín","cat":"San Valentín","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.","longDesc":"Vela artesanal  decorada con corazones en tonos rojos y rosados  en un envase de vidrio transparente. \n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Vidrio transparente.\n. Decoración: Corazones de cera en relieve.\n. Diseños: Corazones pequeños o grandes.\n. Aromas: A elección, según disponibilidad.\n. Personalización: Nombres, mensajes y colores.","soldOut":false,"img":"","variants":[{"name":"Rosa","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-rosa-vibracandela.webp"},{"name":"Red","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-red-vibracandela.webp"}]},{"id":11,"name":"Aura Oval","cat":"Floral","subProduct":"","variantType":"Color","price":"","shortDesc":"Vela artesanal de cera de soya en un elegante diseño ovalado, decorada con delicadas flores de cera en diferentes colores.","longDesc":"Diseño ovalado de acabado minimalista, decorado con flores de cera en relieve y tonos delicados. Incorpora una mecha de madera de cerezo que aporta un toque natural.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Ovalado, con acabado tipo concreto blanco.\n. Decoración: Flores de cera en relieve, con colores a elección.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp"},{"name":"Lila","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-lila-vibracandela.webp"},{"name":"Uva","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-uva-vibracandela.webp"},{"name":"Cuarzo","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-cuarzo-vibracandela.webp"}]},{"id":12,"name":"Atenea","cat":"Floral","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.","longDesc":"Diseño de inspiración clásica, con un envase de líneas acanaladas y acabado tipo concreto blanco. Decorado artesanalmente con flores de cera de soya en relieve, en diferentes formas y tonalidades.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Acabado tipo concreto blanco, con relieve acanalado.\n. Decoración: Flores y detalles de cera en relieve.\n. Colores: A elección, según disponibilidad.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Mini Margaritas","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp"},{"name":"Margarita","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-margarita-vibracandela.webp"}]},{"id":13,"name":"Recuerdos","cat":"Recuerdos","subProduct":"","variantType":"Diseño","price":"","shortDesc":"Pequeñas velas personalizadas para grandes momentos.","longDesc":"Velitas con mensajes personalizados para celebrar ocasiones especiales y sorprender a quienes más quieres.\n\nCaracterísticas\n\n. Cera: 100 % soya.\n. Contenido: 25 g.\n. Envase: Frasco de vidrio transparente con tapa de corcho.\n. Personalización: Nombres, fechas, frases o mensajes especiales.\n. Decoración: Cinta decorativa y detalles florales según disponibilidad.\n. Aromas: A elección, según disponibilidad.\n. Presentación: Caja kraft con relleno decorativo (opcional con costo adiciona).\n. Ocasiones: Baby showers, bautizos, matrimonios, cumpleaños, anuncios especiales y eventos.","soldOut":false,"img":"","variants":[{"name":"Bienvenida","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp"},{"name":"Anuncio","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-anuncio-vibracandela.webp"}]},{"id":14,"name":"Difusores de varillas","cat":"Difusores","subProduct":"","variantType":"Opción","price":"","shortDesc":"Difusor ambiental de 40 ml en envase de vidrio modelo Luma, con varillas de ratán y disponible en diferentes combinaciones de colores.","longDesc":"El difusor Luma combina un diseño elegante y minimalista con un sistema de difusión mediante varillas de ratán, que permiten liberar gradualmente la fragancia y aromatizar tus espacios.\n\nCaracterísticas:\n\nContenido: 40 ml.\nColor del envase: Negro.\nColores de varillas: Maíz y negro.\nSistema de difusión: Varillas de ratán.\nFragancias: A elección, según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Varillas negras","price":"S/. 49.90","img":"vibraimgs/imgprod/difusores-de-varillas-varillas-negras-vibracandela-5x73d1.webp"},{"name":"Varillas maiz","price":"S/. 49.90","img":"vibraimgs/imgprod/difusores-de-varillas-varillas-maiz-vibracandela-6nv3r9.webp"}]}];
+
+
+
+<script>let products = [{"id":1,"name":"Velas de edición","cat":"De edición","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Velas de cera de soya en envases de vidrio, con diseños decorativos y opciones de personalización para crear un detalle especial.","longDesc":"Velas elaboradas artesanalmente con cera de soya, en envases de vidrio y con delicadas figuras decorativas de cera. \n\nCaracterísticas:\n\n. Cera: 100% de soya\n. Presentación: Envase de vidrio transparente\n. Diseños: Florales, temáticos, religiosos y personalizados\n. Aromas y colores: A elección, según disponibilidad\n. Peso: 250 gramos\n. Personalización: Nombre o mensaje especial","soldOut":false,"img":"","variants":[{"name":"Floral 01","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-floral-01-vibracandela.webp"},{"name":"Floral 02","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-flora-02-vibracandela.webp"},{"name":"Virgen","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-virgen-vibracandela.webp"},{"name":"Halloween","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-halloween-vibracandela.webp"},{"name":"Peonía","price":"S/. 59.90","img":"vibraimgs/imgprod/velas-artesanales-decorativas-peonia-vibracandela.webp"}]},{"id":2,"name":"Difusor de auto","cat":"Difusores","subProduct":"","variantType":"Opción","price":"","shortDesc":"Difusores aromáticos para auto con tapita de bambú, disponibles en presentación colgante y fija para perfumar el interior de tu vehículo.","longDesc":"Dale un toque especial a tus viajes con nuestros difusores aromáticos para auto. Diseñados para perfumar tus espacios con delicadas fragancias y un estilo minimalista, cuentan con tapita de bambú y están disponibles en dos presentaciones:\n\nColgante: ideal para colocar en el espejo retrovisor.\nFijo: Idela para colocarse en la salida del aire acondicionado.\n\nCaracterísticas:\n\nPresentación: Difusor para auto con tapita de bambú.\nFormatos: Colgante y fijo.\nAromas: A elección, según disponibilidad.\nUso: Aromatización del interior del vehículo.","soldOut":false,"img":"","variants":[{"name":"Colgante","price":"S/. 29.90","img":"vibraimgs/imgprod/difusor-de-auto-colgante-vibracandela-nsxnvd.webp"},{"name":"Fijo","price":"S/. 34.90","img":"vibraimgs/imgprod/difusor-de-auto-fijo-vibracandela-oo160d.webp"}]},{"id":3,"name":"Villa Navideña","cat":"Navidad","subProduct":"","variantType":"Aroma","price":"S/. 59.90","shortDesc":"Villa navideña elaborada artesanalmente con cera de soya, con detalles decorativos que aportan encanto y calidez a tus espacios mientras los aromatizan.","longDesc":"Villa Navideña es una vela decorativa elaborada artesanalmente con cera de soya, inspirada en la magia de la Navidad. Su composición incluye pequeños árboles, una casita y un farol que recrean una encantadora escena navideña. \n\nCaracterísticas:\n\nMaterial: 100 % cera de soya.\nPresentación:D iseño decorativo en recipiente de ecoresina.\nPeso: 250 g.\nAromas: A elección, según disponibilidad.","soldOut":false,"img":"vibraimgs/imgprod/villa-navidena-vibracandela.webp","variants":[]},{"id":5,"name":"Tulipán","cat":"","subProduct":"","variantType":"Color","price":"","shortDesc":"Por confirmar","longDesc":"Cera de soya xdddd","soldOut":false,"img":"","variants":[{"name":"Amarillo patito","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-amarillo-patito-vibracandela.webp"},{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-rosa-vibracandela.webp"},{"name":"Red","price":"S/. 44.90","img":"vibraimgs/imgprod/tulipan-red-vibracandela.webp"}]},{"id":6,"name":"Pino Navideño","cat":"Navidad","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Vela artesanal de cera de soya con diseño de pino navideño, ideal para decorar tus espacios y llenar de aroma y espíritu navideño cada rincón.","longDesc":"El Pino Navideño es una vela decorativa elaborada artesanalmente con cera de soya, inspirada en uno de los símbolos más representativos de la Navidad. \n\nCaracterísticas:\n\nMaterial: 100 % cera de soya.\nPresentación: En base circular blanco o diseño de tronco\nPeso: 120 g.\nColor: Verde, según disponibilidad.\nAromas: Casa de Galletas, Otoño en Casa y Calma Natural.","soldOut":false,"img":"","variants":[{"name":"Modelo 01","price":"S/. 24.90","img":"vibraimgs/imgprod/pino-navideno-modelo-01-vibracandela.webp"}]},{"id":7,"name":"Velas de autor","cat":"Autor","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Velas artesanales de cera de soya con diseños decorativos y detalles elaborados en cera, inspirados en flores, postres y creaciones especiales.","longDesc":"Nuestra colección Velas de Autor reúne velas elaboradas artesanalmente con cera de soya y decoraciones hechas en cera, inspiradas en flores, postres y otros diseños especiales. Cada pieza combina formas, colores y aromas, convirtiéndose en una opción especial para regalar o decorar tus espacios.\n\nCaracterísticas para la ficha del producto\n. Cera de soya 100%\n. Diseños: Florales, frutales, inspirados en postres y personalizados\n. Colores: Personalizables según diseño y disponibilidad\n. Aromas: A elección según disponibilidad\n.Etiquetas con nombres o mensajes especiales (cortos)","soldOut":false,"img":"","variants":[{"name":"Postre de fresas","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-de-fresas-vibracandela.webp"},{"name":"Postre floral","price":"S/. 49.90","img":"vibraimgs/imgprod/velas-de-autor-postre-floral-vibracandela.webp"}]},{"id":8,"name":"Vela Naturale","cat":"Floral","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Velas artesanales de cera de soya, decoradas con delicadas flores en relieve y presentadas en elegantes envases de acabado tipo concreto blanco.","longDesc":"Nuestra colección Naturale combina la delicadeza de las flores con la sencillez de un diseño atemporal.\n\nCada vela está elaborada artesanalmente con cera de soya, decorada con flores de cera en diferentes formas y tonalidades, y presentada en un envase de acabado tipo concreto blanco.\n\nCaracterísticas\n- Cera: 100% soya.\n- Envase: Artesanal, con acabado tipo concreto blanco.\n- Decoración: Flores de cera en relieve.\n- Colores: Personalizables según disponibilidad.\n- Aromas: A elección según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Margaritas","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-margaritas-vibracandela.webp"},{"name":"Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-rosa-floral-vibracandela.webp"},{"name":"Lila & Rosa Floral","price":"S/. 59.90","img":"vibraimgs/imgprod/vela-naturale-lila-rosa-floral-vibracandela.webp"}]},{"id":9,"name":"Ondas","cat":"Floral","subProduct":"navidad","variantType":"Diseño","price":"","shortDesc":"Vela artesanal de cera de soya en un recipiente de diseño ondulado, con delicados detalles florales y acabados en tonos plata o dorado.","longDesc":"Diseño en cera de soya, con un recipiente de acabado en concreto blanco con bordes ondulados en color plata o dorado.\n\nCaracterísticas \n\n. Cera: 100% de coya \n. Envase: Acabado tipo concreto\n. Decoración:Flores en relieve \n. Aromas según disponibilidad","soldOut":false,"img":"","variants":[{"name":"Plata","price":"S/. 49","img":"vibraimgs/imgprod/ondas-plata-vibracandela.webp"},{"name":"Dorado","price":"S/. 49","img":"vibraimgs/imgprod/ondas-dorado-vibracandela.webp"}]},{"id":10,"name":"Valentín","cat":"San Valentín","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño de corazones en tonos rojos y rosados,  con etiqueta personalizada.","longDesc":"Vela artesanal  decorada con corazones en tonos rojos y rosados  en un envase de vidrio transparente. \n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Vidrio transparente.\n. Decoración: Corazones de cera en relieve.\n. Diseños: Corazones pequeños o grandes.\n. Aromas: A elección, según disponibilidad.\n. Personalización: Nombres, mensajes y colores.","soldOut":false,"img":"","variants":[{"name":"Rosa","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-rosa-vibracandela.webp"},{"name":"Red","price":"S/. 54.90","img":"vibraimgs/imgprod/valentin-red-vibracandela.webp"}]},{"id":11,"name":"Aura Oval","cat":"Floral","subProduct":"","variantType":"Color","price":"","shortDesc":"Vela artesanal de cera de soya en un elegante diseño ovalado, decorada con delicadas flores de cera en diferentes colores.","longDesc":"Diseño ovalado de acabado minimalista, decorado con flores de cera en relieve y tonos delicados. Incorpora una mecha de madera de cerezo que aporta un toque natural.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Ovalado, con acabado tipo concreto blanco.\n. Decoración: Flores de cera en relieve, con colores a elección.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Rosa","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-rosa-vibracandela.webp"},{"name":"Lila","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-lila-vibracandela.webp"},{"name":"Uva","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-uva-vibracandela.webp"},{"name":"Cuarzo","price":"S/. 44.90","img":"vibraimgs/imgprod/aura-oval-cuarzo-vibracandela.webp"}]},{"id":12,"name":"Atenea","cat":"Floral","subProduct":"","variantType":"Aroma","price":"","shortDesc":"Diseño acanalado de inspiración clásica, con delicadas flores de cera de soya en relieve.","longDesc":"Diseño de inspiración clásica, con un envase de líneas acanaladas y acabado tipo concreto blanco. Decorado artesanalmente con flores de cera de soya en relieve, en diferentes formas y tonalidades.\n\nCaracterísticas\n\n. Cera: 100% soya.\n. Envase: Acabado tipo concreto blanco, con relieve acanalado.\n. Decoración: Flores y detalles de cera en relieve.\n. Colores: A elección, según disponibilidad.\n. Mecha: Madera de cerezo.\n. Aromas: A elección, según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Mini Margaritas","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-mini-margaritas-vibracandela.webp"},{"name":"Margarita","price":"S/. 39.90","img":"vibraimgs/imgprod/atenea-margarita-vibracandela.webp"}]},{"id":13,"name":"Recuerdos","cat":"Recuerdos","subProduct":"","variantType":"Diseño","price":"","shortDesc":"Pequeñas velas personalizadas para grandes momentos.","longDesc":"Velitas con mensajes personalizados para celebrar ocasiones especiales y sorprender a quienes más quieres.\n\nCaracterísticas\n\n. Cera: 100 % soya.\n. Contenido: 25 g.\n. Envase: Frasco de vidrio transparente con tapa de corcho.\n. Personalización: Nombres, fechas, frases o mensajes especiales.\n. Decoración: Cinta decorativa y detalles florales según disponibilidad.\n. Aromas: A elección, según disponibilidad.\n. Presentación: Caja kraft con relleno decorativo (opcional con costo adiciona).\n. Ocasiones: Baby showers, bautizos, matrimonios, cumpleaños, anuncios especiales y eventos.","soldOut":false,"img":"","variants":[{"name":"Bienvenida","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-bienvenida-vibracandela.webp"},{"name":"Anuncio","price":"S/. 10.50","img":"vibraimgs/imgprod/recuerdos-anuncio-vibracandela.webp"}]},{"id":14,"name":"Difusores de varillas","cat":"Difusores","subProduct":"","variantType":"Opción","price":"","shortDesc":"Difusor ambiental de 40 ml en envase de vidrio modelo Luma, con varillas de ratán y disponible en diferentes combinaciones de colores.","longDesc":"El difusor Luma combina un diseño elegante y minimalista con un sistema de difusión mediante varillas de ratán, que permiten liberar gradualmente la fragancia y aromatizar tus espacios.\n\nCaracterísticas:\n\nContenido: 40 ml.\nColor del envase: Negro.\nColores de varillas: Maíz y negro.\nSistema de difusión: Varillas de ratán.\nFragancias: A elección, según disponibilidad.","soldOut":false,"img":"","variants":[{"name":"Varillas negras","price":"S/. 49.90","img":"vibraimgs/imgprod/difusores-de-varillas-varillas-negras-vibracandela-5x73d1.webp"},{"name":"Varillas maiz","price":"S/. 49.90","img":"vibraimgs/imgprod/difusores-de-varillas-varillas-maiz-vibracandela-6nv3r9.webp"}]},{"id":15,"name":"Villa navideña curvy","cat":"Navidad","subProduct":"navidad","variantType":"Aroma","price":"S/. 49","shortDesc":"Villa Navideña es una vela decorativa elaborada artesanalmente con cera de soya. Su maceta de diseño curvy enmarca una pequeña escena navideña llena de encanto, ideal para decorar y aromatizar tus espacios.","longDesc":"Características:\n\nMaterial: 100 % cera de soya.\nPresentación:D iseño decorativo en recipiente de ecoresina.\nPeso: 200 g.\nAromas: A elección, según disponibilidad.","soldOut":false,"img":"vibraimgs/imgprod/villa-navidena-curvy-vibracandela-xlp6t0.webp","variants":[]},{"id":16,"name":"Pino navideño curvy","cat":"Navidad","subProduct":"navidad","variantType":"Aroma","price":"S/. 59.90","shortDesc":"Pino Navideño Curvy es una vela decorativa elaborada artesanalmente con cera de soya. Presenta un árbol navideño de cera sobre una maceta de diseño curvy, creando una pieza original que aporta un toque festivo a tus espacios.","longDesc":"Características:\n\nMaterial: 100 % cera de soya.\nPresentación:D iseño decorativo en recipiente de ecoresina.\nPeso: 270 g.\nAromas: A elección, según disponibilidad.","soldOut":false,"img":"vibraimgs/imgprod/pino-navideno-curvy-vibracandela-zk5p7n.webp","variants":[]},{"id":17,"name":"Ciudad de Nieve","cat":"Navidad","subProduct":"navidad","variantType":"Aroma","price":"S/. 39.90","shortDesc":"Vela artesanal de cera de soya en envase decorativo con diseños en relieve, inspirados en una pequeña ciudad navideña que aporta encanto y aroma a tus espacios.","longDesc":"Características:\n\nMaterial: 100 % cera de soya.\nEnvase: Blanco con relieve \nPresentación:D iseño decorativo en recipiente de ecoresina.\nPeso: 50 g.\nAromas: A elección, según disponibilidad.","soldOut":false,"img":"vibraimgs/imgprod/ciudad-de-nieve-vibracandela-douck9.webp","variants":[]},{"id":18,"name":"Dúo de nieve","cat":"Piezas decorativas","subProduct":"navidad","variantType":"Aroma","price":"","shortDesc":"Adorno decorativo de cemento y marmolina con dos simpáticos muñecos de nieve y luz LED central, ideal para llenar tus espacios de espíritu navideño.","longDesc":"Características:\n\n- Material: Cemento y marmolina.\n- Presentación: Base decorativa con dos muñecos de nieve.\n- Iluminación: Vela LED de luz cálida.\n- Diseño: Detalles en rojo y blanco con motivos navideños o elección \n- Tiempo para piezas personalizadas: 4 días","soldOut":false,"img":"vibraimgs/imgprod/duo-de-nieve-vibracandela-hx7xwo.webp","variants":[]}];
 let navState = {"items":[{"id":"inicio","label":"Inicio","target":"inicio"},{"id":"productos","label":"Productos","target":"productos"},{"id":"acerca","label":"Acerca de","target":"acerca"},{"id":"contacto","label":"Contacto","target":"contacto"}],"subProductsEnabled":true,"subProducts":[{"id":"navidad","name":"Navidad"},{"id":"halloween","name":"Halloween"},{"id":"san-valentin","name":"San Valentín"}]};
 let currentSubCatalog = null;
 
